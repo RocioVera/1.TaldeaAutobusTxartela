@@ -17,9 +17,9 @@ public class Leiho4 extends JFrame {
 	private JLabel lblNan;
 	private JLabel lblPasahitza;
 
-	JButton btn_next = new JButton("Hurrengoa");
-	JButton btn_prev = new JButton("Atzera");
-	JButton restart = new JButton("\u2302");
+	private JButton btn_next = new JButton("Hurrengoa");
+	private JButton btn_prev = new JButton("Atzera");
+	private JButton restart = new JButton("\u2302");
 	
 	public Leiho4() {
 		setLayout(null);
@@ -36,7 +36,8 @@ public class Leiho4 extends JFrame {
 				dispose();
 			}
 		});
-		btn_next.setBounds(461, 510, 89, 23);
+		btn_next.setBounds(423, 500, 122, 32);
+		btn_next.setFont(new Font("Tahoma", Font.ITALIC, 16));
 		getContentPane().add(btn_next);
 		
 		btn_prev.addActionListener(new ActionListener() {
@@ -46,7 +47,8 @@ public class Leiho4 extends JFrame {
 				dispose();
 			}
 		});
-		btn_prev.setBounds(38, 510, 89, 23);
+		btn_prev.setBounds(38, 500, 99, 32);
+		btn_prev.setFont(new Font("Tahoma", Font.ITALIC, 16));
 		getContentPane().add(btn_prev);
 		
 		restart.addActionListener(new ActionListener() {
@@ -56,7 +58,7 @@ public class Leiho4 extends JFrame {
 				dispose();
 			}
 		});
-		restart.setBounds(269, 510, 89, 23);
+		restart.setBounds(245, 500, 72, 32);	
 		getContentPane().add(restart);
 		
 		

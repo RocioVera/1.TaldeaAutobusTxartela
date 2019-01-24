@@ -18,6 +18,6 @@ public class Nagusia {
 		// ateratzeko datuak baina static ez
 		// Kontsultak.autobusDatuak();
 		//Kontsultak.geltokiakAtera("L2");
-
+ 
 	}
 }

@@ -52,9 +52,9 @@ public class Leiho3 extends JFrame {
 	private JRadioButton Joan;
 	private JRadioButton joanEtorria;
 
-	JButton btn_next = new JButton("Hurrengoa");
-	JButton btn_prev = new JButton("Atzera");
-	JButton restart = new JButton("\u2302");
+	private JButton btn_next = new JButton("Hurrengoa");
+	private JButton btn_prev = new JButton("Atzera");
+	private JButton restart = new JButton("\u2302");
 
 	public Leiho3() {
 		getContentPane().setLayout(null);
@@ -69,7 +69,8 @@ public class Leiho3 extends JFrame {
 				dispose();
 			}
 		});
-		btn_next.setBounds(461, 510, 89, 23);
+		btn_next.setBounds(423, 500, 122, 32);
+		btn_next.setFont(new Font("Tahoma", Font.ITALIC, 16));
 		getContentPane().add(btn_next);
 		
 		btn_prev.addActionListener(new ActionListener() {
@@ -79,8 +80,10 @@ public class Leiho3 extends JFrame {
 				dispose();
 			}
 		});
-		btn_prev.setBounds(38, 510, 89, 23);
+		btn_prev.setBounds(38, 500, 99, 32);
+		btn_prev.setFont(new Font("Tahoma", Font.ITALIC, 16));
 		getContentPane().add(btn_prev);
+		
 		
 		restart.addActionListener(new ActionListener() {
 			@Override
@@ -89,9 +92,11 @@ public class Leiho3 extends JFrame {
 				dispose();
 			}
 		});
-		restart.setBounds(269, 510, 89, 23);
+		restart.setBounds(245, 500, 72, 32);	
 		getContentPane().add(restart);
 
+		
+		
 		geltoki = new JMenuBar();
 
 		hasierakoGeltokia = new JMenu("Hasierako geltokia");
@@ -295,7 +300,7 @@ public class Leiho3 extends JFrame {
 		}
 
 		geltoki.setBounds(0, 0, 600, 21);
-		add(geltoki);
+		getContentPane().add(geltoki);
 
 		geltoki.add(hasierakoGeltokia);
 		geltoki.add(amaierakoGeltokia);
@@ -307,31 +312,31 @@ public class Leiho3 extends JFrame {
 		lblJoan = new JLabel("Joan");
 		lblJoan.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		lblJoan.setBounds(28, 61, 89, 21);
-		add(lblJoan);
+		getContentPane().add(lblJoan);
 
 		lblDataJoan = new JLabel("Data");
 		lblDataJoan.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		lblDataJoan.setBounds(71, 86, 46, 21);
-		add(lblDataJoan);
+		getContentPane().add(lblDataJoan);
 
 		lblOrduaJoan = new JLabel("Ordua");
 		lblOrduaJoan.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		lblOrduaJoan.setBounds(71, 123, 46, 14);
-		add(lblOrduaJoan);
+		getContentPane().add(lblOrduaJoan);
 
 		dateJoan = new JDateChooser();
 		dateJoan.setDateFormatString("dd-MM-yyyy");
 		dateJoan.setBounds(127, 87, 127, 20);
-		add(dateJoan);
+		getContentPane().add(dateJoan);
 
 		joanMinutu = new JSpinner();
 		joanMinutu.setModel(new SpinnerNumberModel(0, 0, 59, 1));
 		joanMinutu.setBounds(203, 120, 51, 20);
-		add(joanMinutu);
+		getContentPane().add(joanMinutu);
 		
 		lblEtorria = new JLabel("Etorria");
 		lblEtorria.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		lblEtorria.setBounds(28, 170, 89, 21);
-		add(lblEtorria);
+		getContentPane().add(lblEtorria);
 	}
 }

@@ -42,7 +42,8 @@ public class Leiho5 extends JFrame {
 				dispose();
 			}
 		});
-		btn_next.setBounds(461, 510, 89, 23);
+		btn_next.setBounds(423, 500, 122, 32);
+		btn_next.setFont(new Font("Tahoma", Font.ITALIC, 16));
 		getContentPane().add(btn_next);
 
 		btn_prev.addActionListener(new ActionListener() {
@@ -52,7 +53,8 @@ public class Leiho5 extends JFrame {
 				dispose();
 			}
 		});
-		btn_prev.setBounds(38, 510, 89, 23);
+		btn_prev.setBounds(38, 500, 99, 32);
+		btn_prev.setFont(new Font("Tahoma", Font.ITALIC, 16));
 		getContentPane().add(btn_prev);
 
 		restart.addActionListener(new ActionListener() {
@@ -62,7 +64,7 @@ public class Leiho5 extends JFrame {
 				dispose();
 			}
 		});
-		restart.setBounds(269, 510, 89, 23);
+		restart.setBounds(245, 500, 72, 32);	
 		getContentPane().add(restart);
 
 		/* Prezio totala */

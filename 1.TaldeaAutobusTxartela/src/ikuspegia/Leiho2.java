@@ -21,9 +21,8 @@ public class Leiho2 extends JFrame {
 	private JRadioButton L4;
 	private ButtonGroup group;
 	
-	JButton btn_next = new JButton("Hurrengoa");
-//	JButton btn_prev = new JButton("Atzera");
-	JButton restart = new JButton("\u2302");
+	private JButton btn_next = new JButton("Hurrengoa");
+	private JButton restart = new JButton("\u2302");
 	
 	public Leiho2() {
 		getContentPane().setLayout(null);
@@ -42,7 +41,8 @@ public class Leiho2 extends JFrame {
 				dispose();
 			}
 		});
-		btn_next.setBounds(461, 510, 89, 23);
+		btn_next.setBounds(350, 500, 122, 32);
+		btn_next.setFont(new Font("Tahoma", Font.ITALIC, 16));
 		getContentPane().add(btn_next);
 			
 		restart.addActionListener(new ActionListener() {
@@ -52,7 +52,7 @@ public class Leiho2 extends JFrame {
 				dispose();
 			}
 		});
-		restart.setBounds(313, 510, 89, 23);
+		restart.setBounds(125, 500, 72, 32);	
 		getContentPane().add(restart);
 		
 		// NEW
