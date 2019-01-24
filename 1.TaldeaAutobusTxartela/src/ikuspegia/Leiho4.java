@@ -21,7 +21,7 @@ public class Leiho4 extends JFrame {
 	private JButton btn_prev = new JButton("Atzera");
 	private JButton restart = new JButton("\u2302");
 	
-	public Leiho4() {
+	public Leiho4(String hartutakoLinea) {
 		setLayout(null);
 		this.setBounds(350,50,600,600);
 		this.setResizable(false); // neurketak ez aldatzeko
@@ -32,7 +32,7 @@ public class Leiho4 extends JFrame {
 		btn_next.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Metodoak.bostgarrenLeihoa();
+				Metodoak.bostgarrenLeihoa(hartutakoLinea);
 				dispose();
 			}
 		});
@@ -43,7 +43,7 @@ public class Leiho4 extends JFrame {
 		btn_prev.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Metodoak.hirugarrenLeihoa();
+				Metodoak.hirugarrenLeihoa(hartutakoLinea);
 				dispose();
 			}
 		});

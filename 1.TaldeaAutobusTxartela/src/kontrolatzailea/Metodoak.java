@@ -42,30 +42,33 @@ public class Metodoak {
 	
 	//leiho2 sortu
 	public static void bigarrenLeihoa() {
-		Leiho2 Leiho2= new Leiho2();
+		ArrayList<Lineak> lineak = new ArrayList<Lineak>();
+		lineak = Kontsultak.lineakDatuak();
+
+		Leiho2 Leiho2= new Leiho2(lineak);
 		Leiho2.setVisible(true);
 		}
 	
 	//leiho3 sortu
-	public static void hirugarrenLeihoa() {
-		
-		Leiho3 Leiho3= new Leiho3();
+	public static void hirugarrenLeihoa(String hartutakoLinea) {
+		ArrayList <Geltokiak> arrayGeltokia = new ArrayList<Geltokiak>();
+		Leiho3 Leiho3= new Leiho3(arrayGeltokia, hartutakoLinea);
 		Leiho3.setVisible(true);
 		
 		}
 	
 	//leiho4 sortu
-	public static void laugarrenLeihoa() {
-		
-		Leiho4 Leiho4= new Leiho4();
+	public static void laugarrenLeihoa(String hartutakoLinea) {
+
+		Leiho4 Leiho4= new Leiho4(hartutakoLinea);
 		Leiho4.setVisible(true);
 		
 		}
 	
 	//leiho5 sortu
-	public static void bostgarrenLeihoa() {
+	public static void bostgarrenLeihoa(String hartutakoLinea) {
 		
-		Leiho5 Leiho5= new Leiho5();
+		Leiho5 Leiho5= new Leiho5(hartutakoLinea);
 		Leiho5.setVisible(true);
 		
 		}

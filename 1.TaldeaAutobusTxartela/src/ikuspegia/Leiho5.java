@@ -28,7 +28,7 @@ public class Leiho5 extends JFrame {
 	/**
 	 * Create the panel.
 	 */
-	public Leiho5() {
+	public Leiho5(String hartutakoLinea) {
 		getContentPane().setLayout(null);
 		this.setBounds(350,50,600,600);
 		this.setResizable(false); // neurketak ez aldatzeko
@@ -49,7 +49,7 @@ public class Leiho5 extends JFrame {
 		btn_prev.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Metodoak.laugarrenLeihoa();
+				Metodoak.laugarrenLeihoa(hartutakoLinea);
 				dispose();
 			}
 		});

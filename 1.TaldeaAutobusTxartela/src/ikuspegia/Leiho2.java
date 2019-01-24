@@ -20,31 +20,33 @@ public class Leiho2 extends JFrame {
 	private JRadioButton L3;
 	private JRadioButton L4;
 	private ButtonGroup group;
-	
+	private String hartutakoLinea;
 	private JButton btn_next = new JButton("Hurrengoa");
 	private JButton restart = new JButton("\u2302");
-	
-	public Leiho2() {
+
+	public Leiho2(ArrayList<Lineak> lineak) {
 		getContentPane().setLayout(null);
-		this.setBounds(350,50,600,600);
+		this.setBounds(350, 50, 600, 600);
 		this.setResizable(false); // neurketak ez aldatzeko
 		this.setSize(new Dimension(600, 600));
 		Font font;
 		font = new Font("Verdana", Font.PLAIN, 16);
-		  
-		//botoiak
+
+		// botoiak
 
 		btn_next.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Metodoak.hirugarrenLeihoa();
+				Metodoak.hirugarrenLeihoa(hartutakoLinea);
 				dispose();
 			}
 		});
 		btn_next.setBounds(350, 500, 122, 32);
 		btn_next.setFont(new Font("Tahoma", Font.ITALIC, 16));
 		getContentPane().add(btn_next);
-			
+		btn_next.setVisible(false);
+
+
 		restart.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -52,12 +54,12 @@ public class Leiho2 extends JFrame {
 				dispose();
 			}
 		});
-		restart.setBounds(125, 500, 72, 32);	
+		restart.setBounds(125, 500, 72, 32);
 		getContentPane().add(restart);
-		
+
 		// NEW
-		ArrayList<Lineak> lineak = new ArrayList<>();
-		lineak = Kontsultak.lineakDatuak();
+		// ArrayList<Lineak> lineak = new ArrayList<>();
+		// lineak = Kontsultak.lineakDatuak();
 
 		L1 = new JRadioButton(lineak.get(0).getKodLinea() + "        " + lineak.get(0).getIzena());
 		L2 = new JRadioButton(lineak.get(1).getKodLinea() + "        " + lineak.get(1).getIzena());
@@ -66,21 +68,11 @@ public class Leiho2 extends JFrame {
 		group = new ButtonGroup();
 		txtErabakiLinea = new JTextField();
 
-		String linea = "";
-		if (L1.isEnabled()) {
-			linea = lineak.get(0).getKodLinea();
-		} else if (L2.isEnabled()) {
-			linea = lineak.get(1).getKodLinea();
-		} else if (L3.isEnabled()) {
-			linea = lineak.get(2).getKodLinea();
-		} else if (L4.isEnabled()) {
-			linea = lineak.get(3).getKodLinea(); 
-		}
-
 		// non dagoen label bakoitza
 		L1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-//				Frame.hartuErabakitakoLinea("L1");	
+				btn_next.setVisible(true);
+				hartutakoLinea="L1";
 			}
 		});
 		L1.setBounds(47, 85, 530, 85);
@@ -89,8 +81,8 @@ public class Leiho2 extends JFrame {
 
 		L2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-	//			Frame.btn_next.setVisible(true);
-//				Frame.hartuErabakitakoLinea("L2");
+				btn_next.setVisible(true);
+				hartutakoLinea="L2";
 			}
 		});
 		L2.setBounds(47, 187, 530, 85);
@@ -99,8 +91,8 @@ public class Leiho2 extends JFrame {
 
 		L3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-	//			Frame.btn_next.setVisible(true);
-	//			Frame.hartuErabakitakoLinea("L3");
+				btn_next.setVisible(true);
+				hartutakoLinea="L3";
 			}
 		});
 		L3.setBounds(47, 288, 530, 85);
@@ -109,8 +101,8 @@ public class Leiho2 extends JFrame {
 
 		L4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-	//			Frame.btn_next.setVisible(true);
-		//		Frame.hartuErabakitakoLinea("L4");
+				btn_next.setVisible(true);
+				hartutakoLinea="L4";
 			}
 		});
 		L4.setBounds(47, 380, 530, 85);
@@ -130,8 +122,6 @@ public class Leiho2 extends JFrame {
 		txtErabakiLinea.setEditable(false);
 		txtErabakiLinea.setBounds(0, 24, 600, 50);
 		getContentPane().add(txtErabakiLinea);
-
-		
 
 	}
 }
