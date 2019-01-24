@@ -11,10 +11,10 @@ import java.util.ArrayList;
 
 import eredua.*;
 import kontrolatzailea.*;
+import eredua.Kontsultak;
 
 public class Leiho2 extends JPanel {
 	private JTextField txtErabakiLinea;
-	private JButton btnKaka;
 	private JRadioButton L1;
 	private JRadioButton L2;
 	private JRadioButton L3;
@@ -37,17 +37,6 @@ public class Leiho2 extends JPanel {
 		L4 = new JRadioButton(lineak.get(3).getKodLinea() + "        " + lineak.get(3).getIzena());
 		group = new ButtonGroup();
 		txtErabakiLinea = new JTextField();
-
-		String linea = "";
-		if (L1.isEnabled()) {
-			linea = lineak.get(0).getKodLinea();
-		} else if (L2.isEnabled()) {
-			linea = lineak.get(1).getKodLinea();
-		} else if (L3.isEnabled()) {
-			linea = lineak.get(2).getKodLinea();
-		} else if (L4.isEnabled()) {
-			linea = lineak.get(3).getKodLinea();
-		}
 
 		// non dagoen label bakoitza
 		L1.addActionListener(new ActionListener() {

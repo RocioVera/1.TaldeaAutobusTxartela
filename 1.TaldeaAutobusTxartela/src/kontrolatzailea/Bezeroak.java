@@ -11,7 +11,7 @@ public class Bezeroak {
 	
 	public Bezeroak(String nAN, String izena, String abizenak, String data, String sexua, String pasahitza) {
 		
-		NAN = nAN;
+		NAN = nAN; 
 		this.izena = izena;
 		this.abizenak = abizenak;
 		this.data = data;
