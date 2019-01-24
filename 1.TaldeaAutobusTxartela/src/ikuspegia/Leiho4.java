@@ -23,6 +23,8 @@ public class Leiho4 extends JFrame {
 	
 	public Leiho4() {
 		setLayout(null);
+		this.setBounds(350,50,600,600);
+		this.setResizable(false); // neurketak ez aldatzeko
 		this.setSize(new Dimension(600, 600));
 
 		

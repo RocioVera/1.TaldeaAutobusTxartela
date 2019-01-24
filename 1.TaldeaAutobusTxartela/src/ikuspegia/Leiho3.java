@@ -56,6 +56,8 @@ public class Leiho3 extends JFrame {
 
 	public Leiho3() {
 		getContentPane().setLayout(null);
+		this.setBounds(350,50,600,600);
+		this.setResizable(false); // neurketak ez aldatzeko
 		this.setSize(new Dimension(600, 600));
 		// botoiak
 		btn_next.addActionListener(new ActionListener() {

@@ -23,6 +23,8 @@ public class Leiho1 extends JFrame {
 			
 	public Leiho1() {
 		getContentPane().setLayout(null);
+		this.setBounds(350,50,600,600);
+		this.setResizable(false); // neurketak ez aldatzeko
 		this.setSize(new Dimension(600, 600));
 		JButton aurreraBtn = new JButton("");
 		aurreraBtn.setIcon(new ImageIcon(".\\Argazkiak\\logo-termibus.png"));

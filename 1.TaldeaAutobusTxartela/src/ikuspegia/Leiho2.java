@@ -27,6 +27,8 @@ public class Leiho2 extends JFrame {
 	
 	public Leiho2() {
 		getContentPane().setLayout(null);
+		this.setBounds(350,50,600,600);
+		this.setResizable(false); // neurketak ez aldatzeko
 		this.setSize(new Dimension(600, 600));
 		Font font;
 		font = new Font("Verdana", Font.PLAIN, 16);
