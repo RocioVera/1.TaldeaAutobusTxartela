@@ -15,7 +15,7 @@ public class Metodoak {
 
 	}
 
-	public static ArrayList<Integer> geltokiakHartu(String linea) {
+	public static void geltokiakHartu(String linea) {
 		ArrayList<GeltokiaLinea> arrayGelLinea = Kontsultak.arrayGelLinea();
 		ArrayList<Integer> arrayGeltokiak = new ArrayList<>();
 		for (GeltokiaLinea obj : arrayGelLinea) {
@@ -23,17 +23,19 @@ public class Metodoak {
 				arrayGeltokiak.add(obj.getKodGeltokia());
 			}
 		}
-		return arrayGeltokiak;
+
 
 	}
 	
-	public static double kalkulatuPrezioa() {
+	public static void kalkulatuPrezioa(double prezioa) {
 		double guztira = 0;
 		
-		return guztira;
+		
 	}
 	
-	
+	public static void ateraTiketa() {
+		
+	}
 	
 	
 }
