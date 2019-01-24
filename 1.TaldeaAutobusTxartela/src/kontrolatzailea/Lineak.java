@@ -1,4 +1,4 @@
-package eredua;
+package kontrolatzailea;
 
 public class Lineak {
 	

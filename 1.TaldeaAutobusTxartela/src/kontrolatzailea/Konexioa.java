@@ -1,4 +1,4 @@
-package eredua;
+package kontrolatzailea;
 
 import java.io.*;
 import java.sql.Connection;

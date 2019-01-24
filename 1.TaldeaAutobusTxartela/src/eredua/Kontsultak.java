@@ -1,10 +1,17 @@
-package kontrolatzailea;
+package eredua;
 
 import java.util.ArrayList;
 
 import javax.swing.plaf.synth.SynthSpinnerUI;
 
 import eredua.*;
+import kontrolatzailea.AutobusLinea;
+import kontrolatzailea.Autobusak;
+import kontrolatzailea.Bezeroak;
+import kontrolatzailea.GeltokiaLinea;
+import kontrolatzailea.Geltokiak;
+import kontrolatzailea.Konexioa;
+import kontrolatzailea.Lineak;
 
 import java.sql.*;
 

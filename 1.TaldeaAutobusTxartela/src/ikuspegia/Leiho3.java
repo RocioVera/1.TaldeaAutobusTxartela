@@ -7,8 +7,8 @@ import java.util.ArrayList;
 import javax.swing.*;
 import com.toedter.calendar.*;
 
-import eredua.Geltokiak;
-import kontrolatzailea.Kontsultak;
+import eredua.Kontsultak;
+import kontrolatzailea.Geltokiak;
 
 import java.awt.Font;
 
