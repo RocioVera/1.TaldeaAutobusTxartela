@@ -12,9 +12,8 @@ public class Nagusia {
 		Konexioa konex = new Konexioa(basedatos);
 		konex.getConexion();
 	//	Kontsultak.arrayGelLinea();
-
-		Frame Ejecutar = new Frame();
-		Ejecutar.setVisible(true);
+		
+		Metodoak.lehenengoLeihoa();
 
 		// ateratzeko datuak baina static ez
 		// Kontsultak.autobusDatuak();

@@ -12,11 +12,11 @@ public class Leiho_segunduak {
 					e1.printStackTrace();
 				} 
 			}// for
-				Frame.Leiho1.setVisible(true);
-				Frame.Leiho3.setVisible(false);
-				Frame.Leiho4.setVisible(false);
-				Frame.Leiho5.setVisible(false);
-				Frame.Leiho2.setVisible(false);
+		//		Frame.Leiho1.setVisible(true);
+		//		Frame.Leiho3.setVisible(false);
+		//		Frame.Leiho4.setVisible(false);
+		//		Frame.Leiho5.setVisible(false);
+		//		Frame.Leiho2.setVisible(false);
 			//	zerrenda.hasieratuMetodoa();
 		} //public void
 	} //class

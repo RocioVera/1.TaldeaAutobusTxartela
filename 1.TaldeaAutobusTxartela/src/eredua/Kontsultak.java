@@ -5,8 +5,13 @@ import java.util.ArrayList;
 import javax.swing.plaf.synth.SynthSpinnerUI;
 
 import eredua.*;
-import kontrolatzailea.*;
-
+import kontrolatzailea.AutobusLinea;
+import kontrolatzailea.Autobusak;
+import kontrolatzailea.Bezeroak;
+import kontrolatzailea.GeltokiaLinea;
+import kontrolatzailea.Geltokiak;
+import kontrolatzailea.Konexioa;
+import kontrolatzailea.Lineak;
 
 import java.sql.*;
 
@@ -31,7 +36,7 @@ public class Kontsultak {
 				Lineak lineak = new Lineak(kodLinea, izena);
 				arrayLineak.add(lineak);
 
-			} 
+			}
 
 		} catch (Exception e) {
 			e.getMessage();
