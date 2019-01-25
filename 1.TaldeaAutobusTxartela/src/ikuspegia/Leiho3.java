@@ -135,12 +135,12 @@ public class Leiho3 extends JFrame {
 						amaierakoGeltokia.setEnabled(true);
 						hasierakoGeltokiaGroup.add(hasierakoGeltItem_1);
 						amaierakoGeltItem_1.setEnabled(false);
-						amaierakoGeltItem_2.setEnabled(true);
-						amaierakoGeltItem_3.setEnabled(true);
-						amaierakoGeltItem_4.setEnabled(true);
-						amaierakoGeltItem_5.setEnabled(true);
-						amaierakoGeltItem_6.setEnabled(true);
-						amaierakoGeltItem_7.setEnabled(true);
+//						amaierakoGeltItem_2.setEnabled(true);
+//						amaierakoGeltItem_3.setEnabled(true);
+//						amaierakoGeltItem_4.setEnabled(true);
+//						amaierakoGeltItem_5.setEnabled(true);
+//						amaierakoGeltItem_6.setEnabled(true);
+//						amaierakoGeltItem_7.setEnabled(true);
 
 						// Metodoak.geltokiakMarkatu(JRadioButton );
 					}
@@ -158,11 +158,11 @@ public class Leiho3 extends JFrame {
 						hasierakoGeltokiaGroup.add(hasierakoGeltItem_2);
 						amaierakoGeltItem_1.setEnabled(false);
 						amaierakoGeltItem_2.setEnabled(false);
-						amaierakoGeltItem_3.setEnabled(true);
-						amaierakoGeltItem_4.setEnabled(true);
-						amaierakoGeltItem_5.setEnabled(true);
-						amaierakoGeltItem_6.setEnabled(true);
-						amaierakoGeltItem_7.setEnabled(true);
+//						amaierakoGeltItem_3.setEnabled(true);
+//						amaierakoGeltItem_4.setEnabled(true);
+//						amaierakoGeltItem_5.setEnabled(true);
+//						amaierakoGeltItem_6.setEnabled(true);
+//						amaierakoGeltItem_7.setEnabled(true);
 					}
 				});
 			}
@@ -179,10 +179,10 @@ public class Leiho3 extends JFrame {
 						amaierakoGeltItem_1.setEnabled(false);
 						amaierakoGeltItem_2.setEnabled(false);
 						amaierakoGeltItem_3.setEnabled(false);
-						amaierakoGeltItem_4.setEnabled(true);
-						amaierakoGeltItem_5.setEnabled(true);
-						amaierakoGeltItem_6.setEnabled(true);
-						amaierakoGeltItem_7.setEnabled(true);
+//						amaierakoGeltItem_4.setEnabled(true);
+//						amaierakoGeltItem_5.setEnabled(true);
+//						amaierakoGeltItem_6.setEnabled(true);
+//						amaierakoGeltItem_7.setEnabled(true);
 					}
 				});
 			}
@@ -200,9 +200,9 @@ public class Leiho3 extends JFrame {
 						amaierakoGeltItem_2.setEnabled(false);
 						amaierakoGeltItem_3.setEnabled(false);
 						amaierakoGeltItem_4.setEnabled(false);
-						amaierakoGeltItem_5.setEnabled(true);
-						amaierakoGeltItem_6.setEnabled(true);
-						amaierakoGeltItem_7.setEnabled(true);
+//						amaierakoGeltItem_5.setEnabled(true);
+//						amaierakoGeltItem_6.setEnabled(true);
+//						amaierakoGeltItem_7.setEnabled(true);
 					}
 				});
 			}
@@ -221,8 +221,8 @@ public class Leiho3 extends JFrame {
 						amaierakoGeltItem_3.setEnabled(false);
 						amaierakoGeltItem_4.setEnabled(false);
 						amaierakoGeltItem_5.setEnabled(false);
-						amaierakoGeltItem_6.setEnabled(true);
-						amaierakoGeltItem_7.setEnabled(true);
+//						amaierakoGeltItem_6.setEnabled(true);
+//						amaierakoGeltItem_7.setEnabled(true);
 					}
 				});
 			}
@@ -241,7 +241,7 @@ public class Leiho3 extends JFrame {
 						amaierakoGeltItem_4.setEnabled(false);
 						amaierakoGeltItem_5.setEnabled(false);
 						amaierakoGeltItem_6.setEnabled(false);
-						amaierakoGeltItem_7.setEnabled(true);
+//						amaierakoGeltItem_7.setEnabled(true);
 					}
 				});
 			}
@@ -375,7 +375,7 @@ public class Leiho3 extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// joanEtorriaMenua.setEnabled(true);
-				// amaierakoGeltokiaGroup.add(hasierakoGeltItem_7);
+				// amaierakoGeltokiaGroup.add(hasierakoGeltItem_7); 
 			}
 		});*/
 
