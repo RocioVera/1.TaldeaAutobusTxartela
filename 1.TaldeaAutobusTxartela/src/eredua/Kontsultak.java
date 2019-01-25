@@ -62,45 +62,48 @@ public class Kontsultak {
 				kolorea = (rs.getString(4));
 				Autobusak autobusak = new Autobusak(kodBus, nPlaza, kontsumoa, kolorea);
 				arraybus.add(autobusak);
-				for(int i=0;i<arraybus.size();i++){
-		    		System.out.println(arraybus);
-		        } 	
+				for (int i = 0; i < arraybus.size(); i++) {
+					System.out.println(arraybus);
+				}
 			}
 		} catch (Exception e) {
 			e.getMessage();
 		}
 		return arraybus;
 	}
-	public static ArrayList <Geltokiak> geltokiakAtera(String linea){
-		ArrayList <Geltokiak> arrayparada = new ArrayList<Geltokiak>();
-		PreparedStatement st=null;
-		Connection konexioa=Konexioa.getConexion();
+
+	public static ArrayList<Geltokiak> geltokiakAtera(String linea) {
+		ArrayList<Geltokiak> arrayparada = new ArrayList<Geltokiak>();
+		PreparedStatement st = null;
+		Connection konexioa = Konexioa.getConexion();
 		try {
-			
-			st = konexioa.prepareStatement("SELECT * FROM parada, linea_parada,linea WHERE parada.Cod_Parada=linea_parada.Cod_Parada and linea.Cod_Linea=linea_parada.Cod_Linea AND linea.Cod_Linea like"+"'" +linea+"'");
+
+			st = konexioa.prepareStatement(
+					"SELECT * FROM parada, linea_parada,linea WHERE parada.Cod_Parada=linea_parada.Cod_Parada and linea.Cod_Linea=linea_parada.Cod_Linea AND linea.Cod_Linea like"
+							+ "'" + linea + "'");
 			ResultSet rs = st.executeQuery();
-			     
+
 			int kodGeltokia;
 			String izena;
 			String kalea;
 			float altuera;
 			float luzera;
 			while (rs.next()) {
-				 System.out.println(rs.getString(2));
-				 	kodGeltokia=(rs.getInt(1));
-				 	izena=(rs.getString(2));
-				 	kalea=(rs.getString(3));
-				 	altuera=(rs.getFloat(4));
-				 	luzera=(rs.getFloat(5));
-				 	Geltokiak parada= new Geltokiak(kodGeltokia, izena, kalea, altuera, luzera);
-				 	arrayparada.add(parada);
+				System.out.println(rs.getString(2));
+				kodGeltokia = (rs.getInt(1));
+				izena = (rs.getString(2));
+				kalea = (rs.getString(3));
+				altuera = (rs.getFloat(4));
+				luzera = (rs.getFloat(5));
+				Geltokiak parada = new Geltokiak(kodGeltokia, izena, kalea, altuera, luzera);
+				arrayparada.add(parada);
 			}
-		}catch(Exception e) {
+		} catch (Exception e) {
 			e.getMessage();
 		}
 		return arrayparada;
 	}
-	
+
 	public static ArrayList<Bezeroak> bezeroDatuak() {
 		ArrayList<Bezeroak> arrayBezeroak = new ArrayList<Bezeroak>();
 		Statement st = null;
@@ -127,7 +130,7 @@ public class Kontsultak {
 	}
 
 	public static ArrayList<GeltokiaLinea> arrayGelLinea() {
-		
+
 		ArrayList<GeltokiaLinea> arrayGelLinea = new ArrayList<GeltokiaLinea>();
 		Statement st = null;
 		Connection konexioa = Konexioa.getConexion();
@@ -135,14 +138,14 @@ public class Kontsultak {
 		int kodGeltokia;
 
 		try {
-			
+
 			st = konexioa.createStatement();
 			ResultSet rs = st.executeQuery("Select * from linea_parada");
 			while (rs.next()) {
 				kodLinea = (rs.getString("Cod_Linea"));
 				kodGeltokia = (rs.getInt("Cod_Parada"));
 				GeltokiaLinea geltokiLinea = new GeltokiaLinea(kodLinea, kodGeltokia);
-				arrayGelLinea.add(geltokiLinea);	
+				arrayGelLinea.add(geltokiLinea);
 			}
 		} catch (Exception e) {
 			e.getMessage();
@@ -150,9 +153,9 @@ public class Kontsultak {
 		return arrayGelLinea;
 
 	}
-	
-public static ArrayList<AutobusLinea> arrayBusLinea() {
-		
+
+	public static ArrayList<AutobusLinea> arrayBusLinea() {
+
 		ArrayList<AutobusLinea> arrayBusLinea = new ArrayList<AutobusLinea>();
 		Statement st = null;
 		Connection konexioa = Konexioa.getConexion();
@@ -160,14 +163,14 @@ public static ArrayList<AutobusLinea> arrayBusLinea() {
 		int kodAutobusa;
 
 		try {
-			
+
 			st = konexioa.createStatement();
 			ResultSet rs = st.executeQuery("Select * from linea_autobus");
 			while (rs.next()) {
 				kodLinea = (rs.getString("Cod_Linea"));
 				kodAutobusa = (rs.getInt("Cod_bus"));
 				AutobusLinea autobusLinea = new AutobusLinea(kodLinea, kodAutobusa);
-				arrayBusLinea.add(autobusLinea);	
+				arrayBusLinea.add(autobusLinea);
 			}
 		} catch (Exception e) {
 			e.getMessage();
