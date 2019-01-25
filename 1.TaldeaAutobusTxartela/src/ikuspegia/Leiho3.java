@@ -375,7 +375,7 @@ public class Leiho3 extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// joanEtorriaMenua.setEnabled(true);
-				// amaierakoGeltokiaGroup.add(hasierakoGeltItem_7);
+				// amaierakoGeltokiaGroup.add(hasierakoGeltItem_7); 
 			}
 		});*/
 
