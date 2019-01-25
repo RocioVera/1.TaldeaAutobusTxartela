@@ -9,11 +9,11 @@ public class Txartelak {
 	private int kodGeltokiAmaiera;
 	private String data;
 	private String ordua;
-	private String NAN;
+	private String nan;
 	private float prezioa;
 	
 	public Txartelak(int kodTxartela, String kodLinea, int kodBus, int kodGeltokiHasiera, int kodGeltokiAmaiera,
-			String data, String ordua, String nAN, float prezioa) {
+			String data, String ordua, String nan, float prezioa) {
 		
 		this.kodTxartela = kodTxartela;
 		this.kodLinea = kodLinea;
@@ -22,7 +22,7 @@ public class Txartelak {
 		this.kodGeltokiAmaiera = kodGeltokiAmaiera;
 		this.data = data;
 		this.ordua = ordua;
-		NAN = nAN;
+		this.nan = nan;
 		this.prezioa = prezioa;
 	}
 	
@@ -82,12 +82,12 @@ public class Txartelak {
 		this.ordua = ordua;
 	}
 
-	public String getNAN() {
-		return NAN;
+	public String getNan() {
+		return nan;
 	}
 
-	public void setNAN(String nAN) {
-		NAN = nAN;
+	public void setNan(String nAN) {
+		this.nan = nan;
 	}
 
 	public float getPrezioa() {

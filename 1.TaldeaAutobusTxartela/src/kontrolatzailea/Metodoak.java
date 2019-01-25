@@ -98,7 +98,7 @@ public class Metodoak {
 		ArrayList<Geltokiak> arrayGeltokia = new ArrayList<Geltokiak>();
 		Leiho3 Leiho3 = new Leiho3(arrayGeltokia, hartutakoLinea);
 		Leiho3.setVisible(true);
-
+		
 	}
 
 	// leiho4 sortu

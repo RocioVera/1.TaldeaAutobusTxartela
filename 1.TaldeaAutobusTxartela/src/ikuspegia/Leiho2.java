@@ -33,7 +33,6 @@ public class Leiho2 extends JFrame {
 		font = new Font("Verdana", Font.PLAIN, 16);
 
 		// botoiak
-
 		btn_next.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -58,9 +57,6 @@ public class Leiho2 extends JFrame {
 		getContentPane().add(restart);
 
 		// NEW
-		// ArrayList<Lineak> lineak = new ArrayList<>();
-		// lineak = Kontsultak.lineakDatuak();
-
 		L1 = new JRadioButton(lineak.get(0).getKodLinea() + "        " + lineak.get(0).getIzena());
 		L2 = new JRadioButton(lineak.get(1).getKodLinea() + "        " + lineak.get(1).getIzena());
 		L3 = new JRadioButton(lineak.get(2).getKodLinea() + "        " + lineak.get(2).getIzena());

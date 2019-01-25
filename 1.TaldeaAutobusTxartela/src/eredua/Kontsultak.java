@@ -1,18 +1,9 @@
 package eredua;
 
 import java.util.ArrayList;
-
 import javax.swing.plaf.synth.SynthSpinnerUI;
-
 import eredua.*;
-import kontrolatzailea.AutobusLinea;
-import kontrolatzailea.Autobusak;
-import kontrolatzailea.Bezeroak;
-import kontrolatzailea.GeltokiaLinea;
-import kontrolatzailea.Geltokiak;
-import kontrolatzailea.Konexioa;
-import kontrolatzailea.Lineak;
-
+import kontrolatzailea.*;
 import java.sql.*;
 
 public class Kontsultak {
@@ -25,7 +16,7 @@ public class Kontsultak {
 
 		try {
 			st = konexioa.createStatement();
-			ResultSet rs = st.executeQuery("select * from linea");
+			ResultSet rs = st.executeQuery("SELECT * FROM linea");
 
 			// crear obejtos asignandoselo al rs, luego crear el obejeto y luego meterle las
 			// variables
@@ -54,7 +45,7 @@ public class Kontsultak {
 
 		try {
 			st = konexioa.createStatement();
-			ResultSet rs = st.executeQuery("select * from autobus");
+			ResultSet rs = st.executeQuery("SELECT * FROM autobus");
 			while (rs.next()) {
 				kodBus = (rs.getInt("Cod_bus"));
 				nPlaza = (rs.getInt("N_plazas"));
@@ -112,7 +103,7 @@ public class Kontsultak {
 
 		try {
 			st = konexioa.createStatement();
-			ResultSet rs = st.executeQuery("select * from cliente");
+			ResultSet rs = st.executeQuery("SELECT * FROM cliente");
 			while (rs.next()) {
 				NAN = (rs.getString(1));
 				izena = (rs.getString(2));
@@ -140,7 +131,7 @@ public class Kontsultak {
 		try {
 
 			st = konexioa.createStatement();
-			ResultSet rs = st.executeQuery("Select * from linea_parada");
+			ResultSet rs = st.executeQuery("Select * FROM linea_parada");
 			while (rs.next()) {
 				kodLinea = (rs.getString("Cod_Linea"));
 				kodGeltokia = (rs.getInt("Cod_Parada"));
@@ -165,7 +156,7 @@ public class Kontsultak {
 		try {
 
 			st = konexioa.createStatement();
-			ResultSet rs = st.executeQuery("Select * from linea_autobus");
+			ResultSet rs = st.executeQuery("Select * FROM linea_autobus");
 			while (rs.next()) {
 				kodLinea = (rs.getString("Cod_Linea"));
 				kodAutobusa = (rs.getInt("Cod_bus"));
@@ -178,4 +169,44 @@ public class Kontsultak {
 		return arrayBusLinea;
 
 	}
+
+	public static ArrayList<Txartelak> billeteakGorde(int kodTxartela, int Ntrayecto,String kodLinea, int kodBus, int kodGeltokiHasiera, int kodGeltokiAmaiera,
+			String data, String ordua, String nan, float prezioa) {
+		ArrayList<Txartelak> arrayTxartelak = new ArrayList<Txartelak>();
+		Statement st = null;
+		Connection konexioa = Konexioa.getConexion();
+		//int kodTxartela, kodBus, kodGeltokiHasiera, kodGeltokiAmaiera;
+		//String kodLinea, data, ordua, nan; 
+		//float prezioa;
+		
+		try {
+			st = konexioa.createStatement();
+		//	Ntrayecto //lasegunda
+			ResultSet rs = st.executeQuery("insert into billete VALUES"+ "'" +kodTxartela+ "','"+Ntrayecto+"','"+kodLinea+ "','"+kodBus+ "','"+kodGeltokiHasiera+ "','"+kodGeltokiAmaiera+ "','"+data+ "','"+ordua+ "','"+nan+ "','"+prezioa);
+			//INSERT INTO `billete` VALUES ('12345678', '1234567891', 'L1', '3002', '9', '10', '2019-01-26', '13:09:0', '45899844Y', '2');
+			
+			while (rs.next()) {
+
+				kodTxartela = (rs.getInt("Cod_Billete"));
+		//		izena = (rs.getString("NTrayecto"));  //*****galdetu*****
+				kodLinea = (rs.getString("Cod_Linea"));
+				kodBus = (rs.getInt("Cod_Bus"));
+				kodGeltokiHasiera = (rs.getInt("Cod_Parada_Inicio"));
+				kodGeltokiAmaiera = (rs.getInt("Cod_Parada_Fin"));
+				data = (rs.getString("Fecha"));
+				ordua = (rs.getString("Hora"));
+				nan = (rs.getString("DNI"));
+				prezioa = (rs.getFloat("Precio"));
+				Txartelak txartelak = new Txartelak(kodTxartela, kodLinea, kodBus, kodGeltokiHasiera, kodGeltokiAmaiera, data, ordua, nan, prezioa);
+				arrayTxartelak.add(txartelak); 
+				for (int i = 0; i < arrayTxartelak.size(); i++) {
+					System.out.println(arrayTxartelak);
+				}
+			}
+		} catch (Exception e) {
+			e.getMessage();
+		}
+		return arrayTxartelak;
+	}
+
 }
