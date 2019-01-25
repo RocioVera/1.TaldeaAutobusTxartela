@@ -522,16 +522,16 @@ public class Leiho3 extends JFrame {
 		getContentPane().add(etorriaOrdua);
 	
 
-			dateJoan.getDateEditor().addPropertyChangeListener(
-		    new PropertyChangeListener() {
-		        @Override
-		        public void propertyChange(PropertyChangeEvent e) {
-		        	 if (dateJoan != null) {
-		            	   btn_next.setEnabled(true);
-		               }
-		        }
-		    });
-		
-	}
+		dateJoan.getDateEditor().addPropertyChangeListener(
+	    new PropertyChangeListener() {
+	        @Override
+	        public void propertyChange(PropertyChangeEvent e) {
+	        	 if (dateJoan != null) {
+	            	   btn_next.setEnabled(true);
+	               }
+	        }
+	    });
+	
+}
 	
 }
