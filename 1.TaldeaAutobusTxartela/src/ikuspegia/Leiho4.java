@@ -105,7 +105,6 @@ public class Leiho4 extends JFrame {
 				lblPasahitza.setVisible(true);
 				lblNan.setVisible(true);
 				
-				
 				passwordField = new JPasswordField();
 				passwordField.setEchoChar('*');
 				passwordField.setBounds(283, 270, 86, 20);
