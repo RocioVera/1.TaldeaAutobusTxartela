@@ -22,7 +22,7 @@ public class Leiho4 extends JFrame {
 	private JButton restart = new JButton("\u2302");
 	
 	public Leiho4(String hartutakoLinea) {
-		setLayout(null);
+		getContentPane().setLayout(null);
 		this.setBounds(350,50,600,600);
 		this.setResizable(false); // neurketak ez aldatzeko
 		this.setSize(new Dimension(600, 600));
@@ -66,7 +66,7 @@ public class Leiho4 extends JFrame {
 		lblPrezioTotala = new JLabel("Prezio totala:");
 		lblPrezioTotala.setFont(new Font("Tahoma", Font.BOLD, 17));
 		lblPrezioTotala.setBounds(159, 76, 117, 20);
-		add(lblPrezioTotala);
+		getContentPane().add(lblPrezioTotala);
 
 		txtPrezioTot.setEditable(false);
 		txtPrezioTot.setColumns(10);
@@ -74,34 +74,44 @@ public class Leiho4 extends JFrame {
 		String guztiraPrezBEZ="";
 		//guztiraPrezBEZ = zerrenda.guztiraPrezBEZMetodoa();
 		txtPrezioTot.setText(guztiraPrezBEZ + " €");
-		add(txtPrezioTot);
-
+		getContentPane().add(txtPrezioTot);
+		btn_next.setVisible(false);
+		
+		
+		lblNan = new JLabel("NAN:");
+		lblPasahitza = new JLabel("Pasahitza:");
+		lblPasahitza.setVisible(false);
+		lblNan.setVisible(false);
+		
+		
 		btnSartu = new JButton("Sartu");
 		btnSartu.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				lblNan = new JLabel("NAN:");
+			public void actionPerformed(ActionEvent arg0) {
+
 				lblNan.setFont(new Font("Tahoma", Font.BOLD, 17));
-				lblNan.setBounds(199, 223, 61, 20);
-				add(lblNan);
+				lblNan.setBounds(214, 225, 62, 20);
+				getContentPane().add(lblNan);
 				
 				txtNan = new JTextField();
 				txtNan.setColumns(10);
-				txtNan.setBounds(306, 225, 86, 20);
-				add(txtNan);
+				txtNan.setBounds(283, 225, 86, 20);
+				getContentPane().add(txtNan);
 				
-				JLabel lblPasahitza = new JLabel("Pasahitza:");
 				lblPasahitza.setFont(new Font("Tahoma", Font.BOLD, 17));
-				lblPasahitza.setBounds(199, 266, 102, 20);
-				add(lblPasahitza);
+				lblPasahitza.setBounds(184, 267, 93, 20);
+				getContentPane().add(lblPasahitza);
 				
+				
+				lblPasahitza.setVisible(true);
+				lblNan.setVisible(true);
 				
 				passwordField = new JPasswordField();
 				passwordField.setEchoChar('*');
-				passwordField.setBounds(306, 267, 86, 22);
-				add(passwordField);
+				passwordField.setBounds(283, 270, 86, 20);
+				getContentPane().add(passwordField);
 			
 				//al quitar esto no aparece lo demas
-	//			Frame.btn_next.setVisible(true);
+				btn_next.setVisible(true);
 				
 				JButton btnKonektatu = new JButton("Konektatu");
 				btnKonektatu.addActionListener(new ActionListener() {
@@ -111,13 +121,13 @@ public class Leiho4 extends JFrame {
 					}
 				});
 				btnKonektatu.setBounds(252, 318, 104, 25);
-				add(btnKonektatu);
+				getContentPane().add(btnKonektatu);
 
 				
 			}
 		});
 		btnSartu.setBounds(252, 156, 69, 25);
-		add(btnSartu);		
+		getContentPane().add(btnSartu);		
 		
 	}
 }
