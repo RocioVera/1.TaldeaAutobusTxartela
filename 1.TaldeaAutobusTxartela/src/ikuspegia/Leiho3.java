@@ -4,6 +4,8 @@ package ikuspegia;
 import java.awt.CheckboxGroup;
 import java.awt.Dimension;
 import java.awt.event.*;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 
 import javax.swing.*;
@@ -23,6 +25,8 @@ public class Leiho3 extends JFrame {
 	private ButtonGroup hasierakoGeltokiaGroup;
 	private ButtonGroup amaierakoGeltokiaGroup;
 	private ButtonGroup joanEtorriGroup;
+	private JTextFieldDateEditor editor;
+	private JFormattedTextField spinner;
 
 	private JSpinner etorriaOrdua;
 	private JSpinner etorriaMinutu;
@@ -64,16 +68,23 @@ public class Leiho3 extends JFrame {
 		this.setResizable(false); // neurketak ez aldatzeko
 		this.setSize(new Dimension(600, 600));
 		// botoiak
+		
 		btn_next.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				if (dateJoan != null) {
+					Metodoak.laugarrenLeihoa(hartutakoLinea);
+					dispose();
+	               }
 				Metodoak.laugarrenLeihoa(hartutakoLinea);
 				dispose();
 			}
 			//adios tximuelo
 		});
+		
 		btn_next.setBounds(423, 500, 122, 32);
 		btn_next.setFont(new Font("Tahoma", Font.ITALIC, 16));
+		btn_next.setEnabled(false);
 		getContentPane().add(btn_next);
 
 		btn_prev.addActionListener(new ActionListener() {
@@ -368,85 +379,159 @@ public class Leiho3 extends JFrame {
 
 		geltoki.add(hasierakoGeltokia);
 		geltoki.add(amaierakoGeltokia);
-
 		geltoki.add(joanEtorriaMenua);
+		
+		joanEtorriGroup.add(joan);
+		joanEtorriGroup.add(joanEtorria);
+		
 		// joanEtorriaMenua.add(joanEtorria);
 
-		/*joan.addActionListener(new ActionListener() {
+		joan.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// joanEtorriaMenua.setEnabled(true);
 				// amaierakoGeltokiaGroup.add(hasierakoGeltItem_7); 
+				lblJoan.setVisible(true);
+				lblDataJoan.setVisible(true);
+				lblOrduaJoan.setVisible(true);
+				dateJoan.setVisible(true);
+			    joanMinutu.setVisible(true);
+				joanOrdua.setVisible(true);
+				
+				lblEtorria.setVisible(false);
+				lblDataEtorria.setVisible(false);
+				lblOrduaEtorria.setVisible(false);
+				dateEtorria.setVisible(false);
+				etorriaMinutu.setVisible(false);
+				etorriaOrdua.setVisible(false);
+				
+				editor.setValue(0);
+				etorriaMinutu.setValue(0);
+				etorriaOrdua.setValue(0);
 			}
-		});*/
+		});
 
 		// bakarrik joan
 		lblJoan = new JLabel("Joan");
 		lblJoan.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		lblJoan.setBounds(71, 108, 51, 21);
+		lblJoan.setVisible(false);
 		getContentPane().add(lblJoan);
 
 		lblDataJoan = new JLabel("Data");
 		lblDataJoan.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		lblDataJoan.setBounds(134, 142, 46, 21);
+		lblDataJoan.setVisible(false);
 		getContentPane().add(lblDataJoan);
 
 		lblOrduaJoan = new JLabel("Ordua");
 		lblOrduaJoan.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		lblOrduaJoan.setBounds(134, 176, 46, 14);
+		lblOrduaJoan.setVisible(false);
 		getContentPane().add(lblOrduaJoan);
 
 		dateJoan = new JDateChooser();
 		dateJoan.setDateFormatString("dd-MM-yyyy");
 		dateJoan.setBounds(190, 142, 127, 20);
+		editor = (JTextFieldDateEditor) dateJoan.getDateEditor();
+		editor.setEditable(false);
+		dateJoan.setVisible(false);
 		getContentPane().add(dateJoan);
 
 		joanMinutu = new JSpinner();
 		joanMinutu.setModel(new SpinnerNumberModel(0, 0, 59, 1));
 		joanMinutu.setBounds(258, 176, 51, 20);
+	    spinner = ((JSpinner.DefaultEditor) joanMinutu.getEditor()).getTextField();
+	    spinner.setEditable(false);
+	    joanMinutu.setVisible(false);
 		getContentPane().add(joanMinutu);
 
 		joanOrdua = new JSpinner();
 		joanOrdua.setModel(new SpinnerNumberModel(0, 0, 23, 1));
 		joanOrdua.setBounds(192, 176, 51, 20);
+	    spinner = ((JSpinner.DefaultEditor) joanOrdua.getEditor()).getTextField();
+	    spinner.setEditable(false);
+		joanOrdua.setVisible(false);
 		getContentPane().add(joanOrdua);
 
-		/*joanEtorria.addActionListener(new ActionListener() {
+		joanEtorria.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+			
+				lblJoan.setVisible(true);
+				lblDataJoan.setVisible(true);
+				lblOrduaJoan.setVisible(true);
+				dateJoan.setVisible(true);
+			    joanMinutu.setVisible(true);
+				joanOrdua.setVisible(true);
+				
+				lblEtorria.setVisible(true);
+				lblDataEtorria.setVisible(true);
+				lblOrduaEtorria.setVisible(true);
+				dateEtorria.setVisible(true);
+				etorriaMinutu.setVisible(true);
+				etorriaOrdua.setVisible(true);
+			
 			}
-		});*/
+		});
 
+
+		
+			
 		// joan etorria klik egitean aktibatzeko
 		lblEtorria = new JLabel("Etorria");
 		lblEtorria.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		lblEtorria.setBounds(71, 222, 89, 21);
+		lblEtorria.setVisible(false);
 		getContentPane().add(lblEtorria);
 
 		lblDataEtorria = new JLabel("Data");
 		lblDataEtorria.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		lblDataEtorria.setBounds(134, 265, 46, 21);
+		lblDataEtorria.setVisible(false);
 		getContentPane().add(lblDataEtorria);
 
 		lblOrduaEtorria = new JLabel("Ordua");
 		lblOrduaEtorria.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		lblOrduaEtorria.setBounds(134, 300, 46, 21);
+		lblOrduaEtorria.setVisible(false);
 		getContentPane().add(lblOrduaEtorria);
 
 		dateEtorria = new JDateChooser();
 		dateEtorria.setDateFormatString("dd-MM-yyyy");
 		dateEtorria.setBounds(190, 265, 127, 20);
+		editor = (JTextFieldDateEditor) dateEtorria.getDateEditor();
+		editor.setEditable(false);
+		dateEtorria.setVisible(false);
 		getContentPane().add(dateEtorria);
 
 		etorriaMinutu = new JSpinner();
 		etorriaMinutu.setModel(new SpinnerNumberModel(0, 0, 59, 1));
 		etorriaMinutu.setBounds(266, 300, 51, 20);
+	    spinner = ((JSpinner.DefaultEditor) etorriaMinutu.getEditor()).getTextField();
+	    spinner.setEditable(false);
+		etorriaMinutu.setVisible(false);
 		getContentPane().add(etorriaMinutu);
 
 		etorriaOrdua = new JSpinner();
 		etorriaOrdua.setModel(new SpinnerNumberModel(0, 0, 23, 1));
 		etorriaOrdua.setBounds(200, 300, 51, 20);
+	    spinner = ((JSpinner.DefaultEditor) etorriaOrdua.getEditor()).getTextField();
+	    spinner.setEditable(false);
+		etorriaOrdua.setVisible(false);
 		getContentPane().add(etorriaOrdua);
+	
 
+			dateJoan.getDateEditor().addPropertyChangeListener(
+		    new PropertyChangeListener() {
+		        @Override
+		        public void propertyChange(PropertyChangeEvent e) {
+		        	 if (dateJoan != null) {
+		            	   btn_next.setEnabled(true);
+		               }
+		        }
+		    });
+		
 	}
+	
 }
