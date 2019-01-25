@@ -166,7 +166,7 @@ public class Leiho3 extends JFrame {
 					}
 				});
 			}
-
+ 
 			if (i == 3) {
 				hasierakoGeltItem_3 = new JRadioButton(arrayGeltokia.get(2).getIzena());
 				hasierakoGeltItem_3.setFont(new Font("Verdana", Font.BOLD, 12));
