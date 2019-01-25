@@ -521,7 +521,7 @@ public class Leiho3 extends JFrame {
 		etorriaOrdua.setVisible(false);
 		getContentPane().add(etorriaOrdua);
 	
-
+        //listener
 		dateJoan.getDateEditor().addPropertyChangeListener(
 	    new PropertyChangeListener() {
 	        @Override
