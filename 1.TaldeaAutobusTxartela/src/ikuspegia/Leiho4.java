@@ -16,10 +16,16 @@ public class Leiho4 extends JFrame {
 	private JButton btnSartu;
 	private JLabel lblNan;
 	private JLabel lblPasahitza;
-
+	
+	private JButton btnKonektatu = new JButton("Konektatu"); 
 	private JButton btn_next = new JButton("Hurrengoa");
 	private JButton btn_prev = new JButton("Atzera");
 	private JButton restart = new JButton("\u2302");
+	
+	private String pasahitza;
+	private String nan;
+	private boolean balPasa;
+	private boolean balNan;
 	
 	public Leiho4(String hartutakoLinea) {
 		getContentPane().setLayout(null);
@@ -77,7 +83,7 @@ public class Leiho4 extends JFrame {
 		getContentPane().add(txtPrezioTot);
 		btn_next.setVisible(false);
 		
-		
+		btnKonektatu.setVisible(false);
 		lblNan = new JLabel("NAN:");
 		lblPasahitza = new JLabel("Pasahitza:");
 		lblPasahitza.setVisible(false);
@@ -87,6 +93,7 @@ public class Leiho4 extends JFrame {
 		btnSartu = new JButton("Sartu");
 		btnSartu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				btnKonektatu.setVisible(true);
 
 				lblNan.setFont(new Font("Tahoma", Font.BOLD, 17));
 				lblNan.setBounds(214, 225, 62, 20);
@@ -100,8 +107,7 @@ public class Leiho4 extends JFrame {
 				lblPasahitza.setFont(new Font("Tahoma", Font.BOLD, 17));
 				lblPasahitza.setBounds(184, 267, 93, 20);
 				getContentPane().add(lblPasahitza);
-				
-				
+						
 				lblPasahitza.setVisible(true);
 				lblNan.setVisible(true);
 				
@@ -109,25 +115,31 @@ public class Leiho4 extends JFrame {
 				passwordField.setEchoChar('*');
 				passwordField.setBounds(283, 270, 86, 20);
 				getContentPane().add(passwordField);
-			
-				//al quitar esto no aparece lo demas
-				btn_next.setVisible(true);
-				
-				JButton btnKonektatu = new JButton("Konektatu");
-				btnKonektatu.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						//conectar a la bbdd para la pasahitza
-	//					Frame.btn_next.setVisible(true);
-					}
-				});
-				btnKonektatu.setBounds(252, 318, 104, 25);
-				getContentPane().add(btnKonektatu);
-
-				
 			}
 		});
 		btnSartu.setBounds(252, 156, 69, 25);
 		getContentPane().add(btnSartu);		
+		
+		btnKonektatu.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//conectar a la bbdd para la pasahitza
+				
+				
+				nan = txtNan.getText();
+				pasahitza = String.valueOf(passwordField.getPassword());
+				balPasa = Metodoak.frogatuPasahitza(pasahitza);
+				balNan = Metodoak.frogatuNAN(nan);
+				if (balPasa && balNan) {
+					btn_next.setVisible(true);
+				}else
+					System.out.println("NAN edo pasahitza txarto dago");
+				
+					
+			}
+		});
+		btnKonektatu.setBounds(243, 348, 104, 25);
+		getContentPane().add(btnKonektatu);
+
 		
 	}
 }
