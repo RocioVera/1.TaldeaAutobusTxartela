@@ -70,6 +70,7 @@ public class Leiho3 extends JFrame {
 				Metodoak.laugarrenLeihoa(hartutakoLinea);
 				dispose();
 			}
+			//adios tximuelo
 		});
 		btn_next.setBounds(423, 500, 122, 32);
 		btn_next.setFont(new Font("Tahoma", Font.ITALIC, 16));
