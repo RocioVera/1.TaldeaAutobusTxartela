@@ -8,7 +8,7 @@ import java.awt.event.ActionEvent;
 public class Leiho6 extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JLabel lblEskerrikAskoMezua1, lblEskerrikAskoMezua2;
-	private JButton btnTiketaIkusi;
+	private JButton btnTiketaImprimatu;
 	private JTextField txtSegundenMezua;
 
 	public Leiho6() {
@@ -32,26 +32,24 @@ public class Leiho6 extends JFrame {
 		
 		
 		txtSegundenMezua = new JTextField("Tiketa");
+		txtSegundenMezua.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		txtSegundenMezua.setHorizontalAlignment(SwingConstants.CENTER);
+		txtSegundenMezua.setBackground(Color.LIGHT_GRAY);
+		txtSegundenMezua.setBounds(99, 230, 389, 216);
+		getContentPane().add(txtSegundenMezua);
+
 		//lblPasahitza = new JLabel("Pasahitza:");
-		txtSegundenMezua.setVisible(false);
 	//	lblNan.setVisible(false);
 		
-		btnTiketaIkusi = new JButton("Tiketa ikusi");
-		btnTiketaIkusi.addActionListener(new ActionListener() {
+		btnTiketaImprimatu = new JButton("Tiketa imprimatu eta bukatu erosketa");
+		btnTiketaImprimatu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				txtSegundenMezua.setFont(new Font("Tahoma", Font.PLAIN, 14));
-				txtSegundenMezua.setHorizontalAlignment(SwingConstants.CENTER);
-				txtSegundenMezua.setBackground(Color.LIGHT_GRAY);
-				txtSegundenMezua.setBounds(99, 230, 389, 216);
-				getContentPane().add(txtSegundenMezua);
-				txtSegundenMezua.setVisible(true);
-
-			//	Metodoak.Leiho_segunduak();
-			//	dispose();
+				Metodoak.Leiho_segunduak();
+				dispose();
 			}
 		});
-		btnTiketaIkusi.setBounds(247, 168, 97, 25);
-		getContentPane().add(btnTiketaIkusi);
+		btnTiketaImprimatu.setBounds(130, 169, 306, 25);
+		getContentPane().add(btnTiketaImprimatu);
 		
 		
 		//FALTA EL TICKET

@@ -33,10 +33,12 @@ public class Leiho2 extends JFrame {
 		});
 		btn_next.setBounds(350, 500, 122, 32);
 		btn_next.setFont(new Font("Tahoma", Font.ITALIC, 16));
+		btn_next.setForeground(Color.RED);
+		btn_next.setBackground(Color.LIGHT_GRAY);
+
 		getContentPane().add(btn_next);
 		btn_next.setVisible(false);
-
-
+		
 		restart.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -45,6 +47,8 @@ public class Leiho2 extends JFrame {
 			}
 		});
 		restart.setBounds(125, 500, 72, 32);
+		restart.setForeground(Color.RED);
+		restart.setBackground(Color.LIGHT_GRAY);
 		getContentPane().add(restart);
 
 		// NEW
@@ -102,7 +106,7 @@ public class Leiho2 extends JFrame {
 		group.add(L4);
 
 		txtErabakiLinea.setText("Klikatu nahi duzun linearen gainean");
-		txtErabakiLinea.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 20));
+		txtErabakiLinea.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 25));
 		txtErabakiLinea.setHorizontalAlignment(SwingConstants.CENTER);
 		txtErabakiLinea.setForeground(Color.LIGHT_GRAY);
 		txtErabakiLinea.setBackground(Color.RED);

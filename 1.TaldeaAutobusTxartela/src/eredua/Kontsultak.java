@@ -1,13 +1,10 @@
 package eredua;
 
 import java.util.ArrayList;
-import javax.swing.plaf.synth.SynthSpinnerUI;
-import eredua.*;
 import kontrolatzailea.*;
 import java.sql.*;
 
 public class Kontsultak {
-	// static ez
 	public static ArrayList<Lineak> lineakDatuak() {
 		ArrayList<Lineak> arrayLineak = new ArrayList<Lineak>();
 		Statement st = null;
