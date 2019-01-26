@@ -1,68 +1,33 @@
 package ikuspegia;
-//mirar lo de los group
-
-import java.awt.CheckboxGroup;
-import java.awt.Dimension;
+import java.awt.*;
 import java.awt.event.*;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
-import java.util.ArrayList;
-import java.util.Date;
-
+import java.beans.*;
+import java.util.*;
 import javax.swing.*;
 import com.toedter.calendar.*;
 
-import eredua.Kontsultak;
-import kontrolatzailea.Geltokiak;
-import kontrolatzailea.Metodoak;
-
-import java.awt.Font;
+import eredua.*;
+import kontrolatzailea.*;
 
 public class Leiho3 extends JFrame {
+	private static final long serialVersionUID = 1L;
 	private JMenuBar geltoki;
-	private JMenu hasierakoGeltokia;
-	private JMenu amaierakoGeltokia;
-	private JMenu joanEtorriaMenua;
-	private ButtonGroup hasierakoGeltokiaGroup;
-	private ButtonGroup amaierakoGeltokiaGroup;
-	private ButtonGroup joanEtorriGroup;
+	private JMenu hasierakoGeltokia, amaierakoGeltokia, joanEtorriaMenua;
+	private ButtonGroup hasierakoGeltokiaGroup,amaierakoGeltokiaGroup, joanEtorriGroup;
 	private JTextFieldDateEditor editor;
 	private JFormattedTextField spinnerEditatu;
 
-	private JSpinner etorriaOrdua;
-	private JSpinner etorriaMinutu;
-	private JSpinner joanOrdua;
-	private JSpinner joanMinutu;
-	private JLabel lblEtorria;
-	private JLabel lblDataEtorria;
-	private JLabel lblDataJoan;
-	private JLabel lblOrduaJoan;
-	private JLabel lblOrduaEtorria;
-	private JLabel lblJoan;
-	private JDateChooser dateEtorria;
-	private JDateChooser dateJoan;
+	private JSpinner etorriaOrdua, etorriaMinutu, joanOrdua, joanMinutu;
+	private JLabel lblEtorria, lblJoan, lblDataEtorria, lblDataJoan, lblOrduaJoan, lblOrduaEtorria;
+	private JDateChooser dateEtorria, dateJoan;
 
-	private JRadioButton amaierakoGeltItem_1;
-	private JRadioButton amaierakoGeltItem_2;
-	private JRadioButton amaierakoGeltItem_3;
-	private JRadioButton amaierakoGeltItem_4;
-	private JRadioButton amaierakoGeltItem_5;
-	private JRadioButton amaierakoGeltItem_6;
-	private JRadioButton amaierakoGeltItem_7;
-	private JRadioButton hasierakoGeltItem_1;
-	private JRadioButton hasierakoGeltItem_2;
-	private JRadioButton hasierakoGeltItem_3;
-	private JRadioButton hasierakoGeltItem_4;
-	private JRadioButton hasierakoGeltItem_5;
-	private JRadioButton hasierakoGeltItem_6;
-	private JRadioButton hasierakoGeltItem_7;
-	private JRadioButton joan;
-	private JRadioButton joanEtorria;
+	private JRadioButton amaierakoGeltItem_1, amaierakoGeltItem_2, amaierakoGeltItem_3, amaierakoGeltItem_4, amaierakoGeltItem_5, amaierakoGeltItem_6, amaierakoGeltItem_7;
+	private JRadioButton hasierakoGeltItem_1, hasierakoGeltItem_2, hasierakoGeltItem_3, hasierakoGeltItem_4, hasierakoGeltItem_5, hasierakoGeltItem_6, hasierakoGeltItem_7;
+	private JRadioButton joan, joanEtorria;
 
 	private JButton btn_next = new JButton("Hurrengoa");
 	private JButton btn_prev = new JButton("Atzera");
 	private JButton restart = new JButton("\u2302");
-	private Date date = new Date();
 
 	public Leiho3(ArrayList<Geltokiak> arrayGeltokia, String hartutakoLinea) {
 		getContentPane().setLayout(null);
@@ -130,8 +95,8 @@ public class Leiho3 extends JFrame {
 
 		// ArrayList <Geltokiak> arrayparada = new ArrayList<Geltokiak>();
 		arrayGeltokia = Kontsultak.geltokiakAtera((hartutakoLinea));
-
-		for (int i = 0; i <= arrayGeltokia.size(); i++) {
+		int luzera=arrayGeltokia.size();
+		for (int i = 0; i <= luzera-1; i++) {
 			if (i == 1) {
 				hasierakoGeltItem_1 = new JRadioButton(arrayGeltokia.get(0).getIzena());
 				hasierakoGeltItem_1.setFont(new Font("Verdana", Font.BOLD, 12));
@@ -142,6 +107,38 @@ public class Leiho3 extends JFrame {
 						amaierakoGeltokia.setEnabled(true);
 						hasierakoGeltokiaGroup.add(hasierakoGeltItem_1);
 						amaierakoGeltItem_1.setEnabled(false);
+						if (luzera==2)
+							amaierakoGeltItem_2.setEnabled(true);
+						else if (luzera==3) {
+							amaierakoGeltItem_2.setEnabled(true);
+							amaierakoGeltItem_3.setEnabled(true);
+							}
+						else if (luzera==4){
+							amaierakoGeltItem_2.setEnabled(true);
+							amaierakoGeltItem_3.setEnabled(true);
+							amaierakoGeltItem_4.setEnabled(true);
+							}
+						else if (luzera==5){
+							amaierakoGeltItem_2.setEnabled(true);
+							amaierakoGeltItem_3.setEnabled(true);
+							amaierakoGeltItem_4.setEnabled(true);
+							amaierakoGeltItem_5.setEnabled(true);
+						}
+						else if (luzera==6){
+							amaierakoGeltItem_2.setEnabled(true);
+							amaierakoGeltItem_3.setEnabled(true);
+							amaierakoGeltItem_4.setEnabled(true);
+							amaierakoGeltItem_5.setEnabled(true);
+							amaierakoGeltItem_6.setEnabled(true);
+						}
+						else if (luzera==7){
+							amaierakoGeltItem_2.setEnabled(true);
+							amaierakoGeltItem_3.setEnabled(true);
+							amaierakoGeltItem_4.setEnabled(true);
+							amaierakoGeltItem_5.setEnabled(true);
+							amaierakoGeltItem_6.setEnabled(true);
+							amaierakoGeltItem_7.setEnabled(true);
+						}
 					}
 				});
 			}
@@ -157,6 +154,31 @@ public class Leiho3 extends JFrame {
 						hasierakoGeltokiaGroup.add(hasierakoGeltItem_2);
 						amaierakoGeltItem_1.setEnabled(false);
 						amaierakoGeltItem_2.setEnabled(false);
+						if (luzera==3) {
+							amaierakoGeltItem_3.setEnabled(true);
+							}
+						else if (luzera==4){
+							amaierakoGeltItem_3.setEnabled(true);
+							amaierakoGeltItem_4.setEnabled(true);
+							}
+						else if (luzera==5){
+							amaierakoGeltItem_3.setEnabled(true);
+							amaierakoGeltItem_4.setEnabled(true);
+							amaierakoGeltItem_5.setEnabled(true);
+						}
+						else if (luzera==6){
+							amaierakoGeltItem_3.setEnabled(true);
+							amaierakoGeltItem_4.setEnabled(true);
+							amaierakoGeltItem_5.setEnabled(true);
+							amaierakoGeltItem_6.setEnabled(true);
+						}
+						else if (luzera==7){
+							amaierakoGeltItem_3.setEnabled(true);
+							amaierakoGeltItem_4.setEnabled(true);
+							amaierakoGeltItem_5.setEnabled(true);
+							amaierakoGeltItem_6.setEnabled(true);
+							amaierakoGeltItem_7.setEnabled(true);
+						}
 					}
 				});
 			}
@@ -173,6 +195,24 @@ public class Leiho3 extends JFrame {
 						amaierakoGeltItem_1.setEnabled(false);
 						amaierakoGeltItem_2.setEnabled(false);
 						amaierakoGeltItem_3.setEnabled(false);
+						if (luzera==4){
+							amaierakoGeltItem_4.setEnabled(true);
+							}
+						else if (luzera==5){
+							amaierakoGeltItem_4.setEnabled(true);
+							amaierakoGeltItem_5.setEnabled(true);
+						}
+						else if (luzera==6){
+							amaierakoGeltItem_4.setEnabled(true);
+							amaierakoGeltItem_5.setEnabled(true);
+							amaierakoGeltItem_6.setEnabled(true);
+						}
+						else if (luzera==7){
+							amaierakoGeltItem_4.setEnabled(true);
+							amaierakoGeltItem_5.setEnabled(true);
+							amaierakoGeltItem_6.setEnabled(true);
+							amaierakoGeltItem_7.setEnabled(true);
+						}
 					}
 				});
 			}
@@ -190,6 +230,18 @@ public class Leiho3 extends JFrame {
 						amaierakoGeltItem_2.setEnabled(false);
 						amaierakoGeltItem_3.setEnabled(false);
 						amaierakoGeltItem_4.setEnabled(false);
+						if (luzera==5){
+							amaierakoGeltItem_5.setEnabled(true);
+						}
+						else if (luzera==6){
+							amaierakoGeltItem_5.setEnabled(true);
+							amaierakoGeltItem_6.setEnabled(true);
+						}
+						else if (luzera==7){
+							amaierakoGeltItem_5.setEnabled(true);
+							amaierakoGeltItem_6.setEnabled(true);
+							amaierakoGeltItem_7.setEnabled(true);
+						}
 					}
 				});
 			}
@@ -208,6 +260,13 @@ public class Leiho3 extends JFrame {
 						amaierakoGeltItem_3.setEnabled(false);
 						amaierakoGeltItem_4.setEnabled(false);
 						amaierakoGeltItem_5.setEnabled(false);
+						if (luzera==6){
+							amaierakoGeltItem_6.setEnabled(true);
+						}
+						else if (luzera==7){
+							amaierakoGeltItem_6.setEnabled(true);
+							amaierakoGeltItem_7.setEnabled(true);
+						}
 					}
 				});
 			}
@@ -226,6 +285,8 @@ public class Leiho3 extends JFrame {
 						amaierakoGeltItem_4.setEnabled(false);
 						amaierakoGeltItem_5.setEnabled(false);
 						amaierakoGeltItem_6.setEnabled(false);
+						if (luzera==7)
+							amaierakoGeltItem_7.setEnabled(true);
 					}
 				});
 			}

@@ -2,30 +2,24 @@ package ikuspegia;
 
 import java.awt.*;
 import javax.swing.*;
-
-import kontrolatzailea.Metodoak;
-
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+import kontrolatzailea.*;
+import java.awt.event.*;
 
 public class Leiho4 extends JFrame {
+	private static final long serialVersionUID = 1L;
 	static JTextField txtPrezioTot = new JTextField();
 	private JTextField txtNan;
 	private JPasswordField passwordField;
-	private JLabel lblPrezioTotala;
-	private JButton btnSartu;
-	private JLabel lblNan;
-	private JLabel lblPasahitza;
+	private JLabel lblPrezioTotala, lblNan, lblPasahitza;
 	
+	private JButton btnSartu;
 	private JButton btnKonektatu = new JButton("Konektatu"); 
 	private JButton btn_next = new JButton("Hurrengoa");
 	private JButton btn_prev = new JButton("Atzera");
 	private JButton restart = new JButton("\u2302");
 	
-	private String pasahitza;
-	private String nan;
-	private boolean balPasa;
-	private boolean balNan;
+	private String pasahitza, nan;
+	private boolean balPasa, balNan;
 	
 	public Leiho4(String hartutakoLinea) {
 		getContentPane().setLayout(null);

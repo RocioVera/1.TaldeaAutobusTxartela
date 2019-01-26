@@ -4,6 +4,7 @@ import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 
 import eredua.*;
 import ikuspegia.*;
@@ -121,6 +122,18 @@ public class Metodoak {
 	public static void seigarrenLeihoa() {
 		Leiho6 Leiho6 = new Leiho6();
 		Leiho6.setVisible(true);
+	//	Metodoak.Leiho_segunduak();
 
 	}
+	public static void Leiho_segunduak(){
+		for (int i=1;i<=5;i++) {
+			System.out.println(i);
+			try {
+				TimeUnit.SECONDS.sleep(1);
+			} catch (InterruptedException e1) {
+				e1.printStackTrace();
+			} 
+		}
+			lehenengoLeihoa();
+	} 
 }

@@ -2,23 +2,19 @@ package ikuspegia;
 
 import java.awt.*;
 import javax.swing.*;
-
-import kontrolatzailea.Metodoak;
-
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+import kontrolatzailea.*;
+import java.awt.event.*;
 
 public class Leiho5 extends JFrame {
+	private static final long serialVersionUID = 1L;
 	// new
-	static JTextField txtPrezioTot = new JTextField();
-	static JTextField txtDiruFalta = new JTextField();
-	static JTextField txtBueltak = new JTextField();
-	static JTextArea txtrTxtareatxanponbueltak = new JTextArea();
+	JTextField txtPrezioTot = new JTextField();
+	JTextField txtDiruFalta = new JTextField();
+	JTextField txtBueltak = new JTextField();
+	JTextArea txtrTxtareatxanponbueltak = new JTextArea();
 
 	int kont = 0;
-	static String guztiraPrezBEZ;
-	static String txanponTot = "";
-
+	String guztiraPrezBEZ, txanponTot;
 	double diruFalta;
 
 	JButton btn_next = new JButton("Hurrengoa");

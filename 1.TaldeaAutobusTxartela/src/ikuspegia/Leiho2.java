@@ -1,24 +1,15 @@
 package ikuspegia;
 
 import javax.swing.*;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.Color;
-
-import java.util.ArrayList;
-
-import eredua.*;
+import java.awt.*;
+import java.awt.event.*;
+import java.util.*;
 import kontrolatzailea.*;
 
 public class Leiho2 extends JFrame {
+	private static final long serialVersionUID = 1L;
 	private JTextField txtErabakiLinea;
-	private JButton btnKaka;
-	private JRadioButton L1;
-	private JRadioButton L2;
-	private JRadioButton L3;
-	private JRadioButton L4;
+	private JRadioButton L1, L2, L3, L4;
 	private ButtonGroup group;
 	private String hartutakoLinea;
 	private JButton btn_next = new JButton("Hurrengoa");
