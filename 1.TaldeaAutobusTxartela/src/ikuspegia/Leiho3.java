@@ -565,7 +565,7 @@ public class Leiho3 extends JFrame {
 
 		
 		// listener
-		dateJoan.addPropertyChangeListener(new PropertyChangeListener() {
+	/*	dateJoan.addPropertyChangeListener(new PropertyChangeListener() {
 			@Override
 			public void propertyChange(PropertyChangeEvent e) {
 				if (e.getPropertyName()==null) {
@@ -573,7 +573,7 @@ public class Leiho3 extends JFrame {
 					btn_next.setVisible(true);
 				}
 			}
-		});
+		});*/
 
 	}
 

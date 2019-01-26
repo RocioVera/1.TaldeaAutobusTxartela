@@ -47,7 +47,6 @@ public class Metodoak {
 			while (hashtext.length() < 32) {
 				hashtext = "0" + hashtext;
 			}
-			System.out.println();
 			return hashtext;
 		} catch (NoSuchAlgorithmException e) {
 			throw new RuntimeException(e);

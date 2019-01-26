@@ -17,7 +17,6 @@ public class Leiho4 extends JFrame {
 	private JButton btn_next = new JButton("Hurrengoa");
 	private JButton btn_prev = new JButton("Atzera");
 	private JButton restart = new JButton("\u2302");
-	
 	private String pasahitza, nan;
 	private boolean balPasa, balNan;
 	private int nanLuzera=9;
