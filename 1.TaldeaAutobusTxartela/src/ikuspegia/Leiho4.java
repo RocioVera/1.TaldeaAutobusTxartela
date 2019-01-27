@@ -10,8 +10,7 @@ public class Leiho4 extends JFrame {
 	static JTextField txtPrezioTot = new JTextField();
 	private JTextField txtNan;
 	private JPasswordField passwordField;
-	private JLabel lblPrezioTotala, lblNan, lblPasahitza, lblErroreakonektatu;
-	
+	private JLabel lblPrezioTotala, lblNan, lblPasahitza, lblErroreakonektatu, lblKonekBezeroMezua;
 	private JButton btnSartu;
 	private JButton btnKonektatu = new JButton("Konektatu"); 
 	private JButton btn_next = new JButton("Hurrengoa");
@@ -19,7 +18,8 @@ public class Leiho4 extends JFrame {
 	private JButton restart = new JButton("\u2302");
 	private String pasahitza, nan;
 	private boolean balPasa, balNan;
-	private int nanLuzera=9;
+	private int nanLuzera=8;
+	private char letra;
 	
 	public Leiho4(String hartutakoLinea) {
 		getContentPane().setLayout(null);
@@ -65,12 +65,12 @@ public class Leiho4 extends JFrame {
 		
 		lblPrezioTotala = new JLabel("Prezio totala:");
 		lblPrezioTotala.setFont(new Font("Tahoma", Font.BOLD, 17));
-		lblPrezioTotala.setBounds(159, 76, 117, 20);
+		lblPrezioTotala.setBounds(159, 91, 117, 20);
 		getContentPane().add(lblPrezioTotala);
 
 		txtPrezioTot.setEditable(false);
 		txtPrezioTot.setColumns(10);
-		txtPrezioTot.setBounds(283, 76, 86, 20);
+		txtPrezioTot.setBounds(283, 91, 86, 20);
 		String guztiraPrezBEZ="";
 		//guztiraPrezBEZ = zerrenda.guztiraPrezBEZMetodoa();
 		txtPrezioTot.setText(guztiraPrezBEZ + " €");
@@ -79,27 +79,42 @@ public class Leiho4 extends JFrame {
 		
 		btnKonektatu.setVisible(false);
 		lblNan = new JLabel("NAN:");
+		lblNan.setVisible(false);
 		lblPasahitza = new JLabel("Pasahitza:");
 		lblPasahitza.setVisible(false);
-		lblNan.setVisible(false);
 		
+		lblKonekBezeroMezua = new JLabel("Konektatzeko bezeroa eta pasahitza sartu");
+		lblKonekBezeroMezua.setForeground(Color.BLUE);
+		lblKonekBezeroMezua.setHorizontalAlignment(SwingConstants.CENTER);
+		lblKonekBezeroMezua.setFont(new Font("Tempus Sans ITC", Font.BOLD | Font.ITALIC, 14));
+		lblKonekBezeroMezua.setBounds(122, 137, 328, 16);
+		getContentPane().add(lblKonekBezeroMezua);
 		
 		btnSartu = new JButton("Sartu");
 		btnSartu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				btnKonektatu.setVisible(true);
-
+				lblKonekBezeroMezua.setVisible(false);
+				btnSartu.setVisible(false);
+				
 				lblNan.setFont(new Font("Tahoma", Font.BOLD, 17));
-				lblNan.setBounds(214, 225, 62, 20);
+				lblNan.setBounds(214, 211, 62, 20);
 				getContentPane().add(lblNan);
 				
 				txtNan = new JTextField();
-				txtNan.setSize(nanLuzera, nanLuzera);
-				txtNan.setBounds(283, 225, 86, 20);
+				txtNan.setBounds(283, 211, 86, 20);
 				getContentPane().add(txtNan);
+				txtNan.addKeyListener(new KeyAdapter(){
+				   public void keyTyped(KeyEvent e){
+					   letra = e.getKeyChar();
+					   //9 baino gehiago edo espazioa sartzerakoan
+					   if (txtNan.getText().length()>nanLuzera || (letra == '\b'))
+				         e.consume();  // ez du godetzen  
+				   }
+				});
 				
 				lblPasahitza.setFont(new Font("Tahoma", Font.BOLD, 17));
-				lblPasahitza.setBounds(184, 267, 93, 20);
+				lblPasahitza.setBounds(184, 266, 93, 20);
 				getContentPane().add(lblPasahitza);
 						
 				lblPasahitza.setVisible(true);
@@ -107,11 +122,11 @@ public class Leiho4 extends JFrame {
 				
 				passwordField = new JPasswordField();
 				passwordField.setEchoChar('*');
-				passwordField.setBounds(283, 270, 86, 20);
+				passwordField.setBounds(283, 269, 86, 20);
 				getContentPane().add(passwordField);
 			}
 		});
-		btnSartu.setBounds(252, 156, 69, 25);
+		btnSartu.setBounds(245, 166, 69, 25);
 		getContentPane().add(btnSartu);	
 		
 		
@@ -123,7 +138,7 @@ public class Leiho4 extends JFrame {
 
 		btnKonektatu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//conectar a la bbdd para la pasahitza	
+				//bbdd-ra konektatu pasahitza frogatzeko
 				nan = txtNan.getText();
 				pasahitza = String.valueOf(passwordField.getPassword());
 				balPasa = Metodoak.frogatuPasahitza(pasahitza);
@@ -132,18 +147,21 @@ public class Leiho4 extends JFrame {
 					btn_next.setVisible(true);
 					lblErroreakonektatu.setForeground(Color.BLACK);
 					lblErroreakonektatu.setText("Konektatuta");
+					passwordField.setEnabled(false);
+					txtNan.setEnabled(false);
+					btnKonektatu.setEnabled(false);
 					lblErroreakonektatu.setVisible(true);
 				}else {
-					passwordField.setText("");
-					txtNan.setText("");
 					lblErroreakonektatu.setForeground(Color.RED);
 					lblErroreakonektatu.setText("NAN-a edo pasahitza ez dago ondo, sartu berriz");
 					lblErroreakonektatu.setVisible(true);
 				}	
 			}
 		});
-		btnKonektatu.setBounds(245, 362, 104, 25);
+		btnKonektatu.setBounds(245, 360, 104, 25);
 		getContentPane().add(btnKonektatu);
+		
+
 
 		
 	}
