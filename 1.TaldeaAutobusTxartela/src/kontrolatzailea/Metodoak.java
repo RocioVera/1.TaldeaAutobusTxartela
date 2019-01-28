@@ -46,7 +46,7 @@ public class Metodoak {
 		return guztira;
 	}
 
-	public static String balidatuPasahitza(String pasahitza) {
+	public static String zifratuPasahitza(String pasahitza) {
 		try {
 			MessageDigest md = MessageDigest.getInstance("MD5");
 			byte[] messageDigest = md.digest(pasahitza.getBytes());
@@ -65,13 +65,28 @@ public class Metodoak {
 	public static boolean frogatuPasahitza(String pasahitza) {
 		boolean bal = false;
 		String pasaEnkr = "";
-		pasaEnkr = balidatuPasahitza(pasahitza);
+		pasaEnkr = zifratuPasahitza(pasahitza);
 		ArrayList<Bezeroak> bezeroak = new ArrayList<>();
 		bezeroak = Kontsultak.bezeroDatuak();
 		for (Bezeroak bezeroak2 : bezeroak) {
 			if (pasaEnkr.equals(bezeroak2.getPasahitza()))
 				bal = true;
 		}
+		return bal;
+	}
+	
+	public static boolean erregistratuBezeroak(String pasahitza, String NAN, String izena, String abizenak, String sexua, String jaioData) {
+		boolean bal = true;
+		String pasaEnkr = "";
+		pasaEnkr = zifratuPasahitza(pasahitza);
+		
+		ArrayList<Bezeroak> bezeroak = new ArrayList<>();
+		bezeroak = Kontsultak.erregistratuBezeroak(pasaEnkr, NAN, izena, abizenak, sexua, jaioData);
+		
+	//	for (Bezeroak bezeroak2 : bezeroak) {
+			if (pasaEnkr.isEmpty() || NAN.isEmpty() || izena.isEmpty() || abizenak.isEmpty() || sexua.isEmpty() || jaioData.isEmpty())
+				bal = false;
+	//	}
 		return bal;
 	}
 
