@@ -27,6 +27,7 @@ public class Leiho2 extends JFrame {
 		btn_next.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				//lamar al metodo que elije autobus
 				Metodoak.hirugarrenLeihoa(hartutakoLinea);
 				dispose();
 			}

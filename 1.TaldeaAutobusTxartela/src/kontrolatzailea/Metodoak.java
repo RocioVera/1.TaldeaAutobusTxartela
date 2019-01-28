@@ -15,9 +15,6 @@ public class Metodoak {
 	 * 
 	 * @author talde1
 	 */
-	public static void hasieratuMetodoa() {
-
-	}
 
 	public static ArrayList<Integer> geltokiakHartu(String linea) {
 		ArrayList<GeltokiaLinea> arrayGelLinea = Kontsultak.arrayGelLinea();
@@ -30,10 +27,22 @@ public class Metodoak {
 		return arrayGeltokiak;
 
 	}
-
-	public static double kalkulatuPrezioa() {
+	public static double kalkulatuDistantzia(double altuera1, double luzera1, double altuera2, double luzera2) {
+		double lurrarenErradioa = 6371;  
+        double dLat = Math.toRadians(altuera2 - altuera1);  
+        double dLng = Math.toRadians(luzera2 - luzera1);  
+        double sindLat = Math.sin(dLat / 2);  
+        double sindLng = Math.sin(dLng / 2);  
+        double va1 = Math.pow(sindLat, 2) + Math.pow(sindLng, 2)* Math.cos(Math.toRadians(altuera1)) * Math.cos(Math.toRadians(altuera2));  
+        double va2 = 2 * Math.atan2(Math.sqrt(va1), Math.sqrt(1 - va1));  
+        double distantzia = lurrarenErradioa * va2;  
+        return distantzia;  
+	}
+	
+	public static double kalkulatuPrezioa(double altuera1, double luzera1, double altuera2, double luzera2, int zPlaza) {
 		double guztira = 0;
-
+		double distantzia=kalkulatuDistantzia(altuera1, luzera1, altuera2, luzera2);
+		
 		return guztira;
 	}
 
