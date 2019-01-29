@@ -1,7 +1,6 @@
 package ikuspegia;
 import java.awt.*;
 import java.awt.event.*;
-import java.beans.*;
 import java.util.*;
 import javax.swing.*;
 import com.toedter.calendar.*;
@@ -472,7 +471,7 @@ public class Leiho3 extends JFrame {
 				btn_next.setVisible(true);
 			}
 		});
-		dateJoan.setDateFormatString("dd/MM/yyyy");
+		dateJoan.setDateFormatString("yyyy-MM-dd");
 		dateJoan.setBounds(190, 142, 127, 20);
 		editor = (JTextFieldDateEditor) dateJoan.getDateEditor();
 		editor.setEditable(false);
@@ -540,7 +539,7 @@ public class Leiho3 extends JFrame {
 				btn_next.setVisible(true);
 			}
 		});
-		dateEtorria.setDateFormatString("dd/MM/yyyy");
+		dateEtorria.setDateFormatString("yyyy-MM-dd");
 		dateEtorria.setBounds(190, 265, 127, 20);
 		editor = (JTextFieldDateEditor) dateEtorria.getDateEditor();
 		editor.setEditable(false);
@@ -562,18 +561,6 @@ public class Leiho3 extends JFrame {
 		spinnerEditatu.setEditable(false);
 		etorriaOrdua.setVisible(false);
 		getContentPane().add(etorriaOrdua);
-
-		
-		// listener
-	/*	dateJoan.addPropertyChangeListener(new PropertyChangeListener() {
-			@Override
-			public void propertyChange(PropertyChangeEvent e) {
-				if (e.getPropertyName()==null) {
-					System.out.println("funciona");
-					btn_next.setVisible(true);
-				}
-			}
-		});*/
 
 	}
 

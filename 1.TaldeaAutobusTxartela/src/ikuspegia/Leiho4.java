@@ -4,12 +4,13 @@ import java.awt.*;
 import javax.swing.*;
 import kontrolatzailea.*;
 import java.awt.event.*;
+import com.toedter.calendar.*;
 
 public class Leiho4 extends JFrame {
 	private static final long serialVersionUID = 1L;
 	static JTextField txtPrezioTot = new JTextField();
 	private JTextField txtNan = new JTextField(), txtIzena = new JTextField(), txtAbizenak = new JTextField(),
-			txtSexua = new JTextField(),txtJaioData = new JTextField();
+			txtSexua = new JTextField();
 	private JPasswordField passwordField = new JPasswordField();
 	private JLabel lblPrezioTotala, lblNan, lblPasahitza, lblIzena, lblAbizenak, lblJaioData, lblSexua,
 			lblErroreakonektatu, lblKonekBezeroMezua;
@@ -25,6 +26,9 @@ public class Leiho4 extends JFrame {
 	private boolean balPasa, balNan, balErregis;
 	private int nanLuzera = 8, izenLuzera = 49, abizenLuzera = 99, pasahitzLuzera = 49, sexuLuzera = 0, jaioDataLuzera=9;
 	private char letra;
+	private JDateChooser txtJaioData;
+	private JTextFieldDateEditor editor;
+
 
 	public Leiho4(String hartutakoLinea) {
 		getContentPane().setLayout(null);
@@ -93,6 +97,8 @@ public class Leiho4 extends JFrame {
 		lblKonekBezeroMezua.setBounds(122, 74, 328, 25);
 		getContentPane().add(lblKonekBezeroMezua);
 
+		btnErregistratu.setVisible(false);
+		
 		btnHasiSaioa = new JButton("Hasi saioa");
 		btnHasiSaioa.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -192,7 +198,6 @@ public class Leiho4 extends JFrame {
 				
 				lblKonekBezeroMezua.setVisible(false);
 				lblErroreakonektatu.setVisible(false);
-				
 				lblIzena.setVisible(true);
 				lblAbizenak.setVisible(true);
 				lblJaioData.setVisible(true);
@@ -202,7 +207,7 @@ public class Leiho4 extends JFrame {
 				
 				txtIzena.setVisible(true);
 				txtAbizenak.setVisible(true);
-				txtJaioData.setVisible(true);
+				/*******				txtJaioData.setVisible(true);*/
 				txtSexua.setVisible(true);
 				passwordField.setVisible(true);
 				txtNan.setVisible(true);
@@ -276,8 +281,7 @@ public class Leiho4 extends JFrame {
 				txtSexua.addKeyListener(new KeyAdapter() {
 					public void keyTyped(KeyEvent e) {						
 						letra = e.getKeyChar();
-/*******Solo dejar V,v,M,m*******/
-						if (txtSexua.getText().length() > sexuLuzera )
+						if (txtSexua.getText().length() > sexuLuzera || letra !='V' && letra !='v' && letra !='M' && letra !='m')
 							e.consume(); // ez du godetzen
 					}
 				});
@@ -286,18 +290,15 @@ public class Leiho4 extends JFrame {
 				lblJaioData.setBounds(175, 315, 90, 20);
 				getContentPane().add(lblJaioData);
 
-				txtJaioData.setBounds(281, 317, 86, 20);
+				
+				txtJaioData = new JDateChooser();
+				txtJaioData.setDateFormatString("yyyy-MM-dd");
+				txtJaioData.setBounds(281, 315, 112, 20);
+				editor = (JTextFieldDateEditor) txtJaioData.getDateEditor();
+				editor.setEditable(false);
 				getContentPane().add(txtJaioData);
-				txtJaioData.addKeyListener(new KeyAdapter() {
-					public void keyTyped(KeyEvent e) {
-/******Solo dejar en este formato= yyyy-mm-dd******/
-						// 50 baino gehiago
-						if (txtJaioData.getText().length() > jaioDataLuzera)
-							e.consume(); // ez du godetzen
-					}
-				});
-
-			}
+ 
+		}
 		});
 		btnErregistratuNahi.setBounds(313, 112, 122, 25);
 		getContentPane().add(btnErregistratuNahi);
@@ -310,7 +311,7 @@ public class Leiho4 extends JFrame {
 				pasahitza = String.valueOf(passwordField.getPassword());
 				izena = txtIzena.getText();
 				abizenak = txtAbizenak.getText();
-				jaioData = txtJaioData.getText();
+				jaioData = txtJaioData.getDateFormatString();
 				sexua = txtSexua.getText();
 
 				balErregis = Metodoak.erregistratuBezeroak(pasahitza, nan, izena, abizenak, sexua, jaioData);
@@ -349,6 +350,8 @@ public class Leiho4 extends JFrame {
 		});
 		btnErregistratu.setBounds(233, 408, 109, 25);
 		getContentPane().add(btnErregistratu);
+		
+
 
 	}
 }
