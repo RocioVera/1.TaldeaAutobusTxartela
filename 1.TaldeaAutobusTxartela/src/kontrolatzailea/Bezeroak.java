@@ -1,20 +1,22 @@
 package kontrolatzailea;
 
+import java.util.Date;
+
 public class Bezeroak {
 	
 	private String NAN;
 	private String izena;
 	private String abizenak;
-	private String data;
+	private Date data;
 	private String sexua;
 	private String pasahitza;
 	
-	public Bezeroak(String nAN, String izena, String abizenak, String data, String sexua, String pasahitza) {
+	public Bezeroak(String nAN, String izena, String abizenak, Date jaioData, String sexua, String pasahitza) {
 		
 		NAN = nAN;
 		this.izena = izena;
 		this.abizenak = abizenak;
-		this.data = data;
+		this.data = jaioData;
 		this.sexua = sexua;
 		this.pasahitza = pasahitza;
 	}
@@ -43,11 +45,11 @@ public class Bezeroak {
 		this.abizenak = abizenak;
 	}
 	
-	public String getData() {
+	public Date getData() {
 		return data;
 	}
 	
-	public void setData(String data) {
+	public void setData(Date data) {
 		this.data = data;
 	}
 	

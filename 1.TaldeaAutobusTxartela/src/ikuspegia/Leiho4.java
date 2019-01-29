@@ -4,6 +4,8 @@ import java.awt.*;
 import javax.swing.*;
 import kontrolatzailea.*;
 import java.awt.event.*;
+import java.util.Date;
+
 import com.toedter.calendar.*;
 
 public class Leiho4 extends JFrame {
@@ -22,7 +24,8 @@ public class Leiho4 extends JFrame {
 	private JButton btn_next = new JButton("Hurrengoa");
 	private JButton btn_prev = new JButton("Atzera");
 	private JButton restart = new JButton("\u2302");
-	private String pasahitza, nan, izena, abizenak, sexua, jaioData;
+	private String pasahitza, nan, izena, abizenak, sexua;
+	Date jaioData;
 	private boolean balPasa, balNan, balErregis;
 	private int nanLuzera = 8, izenLuzera = 49, abizenLuzera = 99, pasahitzLuzera = 49, sexuLuzera = 0, jaioDataLuzera=9;
 	private char letra;
@@ -311,7 +314,7 @@ public class Leiho4 extends JFrame {
 				pasahitza = String.valueOf(passwordField.getPassword());
 				izena = txtIzena.getText();
 				abizenak = txtAbizenak.getText();
-				jaioData = txtJaioData.getDateFormatString();
+				jaioData = txtJaioData.getDate();
 				sexua = txtSexua.getText();
 
 				balErregis = Metodoak.erregistratuBezeroak(pasahitza, nan, izena, abizenak, sexua, jaioData);
@@ -341,9 +344,9 @@ public class Leiho4 extends JFrame {
 						lblErroreakonektatu.setText("abizena bete behar duzu");
 					else if (sexua.isEmpty())
 						lblErroreakonektatu.setText("sexua bete behar duzu");
-					else if (jaioData.isEmpty())
+					else if (jaioData==null)
 						lblErroreakonektatu.setText("jaioData bete behar duzu");
-					else if (pasahitza.isEmpty())
+					else if (pasahitza.length()==0)
 						lblErroreakonektatu.setText("pasahitza bete behar duzu");
 				}
 			}

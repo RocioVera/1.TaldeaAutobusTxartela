@@ -1,6 +1,8 @@
 package eredua;
 
 import java.util.ArrayList;
+import java.util.Date;
+
 import kontrolatzailea.*;
 import java.sql.*;
 
@@ -96,7 +98,8 @@ public class Kontsultak {
 		ArrayList<Bezeroak> arrayBezeroak = new ArrayList<Bezeroak>();
 		Statement st = null;
 		Connection konexioa = Konexioa.getConexion();
-		String izena, abizenak, NAN, data, pasahitza, sexua;
+		String izena, abizenak, NAN, pasahitza, sexua;
+		java.sql.Date data;
 		ResultSet rs = null;
 
 		try {
@@ -107,7 +110,7 @@ public class Kontsultak {
 				NAN = (rs.getString(1));
 				izena = (rs.getString(2));
 				abizenak = (rs.getString(3));
-				data = (rs.getString(4));
+				data = (rs.getDate(4));
 				sexua = (rs.getString(5));
 				pasahitza = (rs.getString(6));
 				Bezeroak bezeroa = new Bezeroak(NAN, izena, abizenak, data, sexua, pasahitza);
@@ -119,27 +122,26 @@ public class Kontsultak {
 		return arrayBezeroak;
 	}
 	
-	public static ArrayList<Bezeroak> erregistratuBezeroak(String pasahitza, String NAN, String izena, String abizenak, String sexua, String data) {
+	public static ArrayList<Bezeroak> erregistratuBezeroak(String pasahitza, String NAN, String izena, String abizenak, String sexua, Date jaioData) {
 		ArrayList<Bezeroak> arrayBezeroak = new ArrayList<Bezeroak>();
 		Statement st = null;
 		Connection konexioa = Konexioa.getConexion();
-		ResultSet rs = null;
 		try {
 			st = konexioa.createStatement();
-			rs = st.executeQuery("insert into cliente VALUES '"+NAN+"','"+izena+"','"+abizenak+ "','"+data+ "','"+sexua+ "','"+pasahitza+"'");
+			st.executeUpdate("insert into cliente VALUES '"+NAN+"','"+izena+"','"+abizenak+ "','"+jaioData+ "','"+sexua+ "','"+pasahitza+"'");
 			System.out.println("Heldu da3");
 //       String query = "INSERT INTO cliente (DNI, Nombre, Apellidos, Fecha_nac, Sexo, Contraseña, Precio) values ('"+NAN+"','"+izena+"','"+abizenak+ "','"+data+ "','"+sexua+ "','"+pasahitza+"')";
 
-			while (rs.next()) {
+/*			while (rs.next()) {
 				NAN = (rs.getString(1));
 				izena = (rs.getString(2));
 				abizenak = (rs.getString(3));
-				data = (rs.getString(4));
+				jaioData = (rs.getDate(4));
 				sexua = (rs.getString(5));
 				pasahitza = (rs.getString(6));
-				Bezeroak bezeroa = new Bezeroak(NAN, izena, abizenak, data, sexua, pasahitza);
-				arrayBezeroak.add(bezeroa);
-			}
+				Bezeroak bezeroa = new Bezeroak(NAN, izena, abizenak, jaioData, sexua, pasahitza);
+				arrayBezeroak.add(bezeroa);*/
+			//}
 		} catch (Exception e) {
 			e.getMessage();
 		}

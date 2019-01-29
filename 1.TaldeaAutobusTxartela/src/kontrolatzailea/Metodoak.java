@@ -4,6 +4,7 @@ import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 import eredua.*;
@@ -75,7 +76,7 @@ public class Metodoak {
 		return bal;
 	}
 	
-	public static boolean erregistratuBezeroak(String pasahitza, String NAN, String izena, String abizenak, String sexua, String jaioData) {
+	public static boolean erregistratuBezeroak(String pasahitza, String NAN, String izena, String abizenak, String sexua, Date jaioData) {
 		boolean bal = true;
 		String pasaEnkr = "";
 		pasaEnkr = zifratuPasahitza(pasahitza);
@@ -83,10 +84,8 @@ public class Metodoak {
 		ArrayList<Bezeroak> bezeroak = new ArrayList<>();
 		bezeroak = Kontsultak.erregistratuBezeroak(pasaEnkr, NAN, izena, abizenak, sexua, jaioData);
 		
-	//	for (Bezeroak bezeroak2 : bezeroak) {
-			if (pasaEnkr.isEmpty() || NAN.isEmpty() || izena.isEmpty() || abizenak.isEmpty() || sexua.isEmpty() || jaioData.isEmpty())
+			if (pasahitza.length()==0 || NAN.isEmpty() || izena.isEmpty() || abizenak.isEmpty() || sexua.isEmpty() || jaioData==null)
 				bal = false;
-	//	}
 		return bal;
 	}
 
