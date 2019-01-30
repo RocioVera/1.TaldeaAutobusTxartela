@@ -25,13 +25,11 @@ public class Leiho4 extends JFrame {
 	private JButton btn_prev = new JButton("Atzera");
 	private JButton restart = new JButton("\u2302");
 	private String pasahitza, nan, izena, abizenak, sexua;
-	Date jaioData;
+	private Date jaioData;
 	private boolean balPasa, balNan, balErregis;
 	private int nanLuzera = 8, izenLuzera = 49, abizenLuzera = 99, pasahitzLuzera = 49, sexuLuzera = 0, jaioDataLuzera=9;
 	private char letra;
-	private JDateChooser txtJaioData;
-	private JTextFieldDateEditor editor;
-
+	private JDateChooser txtJaioData = new JDateChooser("yyyy-MM-dd","####/##/##",'_');
 
 	public Leiho4(String hartutakoLinea) {
 		getContentPane().setLayout(null);
@@ -294,11 +292,9 @@ public class Leiho4 extends JFrame {
 				getContentPane().add(lblJaioData);
 
 				
-				txtJaioData = new JDateChooser();
+ 				
 				txtJaioData.setDateFormatString("yyyy-MM-dd");
 				txtJaioData.setBounds(281, 315, 112, 20);
-				editor = (JTextFieldDateEditor) txtJaioData.getDateEditor();
-				editor.setEditable(false);
 				getContentPane().add(txtJaioData);
  
 		}
@@ -315,6 +311,8 @@ public class Leiho4 extends JFrame {
 				izena = txtIzena.getText();
 				abizenak = txtAbizenak.getText();
 				jaioData = txtJaioData.getDate();
+				
+		//		jaioData = Metodoak.dataAldatu(jaioData);
 				sexua = txtSexua.getText();
 
 				balErregis = Metodoak.erregistratuBezeroak(pasahitza, nan, izena, abizenak, sexua, jaioData);

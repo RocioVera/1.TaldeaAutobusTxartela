@@ -3,9 +3,16 @@ package kontrolatzailea;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Locale;
 import java.util.concurrent.TimeUnit;
+
+import com.toedter.calendar.JDateChooser;
 
 import eredua.*;
 import ikuspegia.*;
@@ -75,6 +82,20 @@ public class Metodoak {
 		}
 		return bal;
 	}
+	
+	public static Date dataAldatu(Date jaioData) {
+		String strFecha=new SimpleDateFormat("yyyy-MM-dd").format(jaioData);
+		SimpleDateFormat formatoDelTexto = new SimpleDateFormat("yyyy-MM-dd");
+		try {
+			jaioData = formatoDelTexto.parse(strFecha);
+			} catch (ParseException ex) {
+			ex.printStackTrace();
+			System.out.println("txarto");
+			}
+		System.out.println(jaioData);
+		return jaioData;
+	}
+	
 	
 	public static boolean erregistratuBezeroak(String pasahitza, String NAN, String izena, String abizenak, String sexua, Date jaioData) {
 		boolean bal = true;

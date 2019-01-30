@@ -126,10 +126,11 @@ public class Kontsultak {
 		ArrayList<Bezeroak> arrayBezeroak = new ArrayList<Bezeroak>();
 		Statement st = null;
 		Connection konexioa = Konexioa.getConexion();
+		//System.out.println(jaioData);
 		try {
 			st = konexioa.createStatement();
 			st.executeUpdate("insert into cliente VALUES '"+NAN+"','"+izena+"','"+abizenak+ "','"+jaioData+ "','"+sexua+ "','"+pasahitza+"'");
-			System.out.println("Heldu da3");
+			//System.out.println("Heldu da3");
 //       String query = "INSERT INTO cliente (DNI, Nombre, Apellidos, Fecha_nac, Sexo, Contraseña, Precio) values ('"+NAN+"','"+izena+"','"+abizenak+ "','"+data+ "','"+sexua+ "','"+pasahitza+"')";
 
 /*			while (rs.next()) {

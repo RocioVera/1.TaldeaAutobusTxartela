@@ -18,7 +18,8 @@ public class Leiho3 extends JFrame {
 
 	private JSpinner etorriaOrdua, etorriaMinutu, joanOrdua, joanMinutu;
 	private JLabel lblEtorria, lblJoan, lblDataEtorria, lblDataJoan, lblOrduaJoan, lblOrduaEtorria;
-	private JDateChooser dateEtorria, dateJoan;
+	private JDateChooser dateEtorria = new JDateChooser("yyyy-MM-dd","####/##/##",'_');
+	private JDateChooser dateJoan = new JDateChooser("yyyy-MM-dd","####/##/##",'_');
 
 	private JRadioButton amaierakoGeltItem_1, amaierakoGeltItem_2, amaierakoGeltItem_3, amaierakoGeltItem_4, amaierakoGeltItem_5, amaierakoGeltItem_6, amaierakoGeltItem_7;
 	private JRadioButton hasierakoGeltItem_1, hasierakoGeltItem_2, hasierakoGeltItem_3, hasierakoGeltItem_4, hasierakoGeltItem_5, hasierakoGeltItem_6, hasierakoGeltItem_7;
@@ -439,7 +440,6 @@ public class Leiho3 extends JFrame {
 				etorriaMinutu.setVisible(false);
 				etorriaOrdua.setVisible(false);
 
-				editor.setValue("");
 				etorriaMinutu.setValue(0);
 				etorriaOrdua.setValue(0);
 			}
@@ -465,7 +465,6 @@ public class Leiho3 extends JFrame {
 		lblOrduaJoan.setVisible(false);
 		getContentPane().add(lblOrduaJoan);
 		
-		dateJoan = new JDateChooser();
 		dateJoan.getCalendarButton().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				btn_next.setVisible(true);
@@ -473,8 +472,6 @@ public class Leiho3 extends JFrame {
 		});
 		dateJoan.setDateFormatString("yyyy-MM-dd");
 		dateJoan.setBounds(190, 142, 127, 20);
-		editor = (JTextFieldDateEditor) dateJoan.getDateEditor();
-		editor.setEditable(false);
 		dateJoan.setVisible(false);
 		getContentPane().add(dateJoan);
 
@@ -533,7 +530,6 @@ public class Leiho3 extends JFrame {
 		lblOrduaEtorria.setVisible(false);
 		getContentPane().add(lblOrduaEtorria);
 
-		dateEtorria = new JDateChooser();
 		dateEtorria.getCalendarButton().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				btn_next.setVisible(true);
@@ -541,8 +537,6 @@ public class Leiho3 extends JFrame {
 		});
 		dateEtorria.setDateFormatString("yyyy-MM-dd");
 		dateEtorria.setBounds(190, 265, 127, 20);
-		editor = (JTextFieldDateEditor) dateEtorria.getDateEditor();
-		editor.setEditable(false);
 		dateEtorria.setVisible(false);
 		getContentPane().add(dateEtorria);
 
