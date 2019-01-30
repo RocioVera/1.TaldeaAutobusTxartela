@@ -443,6 +443,7 @@ public class Leiho3 extends JFrame {
 				etorriaMinutu.setVisible(false);
 				etorriaOrdua.setVisible(false);
 				btnDataEgiaztatu1.setVisible(true);
+				btnDataEgiaztatu2.setVisible(false);
 				
 				etorriaMinutu.setValue(0);
 				etorriaOrdua.setValue(0);
@@ -507,6 +508,7 @@ public class Leiho3 extends JFrame {
 				etorriaMinutu.setVisible(true);
 				etorriaOrdua.setVisible(true);
 				btnDataEgiaztatu2.setVisible(true);
+				btnDataEgiaztatu1.setVisible(false);
 			}
 		});
 
