@@ -24,7 +24,7 @@ public class Leiho4 extends JFrame {
 	private JButton btn_next = new JButton("Hurrengoa");
 	private JButton btn_prev = new JButton("Atzera");
 	private JButton restart = new JButton("\u2302");
-	private String pasahitza, nan, izena, abizenak, sexua;
+	private String pasahitza, nan, izena, abizenak, sexua, guztiraPrez;
 	private Date jaioData;
 	private boolean balPasa, balNan, balErregis;
 	private int nanLuzera = 8, izenLuzera = 49, abizenLuzera = 99, pasahitzLuzera = 49, sexuLuzera = 0, jaioDataLuzera=9;
@@ -35,7 +35,7 @@ public class Leiho4 extends JFrame {
 		getContentPane().setLayout(null);
 		this.setBounds(350, 50, 600, 600);
 		this.setResizable(false); // neurketak ez aldatzeko
-		this.setSize(new Dimension(600, 600));
+		this.setSize(new Dimension(600, 600));		
 
 		// botoiak
 		btn_next.addActionListener(new ActionListener() {
@@ -81,9 +81,9 @@ public class Leiho4 extends JFrame {
 		txtPrezioTot.setEditable(false);
 		txtPrezioTot.setColumns(10);
 		txtPrezioTot.setBounds(281, 37, 86, 20);
-		String guztiraPrezBEZ = "";
-		// guztiraPrezBEZ = zerrenda.guztiraPrezBEZMetodoa();
-		txtPrezioTot.setText(guztiraPrezBEZ + " €");
+		
+//		guztiraPrez = Metodoak.kalkPrezioa();
+		txtPrezioTot.setText(guztiraPrez + " €");
 		getContentPane().add(txtPrezioTot);
 		btn_next.setVisible(false);
 

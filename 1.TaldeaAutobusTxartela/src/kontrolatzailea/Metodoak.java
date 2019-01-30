@@ -132,8 +132,9 @@ public class Metodoak {
 	public static void bigarrenLeihoa() {
 		ArrayList<Lineak> lineak = new ArrayList<Lineak>();
 		lineak = Kontsultak.lineakDatuak();
-
-		Leiho2 Leiho2 = new Leiho2(lineak);
+		ArrayList<Autobusak> autobusak = new ArrayList<>();
+		autobusak = Kontsultak.autobusDatuak();
+		Leiho2 Leiho2 = new Leiho2(lineak, autobusak);
 		Leiho2.setVisible(true);
 	}
 
@@ -162,8 +163,8 @@ public class Metodoak {
 	}
 
 	// leiho6 sortu
-	public static void seigarrenLeihoa() {
-		Leiho6 Leiho6 = new Leiho6();
+	public static void seigarrenLeihoa(String hartutakoLinea) {
+		Leiho6 Leiho6 = new Leiho6(hartutakoLinea);
 		Leiho6.setVisible(true);
 	//	Metodoak.Leiho_segunduak();
 
@@ -179,4 +180,179 @@ public class Metodoak {
 		}
 			lehenengoLeihoa();
 	} 
+	
+	
+	/**
+	 * Zenbat diru sartzen duen jakiteko egiteko
+	 * @author talde1
+	 * @param kont
+	 * @return sartutakoa
+	 */
+	public static double diruaSartu(int kont, double sartutakoa) {
+		switch (kont) {
+			case 1:
+				sartutakoa += 200;
+				sartutakoa = Math.round(sartutakoa*100.0)/100.0;
+				break;
+			case 2:
+				sartutakoa += 100;
+				sartutakoa = Math.round(sartutakoa*100.0)/100.0;
+				break;
+			case 3:
+				sartutakoa += 50;
+				sartutakoa = Math.round(sartutakoa*100.0)/100.0;
+				break;
+			case 4:
+				sartutakoa += 20;
+				sartutakoa = Math.round(sartutakoa*100.0)/100.0;
+				break;
+			case 5:
+				sartutakoa += 10;
+				sartutakoa = Math.round(sartutakoa*100.0)/100.0;
+				break;
+			case 6:
+				sartutakoa += 5;
+				sartutakoa = Math.round(sartutakoa*100.0)/100.0;
+				break;
+			case 7:
+				sartutakoa += 2;
+				sartutakoa = Math.round(sartutakoa*100.0)/100.0;
+				break;
+			case 8:
+				sartutakoa += 1;
+				sartutakoa = Math.round(sartutakoa*100.0)/100.0;
+				break;
+			case 9:
+				sartutakoa += 0.5;
+				sartutakoa = Math.round(sartutakoa*100.0)/100.0;
+				break;
+			case 10:
+				sartutakoa += 0.2;
+				sartutakoa = Math.round(sartutakoa*100.0)/100.0;
+				break;
+			case 11:
+				sartutakoa += 0.1;
+				sartutakoa = Math.round(sartutakoa*100.0)/100.0;
+				break;
+			case 12:
+				sartutakoa += 0.05;
+				sartutakoa = Math.round(sartutakoa*100.0)/100.0;
+				break;
+			case 13:
+				sartutakoa += 0.02;
+				sartutakoa = Math.round(sartutakoa*100.0)/100.0;
+				break;
+			case 14:
+				sartutakoa += 0.01;
+				sartutakoa = Math.round(sartutakoa*100.0)/100.0;
+				break;
+			
+			default:
+				sartutakoa=0;
+				break;
+			}
+		return sartutakoa;
+	}
+	/**
+	 * Jakiteko zenbat diru sartu duen gero bueltak emateko ala ez
+	 * @author talde1
+	 * @return diruFalta
+	 */
+	public static double diruFaltaBueltakMetodoa(double diruFalta, double guztiraPrez, double sartutakoa) {
+		diruFalta = guztiraPrez-sartutakoa;
+		diruFalta = Math.round(diruFalta*100.0)/100.0;
+		return diruFalta;
+	}
+	
+	/**
+	 * Arrayan sartzeko zenbat kantitate txanpon bakoitza eta bueltatu txanpona / billete
+	 * @author talde1
+	 * @return bueltakString
+	 */
+	public static String bueltakZerrenda(double diruFalta) {
+		String bueltakString="";
+		double bueltak=0;
+
+		if (diruFalta<0) {
+			bueltak=-diruFalta;
+			for (double i = bueltak; i>0 ; i=bueltak) {
+				if (bueltak >= 200) {
+					bueltak = bueltak - 200;
+					bueltak = Math.round(bueltak*100.0)/100.0;
+					bueltakString=bueltakString+"200€-ko bilete \n";
+
+				} else if (bueltak >= 100) {
+					bueltak = bueltak - 100;
+					bueltak = Math.round(bueltak*100.0)/100.0;
+					bueltakString=bueltakString+"100€-ko bilete \n";
+
+				} else if (bueltak >= 50) {
+					bueltak = bueltak - 50;
+					bueltak = Math.round(bueltak*100.0)/100.0;
+					bueltakString=bueltakString+"50€-ko bilete \n";
+
+				} else if (bueltak >= 20) {
+					bueltak = bueltak - 20;
+					bueltak = Math.round(bueltak*100.0)/100.0;
+					bueltakString=bueltakString+"20€-ko bilete \n";
+
+
+				} else if (bueltak >= 10) {
+					bueltak = bueltak - 10;
+					bueltak = Math.round(bueltak*100.0)/100.0;
+					bueltakString=bueltakString+"10€-ko bilete \n";
+					
+				} else if (bueltak >= 5) {
+					bueltak = bueltak - 5;
+					bueltak = Math.round(bueltak*100.0)/100.0;
+					bueltakString=bueltakString+"5€-ko bilete \n";
+
+				} else if (bueltak >= 2) {
+					bueltak = bueltak - 2;
+					bueltak = Math.round(bueltak*100.0)/100.0;
+					bueltakString=bueltakString+"2€-ko moneta \n";
+
+				} else if (bueltak >= 1) {
+					bueltak = bueltak - 1;
+					bueltak = Math.round(bueltak*100.0)/100.0;
+					bueltakString=bueltakString+"1€-ko moneta \n";
+
+				} else if (bueltak >= 0.5) {
+					bueltak = bueltak - 0.5;
+					bueltak = Math.round(bueltak*100.0)/100.0;
+					bueltakString=bueltakString+"0.5€-ko moneta \n";
+
+
+				} else if (bueltak >= 0.2) {
+					bueltak = bueltak - 0.2;
+					bueltak = Math.round(bueltak*100.0)/100.0;
+					bueltakString=bueltakString+"0.2€-ko moneta \n";
+
+				} else if (bueltak >= 0.1) {
+					bueltak = bueltak - 0.1;
+					bueltak = Math.round(bueltak*100.0)/100.0;
+					bueltakString=bueltakString+"0.1€-ko moneta \n ";
+
+				} else if (bueltak >= 0.05) {
+					bueltak = bueltak - 0.05;
+					bueltak = Math.round(bueltak*100.0)/100.0;
+					bueltakString=bueltakString+"0.05€-ko moneta \n ";
+
+				} else if (bueltak >= 0.02) {
+					bueltak = bueltak - 0.02;
+					bueltak = Math.round(bueltak*100.0)/100.0;
+					bueltakString=bueltakString+"0.02€-ko moneta \n";
+
+				} else if (bueltak >= 0.01) {
+					bueltak = bueltak - 0.01;
+					bueltak = Math.round(bueltak*100.0)/100.0;
+					bueltakString=bueltakString+"0.01€-ko moneta \n ";
+				}
+			}
+		}
+		return bueltakString;
+	}
+
+	
+	
 }

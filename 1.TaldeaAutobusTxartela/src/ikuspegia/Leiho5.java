@@ -8,18 +8,18 @@ import java.awt.event.*;
 public class Leiho5 extends JFrame {
 	private static final long serialVersionUID = 1L;
 	// new
-	JTextField txtPrezioTot = new JTextField();
-	JTextField txtDiruFalta = new JTextField();
-	JTextField txtBueltak = new JTextField();
-	JTextArea txtrTxtareatxanponbueltak = new JTextArea();
+	private JTextField txtPrezioTot = new JTextField();
+	private JTextField txtDiruFalta = new JTextField();
+	private JTextField txtBueltak = new JTextField();
+	private JTextArea txtrTxtareatxanponbueltak = new JTextArea();
 
-	int kont = 0;
-	String guztiraPrezBEZ, txanponTot;
-	double diruFalta;
+	private int kont = 0;
+	private String txanponTot;
+	private double guztiraPrez,diruFalta, sartutakoa;
 
-	JButton btn_next = new JButton("Hurrengoa");
-	JButton btn_prev = new JButton("Atzera");
-	JButton restart = new JButton("\u2302");
+	private JButton btn_next = new JButton("Hurrengoa");
+	private JButton btn_prev = new JButton("Atzera");
+	private JButton restart = new JButton("\u2302");
 
 	/**
 	 * Create the panel.
@@ -34,7 +34,7 @@ public class Leiho5 extends JFrame {
 		btn_next.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Metodoak.seigarrenLeihoa();
+				Metodoak.seigarrenLeihoa(hartutakoLinea);
 				dispose();
 			}
 		});
@@ -79,8 +79,9 @@ public class Leiho5 extends JFrame {
 		txtPrezioTot.setEditable(false);
 		txtPrezioTot.setColumns(10);
 		txtPrezioTot.setBounds(300, 29, 86, 20);
-		// guztiraPrezBEZ = zerrenda.guztiraPrezBEZMetodoa();
-		txtPrezioTot.setText(guztiraPrezBEZ + " €");
+		//guztiraPrez = Metodoak.kalkPrezioa();
+		guztiraPrez=5.5;
+		txtPrezioTot.setText(guztiraPrez + " €");
 		getContentPane().add(txtPrezioTot);
 
 		/* ZenbatDiru sartu nahi */
@@ -105,7 +106,7 @@ public class Leiho5 extends JFrame {
 		btn_200Euro.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				kont = 1;
-				// String.valueOf(zerrenda.diruaSartu(kont));
+				sartutakoa = Metodoak.diruaSartu(kont, sartutakoa);
 			}
 		});
 		btn_200Euro.setFont(new Font("Tahoma", Font.PLAIN, 13));
@@ -117,7 +118,7 @@ public class Leiho5 extends JFrame {
 		btn_100Euro.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				kont = 2;
-				// String.valueOf(zerrenda.diruaSartu(kont));
+				sartutakoa = Metodoak.diruaSartu(kont, sartutakoa);
 			}
 		});
 		btn_100Euro.setFont(new Font("Tahoma", Font.PLAIN, 13));
@@ -129,7 +130,7 @@ public class Leiho5 extends JFrame {
 		btn_50Euro.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				kont = 3;
-				// String.valueOf(zerrenda.diruaSartu(kont));
+				sartutakoa = Metodoak.diruaSartu(kont, sartutakoa);
 			}
 		});
 		btn_50Euro.setFont(new Font("Tahoma", Font.PLAIN, 13));
@@ -141,7 +142,7 @@ public class Leiho5 extends JFrame {
 		btn_20Euro.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				kont = 4;
-				// String.valueOf(zerrenda.diruaSartu(kont));
+				sartutakoa = Metodoak.diruaSartu(kont, sartutakoa);
 			}
 		});
 		btn_20Euro.setFont(new Font("Tahoma", Font.PLAIN, 13));
@@ -154,7 +155,7 @@ public class Leiho5 extends JFrame {
 		btn_10Euro.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				kont = 5;
-				// String.valueOf(zerrenda.diruaSartu(kont));
+				sartutakoa = Metodoak.diruaSartu(kont, sartutakoa);
 			}
 		});
 		btn_10Euro.setFont(new Font("Tahoma", Font.PLAIN, 13));
@@ -166,7 +167,7 @@ public class Leiho5 extends JFrame {
 		btn_5Euro.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				kont = 6;
-				// String.valueOf(zerrenda.diruaSartu(kont));
+				sartutakoa = Metodoak.diruaSartu(kont, sartutakoa);
 			}
 		});
 		btn_5Euro.setFont(new Font("Tahoma", Font.PLAIN, 13));
@@ -178,7 +179,7 @@ public class Leiho5 extends JFrame {
 		btn_2Euro.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				kont = 7;
-				// String.valueOf(zerrenda.diruaSartu(kont));
+				sartutakoa = Metodoak.diruaSartu(kont, sartutakoa);
 			}
 		});
 		btn_2Euro.setFont(new Font("Tahoma", Font.PLAIN, 13));
@@ -190,7 +191,7 @@ public class Leiho5 extends JFrame {
 		btn_1Euro.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				kont = 8;
-				// String.valueOf(zerrenda.diruaSartu(kont));
+				sartutakoa = Metodoak.diruaSartu(kont, sartutakoa);
 			}
 		});
 		btn_1Euro.setFont(new Font("Tahoma", Font.PLAIN, 13));
@@ -202,7 +203,7 @@ public class Leiho5 extends JFrame {
 		btn_50Zent.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				kont = 9;
-				// String.valueOf(zerrenda.diruaSartu(kont));
+				sartutakoa = Metodoak.diruaSartu(kont, sartutakoa);
 			}
 		});
 		btn_50Zent.setFont(new Font("Tahoma", Font.PLAIN, 13));
@@ -214,7 +215,7 @@ public class Leiho5 extends JFrame {
 		btn_20Zent.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				kont = 10;
-				// String.valueOf(zerrenda.diruaSartu(kont));
+				sartutakoa = Metodoak.diruaSartu(kont, sartutakoa);
 			}
 		});
 		btn_20Zent.setFont(new Font("Tahoma", Font.PLAIN, 13));
@@ -226,7 +227,7 @@ public class Leiho5 extends JFrame {
 		btn_10Zent.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				kont = 11;
-				// String.valueOf(zerrenda.diruaSartu(kont));
+				sartutakoa = Metodoak.diruaSartu(kont, sartutakoa);
 			}
 		});
 		btn_10Zent.setFont(new Font("Tahoma", Font.PLAIN, 13));
@@ -238,7 +239,7 @@ public class Leiho5 extends JFrame {
 		btn_5Zent.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				kont = 12;
-				// String.valueOf(zerrenda.diruaSartu(kont));
+				sartutakoa = Metodoak.diruaSartu(kont, sartutakoa);
 			}
 		});
 		btn_5Zent.setFont(new Font("Tahoma", Font.PLAIN, 13));
@@ -250,7 +251,7 @@ public class Leiho5 extends JFrame {
 		btn_2Zent.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				kont = 13;
-				// String.valueOf(zerrenda.diruaSartu(kont));
+				sartutakoa = Metodoak.diruaSartu(kont, sartutakoa);
 			}
 		});
 		btn_2Zent.setFont(new Font("Tahoma", Font.PLAIN, 13));
@@ -262,7 +263,7 @@ public class Leiho5 extends JFrame {
 		btn_1Zent.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				kont = 14;
-				// String.valueOf(zerrenda.diruaSartu(kont));
+				sartutakoa = Metodoak.diruaSartu(kont, sartutakoa);
 			}
 		});
 		btn_1Zent.setFont(new Font("Tahoma", Font.PLAIN, 13));
@@ -276,7 +277,7 @@ public class Leiho5 extends JFrame {
 		txtDiruFalta.setEditable(false);
 		txtDiruFalta.setColumns(10);
 		txtDiruFalta.setBounds(167, 412, 86, 20);
-		txtDiruFalta.setText(guztiraPrezBEZ + " €");
+		txtDiruFalta.setText(guztiraPrez + " €");
 		getContentPane().add(txtDiruFalta);
 
 		txtBueltak = new JTextField();
@@ -285,14 +286,14 @@ public class Leiho5 extends JFrame {
 		txtBueltak.setEditable(false);
 		txtBueltak.setColumns(10);
 		txtBueltak.setBounds(167, 458, 86, 20);
-		txtBueltak.setText("0.00€");
+		txtBueltak.setText("00.00€");
 		getContentPane().add(txtBueltak);
 
 		/* Erosi */
 		JButton btnErosi = new JButton("Erosi");
 		btnErosi.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// diruFalta = zerrenda.diruFaltaBueltakMetodoa();
+				diruFalta = Metodoak.diruFaltaBueltakMetodoa(diruFalta, guztiraPrez, sartutakoa);
 				String diruFaltaString = String.valueOf(diruFalta);
 
 				if (diruFalta > 0) {
@@ -302,16 +303,17 @@ public class Leiho5 extends JFrame {
 				} else if (diruFalta < 0) {
 					diruFaltaString = String.valueOf(-diruFalta);
 					txtBueltak.setText(diruFaltaString + " €");
-					txtDiruFalta.setText("0.00 €");
+					txtDiruFalta.setText("00.00 €");
 					// txanponTot
-					// txanponTot=zerrenda.bueltakZerrenda();
+					txanponTot=Metodoak.bueltakZerrenda(diruFalta);
 					txtrTxtareatxanponbueltak.setText(txanponTot);
-					// Frame.btn_next.setVisible(true);
+					btn_next.setVisible(true);
+					btnErosi.setVisible(false);
 
 				} else {
 					// Frame.btn_next.setVisible(true);
-					txtDiruFalta.setText("0.00 €");
-					txtBueltak.setText("0.00 €");
+					txtDiruFalta.setText("00.00 €");
+					txtBueltak.setText("00.00 €");
 				}
 			}
 

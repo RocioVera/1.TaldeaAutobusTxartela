@@ -12,10 +12,11 @@ public class Leiho2 extends JFrame {
 	private JRadioButton L1, L2, L3, L4;
 	private ButtonGroup group;
 	private String hartutakoLinea;
+	private Autobusak autobusa;
 	private JButton btn_next = new JButton("Hurrengoa");
 	private JButton restart = new JButton("\u2302");
 
-	public Leiho2(ArrayList<Lineak> lineak) {
+	public Leiho2(ArrayList<Lineak> lineak, ArrayList<Autobusak> autobusak) {
 		getContentPane().setLayout(null);
 		this.setBounds(350, 50, 600, 600);
 		this.setResizable(false); // neurketak ez aldatzeko
@@ -65,6 +66,7 @@ public class Leiho2 extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				btn_next.setVisible(true);
 				hartutakoLinea="L1";
+				autobusa = autobusak.get(0);
 			}
 		});
 		L1.setBounds(47, 85, 530, 85);
@@ -75,6 +77,7 @@ public class Leiho2 extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				btn_next.setVisible(true);
 				hartutakoLinea="L2";
+				autobusa = autobusak.get(3);
 			}
 		});
 		L2.setBounds(47, 187, 530, 85);
@@ -85,6 +88,7 @@ public class Leiho2 extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				btn_next.setVisible(true);
 				hartutakoLinea="L3";
+				autobusa = autobusak.get(4);
 			}
 		});
 		L3.setBounds(47, 288, 530, 85);
@@ -95,6 +99,7 @@ public class Leiho2 extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				btn_next.setVisible(true);
 				hartutakoLinea="L4";
+				autobusa = autobusak.get(6);
 			}
 		});
 		L4.setBounds(47, 380, 530, 85);

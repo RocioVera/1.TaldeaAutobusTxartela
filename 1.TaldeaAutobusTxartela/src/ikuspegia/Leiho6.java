@@ -11,7 +11,7 @@ public class Leiho6 extends JFrame {
 	private JButton btnTiketaImprimatu;
 	private JTextField txtSegundenMezua;
 
-	public Leiho6() {
+	public Leiho6(String hartutakoLinea) {
 		getContentPane().setLayout(null);
 		this.setBounds(350,50,600,600);
 		this.setResizable(false); // neurketak ez aldatzeko

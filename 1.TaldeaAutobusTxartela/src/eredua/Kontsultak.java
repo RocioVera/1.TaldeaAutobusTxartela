@@ -52,9 +52,6 @@ public class Kontsultak {
 				kolorea = (rs.getString(4));
 				Autobusak autobusak = new Autobusak(kodBus, nPlaza, kontsumoa, kolorea);
 				arraybus.add(autobusak);
-				for (int i = 0; i < arraybus.size(); i++) {
-					System.out.println(arraybus);
-				}
 			}
 		} catch (Exception e) {
 			e.getMessage();
