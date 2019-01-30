@@ -14,7 +14,6 @@ public class Leiho3 extends JFrame {
 	private JMenu hasierakoGeltokia, amaierakoGeltokia, joanEtorriaMenua;
 	private ButtonGroup hasierakoGeltokiaGroup,amaierakoGeltokiaGroup, joanEtorriGroup;
 	private JTextFieldDateEditor editor;
-	private JFormattedTextField spinnerEditatu;
 
 	private JSpinner etorriaOrdua, etorriaMinutu, joanOrdua, joanMinutu;
 	private JLabel lblEtorria, lblJoan, lblDataEtorria, lblDataJoan, lblOrduaJoan, lblOrduaEtorria;
@@ -30,9 +29,15 @@ public class Leiho3 extends JFrame {
 	private JButton restart = new JButton("\u2302");
 	private JButton btnDataEgiaztatu1, btnDataEgiaztatu2;
 	
+	private int hasierakoGeltokiaKod, amaierakoGeltokiaKod;
+	
+	private int ibilbideZbk;
+	ArrayList<Geltokiak> arrayGeltokia = new ArrayList<Geltokiak>();
+
+	
 	Date dataJoan, dataEtorri;
 
-	public Leiho3(ArrayList<Geltokiak> arrayGeltokia, String hartutakoLinea) {
+	public Leiho3( String hartutakoLinea, Autobusak autobusa) {
 		getContentPane().setLayout(null);
 		this.setBounds(350, 50, 600, 600);
 		this.setResizable(false); // neurketak ez aldatzeko
@@ -41,7 +46,7 @@ public class Leiho3 extends JFrame {
 		btn_next.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Metodoak.laugarrenLeihoa(hartutakoLinea);
+				Metodoak.laugarrenLeihoa(hartutakoLinea, autobusa, ibilbideZbk, hasierakoGeltokiaKod, hasierakoGeltokiaKod);
 				dispose();
 			}
 		});
@@ -115,6 +120,7 @@ public class Leiho3 extends JFrame {
 					public void actionPerformed(ActionEvent e) {
 						amaierakoGeltokia.setEnabled(true);
 						hasierakoGeltokiaGroup.add(hasierakoGeltItem_1);
+						hasierakoGeltokiaKod=arrayGeltokia.get(0).getKodGeltokia();
 						amaierakoGeltItem_1.setEnabled(false);
 						if (luzera==2)
 							amaierakoGeltItem_2.setEnabled(true);
@@ -161,6 +167,7 @@ public class Leiho3 extends JFrame {
 					public void actionPerformed(ActionEvent e) {
 						amaierakoGeltokia.setEnabled(true);
 						hasierakoGeltokiaGroup.add(hasierakoGeltItem_2);
+						hasierakoGeltokiaKod=arrayGeltokia.get(1).getKodGeltokia();
 						amaierakoGeltItem_1.setEnabled(false);
 						amaierakoGeltItem_2.setEnabled(false);
 						if (luzera==3) {
@@ -195,6 +202,7 @@ public class Leiho3 extends JFrame {
 			if (i == 3) {
 				hasierakoGeltItem_3 = new JRadioButton(arrayGeltokia.get(2).getIzena());
 				hasierakoGeltItem_3.setFont(new Font("Verdana", Font.BOLD, 12));
+				hasierakoGeltokiaKod=arrayGeltokia.get(2).getKodGeltokia();
 				hasierakoGeltokia.add(hasierakoGeltItem_3);
 				hasierakoGeltItem_3.addActionListener(new ActionListener() {
 					@Override
@@ -230,6 +238,7 @@ public class Leiho3 extends JFrame {
 				hasierakoGeltItem_4 = new JRadioButton(arrayGeltokia.get(3).getIzena());
 				hasierakoGeltItem_4.setFont(new Font("Verdana", Font.BOLD, 12));
 				hasierakoGeltokia.add(hasierakoGeltItem_4);
+				hasierakoGeltokiaKod=arrayGeltokia.get(3).getKodGeltokia();
 				hasierakoGeltItem_4.addActionListener(new ActionListener() {
 					@Override
 					public void actionPerformed(ActionEvent e) {
@@ -258,6 +267,8 @@ public class Leiho3 extends JFrame {
 			if (i == 5) {
 				hasierakoGeltItem_5 = new JRadioButton(arrayGeltokia.get(4).getIzena());
 				hasierakoGeltItem_5.setFont(new Font("Verdana", Font.BOLD, 12));
+				hasierakoGeltokiaKod=arrayGeltokia.get(4).getKodGeltokia();
+
 				hasierakoGeltokia.add(hasierakoGeltItem_5);
 				hasierakoGeltItem_5.addActionListener(new ActionListener() {
 					@Override
@@ -282,6 +293,7 @@ public class Leiho3 extends JFrame {
 			if (i == 6) {
 				hasierakoGeltItem_6 = new JRadioButton(arrayGeltokia.get(5).getIzena());
 				hasierakoGeltItem_6.setFont(new Font("Verdana", Font.BOLD, 12));
+				hasierakoGeltokiaKod=arrayGeltokia.get(5).getKodGeltokia();
 				hasierakoGeltokia.add(hasierakoGeltItem_6);
 				hasierakoGeltItem_6.addActionListener(new ActionListener() {
 					@Override
@@ -304,6 +316,7 @@ public class Leiho3 extends JFrame {
 				hasierakoGeltItem_7 = new JRadioButton(arrayGeltokia.get(6).getIzena());
 				hasierakoGeltItem_7.setFont(new Font("Verdana", Font.BOLD, 12));
 				hasierakoGeltokia.add(hasierakoGeltItem_7);
+				hasierakoGeltokiaKod=arrayGeltokia.get(6).getKodGeltokia();
 				hasierakoGeltItem_7.addActionListener(new ActionListener() {
 					@Override
 					public void actionPerformed(ActionEvent e) {
@@ -327,6 +340,8 @@ public class Leiho3 extends JFrame {
 				amaierakoGeltItem_1 = new JRadioButton(arrayGeltokia.get(0).getIzena());
 				amaierakoGeltItem_1.setFont(new Font("Verdana", Font.BOLD, 12));
 				amaierakoGeltokia.add(amaierakoGeltItem_1);
+				amaierakoGeltokiaKod=arrayGeltokia.get(0).getKodGeltokia();
+
 				amaierakoGeltItem_1.addActionListener(new ActionListener() {
 					@Override
 					public void actionPerformed(ActionEvent e) {
@@ -340,6 +355,7 @@ public class Leiho3 extends JFrame {
 				amaierakoGeltItem_2 = new JRadioButton(arrayGeltokia.get(1).getIzena());
 				amaierakoGeltItem_2.setFont(new Font("Verdana", Font.BOLD, 12));
 				amaierakoGeltokia.add(amaierakoGeltItem_2);
+				amaierakoGeltokiaKod=arrayGeltokia.get(1).getKodGeltokia();
 				amaierakoGeltItem_2.addActionListener(new ActionListener() {
 					@Override
 					public void actionPerformed(ActionEvent e) {
@@ -353,6 +369,7 @@ public class Leiho3 extends JFrame {
 				amaierakoGeltItem_3 = new JRadioButton(arrayGeltokia.get(2).getIzena());
 				amaierakoGeltItem_3.setFont(new Font("Verdana", Font.BOLD, 12));
 				amaierakoGeltokia.add(amaierakoGeltItem_3);
+				amaierakoGeltokiaKod=arrayGeltokia.get(2).getKodGeltokia();
 				amaierakoGeltItem_3.addActionListener(new ActionListener() {
 					@Override
 					public void actionPerformed(ActionEvent e) {
@@ -366,6 +383,7 @@ public class Leiho3 extends JFrame {
 				amaierakoGeltItem_4 = new JRadioButton(arrayGeltokia.get(3).getIzena());
 				amaierakoGeltItem_4.setFont(new Font("Verdana", Font.BOLD, 12));
 				amaierakoGeltokia.add(amaierakoGeltItem_4);
+				amaierakoGeltokiaKod=arrayGeltokia.get(3).getKodGeltokia();
 				amaierakoGeltItem_4.addActionListener(new ActionListener() {
 					@Override
 					public void actionPerformed(ActionEvent e) {
@@ -379,6 +397,7 @@ public class Leiho3 extends JFrame {
 				amaierakoGeltItem_5 = new JRadioButton(arrayGeltokia.get(4).getIzena());
 				amaierakoGeltItem_5.setFont(new Font("Verdana", Font.BOLD, 12));
 				amaierakoGeltokia.add(amaierakoGeltItem_5);
+				amaierakoGeltokiaKod=arrayGeltokia.get(4).getKodGeltokia();
 				amaierakoGeltItem_5.addActionListener(new ActionListener() {
 					@Override
 					public void actionPerformed(ActionEvent e) {
@@ -393,6 +412,7 @@ public class Leiho3 extends JFrame {
 				amaierakoGeltItem_6 = new JRadioButton(arrayGeltokia.get(5).getIzena());
 				amaierakoGeltItem_6.setFont(new Font("Verdana", Font.BOLD, 12));
 				amaierakoGeltokia.add(amaierakoGeltItem_6);
+				amaierakoGeltokiaKod=arrayGeltokia.get(5).getKodGeltokia();
 				amaierakoGeltItem_6.addActionListener(new ActionListener() {
 					@Override
 					public void actionPerformed(ActionEvent e) {
@@ -406,6 +426,7 @@ public class Leiho3 extends JFrame {
 				amaierakoGeltItem_7 = new JRadioButton(arrayGeltokia.get(6).getIzena());
 				amaierakoGeltItem_7.setFont(new Font("Verdana", Font.BOLD, 12));
 				amaierakoGeltokia.add(amaierakoGeltItem_7);
+				amaierakoGeltokiaKod=arrayGeltokia.get(6).getKodGeltokia();
 				amaierakoGeltItem_7.addActionListener(new ActionListener() {
 					@Override
 					public void actionPerformed(ActionEvent e) {
@@ -429,6 +450,7 @@ public class Leiho3 extends JFrame {
 		joan.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				ibilbideZbk=1;
 				lblJoan.setVisible(true);
 				lblDataJoan.setVisible(true);
 				lblOrduaJoan.setVisible(true);
@@ -444,6 +466,8 @@ public class Leiho3 extends JFrame {
 				etorriaOrdua.setVisible(false);
 				btnDataEgiaztatu1.setVisible(true);
 				btnDataEgiaztatu2.setVisible(false);
+				btn_next.setVisible(false);
+
 				
 				etorriaMinutu.setValue(0);
 				etorriaOrdua.setValue(0);
@@ -478,22 +502,19 @@ public class Leiho3 extends JFrame {
 		joanMinutu = new JSpinner();
 		joanMinutu.setModel(new SpinnerNumberModel(0, 0, 59, 1));
 		joanMinutu.setBounds(258, 176, 51, 20);
-		spinnerEditatu = ((JSpinner.DefaultEditor) joanMinutu.getEditor()).getTextField();
-		spinnerEditatu.setEditable(false);
 		joanMinutu.setVisible(false);
 		getContentPane().add(joanMinutu);
 
 		joanOrdua = new JSpinner();
 		joanOrdua.setModel(new SpinnerNumberModel(0, 0, 23, 1));
 		joanOrdua.setBounds(192, 176, 51, 20);
-		spinnerEditatu = ((JSpinner.DefaultEditor) joanOrdua.getEditor()).getTextField();
-		spinnerEditatu.setEditable(false);
 		joanOrdua.setVisible(false);
 		getContentPane().add(joanOrdua);
 
 		joanEtorria.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				ibilbideZbk=2;
 				lblJoan.setVisible(true);
 				lblDataJoan.setVisible(true);
 				lblOrduaJoan.setVisible(true);
@@ -509,6 +530,8 @@ public class Leiho3 extends JFrame {
 				etorriaOrdua.setVisible(true);
 				btnDataEgiaztatu2.setVisible(true);
 				btnDataEgiaztatu1.setVisible(false);
+				btn_next.setVisible(false);
+
 			}
 		});
 
@@ -539,16 +562,12 @@ public class Leiho3 extends JFrame {
 		etorriaMinutu = new JSpinner();
 		etorriaMinutu.setModel(new SpinnerNumberModel(0, 0, 59, 1));
 		etorriaMinutu.setBounds(266, 300, 51, 20);
-		spinnerEditatu = ((JSpinner.DefaultEditor) etorriaMinutu.getEditor()).getTextField();
-		spinnerEditatu.setEditable(false);
 		etorriaMinutu.setVisible(false);
 		getContentPane().add(etorriaMinutu);
 
 		etorriaOrdua = new JSpinner();
 		etorriaOrdua.setModel(new SpinnerNumberModel(0, 0, 23, 1));
 		etorriaOrdua.setBounds(200, 300, 51, 20);
-		spinnerEditatu = ((JSpinner.DefaultEditor) etorriaOrdua.getEditor()).getTextField();
-		spinnerEditatu.setEditable(false);
 		etorriaOrdua.setVisible(false);
 		getContentPane().add(etorriaOrdua);
 		
@@ -567,7 +586,6 @@ public class Leiho3 extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				dataJoan = dateJoan.getDate();
-				
 				if(dataJoan != null) {
 					btn_next.setVisible(true);
 				}

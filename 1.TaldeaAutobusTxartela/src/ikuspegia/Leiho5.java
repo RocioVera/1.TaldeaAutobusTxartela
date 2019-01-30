@@ -4,6 +4,7 @@ import java.awt.*;
 import javax.swing.*;
 import kontrolatzailea.*;
 import java.awt.event.*;
+import java.util.ArrayList;
 
 public class Leiho5 extends JFrame {
 	private static final long serialVersionUID = 1L;
@@ -23,8 +24,9 @@ public class Leiho5 extends JFrame {
 
 	/**
 	 * Create the panel.
+	 * @param ibilbideZbk 
 	 */
-	public Leiho5(String hartutakoLinea) {
+	public Leiho5(String hartutakoLinea, Autobusak autobusa, int ibilbideZbk, int hasierakoGeltokiaKod, int amaierakoGeltokiaKod, float guztiraPrez) {
 		getContentPane().setLayout(null);
 		this.setBounds(350,50,600,600);
 		this.setResizable(false); // neurketak ez aldatzeko
@@ -34,7 +36,7 @@ public class Leiho5 extends JFrame {
 		btn_next.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Metodoak.seigarrenLeihoa(hartutakoLinea);
+				Metodoak.seigarrenLeihoa(hartutakoLinea, autobusa, ibilbideZbk,hasierakoGeltokiaKod, amaierakoGeltokiaKod);
 				dispose();
 			}
 		});
@@ -42,13 +44,15 @@ public class Leiho5 extends JFrame {
 		btn_next.setFont(new Font("Tahoma", Font.ITALIC, 16));
 		btn_next.setBackground(Color.LIGHT_GRAY);
 		btn_next.setForeground(Color.RED);
+		btn_next.setVisible(false);
+
 
 		getContentPane().add(btn_next);
 
 		btn_prev.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Metodoak.laugarrenLeihoa(hartutakoLinea);
+				Metodoak.laugarrenLeihoa(hartutakoLinea, autobusa, ibilbideZbk, hasierakoGeltokiaKod, amaierakoGeltokiaKod);
 				dispose();
 			}
 		});
@@ -79,8 +83,6 @@ public class Leiho5 extends JFrame {
 		txtPrezioTot.setEditable(false);
 		txtPrezioTot.setColumns(10);
 		txtPrezioTot.setBounds(300, 29, 86, 20);
-		//guztiraPrez = Metodoak.kalkPrezioa();
-		guztiraPrez=5.5;
 		txtPrezioTot.setText(guztiraPrez + " €");
 		getContentPane().add(txtPrezioTot);
 
@@ -125,7 +127,7 @@ public class Leiho5 extends JFrame {
 		btn_100Euro.setBackground(Color.WHITE);
 		btn_100Euro.setBounds(36, 184, 89, 23);
 		getContentPane().add(btn_100Euro);
-
+		
 		JButton btn_50Euro = new JButton("50\u20AC");
 		btn_50Euro.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -162,7 +164,7 @@ public class Leiho5 extends JFrame {
 		btn_10Euro.setBackground(Color.WHITE);
 		btn_10Euro.setBounds(164, 150, 89, 23);
 		getContentPane().add(btn_10Euro);
-
+		
 		JButton btn_5Euro = new JButton("5\u20AC");
 		btn_5Euro.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -210,7 +212,7 @@ public class Leiho5 extends JFrame {
 		btn_50Zent.setBackground(Color.WHITE);
 		btn_50Zent.setBounds(341, 150, 89, 23);
 		getContentPane().add(btn_50Zent);
-
+		
 		JButton btn_20Zent = new JButton("20 zent");
 		btn_20Zent.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -222,7 +224,7 @@ public class Leiho5 extends JFrame {
 		btn_20Zent.setBackground(Color.WHITE);
 		btn_20Zent.setBounds(341, 184, 89, 23);
 		getContentPane().add(btn_20Zent);
-
+		
 		JButton btn_10Zent = new JButton("10 zent");
 		btn_10Zent.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -276,7 +278,7 @@ public class Leiho5 extends JFrame {
 		txtDiruFalta.setForeground(Color.RED);
 		txtDiruFalta.setEditable(false);
 		txtDiruFalta.setColumns(10);
-		txtDiruFalta.setBounds(167, 412, 86, 20);
+		txtDiruFalta.setBounds(166, 393, 64, 20);
 		txtDiruFalta.setText(guztiraPrez + " €");
 		getContentPane().add(txtDiruFalta);
 
@@ -285,7 +287,7 @@ public class Leiho5 extends JFrame {
 		txtBueltak.setForeground(Color.BLUE);
 		txtBueltak.setEditable(false);
 		txtBueltak.setColumns(10);
-		txtBueltak.setBounds(167, 458, 86, 20);
+		txtBueltak.setBounds(166, 439, 64, 20);
 		txtBueltak.setText("00.00€");
 		getContentPane().add(txtBueltak);
 
@@ -299,7 +301,7 @@ public class Leiho5 extends JFrame {
 				if (diruFalta > 0) {
 					// Diru falta
 					txtDiruFalta.setText(diruFaltaString + " €");
-					txtBueltak.setText("0.00 €");
+					txtBueltak.setText("00.00 €");
 				} else if (diruFalta < 0) {
 					diruFaltaString = String.valueOf(-diruFalta);
 					txtBueltak.setText(diruFaltaString + " €");
@@ -307,13 +309,33 @@ public class Leiho5 extends JFrame {
 					// txanponTot
 					txanponTot=Metodoak.bueltakZerrenda(diruFalta);
 					txtrTxtareatxanponbueltak.setText(txanponTot);
-					btn_next.setVisible(true);
-					btnErosi.setVisible(false);
 
 				} else {
-					// Frame.btn_next.setVisible(true);
 					txtDiruFalta.setText("00.00 €");
 					txtBueltak.setText("00.00 €");
+				}
+				if (diruFalta<=0) {
+					btnErosi.setEnabled(false);
+					btn_next.setVisible(true);
+					btn_prev.setVisible(false);
+					restart.setVisible(false);
+
+					btn_200Euro.setEnabled(false);
+					btn_100Euro.setEnabled(false);
+					btn_50Euro.setEnabled(false);
+					btn_20Euro.setEnabled(false);
+					btn_20Euro.setEnabled(false);
+					btn_10Euro.setEnabled(false);
+					btn_5Euro.setEnabled(false);
+					btn_2Euro.setEnabled(false);
+					btn_1Euro.setEnabled(false);
+					btn_50Zent.setEnabled(false);
+					btn_20Zent.setEnabled(false);
+					btn_10Zent.setEnabled(false);
+					btn_5Zent.setEnabled(false);
+					btn_2Zent.setEnabled(false);
+					btn_2Zent.setEnabled(false);
+					btn_1Zent.setEnabled(false);
 				}
 			}
 
@@ -321,27 +343,27 @@ public class Leiho5 extends JFrame {
 		btnErosi.setFont(new Font("Tahoma", Font.BOLD, 16));
 		btnErosi.setBackground(Color.WHITE);
 		btnErosi.setForeground(new Color(0, 0, 0));
-		btnErosi.setBounds(115, 328, 90, 38);
+		btnErosi.setBounds(115, 321, 90, 38);
 		getContentPane().add(btnErosi);
 
 		// Diru falta
 		JLabel lblDiruFalta = new JLabel("Diru falta:");
 		lblDiruFalta.setForeground(Color.RED);
 		lblDiruFalta.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		lblDiruFalta.setBounds(57, 412, 95, 20);
+		lblDiruFalta.setBounds(56, 393, 95, 20);
 		getContentPane().add(lblDiruFalta);
 
 		// Zenbat bueltak eman behar
 		JLabel lblBueltak = new JLabel("Bueltak:");
 		lblBueltak.setForeground(Color.BLUE);
 		lblBueltak.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		lblBueltak.setBounds(57, 458, 86, 20);
+		lblBueltak.setBounds(56, 439, 86, 20);
 		getContentPane().add(lblBueltak);
 
 		// Bueltak zerrenda
 		txtrTxtareatxanponbueltak.setBackground(Color.LIGHT_GRAY);
 		txtrTxtareatxanponbueltak.setText("Emaiozu botoiari");
-		txtrTxtareatxanponbueltak.setBounds(269, 252, 277, 247);
+		txtrTxtareatxanponbueltak.setBounds(322, 252, 172, 238);
 		getContentPane().add(txtrTxtareatxanponbueltak);
 
 	}

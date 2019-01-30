@@ -47,7 +47,7 @@ public class Metodoak {
         return distantzia;  
 	}
 	
-	public static double kalkulatuPrezioa(double altuera1, double luzera1, double altuera2, double luzera2, int zPlaza) {
+	public static double kalkulatuPrezioa(double altuera1, double luzera1, double altuera2, double luzera2 ) {
 		double guztira = 0;
 		double distantzia=kalkulatuDistantzia(altuera1, luzera1, altuera2, luzera2);
 		
@@ -139,32 +139,30 @@ public class Metodoak {
 	}
 
 	// leiho3 sortu
-	public static void hirugarrenLeihoa(String hartutakoLinea) {
-		ArrayList<Geltokiak> arrayGeltokia = new ArrayList<Geltokiak>();
-		Leiho3 Leiho3 = new Leiho3(arrayGeltokia, hartutakoLinea);
+	public static void hirugarrenLeihoa(String hartutakoLinea, Autobusak autobusa) {
+		Leiho3 Leiho3 = new Leiho3(hartutakoLinea, autobusa);
 		Leiho3.setVisible(true);
 		
 	}
 
 	// leiho4 sortu
-	public static void laugarrenLeihoa(String hartutakoLinea) {
-
-		Leiho4 Leiho4 = new Leiho4(hartutakoLinea);
+	public static void laugarrenLeihoa(String hartutakoLinea, Autobusak autobusa, int ibilbideZbk, int hasierakoGeltokiaKod, int amaierakoGeltokiaKod) {
+		Leiho4 Leiho4 = new Leiho4(hartutakoLinea, autobusa, ibilbideZbk, hasierakoGeltokiaKod, amaierakoGeltokiaKod);
 		Leiho4.setVisible(true);
 
 	}
 
 	// leiho5 sortu
-	public static void bostgarrenLeihoa(String hartutakoLinea) {
+	public static void bostgarrenLeihoa(String hartutakoLinea, Autobusak autobusa, int ibilbideZbk, int hasierakoGeltokiaKod, int amaierakoGeltokiaKod, float guztiraPrez) {
 
-		Leiho5 Leiho5 = new Leiho5(hartutakoLinea);
+		Leiho5 Leiho5 = new Leiho5(hartutakoLinea, autobusa, ibilbideZbk, hasierakoGeltokiaKod, amaierakoGeltokiaKod, guztiraPrez);
 		Leiho5.setVisible(true);
 
 	}
 
 	// leiho6 sortu
-	public static void seigarrenLeihoa(String hartutakoLinea) {
-		Leiho6 Leiho6 = new Leiho6(hartutakoLinea);
+	public static void seigarrenLeihoa(String hartutakoLinea, Autobusak autobusa, int ibilbideZbk, int hasierakoGeltokiaKod, int amaierakoGeltokiaKod) {
+		Leiho6 Leiho6 = new Leiho6(hartutakoLinea, autobusa, ibilbideZbk, hasierakoGeltokiaKod, amaierakoGeltokiaKod);
 		Leiho6.setVisible(true);
 	//	Metodoak.Leiho_segunduak();
 

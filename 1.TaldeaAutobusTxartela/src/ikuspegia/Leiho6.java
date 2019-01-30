@@ -1,8 +1,12 @@
 package ikuspegia;
 import java.awt.*;
 import javax.swing.*;
+
+import kontrolatzailea.Autobusak;
+import kontrolatzailea.Geltokiak;
 import kontrolatzailea.Metodoak;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 
 public class Leiho6 extends JFrame {
@@ -11,7 +15,7 @@ public class Leiho6 extends JFrame {
 	private JButton btnTiketaImprimatu;
 	private JTextField txtSegundenMezua;
 
-	public Leiho6(String hartutakoLinea) {
+	public Leiho6(String hartutakoLinea, Autobusak autobusa, int ibilbideZbk, int hasierakoGeltokiaKod, int amaierakoGeltokiaKod) {
 		getContentPane().setLayout(null);
 		this.setBounds(350,50,600,600);
 		this.setResizable(false); // neurketak ez aldatzeko

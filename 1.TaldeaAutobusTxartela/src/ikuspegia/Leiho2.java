@@ -29,7 +29,7 @@ public class Leiho2 extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				//lamar al metodo que elije autobus
-				Metodoak.hirugarrenLeihoa(hartutakoLinea);
+				Metodoak.hirugarrenLeihoa(hartutakoLinea, autobusa);
 				dispose();
 			}
 		});

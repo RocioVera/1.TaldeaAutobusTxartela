@@ -4,13 +4,14 @@ import java.awt.*;
 import javax.swing.*;
 import kontrolatzailea.*;
 import java.awt.event.*;
+import java.util.ArrayList;
 import java.util.Date;
 
 import com.toedter.calendar.*;
 
 public class Leiho4 extends JFrame {
 	private static final long serialVersionUID = 1L;
-	static JTextField txtPrezioTot = new JTextField();
+	private JTextField txtPrezioTot = new JTextField();
 	private JTextField txtNan = new JTextField(), txtIzena = new JTextField(), txtAbizenak = new JTextField(),
 			txtSexua = new JTextField();
 	private JPasswordField passwordField = new JPasswordField();
@@ -24,14 +25,15 @@ public class Leiho4 extends JFrame {
 	private JButton btn_next = new JButton("Hurrengoa");
 	private JButton btn_prev = new JButton("Atzera");
 	private JButton restart = new JButton("\u2302");
-	private String pasahitza, nan, izena, abizenak, sexua, guztiraPrez;
+	private String pasahitza, nan, izena, abizenak, sexua;
 	private Date jaioData;
+	private float guztiraPrez=(float) 10.5;
 	private boolean balPasa, balNan, balErregis;
 	private int nanLuzera = 8, izenLuzera = 49, abizenLuzera = 99, pasahitzLuzera = 49, sexuLuzera = 0, jaioDataLuzera=9;
 	private char letra;
 	private JDateChooser txtJaioData = new JDateChooser("yyyy-MM-dd","####/##/##",'_');
 
-	public Leiho4(String hartutakoLinea) {
+	public Leiho4(String hartutakoLinea, Autobusak autobusa, int ibilbideZbk, int hasierakoGeltokiaKod, int amaierakoGeltokiaKod) {
 		getContentPane().setLayout(null);
 		this.setBounds(350, 50, 600, 600);
 		this.setResizable(false); // neurketak ez aldatzeko
@@ -41,7 +43,7 @@ public class Leiho4 extends JFrame {
 		btn_next.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Metodoak.bostgarrenLeihoa(hartutakoLinea);
+				Metodoak.bostgarrenLeihoa(hartutakoLinea, autobusa, ibilbideZbk, hasierakoGeltokiaKod, amaierakoGeltokiaKod, guztiraPrez);
 				dispose();
 			}
 		});
@@ -53,7 +55,7 @@ public class Leiho4 extends JFrame {
 		btn_prev.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Metodoak.hirugarrenLeihoa(hartutakoLinea);
+				Metodoak.hirugarrenLeihoa(hartutakoLinea, autobusa);
 				dispose();
 			}
 		});
@@ -104,10 +106,14 @@ public class Leiho4 extends JFrame {
 		btnHasiSaioa.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				//bisibilitatea
+				btnKonektatu.setEnabled(true);
 				btnKonektatu.setVisible(true);
 				btnErregistratu.setVisible(false);
+				btnErregistratu.setEnabled(true);
 				btnHasiSaioa.setVisible(false);
+				btn_next.setVisible(false);
 				btnErregistratuNahi.setVisible(true);
+				
 
 				lblKonekBezeroMezua.setVisible(false);
 				lblErroreakonektatu.setVisible(false);
@@ -124,6 +130,13 @@ public class Leiho4 extends JFrame {
 				txtSexua.setVisible(false);
 				passwordField.setVisible(true);
 				txtNan.setVisible(true);
+				
+				txtIzena.setEnabled(true);
+				txtAbizenak.setEnabled(true);
+				txtJaioData.setEnabled(true);
+				txtSexua.setEnabled(true);
+				passwordField.setEnabled(true);
+				txtNan.setEnabled(true);
 
 				lblNan.setFont(new Font("Tahoma", Font.BOLD, 17));
 				lblNan.setBounds(214, 211, 62, 20);
@@ -192,6 +205,7 @@ public class Leiho4 extends JFrame {
 		btnErregistratuNahi.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				//bisibilitatea
+				btn_next.setVisible(false);
 				btnErregistratu.setVisible(true);
 				btnHasiSaioa.setVisible(true);
 				btnKonektatu.setVisible(false);
@@ -208,10 +222,12 @@ public class Leiho4 extends JFrame {
 				
 				txtIzena.setVisible(true);
 				txtAbizenak.setVisible(true);
-				/*******				txtJaioData.setVisible(true);*/
+				txtJaioData.setVisible(true);
 				txtSexua.setVisible(true);
 				passwordField.setVisible(true);
 				txtNan.setVisible(true);
+				passwordField.setEnabled(true);
+				txtNan.setEnabled(true);
 				
 				//non, formatua eta zer jarri
 				lblNan.setFont(new Font("Tahoma", Font.BOLD, 17));
@@ -329,7 +345,7 @@ public class Leiho4 extends JFrame {
 					txtAbizenak.setEnabled(false);
 					txtJaioData.setEnabled(false);
 					txtSexua.setEnabled(false);
-					// btnKonektatu.setEnabled(false);
+					btnErregistratu.setEnabled(false);
 				} else {
 					lblErroreakonektatu.setForeground(Color.RED);
 					lblErroreakonektatu.setBounds(122, 445, 318, 22);
