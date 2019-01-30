@@ -28,6 +28,9 @@ public class Leiho3 extends JFrame {
 	private JButton btn_next = new JButton("Hurrengoa");
 	private JButton btn_prev = new JButton("Atzera");
 	private JButton restart = new JButton("\u2302");
+	private JButton btnDataEgiaztatu1, btnDataEgiaztatu2;
+	
+	Date dataJoan, dataEtorri;
 
 	public Leiho3(ArrayList<Geltokiak> arrayGeltokia, String hartutakoLinea) {
 		getContentPane().setLayout(null);
@@ -422,7 +425,7 @@ public class Leiho3 extends JFrame {
 
 		joanEtorriGroup.add(joan);
 		joanEtorriGroup.add(joanEtorria);
-
+		
 		joan.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -439,7 +442,8 @@ public class Leiho3 extends JFrame {
 				dateEtorria.setVisible(false);
 				etorriaMinutu.setVisible(false);
 				etorriaOrdua.setVisible(false);
-
+				btnDataEgiaztatu1.setVisible(true);
+				
 				etorriaMinutu.setValue(0);
 				etorriaOrdua.setValue(0);
 			}
@@ -465,11 +469,6 @@ public class Leiho3 extends JFrame {
 		lblOrduaJoan.setVisible(false);
 		getContentPane().add(lblOrduaJoan);
 		
-		dateJoan.getCalendarButton().addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				btn_next.setVisible(true);
-			}
-		});
 		dateJoan.setDateFormatString("yyyy-MM-dd");
 		dateJoan.setBounds(190, 142, 127, 20);
 		dateJoan.setVisible(false);
@@ -507,7 +506,7 @@ public class Leiho3 extends JFrame {
 				dateEtorria.setVisible(true);
 				etorriaMinutu.setVisible(true);
 				etorriaOrdua.setVisible(true);
-
+				btnDataEgiaztatu2.setVisible(true);
 			}
 		});
 
@@ -530,11 +529,6 @@ public class Leiho3 extends JFrame {
 		lblOrduaEtorria.setVisible(false);
 		getContentPane().add(lblOrduaEtorria);
 
-		dateEtorria.getCalendarButton().addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				btn_next.setVisible(true);
-			}
-		});
 		dateEtorria.setDateFormatString("yyyy-MM-dd");
 		dateEtorria.setBounds(190, 265, 127, 20);
 		dateEtorria.setVisible(false);
@@ -555,7 +549,40 @@ public class Leiho3 extends JFrame {
 		spinnerEditatu.setEditable(false);
 		etorriaOrdua.setVisible(false);
 		getContentPane().add(etorriaOrdua);
+		
+
+		btnDataEgiaztatu1 = new JButton("Data egiaztatu");
+		btnDataEgiaztatu1.setBounds(423, 421, 122, 25);
+		btnDataEgiaztatu1.setVisible(false);
+		getContentPane().add(btnDataEgiaztatu1);
+		
+		btnDataEgiaztatu2 = new JButton("Data egiaztatu");
+		btnDataEgiaztatu2.setBounds(423, 421, 122, 25);
+		btnDataEgiaztatu2.setVisible(false);
+		getContentPane().add(btnDataEgiaztatu2);
+		
+		btnDataEgiaztatu1.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				dataJoan = dateJoan.getDate();
+				
+				if(dataJoan != null) {
+					btn_next.setVisible(true);
+				}
+			}
+		});
+		
+		btnDataEgiaztatu2.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				dataJoan = dateJoan.getDate();
+				dataEtorri = dateEtorria.getDate();
+				
+				if(dataJoan != null && dataEtorri != null) {
+					btn_next.setVisible(true);
+				}
+			}
+		});
 
 	}
-
 }
