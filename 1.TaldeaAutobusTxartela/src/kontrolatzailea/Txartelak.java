@@ -1,21 +1,23 @@
 package kontrolatzailea;
 
+import java.sql.Date;
+import java.sql.Timestamp;
+
 public class Txartelak {
 	
-	private int kodTxartela;
 	private String kodLinea;
+	private int zIbilbidea;
 	private int kodBus;
 	private int kodGeltokiHasiera;
 	private int kodGeltokiAmaiera;
-	private String data;
-	private String ordua;
+	private Date data;
+	private Timestamp ordua;
 	private String nan;
 	private float prezioa;
 	
-	public Txartelak(int kodTxartela, String kodLinea, int kodBus, int kodGeltokiHasiera, int kodGeltokiAmaiera,
-			String data, String ordua, String nan, float prezioa) {
+	public Txartelak( String kodLinea, int kodBus, int kodGeltokiHasiera, int kodGeltokiAmaiera,
+			Date data, Timestamp ordua, String nan, float prezioa, int zIbilbidea) {
 		
-		this.kodTxartela = kodTxartela;
 		this.kodLinea = kodLinea;
 		this.kodBus = kodBus;
 		this.kodGeltokiHasiera = kodGeltokiHasiera;
@@ -24,14 +26,15 @@ public class Txartelak {
 		this.ordua = ordua;
 		this.nan = nan;
 		this.prezioa = prezioa;
+		this.zIbilbidea = zIbilbidea;
 	}
 	
-	public int getkodTxartela() {
-		return kodTxartela;
+	public int getzIbilbidea() {
+		return zIbilbidea;
 	}
 
-	public void setkodTxartela(int kodTxartela) {
-		this.kodTxartela = kodTxartela;
+	public void setzIbilbidea(int zIbilbidea) {
+		this.zIbilbidea = zIbilbidea;
 	}
 
 	public String getkodLinea() {
@@ -66,19 +69,19 @@ public class Txartelak {
 		this.kodGeltokiAmaiera = kodGeltokiAmaiera;
 	}
 
-	public String getData() {
+	public Date getData() {
 		return data;
 	}
 
-	public void setData(String data) {
+	public void setData(Date data) {
 		this.data = data;
 	}
 
-	public String getOrdua() {
+	public Timestamp getOrdua() {
 		return ordua;
 	}
 
-	public void setOrdua(String ordua) {
+	public void setOrdua(Timestamp ordua) {
 		this.ordua = ordua;
 	}
 

@@ -106,7 +106,7 @@ public class Metodoak {
 	}
 	
 	public static void sortuBilletea() {
-		billeteaKontsulta();
+		//Kontsultak.billeteaKontsulta();
 	}
 
 	public static boolean frogatuNAN(String nan) {
@@ -152,9 +152,9 @@ public class Metodoak {
 	}
 
 	// leiho5 sortu
-	public static void bostgarrenLeihoa(String hartutakoLinea, Autobusak autobusa, int ibilbideZbk, int hasierakoGeltokiaKod, int amaierakoGeltokiaKod, float guztiraPrez) {
+	public static void bostgarrenLeihoa(String hartutakoLinea, Autobusak autobusa, int ibilbideZbk, int hasierakoGeltokiaKod, int amaierakoGeltokiaKod, float guztiraPrez, String nan) {
 
-		Leiho5 Leiho5 = new Leiho5(hartutakoLinea, autobusa, ibilbideZbk, hasierakoGeltokiaKod, amaierakoGeltokiaKod, guztiraPrez);
+		Leiho5 Leiho5 = new Leiho5(hartutakoLinea, autobusa, ibilbideZbk, hasierakoGeltokiaKod, amaierakoGeltokiaKod, guztiraPrez, nan);
 		Leiho5.setVisible(true);
 
 	}
@@ -348,6 +348,11 @@ public class Metodoak {
 			}
 		}
 		return bueltakString;
+	}
+	public static float kalkPrezioa() {
+		float guztira = 0;
+		
+		return guztira;
 	}
 
 	

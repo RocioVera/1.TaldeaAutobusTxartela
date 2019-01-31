@@ -44,7 +44,7 @@ public class Leiho4 extends JFrame {
 		btn_next.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Metodoak.bostgarrenLeihoa(hartutakoLinea, autobusa, ibilbideZbk, hasierakoGeltokiaKod, amaierakoGeltokiaKod, guztiraPrez);
+				Metodoak.bostgarrenLeihoa(hartutakoLinea, autobusa, ibilbideZbk, hasierakoGeltokiaKod, amaierakoGeltokiaKod, guztiraPrez, nan);
 				dispose();
 			}
 		});
@@ -85,7 +85,7 @@ public class Leiho4 extends JFrame {
 		txtPrezioTot.setColumns(10);
 		txtPrezioTot.setBounds(281, 37, 86, 20);
 		
-//		guztiraPrez = Metodoak.kalkPrezioa();
+		//guztiraPrez = Metodoak.kalkPrezioa(autobusa.getKmKontsumoa(),);
 		txtPrezioTot.setText(guztiraPrez + " €");
 		getContentPane().add(txtPrezioTot);
 		btn_next.setVisible(false);

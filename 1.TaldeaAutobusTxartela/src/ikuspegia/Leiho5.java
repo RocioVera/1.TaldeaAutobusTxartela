@@ -4,6 +4,10 @@ import java.awt.*;
 import javax.swing.*;
 import kontrolatzailea.*;
 import java.awt.event.*;
+
+import java.sql.Date;
+import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Leiho5 extends JFrame {
@@ -14,9 +18,13 @@ public class Leiho5 extends JFrame {
 	private JTextField txtBueltak = new JTextField();
 	private JTextArea txtrTxtareatxanponbueltak = new JTextArea();
 
+	private Txartelak txartela;
+	private Date data = Date.valueOf(LocalDate.now());
+	private Timestamp ordua = new Timestamp(System.currentTimeMillis());
+
 	private int kont = 0;
 	private String txanponTot;
-	private double guztiraPrez,diruFalta, sartutakoa;
+	private double guztiraPrez, diruFalta, sartutakoa;
 
 	private JButton btn_next = new JButton("Hurrengoa");
 	private JButton btn_prev = new JButton("Atzera");
@@ -25,8 +33,9 @@ public class Leiho5 extends JFrame {
 	/**
 	 * Create the panel.
 	 * @param ibilbideZbk 
+	 * @param nan 
 	 */
-	public Leiho5(String hartutakoLinea, Autobusak autobusa, int ibilbideZbk, int hasierakoGeltokiaKod, int amaierakoGeltokiaKod, float guztiraPrez) {
+	public Leiho5(String hartutakoLinea, Autobusak autobusa, int ibilbideZbk, int hasierakoGeltokiaKod, int amaierakoGeltokiaKod, float guztiraPrez, String nan) {
 		getContentPane().setLayout(null);
 		this.setBounds(350,50,600,600);
 		this.setResizable(false); // neurketak ez aldatzeko
@@ -46,13 +55,16 @@ public class Leiho5 extends JFrame {
 		btn_next.setForeground(Color.RED);
 		btn_next.setVisible(false);
 
-
+		
+		
 		getContentPane().add(btn_next);
 
 		btn_prev.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				Metodoak.laugarrenLeihoa(hartutakoLinea, autobusa, ibilbideZbk, hasierakoGeltokiaKod, amaierakoGeltokiaKod);
+				txartela = new Txartelak(hartutakoLinea, autobusa.getKodBus(), hasierakoGeltokiaKod, amaierakoGeltokiaKod,
+						  data, ordua, nan, guztiraPrez);
 				dispose();
 			}
 		});

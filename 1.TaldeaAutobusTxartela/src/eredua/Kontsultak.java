@@ -102,7 +102,7 @@ public class Kontsultak {
 		try {
 			st = konexioa.createStatement();
 			rs = st.executeQuery("SELECT * FROM cliente");
-			
+
 			while (rs.next()) {
 				NAN = (rs.getString(1));
 				izena = (rs.getString(2));
@@ -118,42 +118,61 @@ public class Kontsultak {
 		}
 		return arrayBezeroak;
 	}
-	
-	public static ArrayList<Bezeroak> erregistratuBezeroak(String pasahitza, String NAN, String izena, String abizenak, String sexua, java.util.Date jaioData) {
+
+	public static ArrayList<Bezeroak> erregistratuBezeroak(String pasahitza, String NAN, String izena, String abizenak,
+			String sexua, java.util.Date jaioData) {
 		ArrayList<Bezeroak> arrayBezeroak = new ArrayList<Bezeroak>();
 		Connection konexioa = Konexioa.getConexion();
-		//String query = "INSERT INTO cliente (`Cod_Billete`, `NTrayecto`, `Cod_Linea`, `Cod_Bus`, `Cod_Parada_Inicio`, `Cod_Parada_Fin`, `Fecha`, `Hora`, `DNI`, `Precio`)" + 
-		//(`Cod_Billete`, `NTrayecto`, `Cod_Linea`, `Cod_Bus`, `Cod_Parada_Inicio`, `Cod_Parada_Fin`, `Fecha`, `Hora`, `DNI`, `Precio`)"
-		
+
 		try {
-			 PreparedStatement st = konexioa.prepareStatement("INSERT INTO `cliente` (`DNI`, `Nombre`, `Apellidos`, `Fecha_nac`, `Sexo`, `Contrasena`)"
-					+ " VALUES(?, ?, ?, ?, ?, ?)");
-			//st = konexioa.prepareStatement(query);
-            //ResultSet rs = st.executeUpdate(query);
+			PreparedStatement st = konexioa.prepareStatement(
+					"INSERT INTO `cliente` (`DNI`, `Nombre`, `Apellidos`, `Fecha_nac`, `Sexo`, `Contrasena`)"
+							+ " VALUES(?, ?, ?, ?, ?, ?)");
 
-            st.setString (1, NAN);
-            st.setString (2, izena);
-            st.setString (3, abizenak);
-            //Date.valueOf(localDate.now())
-            st.setDate (4, Date.valueOf(LocalDate.now()));
-            st.setString (5, sexua);
-            st.setString (6, pasahitza);
-		
-            st.executeUpdate();
-            st.close();
+			st.setString(1, NAN);
+			st.setString(2, izena);
+			st.setString(3, abizenak);
+			st.setDate(4, Date.valueOf(LocalDate.now()));
+			// st.setDate (4, (java.util.Date) jaioData);
+			st.setString(5, sexua);
+			st.setString(6, pasahitza);
 
-            System.out.println("Gehitu da");
-		 } catch (SQLException e) {
-	            System.out.println("Ez da gehitu");
-	    }
-		
-		arrayBezeroak=bezeroDatuak();
+			st.executeUpdate();
+			st.close();
+
+			System.out.println("Gehitu da");
+		} catch (SQLException e) {
+			System.out.println("Ez da gehitu");
+		}
+
+		arrayBezeroak = bezeroDatuak();
 		return arrayBezeroak;
 	}
-	
-	public static void billeteaKontsulta() {
-		
-	}
+
+	/*public static void billeteaKontsulta(Txartelak txartela) {
+		// kalkulatu prezioa distantziaren metodoak dietzen
+		Connection konexioa = Konexioa.getConexion();
+
+		try {
+				PreparedStatement st = konexioa.prepareStatement("INSERT INTO `billete` (`NTrayecto`, `Cod_Linea`, `Cod_Bus`, `Cod_Parada_Inicio`, `Cod_Parada_Fin`, `Fecha`, `Hora`, `DNI`, `Precio`)" + " VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)");
+
+			st.setString(1, txartela.getzIbilbidea());
+			st.setString(2, txartela.getkodLinea());
+			st.setString(3, txartela.getkodBus());
+			st.setDate(4, Date.valueOf(LocalDate.now()));
+			// st.setDate (4, (java.util.Date) jaioData);
+			st.setString(5, sexua);
+			st.setString(6, pasahitza);
+
+			st.executeUpdate();
+			st.close();
+
+			System.out.println("Gehitu da");
+		} catch (SQLException e) {
+			System.out.println("Ez da gehitu");
+		}
+
+	}*/
 
 	public static ArrayList<GeltokiaLinea> arrayGelLinea() {
 
@@ -204,44 +223,4 @@ public class Kontsultak {
 		return arrayBusLinea;
 
 	}
-
-	public static ArrayList<Txartelak> billeteakGorde(int kodTxartela, int Ntrayecto,String kodLinea, int kodBus, int kodGeltokiHasiera, int kodGeltokiAmaiera,
-			String data, String ordua, String nan, float prezioa) {
-		ArrayList<Txartelak> arrayTxartelak = new ArrayList<Txartelak>();
-		Statement st = null;
-		Connection konexioa = Konexioa.getConexion();
-		//int kodTxartela, kodBus, kodGeltokiHasiera, kodGeltokiAmaiera;
-		//String kodLinea, data, ordua, nan; 
-		//float prezioa;
-		
-		try {
-			st = konexioa.createStatement();
-		//	Ntrayecto //lasegunda
-			ResultSet rs = st.executeQuery("insert into billete VALUES"+ "'" +kodTxartela+ "','"+Ntrayecto+"','"+kodLinea+ "','"+kodBus+ "','"+kodGeltokiHasiera+ "','"+kodGeltokiAmaiera+ "','"+data+ "','"+ordua+ "','"+nan+ "','"+prezioa);
-			//INSERT INTO `billete` VALUES ('12345678', '1234567891', 'L1', '3002', '9', '10', '2019-01-26', '13:09:0', '45899844Y', '2');
-			
-			while (rs.next()) {
-
-				kodTxartela = (rs.getInt("Cod_Billete"));
-		//		izena = (rs.getString("NTrayecto"));  //*****galdetu*****
-				kodLinea = (rs.getString("Cod_Linea"));
-				kodBus = (rs.getInt("Cod_Bus"));
-				kodGeltokiHasiera = (rs.getInt("Cod_Parada_Inicio"));
-				kodGeltokiAmaiera = (rs.getInt("Cod_Parada_Fin"));
-				data = (rs.getString("Fecha"));
-				ordua = (rs.getString("Hora"));
-				nan = (rs.getString("DNI"));
-				prezioa = (rs.getFloat("Precio"));
-				Txartelak txartelak = new Txartelak(kodTxartela, kodLinea, kodBus, kodGeltokiHasiera, kodGeltokiAmaiera, data, ordua, nan, prezioa);
-				arrayTxartelak.add(txartelak); 
-				for (int i = 0; i < arrayTxartelak.size(); i++) {
-					System.out.println(arrayTxartelak);
-				}
-			}
-		} catch (Exception e) {
-			e.getMessage();
-		}
-		return arrayTxartelak;
-	}
-
 }
