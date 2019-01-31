@@ -2,6 +2,8 @@ package ikuspegia;
 
 import java.awt.*;
 import javax.swing.*;
+
+import eredua.*;
 import kontrolatzailea.*;
 import java.awt.event.*;
 
@@ -62,9 +64,11 @@ public class Leiho5 extends JFrame {
 		btn_prev.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				int zIbilbidea=5;
+				txartela = new Txartelak(hartutakoLinea, autobusa.getKodBus(), hasierakoGeltokiaKod, amaierakoGeltokiaKod, data, ordua, nan, guztiraPrez, zIbilbidea);
+				Metodoak.sortuBilletea(txartela);
 				Metodoak.laugarrenLeihoa(hartutakoLinea, autobusa, ibilbideZbk, hasierakoGeltokiaKod, amaierakoGeltokiaKod);
-				txartela = new Txartelak(hartutakoLinea, autobusa.getKodBus(), hasierakoGeltokiaKod, amaierakoGeltokiaKod,
-						  data, ordua, nan, guztiraPrez);
+			
 				dispose();
 			}
 		});

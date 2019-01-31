@@ -1,10 +1,9 @@
 package eredua;
-
 import java.util.ArrayList;
-
-import java.time.*;
 import java.sql.*;
 import kontrolatzailea.*;
+import java.time.LocalDate;
+import java.sql.PreparedStatement;
 
 public class Kontsultak {
 	public static ArrayList<Lineak> lineakDatuak() {
@@ -125,15 +124,14 @@ public class Kontsultak {
 		Connection konexioa = Konexioa.getConexion();
 
 		try {
-			PreparedStatement st = konexioa.prepareStatement(
-					"INSERT INTO `cliente` (`DNI`, `Nombre`, `Apellidos`, `Fecha_nac`, `Sexo`, `Contrasena`)"
+			PreparedStatement st = konexioa.prepareStatement("INSERT INTO `cliente` (`DNI`, `Nombre`, `Apellidos`, `Fecha_nac`, `Sexo`, `Contrasena`)"
 							+ " VALUES(?, ?, ?, ?, ?, ?)");
 
 			st.setString(1, NAN);
 			st.setString(2, izena);
 			st.setString(3, abizenak);
 			st.setDate(4, Date.valueOf(LocalDate.now()));
-			// st.setDate (4, (java.util.Date) jaioData);
+			//st.setDate (4, jaioData);
 			st.setString(5, sexua);
 			st.setString(6, pasahitza);
 
@@ -143,26 +141,28 @@ public class Kontsultak {
 			System.out.println("Gehitu da");
 		} catch (SQLException e) {
 			System.out.println("Ez da gehitu");
+			//e.printStackTrace();
 		}
 
 		arrayBezeroak = bezeroDatuak();
 		return arrayBezeroak;
 	}
 
-	/*public static void billeteaKontsulta(Txartelak txartela) {
+	public static void billeteaKontsulta(Txartelak txartela) {
 		// kalkulatu prezioa distantziaren metodoak dietzen
 		Connection konexioa = Konexioa.getConexion();
 
 		try {
-				PreparedStatement st = konexioa.prepareStatement("INSERT INTO `billete` (`NTrayecto`, `Cod_Linea`, `Cod_Bus`, `Cod_Parada_Inicio`, `Cod_Parada_Fin`, `Fecha`, `Hora`, `DNI`, `Precio`)" + " VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)");
-
-			st.setString(1, txartela.getzIbilbidea());
+			PreparedStatement st = konexioa.prepareStatement("INSERT INTO `billete` (`NTrayecto`, `Cod_Linea`, `Cod_Bus`, `Cod_Parada_Inicio`, `Cod_Parada_Fin`, `Fecha`, `Hora`, `DNI`, `Precio`)" + " VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)");				
+			st.setInt(1, txartela.getzIbilbidea());
 			st.setString(2, txartela.getkodLinea());
-			st.setString(3, txartela.getkodBus());
-			st.setDate(4, Date.valueOf(LocalDate.now()));
-			// st.setDate (4, (java.util.Date) jaioData);
-			st.setString(5, sexua);
-			st.setString(6, pasahitza);
+			st.setInt(3, txartela.getkodBus());
+			st.setInt(4, txartela.getkodGeltokiHasiera());
+			st.setInt(5, txartela.getkodGeltokiAmaiera());
+			st.setDate(6, txartela.getData());
+			st.setTimestamp(7, txartela.getOrdua());
+			st.setString(8, txartela.getNan());
+			st.setFloat(9, txartela.getPrezioa());
 
 			st.executeUpdate();
 			st.close();
@@ -172,7 +172,7 @@ public class Kontsultak {
 			System.out.println("Ez da gehitu");
 		}
 
-	}*/
+	}
 
 	public static ArrayList<GeltokiaLinea> arrayGelLinea() {
 

@@ -15,7 +15,7 @@ public class Txartelak {
 	private String nan;
 	private float prezioa;
 	
-	public Txartelak( String kodLinea, int kodBus, int kodGeltokiHasiera, int kodGeltokiAmaiera,
+	public Txartelak(String kodLinea, int kodBus, int kodGeltokiHasiera, int kodGeltokiAmaiera,
 			Date data, Timestamp ordua, String nan, float prezioa, int zIbilbidea) {
 		
 		this.kodLinea = kodLinea;

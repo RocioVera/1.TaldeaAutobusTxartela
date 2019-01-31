@@ -6,6 +6,7 @@ import kontrolatzailea.*;
 import java.awt.event.*;
 import java.util.ArrayList;
 import java.sql.Date;
+import java.time.LocalDate;
 
 import com.toedter.calendar.*;
 
@@ -28,7 +29,7 @@ public class Leiho4 extends JFrame {
 	private String pasahitza, nan, izena, abizenak, sexua;
 	private java.util.Date jaioData;
 
-	private float guztiraPrez=(float) 10.5;
+	private float guztiraPrez;
 	private boolean balPasa, balNan, balErregis;
 	private int nanLuzera = 8, izenLuzera = 49, abizenLuzera = 99, pasahitzLuzera = 49, sexuLuzera = 0, jaioDataLuzera=9;
 	private char letra;
@@ -85,7 +86,7 @@ public class Leiho4 extends JFrame {
 		txtPrezioTot.setColumns(10);
 		txtPrezioTot.setBounds(281, 37, 86, 20);
 		
-		//guztiraPrez = Metodoak.kalkPrezioa(autobusa.getKmKontsumoa(),);
+		guztiraPrez = Metodoak.kalkPrezioa(autobusa.getKmKontsumoa(),autobusa.getzPlaza());
 		txtPrezioTot.setText(guztiraPrez + " €");
 		getContentPane().add(txtPrezioTot);
 		btn_next.setVisible(false);
@@ -308,13 +309,12 @@ public class Leiho4 extends JFrame {
 				lblJaioData.setBounds(175, 315, 90, 20);
 				getContentPane().add(lblJaioData);
 
-				
-
 				txtJaioData.setDateFormatString("dd-MM-yyyy");
 				txtJaioData.setBounds(281, 315, 112, 20);
 				getContentPane().add(txtJaioData);
+				txtJaioData.setDate(Date.valueOf(LocalDate.now())); // gaurko data jarri
+				txtJaioData.setMaxSelectableDate(Date.valueOf(LocalDate.now()));// gehienez jarri gaurko data
 				
- 
 		}
 		});
 		btnErregistratuNahi.setBounds(313, 112, 122, 25);
