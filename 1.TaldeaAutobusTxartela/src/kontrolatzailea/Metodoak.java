@@ -3,14 +3,12 @@ package kontrolatzailea;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Locale;
+import java.text.*;
+import java.time.*;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
+import java.sql.*;
+import java.sql.Date;
 
 import com.toedter.calendar.JDateChooser;
 
@@ -83,28 +81,25 @@ public class Metodoak {
 		return bal;
 	}
 	
-	public static Date dataAldatu(Date jaioData) {
-		String strFecha=new SimpleDateFormat("yyyy-MM-dd").format(jaioData);
-		SimpleDateFormat formatoDelTexto = new SimpleDateFormat("yyyy-MM-dd");
-		try {
-			jaioData = formatoDelTexto.parse(strFecha);
-			} catch (ParseException ex) {
-			ex.printStackTrace();
-			System.out.println("txarto");
-			}
-		System.out.println(jaioData);
-		return jaioData;
+	public static String[] dataAldatu(Date jaioData) {
+		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+		String jaioDataString = dateFormat.format(jaioData);
+		String[] arrayData = jaioDataString.split(" ");
+		for (int i = 0; i < arrayData.length; i++) {
+			System.out.println(arrayData[i]);
+		}
+		return arrayData;
 	}
 	
 	
-	public static boolean erregistratuBezeroak(String pasahitza, String NAN, String izena, String abizenak, String sexua, Date jaioData) {
+	public static boolean erregistratuBezeroak(String pasahitza, String NAN, String izena, String abizenak, String sexua, java.util.Date jaioData) {
 		boolean bal = true;
 		String pasaEnkr = "";
 		pasaEnkr = zifratuPasahitza(pasahitza);
-		
 		ArrayList<Bezeroak> bezeroak = new ArrayList<>();
+		SimpleDateFormat formato = new SimpleDateFormat("dd-MM-yyyy");
 		bezeroak = Kontsultak.erregistratuBezeroak(pasaEnkr, NAN, izena, abizenak, sexua, jaioData);
-		
+		//enviar al fitxero
 			if (pasahitza.length()==0 || NAN.isEmpty() || izena.isEmpty() || abizenak.isEmpty() || sexua.isEmpty() || jaioData==null)
 				bal = false;
 		return bal;

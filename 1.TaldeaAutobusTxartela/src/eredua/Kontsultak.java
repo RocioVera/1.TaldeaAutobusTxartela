@@ -1,10 +1,10 @@
 package eredua;
 
 import java.util.ArrayList;
-import java.util.Date;
 
-import kontrolatzailea.*;
+import java.time.*;
 import java.sql.*;
+import kontrolatzailea.*;
 
 public class Kontsultak {
 	public static ArrayList<Lineak> lineakDatuak() {
@@ -119,30 +119,33 @@ public class Kontsultak {
 		return arrayBezeroak;
 	}
 	
-	public static ArrayList<Bezeroak> erregistratuBezeroak(String pasahitza, String NAN, String izena, String abizenak, String sexua, Date jaioData) {
+	public static ArrayList<Bezeroak> erregistratuBezeroak(String pasahitza, String NAN, String izena, String abizenak, String sexua, java.util.Date jaioData) {
 		ArrayList<Bezeroak> arrayBezeroak = new ArrayList<Bezeroak>();
-		Statement st = null;
 		Connection konexioa = Konexioa.getConexion();
-		//System.out.println(jaioData);
+		//String query = "INSERT INTO cliente (`Cod_Billete`, `NTrayecto`, `Cod_Linea`, `Cod_Bus`, `Cod_Parada_Inicio`, `Cod_Parada_Fin`, `Fecha`, `Hora`, `DNI`, `Precio`)" + 
+		//(`Cod_Billete`, `NTrayecto`, `Cod_Linea`, `Cod_Bus`, `Cod_Parada_Inicio`, `Cod_Parada_Fin`, `Fecha`, `Hora`, `DNI`, `Precio`)"
+		
 		try {
-			st = konexioa.createStatement();
-			st.executeUpdate("insert into cliente VALUES '"+NAN+"','"+izena+"','"+abizenak+ "','"+jaioData+ "','"+sexua+ "','"+pasahitza+"'");
-			//System.out.println("Heldu da3");
-//       String query = "INSERT INTO cliente (DNI, Nombre, Apellidos, Fecha_nac, Sexo, Contraseña, Precio) values ('"+NAN+"','"+izena+"','"+abizenak+ "','"+data+ "','"+sexua+ "','"+pasahitza+"')";
+			 PreparedStatement st = konexioa.prepareStatement("INSERT INTO `cliente` (`DNI`, `Nombre`, `Apellidos`, `Fecha_nac`, `Sexo`, `Contrasena`)"
+					+ " VALUES(?, ?, ?, ?, ?, ?)");
+			//st = konexioa.prepareStatement(query);
+            //ResultSet rs = st.executeUpdate(query);
 
-/*			while (rs.next()) {
-				NAN = (rs.getString(1));
-				izena = (rs.getString(2));
-				abizenak = (rs.getString(3));
-				jaioData = (rs.getDate(4));
-				sexua = (rs.getString(5));
-				pasahitza = (rs.getString(6));
-				Bezeroak bezeroa = new Bezeroak(NAN, izena, abizenak, jaioData, sexua, pasahitza);
-				arrayBezeroak.add(bezeroa);*/
-			//}
-		} catch (Exception e) {
-			e.getMessage();
-		}
+            st.setString (1, NAN);
+            st.setString (2, izena);
+            st.setString (3, abizenak);
+            //Date.valueOf(localDate.now())
+            st.setDate (4, Date.valueOf(LocalDate.now()));
+            st.setString (5, sexua);
+            st.setString (6, pasahitza);
+		
+            st.executeUpdate();
+            st.close();
+
+            System.out.println("Gehitu da");
+		 } catch (SQLException e) {
+	            System.out.println("Ez da gehitu");
+	    }
 		
 		arrayBezeroak=bezeroDatuak();
 		return arrayBezeroak;

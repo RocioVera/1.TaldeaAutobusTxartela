@@ -5,7 +5,7 @@ import javax.swing.*;
 import kontrolatzailea.*;
 import java.awt.event.*;
 import java.util.ArrayList;
-import java.util.Date;
+import java.sql.Date;
 
 import com.toedter.calendar.*;
 
@@ -26,7 +26,8 @@ public class Leiho4 extends JFrame {
 	private JButton btn_prev = new JButton("Atzera");
 	private JButton restart = new JButton("\u2302");
 	private String pasahitza, nan, izena, abizenak, sexua;
-	private Date jaioData;
+	private java.util.Date jaioData;
+
 	private float guztiraPrez=(float) 10.5;
 	private boolean balPasa, balNan, balErregis;
 	private int nanLuzera = 8, izenLuzera = 49, abizenLuzera = 99, pasahitzLuzera = 49, sexuLuzera = 0, jaioDataLuzera=9;
@@ -308,10 +309,11 @@ public class Leiho4 extends JFrame {
 				getContentPane().add(lblJaioData);
 
 				
- 				
-				txtJaioData.setDateFormatString("yyyy-MM-dd");
+
+				txtJaioData.setDateFormatString("dd-MM-yyyy");
 				txtJaioData.setBounds(281, 315, 112, 20);
 				getContentPane().add(txtJaioData);
+				
  
 		}
 		});
@@ -327,9 +329,9 @@ public class Leiho4 extends JFrame {
 				izena = txtIzena.getText();
 				abizenak = txtAbizenak.getText();
 				jaioData = txtJaioData.getDate();
-				
-		//		jaioData = Metodoak.dataAldatu(jaioData);
-				sexua = txtSexua.getText();
+				System.out.println("jaio data: "+jaioData);
+
+				sexua=txtSexua.getText();
 
 				balErregis = Metodoak.erregistratuBezeroak(pasahitza, nan, izena, abizenak, sexua, jaioData);
 								
