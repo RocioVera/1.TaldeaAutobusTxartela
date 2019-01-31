@@ -104,6 +104,10 @@ public class Metodoak {
 				bal = false;
 		return bal;
 	}
+	
+	public static void sortuBilletea() {
+		billeteaKontsulta();
+	}
 
 	public static boolean frogatuNAN(String nan) {
 		boolean bal = false;

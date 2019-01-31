@@ -150,6 +150,10 @@ public class Kontsultak {
 		arrayBezeroak=bezeroDatuak();
 		return arrayBezeroak;
 	}
+	
+	public static void billeteaKontsulta() {
+		
+	}
 
 	public static ArrayList<GeltokiaLinea> arrayGelLinea() {
 
