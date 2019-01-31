@@ -30,6 +30,7 @@ public class Leiho3 extends JFrame {
 	private JButton btnDataEgiaztatu1, btnDataEgiaztatu2;
 	
 	private int hasierakoGeltokiaKod, amaierakoGeltokiaKod;
+	private boolean dataFrog;
 	
 	private int ibilbideZbk;
 	ArrayList<Geltokiak> arrayGeltokia = new ArrayList<Geltokiak>();
@@ -497,6 +498,7 @@ public class Leiho3 extends JFrame {
 		dateJoan.setDateFormatString("yyyy-MM-dd");
 		dateJoan.setBounds(190, 142, 127, 20);
 		dateJoan.setVisible(false);
+		dateJoan.getJCalendar().setMinSelectableDate(new Date());
 		getContentPane().add(dateJoan);
 
 		joanMinutu = new JSpinner();
@@ -581,6 +583,47 @@ public class Leiho3 extends JFrame {
 		btnDataEgiaztatu2.setBounds(423, 421, 122, 25);
 		btnDataEgiaztatu2.setVisible(false);
 		getContentPane().add(btnDataEgiaztatu2);
+		
+		dateJoan.getCalendarButton().addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				dataJoan = dateJoan.getDate();
+				dataEtorri = dateEtorria.getDate();
+				dateEtorria.setEnabled(true);
+				
+				if(dataFrog == true) { 
+					dateEtorria.setDate(null);
+				}
+				
+				if (dataEtorri != null) {
+					try {
+						if (dataEtorri.before(dataJoan)) {
+							dateEtorria.setDate(null);
+						} 
+					} catch (Exception e) {
+						
+					}
+					
+				}
+			}
+		});
+		
+		dateEtorria.getCalendarButton().addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				dataJoan = dateJoan.getDate();
+				dateEtorria.getJCalendar().setMinSelectableDate(dataJoan);
+				
+				if(dataJoan == null) {
+					dateEtorria.setEnabled(false);
+					dateEtorria.getJCalendar().setMinSelectableDate(new Date());
+					dateEtorria.getJCalendar().setMaxSelectableDate(new Date());
+					dataFrog = true;
+				}	else {
+						dateEtorria.getJCalendar().setMinSelectableDate(dataJoan);
+						dateEtorria.getJCalendar().setMaxSelectableDate(null);
+						dataFrog = false;
+					}
+			}
+		});
 		
 		btnDataEgiaztatu1.addActionListener(new ActionListener() {
 			@Override
