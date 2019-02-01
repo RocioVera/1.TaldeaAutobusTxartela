@@ -1,4 +1,5 @@
 package ikuspegia;
+
 import java.awt.*;
 import java.awt.event.*;
 import java.util.*;
@@ -12,44 +13,51 @@ public class Leiho3 extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JMenuBar geltoki;
 	private JMenu hasierakoGeltokia, amaierakoGeltokia, joanEtorriaMenua;
-	private ButtonGroup hasierakoGeltokiaGroup,amaierakoGeltokiaGroup, joanEtorriGroup;
+	private ButtonGroup hasierakoGeltokiaGroup, amaierakoGeltokiaGroup, joanEtorriGroup;
 	private JTextFieldDateEditor editor;
 
 	private JSpinner etorriaOrdua, etorriaMinutu, joanOrdua, joanMinutu;
 	private JLabel lblEtorria, lblJoan, lblDataEtorria, lblDataJoan, lblOrduaJoan, lblOrduaEtorria;
-	private JDateChooser dateEtorria = new JDateChooser("yyyy-MM-dd","####/##/##",'_');
-	private JDateChooser dateJoan = new JDateChooser("yyyy-MM-dd","####/##/##",'_');
+	private JDateChooser dateEtorria = new JDateChooser("yyyy-MM-dd", "####/##/##", '_');
+	private JDateChooser dateJoan = new JDateChooser("yyyy-MM-dd", "####/##/##", '_');
 
-	private JRadioButton amaierakoGeltItem_1, amaierakoGeltItem_2, amaierakoGeltItem_3, amaierakoGeltItem_4, amaierakoGeltItem_5, amaierakoGeltItem_6, amaierakoGeltItem_7;
-	private JRadioButton hasierakoGeltItem_1, hasierakoGeltItem_2, hasierakoGeltItem_3, hasierakoGeltItem_4, hasierakoGeltItem_5, hasierakoGeltItem_6, hasierakoGeltItem_7;
+	private JRadioButton amaierakoGeltItem_1, amaierakoGeltItem_2, amaierakoGeltItem_3, amaierakoGeltItem_4,
+			amaierakoGeltItem_5, amaierakoGeltItem_6, amaierakoGeltItem_7;
+	private JRadioButton hasierakoGeltItem_1, hasierakoGeltItem_2, hasierakoGeltItem_3, hasierakoGeltItem_4,
+			hasierakoGeltItem_5, hasierakoGeltItem_6, hasierakoGeltItem_7;
 	private JRadioButton joan, joanEtorria;
 
 	private JButton btn_next = new JButton("Hurrengoa");
 	private JButton btn_prev = new JButton("Atzera");
 	private JButton restart = new JButton("\u2302");
 	private JButton btnDataEgiaztatu1, btnDataEgiaztatu2;
-	
+
 	private int hasierakoGeltokiaKod, amaierakoGeltokiaKod;
 	private boolean dataFrog;
-	
+
 	private int ibilbideZbk;
-	ArrayList<Geltokiak> arrayGeltokia = new ArrayList<Geltokiak>();
-	double altuera1, luzera1, altuera2, luzera2;
+	private ArrayList<Geltokiak> arrayGeltokia = new ArrayList<Geltokiak>();
+	private ArrayList<Double> arrayDistantzia = new ArrayList<Double>();
+	private double distantziaTermibusetik = 0,termibusekoAltuera, termibusekoLuzera;
 	
+	private Hashtable<String, Double> geltokiakOrdenatuta = new Hashtable<String, Double>();
 
-	
-	Date dataJoan, dataEtorri;
+	private double altuera1, luzera1, altuera2, luzera2;
 
-	public Leiho3( String hartutakoLinea, Autobusak autobusa) {
+	private Date dataJoan, dataEtorri;
+
+	public Leiho3(String hartutakoLinea, Autobusak autobusa) {
 		getContentPane().setLayout(null);
 		this.setBounds(350, 50, 600, 600);
 		this.setResizable(false); // neurketak ez aldatzeko
 		this.setSize(new Dimension(600, 600));
+
 		// botoiak
 		btn_next.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Metodoak.laugarrenLeihoa(hartutakoLinea, autobusa, ibilbideZbk, hasierakoGeltokiaKod, hasierakoGeltokiaKod, altuera1, luzera1, altuera2, luzera2);
+				Metodoak.laugarrenLeihoa(hartutakoLinea, autobusa, ibilbideZbk, hasierakoGeltokiaKod,
+						amaierakoGeltokiaKod, altuera1, luzera1, altuera2, luzera2);
 				dispose();
 			}
 		});
@@ -110,10 +118,26 @@ public class Leiho3 extends JFrame {
 		amaierakoGeltokiaGroup = new ButtonGroup();
 		joanEtorriGroup = new ButtonGroup();
 
-		// ArrayList <Geltokiak> arrayparada = new ArrayList<Geltokiak>();
+		//ordenatu geltokiak 
 		arrayGeltokia = Kontsultak.geltokiakAtera((hartutakoLinea));
-		int luzera=arrayGeltokia.size();
-		for (int i = 0; i <= luzera-1; i++) {
+		termibusekoAltuera = arrayGeltokia.get(0).getAltuera();
+		termibusekoLuzera = arrayGeltokia.get(0).getLuzera();
+
+		for (int i = 0; i < arrayGeltokia.size(); i++) {
+			if (!"Termibus-Bilbao".equals(arrayGeltokia.get(i).getIzena())) {
+				distantziaTermibusetik = Metodoak.kalkulatuDistantzia(termibusekoAltuera, termibusekoLuzera,
+						arrayGeltokia.get(i).getAltuera(), arrayGeltokia.get(i).getLuzera());
+				arrayDistantzia.add(distantziaTermibusetik);
+				geltokiakOrdenatuta.put(arrayGeltokia.get(i).getIzena(), distantziaTermibusetik);
+			}
+		}
+		Collections.sort(arrayDistantzia);
+		geltokiakOrdenatuta.get(arrayGeltokia);
+		System.out.println(geltokiakOrdenatuta);
+
+		//pantailaratu geltokiak 
+		int luzera = arrayGeltokia.size();
+		for (int i = 0; i <= luzera - 1; i++) {
 			if (i == 1) {
 				hasierakoGeltItem_1 = new JRadioButton(arrayGeltokia.get(0).getIzena());
 				hasierakoGeltItem_1.setFont(new Font("Verdana", Font.BOLD, 12));
@@ -123,35 +147,31 @@ public class Leiho3 extends JFrame {
 					public void actionPerformed(ActionEvent e) {
 						amaierakoGeltokia.setEnabled(true);
 						hasierakoGeltokiaGroup.add(hasierakoGeltItem_1);
-						hasierakoGeltokiaKod=arrayGeltokia.get(0).getKodGeltokia();
-						altuera1=arrayGeltokia.get(0).getAltuera();
-						luzera1=arrayGeltokia.get(0).getLuzera();
+						hasierakoGeltokiaKod = arrayGeltokia.get(0).getKodGeltokia();
+						altuera1 = arrayGeltokia.get(0).getAltuera();
+						luzera1 = arrayGeltokia.get(0).getLuzera();
 						amaierakoGeltItem_1.setEnabled(false);
-						if (luzera==2)
+						if (luzera == 2)
 							amaierakoGeltItem_2.setEnabled(true);
-						else if (luzera==3) {
+						else if (luzera == 3) {
 							amaierakoGeltItem_2.setEnabled(true);
 							amaierakoGeltItem_3.setEnabled(true);
-							}
-						else if (luzera==4){
+						} else if (luzera == 4) {
 							amaierakoGeltItem_2.setEnabled(true);
 							amaierakoGeltItem_3.setEnabled(true);
 							amaierakoGeltItem_4.setEnabled(true);
-							}
-						else if (luzera==5){
+						} else if (luzera == 5) {
 							amaierakoGeltItem_2.setEnabled(true);
 							amaierakoGeltItem_3.setEnabled(true);
 							amaierakoGeltItem_4.setEnabled(true);
 							amaierakoGeltItem_5.setEnabled(true);
-						}
-						else if (luzera==6){
+						} else if (luzera == 6) {
 							amaierakoGeltItem_2.setEnabled(true);
 							amaierakoGeltItem_3.setEnabled(true);
 							amaierakoGeltItem_4.setEnabled(true);
 							amaierakoGeltItem_5.setEnabled(true);
 							amaierakoGeltItem_6.setEnabled(true);
-						}
-						else if (luzera==7){
+						} else if (luzera == 7) {
 							amaierakoGeltItem_2.setEnabled(true);
 							amaierakoGeltItem_3.setEnabled(true);
 							amaierakoGeltItem_4.setEnabled(true);
@@ -172,30 +192,26 @@ public class Leiho3 extends JFrame {
 					public void actionPerformed(ActionEvent e) {
 						amaierakoGeltokia.setEnabled(true);
 						hasierakoGeltokiaGroup.add(hasierakoGeltItem_2);
-						hasierakoGeltokiaKod=arrayGeltokia.get(1).getKodGeltokia();
-						altuera1=arrayGeltokia.get(1).getAltuera();
-						luzera1=arrayGeltokia.get(1).getLuzera();
+						hasierakoGeltokiaKod = arrayGeltokia.get(1).getKodGeltokia();
+						altuera1 = arrayGeltokia.get(1).getAltuera();
+						luzera1 = arrayGeltokia.get(1).getLuzera();
 						amaierakoGeltItem_1.setEnabled(false);
 						amaierakoGeltItem_2.setEnabled(false);
-						if (luzera==3) {
+						if (luzera == 3) {
 							amaierakoGeltItem_3.setEnabled(true);
-							}
-						else if (luzera==4){
+						} else if (luzera == 4) {
 							amaierakoGeltItem_3.setEnabled(true);
 							amaierakoGeltItem_4.setEnabled(true);
-							}
-						else if (luzera==5){
+						} else if (luzera == 5) {
 							amaierakoGeltItem_3.setEnabled(true);
 							amaierakoGeltItem_4.setEnabled(true);
 							amaierakoGeltItem_5.setEnabled(true);
-						}
-						else if (luzera==6){
+						} else if (luzera == 6) {
 							amaierakoGeltItem_3.setEnabled(true);
 							amaierakoGeltItem_4.setEnabled(true);
 							amaierakoGeltItem_5.setEnabled(true);
 							amaierakoGeltItem_6.setEnabled(true);
-						}
-						else if (luzera==7){
+						} else if (luzera == 7) {
 							amaierakoGeltItem_3.setEnabled(true);
 							amaierakoGeltItem_4.setEnabled(true);
 							amaierakoGeltItem_5.setEnabled(true);
@@ -209,9 +225,9 @@ public class Leiho3 extends JFrame {
 			if (i == 3) {
 				hasierakoGeltItem_3 = new JRadioButton(arrayGeltokia.get(2).getIzena());
 				hasierakoGeltItem_3.setFont(new Font("Verdana", Font.BOLD, 12));
-				hasierakoGeltokiaKod=arrayGeltokia.get(2).getKodGeltokia();
-				altuera1=arrayGeltokia.get(2).getAltuera();
-				luzera1=arrayGeltokia.get(2).getLuzera();
+				hasierakoGeltokiaKod = arrayGeltokia.get(2).getKodGeltokia();
+				altuera1 = arrayGeltokia.get(2).getAltuera();
+				luzera1 = arrayGeltokia.get(2).getLuzera();
 				hasierakoGeltokia.add(hasierakoGeltItem_3);
 				hasierakoGeltItem_3.addActionListener(new ActionListener() {
 					@Override
@@ -221,19 +237,16 @@ public class Leiho3 extends JFrame {
 						amaierakoGeltItem_1.setEnabled(false);
 						amaierakoGeltItem_2.setEnabled(false);
 						amaierakoGeltItem_3.setEnabled(false);
-						if (luzera==4){
+						if (luzera == 4) {
 							amaierakoGeltItem_4.setEnabled(true);
-							}
-						else if (luzera==5){
+						} else if (luzera == 5) {
 							amaierakoGeltItem_4.setEnabled(true);
 							amaierakoGeltItem_5.setEnabled(true);
-						}
-						else if (luzera==6){
+						} else if (luzera == 6) {
 							amaierakoGeltItem_4.setEnabled(true);
 							amaierakoGeltItem_5.setEnabled(true);
 							amaierakoGeltItem_6.setEnabled(true);
-						}
-						else if (luzera==7){
+						} else if (luzera == 7) {
 							amaierakoGeltItem_4.setEnabled(true);
 							amaierakoGeltItem_5.setEnabled(true);
 							amaierakoGeltItem_6.setEnabled(true);
@@ -247,9 +260,9 @@ public class Leiho3 extends JFrame {
 				hasierakoGeltItem_4 = new JRadioButton(arrayGeltokia.get(3).getIzena());
 				hasierakoGeltItem_4.setFont(new Font("Verdana", Font.BOLD, 12));
 				hasierakoGeltokia.add(hasierakoGeltItem_4);
-				hasierakoGeltokiaKod=arrayGeltokia.get(3).getKodGeltokia();
-				altuera1=arrayGeltokia.get(3).getAltuera();
-				luzera1=arrayGeltokia.get(3).getLuzera();
+				hasierakoGeltokiaKod = arrayGeltokia.get(3).getKodGeltokia();
+				altuera1 = arrayGeltokia.get(3).getAltuera();
+				luzera1 = arrayGeltokia.get(3).getLuzera();
 				hasierakoGeltItem_4.addActionListener(new ActionListener() {
 					@Override
 					public void actionPerformed(ActionEvent e) {
@@ -259,14 +272,12 @@ public class Leiho3 extends JFrame {
 						amaierakoGeltItem_2.setEnabled(false);
 						amaierakoGeltItem_3.setEnabled(false);
 						amaierakoGeltItem_4.setEnabled(false);
-						if (luzera==5){
+						if (luzera == 5) {
 							amaierakoGeltItem_5.setEnabled(true);
-						}
-						else if (luzera==6){
+						} else if (luzera == 6) {
 							amaierakoGeltItem_5.setEnabled(true);
 							amaierakoGeltItem_6.setEnabled(true);
-						}
-						else if (luzera==7){
+						} else if (luzera == 7) {
 							amaierakoGeltItem_5.setEnabled(true);
 							amaierakoGeltItem_6.setEnabled(true);
 							amaierakoGeltItem_7.setEnabled(true);
@@ -278,9 +289,9 @@ public class Leiho3 extends JFrame {
 			if (i == 5) {
 				hasierakoGeltItem_5 = new JRadioButton(arrayGeltokia.get(4).getIzena());
 				hasierakoGeltItem_5.setFont(new Font("Verdana", Font.BOLD, 12));
-				hasierakoGeltokiaKod=arrayGeltokia.get(4).getKodGeltokia();
-				altuera1=arrayGeltokia.get(4).getAltuera();
-				luzera1=arrayGeltokia.get(4).getLuzera();
+				hasierakoGeltokiaKod = arrayGeltokia.get(4).getKodGeltokia();
+				altuera1 = arrayGeltokia.get(4).getAltuera();
+				luzera1 = arrayGeltokia.get(4).getLuzera();
 				hasierakoGeltokia.add(hasierakoGeltItem_5);
 				hasierakoGeltItem_5.addActionListener(new ActionListener() {
 					@Override
@@ -292,10 +303,9 @@ public class Leiho3 extends JFrame {
 						amaierakoGeltItem_3.setEnabled(false);
 						amaierakoGeltItem_4.setEnabled(false);
 						amaierakoGeltItem_5.setEnabled(false);
-						if (luzera==6){
+						if (luzera == 6) {
 							amaierakoGeltItem_6.setEnabled(true);
-						}
-						else if (luzera==7){
+						} else if (luzera == 7) {
 							amaierakoGeltItem_6.setEnabled(true);
 							amaierakoGeltItem_7.setEnabled(true);
 						}
@@ -305,9 +315,9 @@ public class Leiho3 extends JFrame {
 			if (i == 6) {
 				hasierakoGeltItem_6 = new JRadioButton(arrayGeltokia.get(5).getIzena());
 				hasierakoGeltItem_6.setFont(new Font("Verdana", Font.BOLD, 12));
-				hasierakoGeltokiaKod=arrayGeltokia.get(5).getKodGeltokia();
-				altuera1=arrayGeltokia.get(5).getAltuera();
-				luzera1=arrayGeltokia.get(5).getLuzera();
+				hasierakoGeltokiaKod = arrayGeltokia.get(5).getKodGeltokia();
+				altuera1 = arrayGeltokia.get(5).getAltuera();
+				luzera1 = arrayGeltokia.get(5).getLuzera();
 				hasierakoGeltokia.add(hasierakoGeltItem_6);
 				hasierakoGeltItem_6.addActionListener(new ActionListener() {
 					@Override
@@ -320,7 +330,7 @@ public class Leiho3 extends JFrame {
 						amaierakoGeltItem_4.setEnabled(false);
 						amaierakoGeltItem_5.setEnabled(false);
 						amaierakoGeltItem_6.setEnabled(false);
-						if (luzera==7)
+						if (luzera == 7)
 							amaierakoGeltItem_7.setEnabled(true);
 					}
 				});
@@ -330,9 +340,9 @@ public class Leiho3 extends JFrame {
 				hasierakoGeltItem_7 = new JRadioButton(arrayGeltokia.get(6).getIzena());
 				hasierakoGeltItem_7.setFont(new Font("Verdana", Font.BOLD, 12));
 				hasierakoGeltokia.add(hasierakoGeltItem_7);
-				hasierakoGeltokiaKod=arrayGeltokia.get(6).getKodGeltokia();
-				altuera1=arrayGeltokia.get(6).getAltuera();
-				luzera1=arrayGeltokia.get(6).getLuzera();
+				hasierakoGeltokiaKod = arrayGeltokia.get(6).getKodGeltokia();
+				altuera1 = arrayGeltokia.get(6).getAltuera();
+				luzera1 = arrayGeltokia.get(6).getLuzera();
 				hasierakoGeltItem_7.addActionListener(new ActionListener() {
 					@Override
 					public void actionPerformed(ActionEvent e) {
@@ -356,9 +366,9 @@ public class Leiho3 extends JFrame {
 				amaierakoGeltItem_1 = new JRadioButton(arrayGeltokia.get(0).getIzena());
 				amaierakoGeltItem_1.setFont(new Font("Verdana", Font.BOLD, 12));
 				amaierakoGeltokia.add(amaierakoGeltItem_1);
-				amaierakoGeltokiaKod=arrayGeltokia.get(0).getKodGeltokia();
-				altuera2=arrayGeltokia.get(0).getAltuera();
-				luzera2=arrayGeltokia.get(0).getLuzera();
+				amaierakoGeltokiaKod = arrayGeltokia.get(0).getKodGeltokia();
+				altuera2 = arrayGeltokia.get(0).getAltuera();
+				luzera2 = arrayGeltokia.get(0).getLuzera();
 
 				amaierakoGeltItem_1.addActionListener(new ActionListener() {
 					@Override
@@ -373,9 +383,9 @@ public class Leiho3 extends JFrame {
 				amaierakoGeltItem_2 = new JRadioButton(arrayGeltokia.get(1).getIzena());
 				amaierakoGeltItem_2.setFont(new Font("Verdana", Font.BOLD, 12));
 				amaierakoGeltokia.add(amaierakoGeltItem_2);
-				amaierakoGeltokiaKod=arrayGeltokia.get(1).getKodGeltokia();
-				altuera2=arrayGeltokia.get(1).getAltuera();
-				luzera2=arrayGeltokia.get(1).getLuzera();
+				amaierakoGeltokiaKod = arrayGeltokia.get(1).getKodGeltokia();
+				altuera2 = arrayGeltokia.get(1).getAltuera();
+				luzera2 = arrayGeltokia.get(1).getLuzera();
 				amaierakoGeltItem_2.addActionListener(new ActionListener() {
 					@Override
 					public void actionPerformed(ActionEvent e) {
@@ -389,9 +399,9 @@ public class Leiho3 extends JFrame {
 				amaierakoGeltItem_3 = new JRadioButton(arrayGeltokia.get(2).getIzena());
 				amaierakoGeltItem_3.setFont(new Font("Verdana", Font.BOLD, 12));
 				amaierakoGeltokia.add(amaierakoGeltItem_3);
-				amaierakoGeltokiaKod=arrayGeltokia.get(2).getKodGeltokia();
-				altuera2=arrayGeltokia.get(2).getAltuera();
-				luzera2=arrayGeltokia.get(2).getLuzera();
+				amaierakoGeltokiaKod = arrayGeltokia.get(2).getKodGeltokia();
+				altuera2 = arrayGeltokia.get(2).getAltuera();
+				luzera2 = arrayGeltokia.get(2).getLuzera();
 				amaierakoGeltItem_3.addActionListener(new ActionListener() {
 					@Override
 					public void actionPerformed(ActionEvent e) {
@@ -405,9 +415,9 @@ public class Leiho3 extends JFrame {
 				amaierakoGeltItem_4 = new JRadioButton(arrayGeltokia.get(3).getIzena());
 				amaierakoGeltItem_4.setFont(new Font("Verdana", Font.BOLD, 12));
 				amaierakoGeltokia.add(amaierakoGeltItem_4);
-				amaierakoGeltokiaKod=arrayGeltokia.get(3).getKodGeltokia();
-				altuera2=arrayGeltokia.get(3).getAltuera();
-				luzera2=arrayGeltokia.get(3).getLuzera();
+				amaierakoGeltokiaKod = arrayGeltokia.get(3).getKodGeltokia();
+				altuera2 = arrayGeltokia.get(3).getAltuera();
+				luzera2 = arrayGeltokia.get(3).getLuzera();
 				amaierakoGeltItem_4.addActionListener(new ActionListener() {
 					@Override
 					public void actionPerformed(ActionEvent e) {
@@ -421,9 +431,9 @@ public class Leiho3 extends JFrame {
 				amaierakoGeltItem_5 = new JRadioButton(arrayGeltokia.get(4).getIzena());
 				amaierakoGeltItem_5.setFont(new Font("Verdana", Font.BOLD, 12));
 				amaierakoGeltokia.add(amaierakoGeltItem_5);
-				amaierakoGeltokiaKod=arrayGeltokia.get(4).getKodGeltokia();
-				altuera2=arrayGeltokia.get(4).getAltuera();
-				luzera2=arrayGeltokia.get(4).getLuzera();
+				amaierakoGeltokiaKod = arrayGeltokia.get(4).getKodGeltokia();
+				altuera2 = arrayGeltokia.get(4).getAltuera();
+				luzera2 = arrayGeltokia.get(4).getLuzera();
 				amaierakoGeltItem_5.addActionListener(new ActionListener() {
 					@Override
 					public void actionPerformed(ActionEvent e) {
@@ -438,9 +448,9 @@ public class Leiho3 extends JFrame {
 				amaierakoGeltItem_6 = new JRadioButton(arrayGeltokia.get(5).getIzena());
 				amaierakoGeltItem_6.setFont(new Font("Verdana", Font.BOLD, 12));
 				amaierakoGeltokia.add(amaierakoGeltItem_6);
-				amaierakoGeltokiaKod=arrayGeltokia.get(5).getKodGeltokia();
-				altuera2=arrayGeltokia.get(5).getAltuera();
-				luzera2=arrayGeltokia.get(5).getLuzera();
+				amaierakoGeltokiaKod = arrayGeltokia.get(5).getKodGeltokia();
+				altuera2 = arrayGeltokia.get(5).getAltuera();
+				luzera2 = arrayGeltokia.get(5).getLuzera();
 				amaierakoGeltItem_6.addActionListener(new ActionListener() {
 					@Override
 					public void actionPerformed(ActionEvent e) {
@@ -454,9 +464,9 @@ public class Leiho3 extends JFrame {
 				amaierakoGeltItem_7 = new JRadioButton(arrayGeltokia.get(6).getIzena());
 				amaierakoGeltItem_7.setFont(new Font("Verdana", Font.BOLD, 12));
 				amaierakoGeltokia.add(amaierakoGeltItem_7);
-				amaierakoGeltokiaKod=arrayGeltokia.get(6).getKodGeltokia();
-				altuera2=arrayGeltokia.get(6).getAltuera();
-				luzera2=arrayGeltokia.get(6).getLuzera();
+				amaierakoGeltokiaKod = arrayGeltokia.get(6).getKodGeltokia();
+				altuera2 = arrayGeltokia.get(6).getAltuera();
+				luzera2 = arrayGeltokia.get(6).getLuzera();
 				amaierakoGeltItem_7.addActionListener(new ActionListener() {
 					@Override
 					public void actionPerformed(ActionEvent e) {
@@ -476,11 +486,11 @@ public class Leiho3 extends JFrame {
 
 		joanEtorriGroup.add(joan);
 		joanEtorriGroup.add(joanEtorria);
-		
+
 		joan.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				ibilbideZbk=1;
+				ibilbideZbk = 1;
 				lblJoan.setVisible(true);
 				lblDataJoan.setVisible(true);
 				lblOrduaJoan.setVisible(true);
@@ -498,7 +508,6 @@ public class Leiho3 extends JFrame {
 				btnDataEgiaztatu2.setVisible(false);
 				btn_next.setVisible(false);
 
-				
 				etorriaMinutu.setValue(0);
 				etorriaOrdua.setValue(0);
 			}
@@ -523,7 +532,7 @@ public class Leiho3 extends JFrame {
 		lblOrduaJoan.setBounds(134, 176, 46, 14);
 		lblOrduaJoan.setVisible(false);
 		getContentPane().add(lblOrduaJoan);
-		
+
 		dateJoan.setDateFormatString("yyyy-MM-dd");
 		dateJoan.setBounds(190, 142, 127, 20);
 		dateJoan.setVisible(false);
@@ -545,7 +554,7 @@ public class Leiho3 extends JFrame {
 		joanEtorria.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				ibilbideZbk=2;
+				ibilbideZbk = 2;
 				lblJoan.setVisible(true);
 				lblDataJoan.setVisible(true);
 				lblOrduaJoan.setVisible(true);
@@ -601,76 +610,75 @@ public class Leiho3 extends JFrame {
 		etorriaOrdua.setBounds(200, 300, 51, 20);
 		etorriaOrdua.setVisible(false);
 		getContentPane().add(etorriaOrdua);
-		
 
 		btnDataEgiaztatu1 = new JButton("Data egiaztatu");
 		btnDataEgiaztatu1.setBounds(423, 421, 122, 25);
 		btnDataEgiaztatu1.setVisible(false);
 		getContentPane().add(btnDataEgiaztatu1);
-		
+
 		btnDataEgiaztatu2 = new JButton("Data egiaztatu");
 		btnDataEgiaztatu2.setBounds(423, 421, 122, 25);
 		btnDataEgiaztatu2.setVisible(false);
 		getContentPane().add(btnDataEgiaztatu2);
-		
+
 		dateJoan.getCalendarButton().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				dataJoan = dateJoan.getDate();
 				dataEtorri = dateEtorria.getDate();
 				dateEtorria.setEnabled(true);
-				
-				if(dataFrog == true) { 
+
+				if (dataFrog == true) {
 					dateEtorria.setDate(null);
 				}
-				
+
 				if (dataEtorri != null) {
 					try {
 						if (dataEtorri.before(dataJoan)) {
 							dateEtorria.setDate(null);
-						} 
+						}
 					} catch (Exception e) {
 						System.out.println("Hutsik dago");
 					}
-					
+
 				}
 			}
 		});
-		
+
 		dateEtorria.getCalendarButton().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				dataJoan = dateJoan.getDate();
 				dateEtorria.getJCalendar().setMinSelectableDate(dataJoan);
-				
-				if(dataJoan == null) {
+
+				if (dataJoan == null) {
 					dateEtorria.setEnabled(false);
 					dateEtorria.getJCalendar().setMinSelectableDate(new Date());
 					dateEtorria.getJCalendar().setMaxSelectableDate(new Date());
 					dataFrog = true;
-				}	else {
-						dateEtorria.getJCalendar().setMinSelectableDate(dataJoan);
-						dateEtorria.getJCalendar().setMaxSelectableDate(null);
-						dataFrog = false;
-					}
+				} else {
+					dateEtorria.getJCalendar().setMinSelectableDate(dataJoan);
+					dateEtorria.getJCalendar().setMaxSelectableDate(null);
+					dataFrog = false;
+				}
 			}
 		});
-		
+
 		btnDataEgiaztatu1.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				dataJoan = dateJoan.getDate();
-				if(dataJoan != null) {
+				if (dataJoan != null) {
 					btn_next.setVisible(true);
 				}
 			}
 		});
-		
+
 		btnDataEgiaztatu2.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				dataJoan = dateJoan.getDate();
 				dataEtorri = dateEtorria.getDate();
-				
-				if(dataJoan != null && dataEtorri != null) {
+
+				if (dataJoan != null && dataEtorri != null) {
 					btn_next.setVisible(true);
 				}
 			}
