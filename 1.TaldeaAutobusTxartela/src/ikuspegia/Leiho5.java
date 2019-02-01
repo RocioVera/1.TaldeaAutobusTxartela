@@ -36,8 +36,12 @@ public class Leiho5 extends JFrame {
 	 * Create the panel.
 	 * @param ibilbideZbk 
 	 * @param nan 
+	 * @param luzera2 
+	 * @param altuera2 
+	 * @param luzera1 
+	 * @param altuera1 
 	 */
-	public Leiho5(String hartutakoLinea, Autobusak autobusa, int ibilbideZbk, int hasierakoGeltokiaKod, int amaierakoGeltokiaKod, float guztiraPrez, String nan) {
+	public Leiho5(String hartutakoLinea, Autobusak autobusa, int ibilbideZbk, int hasierakoGeltokiaKod, int amaierakoGeltokiaKod, float guztiraPrez, String nan, double altuera1, double luzera1, double altuera2, double luzera2) {
 		getContentPane().setLayout(null);
 		this.setBounds(350,50,600,600);
 		this.setResizable(false); // neurketak ez aldatzeko
@@ -47,6 +51,9 @@ public class Leiho5 extends JFrame {
 		btn_next.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				txartela = new Txartelak(hartutakoLinea, autobusa.getKodBus(), hasierakoGeltokiaKod, amaierakoGeltokiaKod, data, ordua, nan, guztiraPrez, ibilbideZbk);
+				Metodoak.sortuBilletea(txartela);
+				Metodoak.fitxIdatzi(txartela);
 				Metodoak.seigarrenLeihoa(hartutakoLinea, autobusa, ibilbideZbk,hasierakoGeltokiaKod, amaierakoGeltokiaKod);
 				dispose();
 			}
@@ -65,9 +72,7 @@ public class Leiho5 extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				int zIbilbidea=5;
-				txartela = new Txartelak(hartutakoLinea, autobusa.getKodBus(), hasierakoGeltokiaKod, amaierakoGeltokiaKod, data, ordua, nan, guztiraPrez, zIbilbidea);
-				Metodoak.sortuBilletea(txartela);
-				Metodoak.laugarrenLeihoa(hartutakoLinea, autobusa, ibilbideZbk, hasierakoGeltokiaKod, amaierakoGeltokiaKod);
+				Metodoak.laugarrenLeihoa(hartutakoLinea, autobusa, ibilbideZbk, hasierakoGeltokiaKod, amaierakoGeltokiaKod , altuera1, luzera1, altuera2, luzera2);
 			
 				dispose();
 			}

@@ -1,5 +1,10 @@
 package kontrolatzailea;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.PrintWriter;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -18,6 +23,7 @@ import ikuspegia.*;
 public class Metodoak {
 	/**
 	 * Hartutako linea jakinda geltokiak bueltatu
+	 * 
 	 * @param arrayGeltokiak
 	 * @author talde1
 	 * @return arrayGeltokiak
@@ -37,6 +43,7 @@ public class Metodoak {
 
 	/**
 	 * Bi geltokien harteko distantzia kalkulatu
+	 * 
 	 * @param altuera1
 	 * @param luzera1
 	 * @param altuera2
@@ -57,32 +64,30 @@ public class Metodoak {
 		return distantzia;
 	}
 
-	/*
-	 * Bi geltokien harteko distantzia kalkulatu
-	 * @param distantzia
-	 * @author talde1
-	 */
 	/**
 	 * Bi geltokien harteko distantzia kalkulatu
+	 * 
 	 * @param kontsumoa
 	 * @param eserKop
 	 * @return totPertsonaBilletea
 	 * @author talde1
 	 */
-	public static float kalkPrezioa(float kontsumoa, int eserKop) {
+	public static float kalkPrezioa(float kontsumoa, int eserKop, double altuera1, double luzera1, double altuera2,
+			double luzera2) {
 		float zenbatIrabazi, totBidaia, totPertsonaBilletea;
-		double onurak = 0.20, erregaia = 0.80;
-		double distantzia = 5.5;
+		final double onurak = 0.20, erregaia = 0.80;
 
-		// distantzia = kalkulatuDistantzia();
+		double distantzia = kalkulatuDistantzia(altuera1, luzera1, altuera2, luzera2);
 		zenbatIrabazi = (float) (erregaia * kontsumoa * distantzia);
 		totBidaia = (float) (zenbatIrabazi * onurak + zenbatIrabazi);
 		totPertsonaBilletea = totBidaia / eserKop;
-
+		totPertsonaBilletea = (float) (Math.round(totPertsonaBilletea * 100.0) / 100.0);
 		return totPertsonaBilletea;
 	}
+
 	/**
 	 * Sartutako pasahitza zifratu
+	 * 
 	 * @param pasahitza
 	 * @return hashtext
 	 * @author talde1
@@ -105,6 +110,7 @@ public class Metodoak {
 
 	/**
 	 * Sartutako pasahitza (zifratuta) ea datu basean dagoen ala ez
+	 * 
 	 * @param pasahitza
 	 * @return bal
 	 * @author talde1
@@ -121,9 +127,10 @@ public class Metodoak {
 		}
 		return bal;
 	}
-	
+
 	/**
 	 * Sartutako nan-a ea datu baaean dagoen ala ez
+	 * 
 	 * @param nan
 	 * @return bal
 	 * @author talde1
@@ -140,7 +147,9 @@ public class Metodoak {
 	}
 
 	/**
-	 * Bezeroen erregistroa egin datu basean eta hutzik baldin badago sartu behar den daturen bat balidazioa bueltatu
+	 * Bezeroen erregistroa egin datu basean eta hutzik baldin badago sartu behar
+	 * den daturen bat balidazioa bueltatu
+	 * 
 	 * @param pasahitza
 	 * @param NAN
 	 * @param izena
@@ -167,6 +176,7 @@ public class Metodoak {
 
 	/**
 	 * Billetea sortu
+	 * 
 	 * @param txartela
 	 * @author talde1
 	 */
@@ -176,6 +186,7 @@ public class Metodoak {
 
 	/**
 	 * Leiho1 sortu
+	 * 
 	 * @author talde1
 	 */
 	public static void lehenengoLeihoa() {
@@ -186,6 +197,7 @@ public class Metodoak {
 
 	/**
 	 * Leiho2 sortu
+	 * 
 	 * @author talde1
 	 */
 	public static void bigarrenLeihoa() {
@@ -199,6 +211,7 @@ public class Metodoak {
 
 	/**
 	 * Leiho3 sortu
+	 * 
 	 * @author talde1
 	 */
 	public static void hirugarrenLeihoa(String hartutakoLinea, Autobusak autobusa) {
@@ -209,29 +222,43 @@ public class Metodoak {
 
 	/**
 	 * Leiho4 sortu
+	 * 
 	 * @author talde1
+	 * @param luzera2
+	 * @param altuera2
+	 * @param luzera1
+	 * @param altuera1
 	 */
 	public static void laugarrenLeihoa(String hartutakoLinea, Autobusak autobusa, int ibilbideZbk,
-			int hasierakoGeltokiaKod, int amaierakoGeltokiaKod) {
-		Leiho4 Leiho4 = new Leiho4(hartutakoLinea, autobusa, ibilbideZbk, hasierakoGeltokiaKod, amaierakoGeltokiaKod);
+			int hasierakoGeltokiaKod, int amaierakoGeltokiaKod, double altuera1, double luzera1, double altuera2,
+			double luzera2) {
+		Leiho4 Leiho4 = new Leiho4(hartutakoLinea, autobusa, ibilbideZbk, hasierakoGeltokiaKod, amaierakoGeltokiaKod,
+				altuera1, luzera1, altuera2, luzera2);
 		Leiho4.setVisible(true);
 
 	}
 
 	/**
 	 * Leiho5 sortu
+	 * 
 	 * @author talde1
+	 * @param luzera2
+	 * @param altuera2
+	 * @param luzera1
+	 * @param altuera1
 	 */
 	public static void bostgarrenLeihoa(String hartutakoLinea, Autobusak autobusa, int ibilbideZbk,
-			int hasierakoGeltokiaKod, int amaierakoGeltokiaKod, float guztiraPrez, String nan) {
+			int hasierakoGeltokiaKod, int amaierakoGeltokiaKod, float guztiraPrez, String nan, double altuera1,
+			double luzera1, double altuera2, double luzera2) {
 		Leiho5 Leiho5 = new Leiho5(hartutakoLinea, autobusa, ibilbideZbk, hasierakoGeltokiaKod, amaierakoGeltokiaKod,
-				guztiraPrez, nan);
+				guztiraPrez, nan, altuera1, luzera1, altuera2, luzera2);
 		Leiho5.setVisible(true);
 
 	}
 
 	/**
 	 * Leiho6 sortu
+	 * 
 	 * @author talde1
 	 */
 	public static void seigarrenLeihoa(String hartutakoLinea, Autobusak autobusa, int ibilbideZbk,
@@ -240,9 +267,10 @@ public class Metodoak {
 		Leiho6.setVisible(true);
 
 	}
-	
+
 	/**
 	 * Amaieran tiketa imprimatzen dagoen bitartean itxaron behar den denbora
+	 * 
 	 * @author talde1
 	 */
 	public static void Leiho_segunduak() {
@@ -259,6 +287,7 @@ public class Metodoak {
 
 	/**
 	 * Zenbat diru sartzen duen jakiteko egiteko
+	 * 
 	 * @param kont
 	 * @param sartutakoa
 	 * @return sartutakoa
@@ -332,6 +361,7 @@ public class Metodoak {
 
 	/**
 	 * Jakiteko zenbat diru sartu duen gero bueltak emateko ala ez
+	 * 
 	 * @param diruFalta
 	 * @param guztiraPrez
 	 * @param sartutakoa
@@ -345,7 +375,9 @@ public class Metodoak {
 	}
 
 	/**
-	 * Arrayan sartzeko zenbat kantitate txanpon bakoitza eta bueltatu txanpona / billete
+	 * Arrayan sartzeko zenbat kantitate txanpon bakoitza eta bueltatu txanpona /
+	 * billete
+	 * 
 	 * @param diruFalta
 	 * @author talde1
 	 * @return bueltakString
@@ -432,4 +464,29 @@ public class Metodoak {
 		return bueltakString;
 	}
 
+	public static void fitxIdatzi(Txartelak txartela) {
+		// fitx = new File("eredua\\Billetea.txt");
+		FileWriter fitx = null;
+		PrintWriter pw = null;
+		try {
+			fitx = new FileWriter("src\\eredua\\Billetea", true);
+			pw = new PrintWriter(fitx);
+
+			pw.println("Ibilbidearen datuak:  \n"+"\tHartutako linea:  "+txartela.getkodLinea()+"\t\t\t"+"Hasierako geltokia:  "+txartela.getkodGeltokiHasiera()+"\t\t\t"+ "Amaierako geltokia:  "+txartela.getkodGeltokiAmaiera()+"\t\t\t"+ "Zure autobusaren kodigoa:  "+txartela.getkodBus()+"\n");
+			pw.println("Bezeroaren datuak:  \n"+"\tNAN:  "+txartela.getNan()+"\n");
+			pw.println("Erosketaren datuak:  \n"+"\tData eta ordua:  "+txartela.getOrdua()+ "\t\t\t"+"Bidaiaren prezioa:  "+txartela.getPrezioa()+"\n");
+			pw.println("******************************************************************************************************************************************");
+
+			pw.println("");
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (null != fitx)
+					fitx.close();
+			} catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+	}
 }

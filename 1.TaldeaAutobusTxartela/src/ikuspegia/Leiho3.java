@@ -34,6 +34,8 @@ public class Leiho3 extends JFrame {
 	
 	private int ibilbideZbk;
 	ArrayList<Geltokiak> arrayGeltokia = new ArrayList<Geltokiak>();
+	double altuera1, luzera1, altuera2, luzera2;
+	
 
 	
 	Date dataJoan, dataEtorri;
@@ -47,7 +49,7 @@ public class Leiho3 extends JFrame {
 		btn_next.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Metodoak.laugarrenLeihoa(hartutakoLinea, autobusa, ibilbideZbk, hasierakoGeltokiaKod, hasierakoGeltokiaKod);
+				Metodoak.laugarrenLeihoa(hartutakoLinea, autobusa, ibilbideZbk, hasierakoGeltokiaKod, hasierakoGeltokiaKod, altuera1, luzera1, altuera2, luzera2);
 				dispose();
 			}
 		});
@@ -122,6 +124,8 @@ public class Leiho3 extends JFrame {
 						amaierakoGeltokia.setEnabled(true);
 						hasierakoGeltokiaGroup.add(hasierakoGeltItem_1);
 						hasierakoGeltokiaKod=arrayGeltokia.get(0).getKodGeltokia();
+						altuera1=arrayGeltokia.get(0).getAltuera();
+						luzera1=arrayGeltokia.get(0).getLuzera();
 						amaierakoGeltItem_1.setEnabled(false);
 						if (luzera==2)
 							amaierakoGeltItem_2.setEnabled(true);
@@ -169,6 +173,8 @@ public class Leiho3 extends JFrame {
 						amaierakoGeltokia.setEnabled(true);
 						hasierakoGeltokiaGroup.add(hasierakoGeltItem_2);
 						hasierakoGeltokiaKod=arrayGeltokia.get(1).getKodGeltokia();
+						altuera1=arrayGeltokia.get(1).getAltuera();
+						luzera1=arrayGeltokia.get(1).getLuzera();
 						amaierakoGeltItem_1.setEnabled(false);
 						amaierakoGeltItem_2.setEnabled(false);
 						if (luzera==3) {
@@ -204,6 +210,8 @@ public class Leiho3 extends JFrame {
 				hasierakoGeltItem_3 = new JRadioButton(arrayGeltokia.get(2).getIzena());
 				hasierakoGeltItem_3.setFont(new Font("Verdana", Font.BOLD, 12));
 				hasierakoGeltokiaKod=arrayGeltokia.get(2).getKodGeltokia();
+				altuera1=arrayGeltokia.get(2).getAltuera();
+				luzera1=arrayGeltokia.get(2).getLuzera();
 				hasierakoGeltokia.add(hasierakoGeltItem_3);
 				hasierakoGeltItem_3.addActionListener(new ActionListener() {
 					@Override
@@ -240,6 +248,8 @@ public class Leiho3 extends JFrame {
 				hasierakoGeltItem_4.setFont(new Font("Verdana", Font.BOLD, 12));
 				hasierakoGeltokia.add(hasierakoGeltItem_4);
 				hasierakoGeltokiaKod=arrayGeltokia.get(3).getKodGeltokia();
+				altuera1=arrayGeltokia.get(3).getAltuera();
+				luzera1=arrayGeltokia.get(3).getLuzera();
 				hasierakoGeltItem_4.addActionListener(new ActionListener() {
 					@Override
 					public void actionPerformed(ActionEvent e) {
@@ -269,7 +279,8 @@ public class Leiho3 extends JFrame {
 				hasierakoGeltItem_5 = new JRadioButton(arrayGeltokia.get(4).getIzena());
 				hasierakoGeltItem_5.setFont(new Font("Verdana", Font.BOLD, 12));
 				hasierakoGeltokiaKod=arrayGeltokia.get(4).getKodGeltokia();
-
+				altuera1=arrayGeltokia.get(4).getAltuera();
+				luzera1=arrayGeltokia.get(4).getLuzera();
 				hasierakoGeltokia.add(hasierakoGeltItem_5);
 				hasierakoGeltItem_5.addActionListener(new ActionListener() {
 					@Override
@@ -295,6 +306,8 @@ public class Leiho3 extends JFrame {
 				hasierakoGeltItem_6 = new JRadioButton(arrayGeltokia.get(5).getIzena());
 				hasierakoGeltItem_6.setFont(new Font("Verdana", Font.BOLD, 12));
 				hasierakoGeltokiaKod=arrayGeltokia.get(5).getKodGeltokia();
+				altuera1=arrayGeltokia.get(5).getAltuera();
+				luzera1=arrayGeltokia.get(5).getLuzera();
 				hasierakoGeltokia.add(hasierakoGeltItem_6);
 				hasierakoGeltItem_6.addActionListener(new ActionListener() {
 					@Override
@@ -318,6 +331,8 @@ public class Leiho3 extends JFrame {
 				hasierakoGeltItem_7.setFont(new Font("Verdana", Font.BOLD, 12));
 				hasierakoGeltokia.add(hasierakoGeltItem_7);
 				hasierakoGeltokiaKod=arrayGeltokia.get(6).getKodGeltokia();
+				altuera1=arrayGeltokia.get(6).getAltuera();
+				luzera1=arrayGeltokia.get(6).getLuzera();
 				hasierakoGeltItem_7.addActionListener(new ActionListener() {
 					@Override
 					public void actionPerformed(ActionEvent e) {
@@ -342,12 +357,14 @@ public class Leiho3 extends JFrame {
 				amaierakoGeltItem_1.setFont(new Font("Verdana", Font.BOLD, 12));
 				amaierakoGeltokia.add(amaierakoGeltItem_1);
 				amaierakoGeltokiaKod=arrayGeltokia.get(0).getKodGeltokia();
+				altuera2=arrayGeltokia.get(0).getAltuera();
+				luzera2=arrayGeltokia.get(0).getLuzera();
 
 				amaierakoGeltItem_1.addActionListener(new ActionListener() {
 					@Override
 					public void actionPerformed(ActionEvent e) {
 						joanEtorriaMenua.setEnabled(true);
-						amaierakoGeltokiaGroup.add(hasierakoGeltItem_1);
+						amaierakoGeltokiaGroup.add(amaierakoGeltItem_1);
 					}
 				});
 			}
@@ -357,11 +374,13 @@ public class Leiho3 extends JFrame {
 				amaierakoGeltItem_2.setFont(new Font("Verdana", Font.BOLD, 12));
 				amaierakoGeltokia.add(amaierakoGeltItem_2);
 				amaierakoGeltokiaKod=arrayGeltokia.get(1).getKodGeltokia();
+				altuera2=arrayGeltokia.get(1).getAltuera();
+				luzera2=arrayGeltokia.get(1).getLuzera();
 				amaierakoGeltItem_2.addActionListener(new ActionListener() {
 					@Override
 					public void actionPerformed(ActionEvent e) {
 						joanEtorriaMenua.setEnabled(true);
-						amaierakoGeltokiaGroup.add(hasierakoGeltItem_2);
+						amaierakoGeltokiaGroup.add(amaierakoGeltItem_2);
 					}
 				});
 			}
@@ -371,11 +390,13 @@ public class Leiho3 extends JFrame {
 				amaierakoGeltItem_3.setFont(new Font("Verdana", Font.BOLD, 12));
 				amaierakoGeltokia.add(amaierakoGeltItem_3);
 				amaierakoGeltokiaKod=arrayGeltokia.get(2).getKodGeltokia();
+				altuera2=arrayGeltokia.get(2).getAltuera();
+				luzera2=arrayGeltokia.get(2).getLuzera();
 				amaierakoGeltItem_3.addActionListener(new ActionListener() {
 					@Override
 					public void actionPerformed(ActionEvent e) {
 						joanEtorriaMenua.setEnabled(true);
-						amaierakoGeltokiaGroup.add(hasierakoGeltItem_3);
+						amaierakoGeltokiaGroup.add(amaierakoGeltItem_3);
 					}
 				});
 			}
@@ -385,11 +406,13 @@ public class Leiho3 extends JFrame {
 				amaierakoGeltItem_4.setFont(new Font("Verdana", Font.BOLD, 12));
 				amaierakoGeltokia.add(amaierakoGeltItem_4);
 				amaierakoGeltokiaKod=arrayGeltokia.get(3).getKodGeltokia();
+				altuera2=arrayGeltokia.get(3).getAltuera();
+				luzera2=arrayGeltokia.get(3).getLuzera();
 				amaierakoGeltItem_4.addActionListener(new ActionListener() {
 					@Override
 					public void actionPerformed(ActionEvent e) {
 						joanEtorriaMenua.setEnabled(true);
-						amaierakoGeltokiaGroup.add(hasierakoGeltItem_4);
+						amaierakoGeltokiaGroup.add(amaierakoGeltItem_4);
 					}
 				});
 			}
@@ -399,11 +422,13 @@ public class Leiho3 extends JFrame {
 				amaierakoGeltItem_5.setFont(new Font("Verdana", Font.BOLD, 12));
 				amaierakoGeltokia.add(amaierakoGeltItem_5);
 				amaierakoGeltokiaKod=arrayGeltokia.get(4).getKodGeltokia();
+				altuera2=arrayGeltokia.get(4).getAltuera();
+				luzera2=arrayGeltokia.get(4).getLuzera();
 				amaierakoGeltItem_5.addActionListener(new ActionListener() {
 					@Override
 					public void actionPerformed(ActionEvent e) {
 						joanEtorriaMenua.setEnabled(true);
-						amaierakoGeltokiaGroup.add(hasierakoGeltItem_5);
+						amaierakoGeltokiaGroup.add(amaierakoGeltItem_5);
 
 					}
 				});
@@ -414,11 +439,13 @@ public class Leiho3 extends JFrame {
 				amaierakoGeltItem_6.setFont(new Font("Verdana", Font.BOLD, 12));
 				amaierakoGeltokia.add(amaierakoGeltItem_6);
 				amaierakoGeltokiaKod=arrayGeltokia.get(5).getKodGeltokia();
+				altuera2=arrayGeltokia.get(5).getAltuera();
+				luzera2=arrayGeltokia.get(5).getLuzera();
 				amaierakoGeltItem_6.addActionListener(new ActionListener() {
 					@Override
 					public void actionPerformed(ActionEvent e) {
 						joanEtorriaMenua.setEnabled(true);
-						amaierakoGeltokiaGroup.add(hasierakoGeltItem_6);
+						amaierakoGeltokiaGroup.add(amaierakoGeltItem_6);
 					}
 				});
 			}
@@ -428,11 +455,13 @@ public class Leiho3 extends JFrame {
 				amaierakoGeltItem_7.setFont(new Font("Verdana", Font.BOLD, 12));
 				amaierakoGeltokia.add(amaierakoGeltItem_7);
 				amaierakoGeltokiaKod=arrayGeltokia.get(6).getKodGeltokia();
+				altuera2=arrayGeltokia.get(6).getAltuera();
+				luzera2=arrayGeltokia.get(6).getLuzera();
 				amaierakoGeltItem_7.addActionListener(new ActionListener() {
 					@Override
 					public void actionPerformed(ActionEvent e) {
 						joanEtorriaMenua.setEnabled(true);
-						amaierakoGeltokiaGroup.add(hasierakoGeltItem_7);
+						amaierakoGeltokiaGroup.add(amaierakoGeltItem_7);
 					}
 				});
 			}
@@ -600,7 +629,7 @@ public class Leiho3 extends JFrame {
 							dateEtorria.setDate(null);
 						} 
 					} catch (Exception e) {
-						
+						System.out.println("Hutsik dago");
 					}
 					
 				}

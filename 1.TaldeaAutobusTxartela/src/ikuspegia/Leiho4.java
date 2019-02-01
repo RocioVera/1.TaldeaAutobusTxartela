@@ -35,7 +35,7 @@ public class Leiho4 extends JFrame {
 	private char letra;
 	private JDateChooser txtJaioData = new JDateChooser("yyyy-MM-dd","####/##/##",'_');
 
-	public Leiho4(String hartutakoLinea, Autobusak autobusa, int ibilbideZbk, int hasierakoGeltokiaKod, int amaierakoGeltokiaKod) {
+	public Leiho4(String hartutakoLinea, Autobusak autobusa, int ibilbideZbk, int hasierakoGeltokiaKod, int amaierakoGeltokiaKod, double altuera1, double luzera1, double altuera2, double luzera2) {
 		getContentPane().setLayout(null);
 		this.setBounds(350, 50, 600, 600);
 		this.setResizable(false); // neurketak ez aldatzeko
@@ -45,7 +45,7 @@ public class Leiho4 extends JFrame {
 		btn_next.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Metodoak.bostgarrenLeihoa(hartutakoLinea, autobusa, ibilbideZbk, hasierakoGeltokiaKod, amaierakoGeltokiaKod, guztiraPrez, nan);
+				Metodoak.bostgarrenLeihoa(hartutakoLinea, autobusa, ibilbideZbk, hasierakoGeltokiaKod, amaierakoGeltokiaKod, guztiraPrez, nan, altuera1, luzera1, altuera2, luzera2);
 				dispose();
 			}
 		});
@@ -86,7 +86,7 @@ public class Leiho4 extends JFrame {
 		txtPrezioTot.setColumns(10);
 		txtPrezioTot.setBounds(281, 37, 86, 20);
 		
-		guztiraPrez = Metodoak.kalkPrezioa(autobusa.getKmKontsumoa(),autobusa.getzPlaza());
+		guztiraPrez = Metodoak.kalkPrezioa(autobusa.getKmKontsumoa(),autobusa.getzPlaza(), altuera1, luzera1, altuera2, luzera2);
 		txtPrezioTot.setText(guztiraPrez + " €");
 		getContentPane().add(txtPrezioTot);
 		btn_next.setVisible(false);
