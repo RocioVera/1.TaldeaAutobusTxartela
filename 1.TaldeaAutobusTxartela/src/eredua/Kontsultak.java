@@ -200,7 +200,6 @@ public class Kontsultak {
 	}
 
 	public static ArrayList<AutobusLinea> arrayBusLinea() {
-
 		ArrayList<AutobusLinea> arrayBusLinea = new ArrayList<AutobusLinea>();
 		Statement st = null;
 		Connection konexioa = Konexioa.getConexion();

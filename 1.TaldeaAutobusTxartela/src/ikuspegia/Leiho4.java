@@ -4,48 +4,61 @@ import java.awt.*;
 import javax.swing.*;
 import kontrolatzailea.*;
 import java.awt.event.*;
-import java.util.ArrayList;
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 import com.toedter.calendar.*;
 
 public class Leiho4 extends JFrame {
 	private static final long serialVersionUID = 1L;
-	private JTextField txtPrezioTot = new JTextField();
-	private JTextField txtNan = new JTextField(), txtIzena = new JTextField(), txtAbizenak = new JTextField(),
-			txtSexua = new JTextField();
+	//panelan ikusten diren bariableak
+	private JTextField txtPrezioTot = new JTextField(), txtNan = new JTextField(), txtIzena = new JTextField(),
+			txtAbizenak = new JTextField(), txtSexua = new JTextField();
 	private JPasswordField passwordField = new JPasswordField();
 	private JLabel lblPrezioTotala, lblNan, lblPasahitza, lblIzena, lblAbizenak, lblJaioData, lblSexua,
 			lblErroreakonektatu, lblKonekBezeroMezua;
-	private JButton btnHasiSaioa;
-	private JButton btnKonektatu = new JButton("Konektatu");
-	private JButton btnErregistratuNahi = new JButton("Erregistratu");
-	private JButton btnErregistratu = new JButton("Erregistratu");
+	private JButton btnHasiSaioa, btnKonektatu = new JButton("Konektatu"),
+			btnErregistratuNahi = new JButton("Erregistratu"), btnErregistratu = new JButton("Erregistratu"),
+			btn_next = new JButton("Hurrengoa"), btn_prev = new JButton("Atzera"), restart = new JButton("\u2302");
+	private JDateChooser txtJaioData = new JDateChooser();
+	private JTextFieldDateEditor dataEzEditatu; //kentzeko eskuz sartu ahal izana
 
-	private JButton btn_next = new JButton("Hurrengoa");
-	private JButton btn_prev = new JButton("Atzera");
-	private JButton restart = new JButton("\u2302");
-	private String pasahitza, nan, izena, abizenak, sexua;
+	//bariableak
 	private java.util.Date jaioData;
-
+	private String pasahitza, nan, izena, abizenak, sexua;
 	private float guztiraPrez;
 	private boolean balPasa, balNan, balErregis;
-	private int nanLuzera = 8, izenLuzera = 49, abizenLuzera = 99, pasahitzLuzera = 49, sexuLuzera = 0, jaioDataLuzera=9;
+	private int nanLuzera = 8, izenLuzera = 49, abizenLuzera = 99, pasahitzLuzera = 49, sexuLuzera = 0;
 	private char letra;
-	private JDateChooser txtJaioData = new JDateChooser("yyyy-MM-dd","####/##/##",'_');
 
-	public Leiho4(String hartutakoLinea, Autobusak autobusa, int ibilbideZbk, int hasierakoGeltokiaKod, int amaierakoGeltokiaKod, double altuera1, double luzera1, double altuera2, double luzera2) {
+	/**
+	 * login edo erregistratu ahal den panela sortu
+	 * @param hartutakoLinea
+	 * @param autobusa
+	 * @param ibilbideZbk
+	 * @param hasierakoGeltokiaKod
+	 * @param amaierakoGeltokiaKod
+	 * @param altuera1
+	 * @param luzera1
+	 * @param altuera2
+	 * @param luzera2
+	 * @author talde1
+	 * @param arrayGeltokia 
+	 */
+	public Leiho4(String hartutakoLinea, Autobusak autobusa, int ibilbideZbk, int hasierakoGeltokiaKod,
+			int amaierakoGeltokiaKod, double altuera1, double luzera1, double altuera2, double luzera2, ArrayList<Geltokiak> arrayGeltokia) {
+		//panelaren propietateak
 		getContentPane().setLayout(null);
 		this.setBounds(350, 50, 600, 600);
 		this.setResizable(false); // neurketak ez aldatzeko
-		this.setSize(new Dimension(600, 600));		
-
+		this.setSize(new Dimension(600, 600));
 		// botoiak
 		btn_next.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Metodoak.bostgarrenLeihoa(hartutakoLinea, autobusa, ibilbideZbk, hasierakoGeltokiaKod, amaierakoGeltokiaKod, guztiraPrez, nan, altuera1, luzera1, altuera2, luzera2);
+				Metodoak.bostgarrenLeihoa(hartutakoLinea, autobusa, ibilbideZbk, hasierakoGeltokiaKod,
+						amaierakoGeltokiaKod, guztiraPrez, nan, altuera1, luzera1, altuera2, luzera2, arrayGeltokia);
 				dispose();
 			}
 		});
@@ -77,6 +90,7 @@ public class Leiho4 extends JFrame {
 		restart.setForeground(Color.RED);
 		getContentPane().add(restart);
 
+		// non, formatua eta zer jarri
 		lblPrezioTotala = new JLabel("Prezio totala:");
 		lblPrezioTotala.setFont(new Font("Tahoma", Font.BOLD, 17));
 		lblPrezioTotala.setBounds(157, 37, 117, 20);
@@ -85,8 +99,10 @@ public class Leiho4 extends JFrame {
 		txtPrezioTot.setEditable(false);
 		txtPrezioTot.setColumns(10);
 		txtPrezioTot.setBounds(281, 37, 86, 20);
-		
-		guztiraPrez = Metodoak.kalkPrezioa(autobusa.getKmKontsumoa(),autobusa.getzPlaza(), altuera1, luzera1, altuera2, luzera2);
+
+		//guztiraPrez kalkulatzeko metodoari deitu
+		guztiraPrez = Metodoak.kalkPrezioa(autobusa.getKmKontsumoa(), autobusa.getzPlaza(), altuera1, luzera1, altuera2,
+				luzera2);
 		txtPrezioTot.setText(guztiraPrez + " €");
 		getContentPane().add(txtPrezioTot);
 		btn_next.setVisible(false);
@@ -103,11 +119,12 @@ public class Leiho4 extends JFrame {
 		getContentPane().add(lblKonekBezeroMezua);
 
 		btnErregistratu.setVisible(false);
-		
+
+		//hasi saioari ematerakoan agertu behar diren bariableak
 		btnHasiSaioa = new JButton("Hasi saioa");
 		btnHasiSaioa.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				//bisibilitatea
+				// bisibilitatea
 				btnKonektatu.setEnabled(true);
 				btnKonektatu.setVisible(true);
 				btnErregistratu.setVisible(false);
@@ -115,7 +132,6 @@ public class Leiho4 extends JFrame {
 				btnHasiSaioa.setVisible(false);
 				btn_next.setVisible(false);
 				btnErregistratuNahi.setVisible(true);
-				
 
 				lblKonekBezeroMezua.setVisible(false);
 				lblErroreakonektatu.setVisible(false);
@@ -125,14 +141,14 @@ public class Leiho4 extends JFrame {
 				lblSexua.setVisible(false);
 				lblPasahitza.setVisible(true);
 				lblNan.setVisible(true);
-				
+
 				txtIzena.setVisible(false);
 				txtAbizenak.setVisible(false);
 				txtJaioData.setVisible(false);
 				txtSexua.setVisible(false);
 				passwordField.setVisible(true);
 				txtNan.setVisible(true);
-				
+
 				txtIzena.setEnabled(true);
 				txtAbizenak.setEnabled(true);
 				txtJaioData.setEnabled(true);
@@ -172,6 +188,7 @@ public class Leiho4 extends JFrame {
 		lblErroreakonektatu.setHorizontalAlignment(SwingConstants.CENTER);
 		getContentPane().add(lblErroreakonektatu);
 
+		//hasi saioari eman ostean ziurtatzeko bezeroa erregistratuta dagoela eta erosi dezakela billetea
 		btnKonektatu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// bbdd-ra konektatu pasahitza frogatzeko
@@ -204,15 +221,16 @@ public class Leiho4 extends JFrame {
 		lblJaioData = new JLabel("Jaio data:");
 		lblSexua = new JLabel("Sexua (V/M):");
 		
+		//erregistratu ematerakoan agertu behar diren bariableak
 		btnErregistratuNahi.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				//bisibilitatea
+				// bisibilitatea
 				btn_next.setVisible(false);
 				btnErregistratu.setVisible(true);
 				btnHasiSaioa.setVisible(true);
 				btnKonektatu.setVisible(false);
 				btnErregistratuNahi.setVisible(false);
-				
+
 				lblKonekBezeroMezua.setVisible(false);
 				lblErroreakonektatu.setVisible(false);
 				lblIzena.setVisible(true);
@@ -221,7 +239,7 @@ public class Leiho4 extends JFrame {
 				lblSexua.setVisible(true);
 				lblPasahitza.setVisible(true);
 				lblNan.setVisible(true);
-				
+
 				txtIzena.setVisible(true);
 				txtAbizenak.setVisible(true);
 				txtJaioData.setVisible(true);
@@ -230,8 +248,8 @@ public class Leiho4 extends JFrame {
 				txtNan.setVisible(true);
 				passwordField.setEnabled(true);
 				txtNan.setEnabled(true);
-				
-				//non, formatua eta zer jarri
+
+				// non, formatua eta zer jarri
 				lblNan.setFont(new Font("Tahoma", Font.BOLD, 17));
 				lblNan.setBounds(212, 150, 62, 20);
 				getContentPane().add(lblNan);
@@ -255,7 +273,7 @@ public class Leiho4 extends JFrame {
 				getContentPane().add(txtIzena);
 				txtIzena.addKeyListener(new KeyAdapter() {
 					public void keyTyped(KeyEvent e) {
-						// 50 baino gehiago
+						// 50 baino gehiago ez sartzeko
 						if (txtIzena.getText().length() > izenLuzera)
 							e.consume(); // ez du godetzen
 					}
@@ -269,12 +287,13 @@ public class Leiho4 extends JFrame {
 				getContentPane().add(txtAbizenak);
 				txtAbizenak.addKeyListener(new KeyAdapter() {
 					public void keyTyped(KeyEvent e) {
-						// izenLuzera=50, abizenLuzera=100, pasahitzLuzera=50, sexuLuzera=1;
+						//100 baino gehiago ez sartzeko
 						if (txtAbizenak.getText().length() > abizenLuzera)
 							e.consume(); // ez du godetzen
 					}
 				});
 				
+				// non, formatua eta zer jarri
 				lblPasahitza.setFont(new Font("Tahoma", Font.BOLD, 17));
 				lblPasahitza.setBounds(175, 360, 93, 20);
 				getContentPane().add(lblPasahitza);
@@ -286,11 +305,13 @@ public class Leiho4 extends JFrame {
 					@SuppressWarnings("deprecation")
 					public void keyTyped(KeyEvent e) {
 						letra = e.getKeyChar();
+						//50 baino gehiago ez sartzeko
 						if (passwordField.getText().length() > pasahitzLuzera)
 							e.consume(); // ez du godetzen
 					}
 				});
 
+				// non, formatua eta zer jarri
 				lblSexua.setFont(new Font("Tahoma", Font.BOLD, 17));
 				lblSexua.setBounds(143, 270, 122, 20);
 				getContentPane().add(lblSexua);
@@ -298,29 +319,33 @@ public class Leiho4 extends JFrame {
 				txtSexua.setBounds(281, 272, 86, 20);
 				getContentPane().add(txtSexua);
 				txtSexua.addKeyListener(new KeyAdapter() {
-					public void keyTyped(KeyEvent e) {						
+					public void keyTyped(KeyEvent e) {
 						letra = e.getKeyChar();
-						if (txtSexua.getText().length() > sexuLuzera || letra !='V' && letra !='v' && letra !='M' && letra !='m')
+						//bakarrik karakter bat (V,v,M,m) sartzekoa
+						if (txtSexua.getText().length() > sexuLuzera || letra != 'V' && letra != 'v' && letra != 'M' && letra != 'm')
 							e.consume(); // ez du godetzen
 					}
 				});
 				
+				// non, formatua eta zer jarri
 				lblJaioData.setFont(new Font("Tahoma", Font.BOLD, 17));
 				lblJaioData.setBounds(175, 315, 90, 20);
 				getContentPane().add(lblJaioData);
 
 				txtJaioData.setDateFormatString("dd-MM-yyyy");
 				txtJaioData.setBounds(281, 315, 112, 20);
+				dataEzEditatu = (JTextFieldDateEditor) txtJaioData.getDateEditor();
+				dataEzEditatu.setEditable(false);
 				getContentPane().add(txtJaioData);
 				txtJaioData.setDate(Date.valueOf(LocalDate.now())); // gaurko data jarri
 				txtJaioData.setMaxSelectableDate(Date.valueOf(LocalDate.now()));// gehienez jarri gaurko data
-				
-		}
+
+			}
 		});
 		btnErregistratuNahi.setBounds(313, 112, 122, 25);
 		getContentPane().add(btnErregistratuNahi);
 
-		
+		//ziurtatzeko bete dituela datu guztiak
 		btnErregistratu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// bbdd-ra konektatu pasahitza frogatzeko
@@ -329,12 +354,12 @@ public class Leiho4 extends JFrame {
 				izena = txtIzena.getText();
 				abizenak = txtAbizenak.getText();
 				jaioData = txtJaioData.getDate();
-				System.out.println("jaio data: "+jaioData);
+				System.out.println("jaio data: " + jaioData);
+				sexua = txtSexua.getText();
 
-				sexua=txtSexua.getText();
-
+				//erregistratzen duen metodoari deitu
 				balErregis = Metodoak.erregistratuBezeroak(pasahitza, nan, izena, abizenak, sexua, jaioData);
-								
+
 				if (balErregis) {
 					btn_next.setVisible(true);
 					lblErroreakonektatu.setBounds(122, 445, 318, 22);
@@ -342,7 +367,7 @@ public class Leiho4 extends JFrame {
 					lblErroreakonektatu.setText("Erregistratuta");
 					lblErroreakonektatu.setVisible(true);
 					passwordField.setEnabled(false);
-					txtNan.setEnabled(false);					
+					txtNan.setEnabled(false);
 					txtIzena.setEnabled(false);
 					txtAbizenak.setEnabled(false);
 					txtJaioData.setEnabled(false);
@@ -360,17 +385,17 @@ public class Leiho4 extends JFrame {
 						lblErroreakonektatu.setText("abizena bete behar duzu");
 					else if (sexua.isEmpty())
 						lblErroreakonektatu.setText("sexua bete behar duzu");
-					else if (jaioData==null)
+					else if (jaioData == null)
 						lblErroreakonektatu.setText("jaioData bete behar duzu");
-					else if (pasahitza.length()==0)
+					else if (pasahitza.length() == 0)
 						lblErroreakonektatu.setText("pasahitza bete behar duzu");
 				}
 			}
 		});
 		btnErregistratu.setBounds(233, 408, 109, 25);
 		getContentPane().add(btnErregistratu);
+
+
 		
-
-
 	}
 }

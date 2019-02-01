@@ -8,15 +8,24 @@ import kontrolatzailea.*;
 
 public class Leiho2 extends JFrame {
 	private static final long serialVersionUID = 1L;
+	//panelan ikusten diren bariableak
 	private JTextField txtErabakiLinea;
 	private JRadioButton L1, L2, L3, L4;
 	private ButtonGroup group;
+	private JButton btn_next = new JButton("Hurrengoa"), restart = new JButton("\u2302");
+
+	//bariableak
 	private String hartutakoLinea;
 	private Autobusak autobusa;
-	private JButton btn_next = new JButton("Hurrengoa");
-	private JButton restart = new JButton("\u2302");
-
+	
+	/**
+	 * Ze linea hartu nahi duen erabaki behar den panela sortu
+	 * @param lineak
+	 * @param autobusak
+	 * @author talde1
+	 */
 	public Leiho2(ArrayList<Lineak> lineak, ArrayList<Autobusak> autobusak) {
+		//panelaren propietateak
 		getContentPane().setLayout(null);
 		this.setBounds(350, 50, 600, 600);
 		this.setResizable(false); // neurketak ez aldatzeko
@@ -53,7 +62,7 @@ public class Leiho2 extends JFrame {
 		restart.setBackground(Color.LIGHT_GRAY);
 		getContentPane().add(restart);
 
-		// NEW
+		// Linea bakoitzaren izena eta kodigoa jartzeko
 		L1 = new JRadioButton(lineak.get(0).getKodLinea() + "        " + lineak.get(0).getIzena());
 		L2 = new JRadioButton(lineak.get(1).getKodLinea() + "        " + lineak.get(1).getIzena());
 		L3 = new JRadioButton(lineak.get(2).getKodLinea() + "        " + lineak.get(2).getIzena());
@@ -61,7 +70,7 @@ public class Leiho2 extends JFrame {
 		group = new ButtonGroup();
 		txtErabakiLinea = new JTextField();
 
-		// non dagoen label bakoitza
+		// non dagoen linea bakoitza kolokatuta
 		L1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				btn_next.setVisible(true);
@@ -106,11 +115,13 @@ public class Leiho2 extends JFrame {
 		L4.setFont(font);
 		getContentPane().add(L4);
 
+		//bakarrik bat hartu ahal izateko
 		group.add(L1);
 		group.add(L2);
 		group.add(L3);
 		group.add(L4);
 
+		//mezua
 		txtErabakiLinea.setText("Klikatu nahi duzun linearen gainean");
 		txtErabakiLinea.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 25));
 		txtErabakiLinea.setHorizontalAlignment(SwingConstants.CENTER);

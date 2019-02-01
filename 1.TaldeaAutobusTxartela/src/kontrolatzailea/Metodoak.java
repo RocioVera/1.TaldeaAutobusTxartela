@@ -228,12 +228,13 @@ public class Metodoak {
 	 * @param altuera2
 	 * @param luzera1
 	 * @param altuera1
+	 * @param arrayGeltokia 
 	 */
 	public static void laugarrenLeihoa(String hartutakoLinea, Autobusak autobusa, int ibilbideZbk,
 			int hasierakoGeltokiaKod, int amaierakoGeltokiaKod, double altuera1, double luzera1, double altuera2,
-			double luzera2) {
+			double luzera2, ArrayList<Geltokiak> arrayGeltokia) {
 		Leiho4 Leiho4 = new Leiho4(hartutakoLinea, autobusa, ibilbideZbk, hasierakoGeltokiaKod, amaierakoGeltokiaKod,
-				altuera1, luzera1, altuera2, luzera2);
+				altuera1, luzera1, altuera2, luzera2, arrayGeltokia);
 		Leiho4.setVisible(true);
 
 	}
@@ -246,12 +247,13 @@ public class Metodoak {
 	 * @param altuera2
 	 * @param luzera1
 	 * @param altuera1
+	 * @param arrayGeltokia 
 	 */
 	public static void bostgarrenLeihoa(String hartutakoLinea, Autobusak autobusa, int ibilbideZbk,
 			int hasierakoGeltokiaKod, int amaierakoGeltokiaKod, float guztiraPrez, String nan, double altuera1,
-			double luzera1, double altuera2, double luzera2) {
+			double luzera1, double altuera2, double luzera2, ArrayList<Geltokiak> arrayGeltokia) {
 		Leiho5 Leiho5 = new Leiho5(hartutakoLinea, autobusa, ibilbideZbk, hasierakoGeltokiaKod, amaierakoGeltokiaKod,
-				guztiraPrez, nan, altuera1, luzera1, altuera2, luzera2);
+				guztiraPrez, nan, altuera1, luzera1, altuera2, luzera2, arrayGeltokia);
 		Leiho5.setVisible(true);
 
 	}
@@ -260,10 +262,13 @@ public class Metodoak {
 	 * Leiho6 sortu
 	 * 
 	 * @author talde1
+	 * @param txartela
+	 * @param arrayGeltokia 
 	 */
 	public static void seigarrenLeihoa(String hartutakoLinea, Autobusak autobusa, int ibilbideZbk,
-			int hasierakoGeltokiaKod, int amaierakoGeltokiaKod) {
-		Leiho6 Leiho6 = new Leiho6(hartutakoLinea, autobusa, ibilbideZbk, hasierakoGeltokiaKod, amaierakoGeltokiaKod);
+			int hasierakoGeltokiaKod, int amaierakoGeltokiaKod, Txartelak txartela) {
+		Leiho6 Leiho6 = new Leiho6(hartutakoLinea, autobusa, ibilbideZbk, hasierakoGeltokiaKod, amaierakoGeltokiaKod,
+				txartela);
 		Leiho6.setVisible(true);
 
 	}
@@ -274,7 +279,7 @@ public class Metodoak {
 	 * @author talde1
 	 */
 	public static void Leiho_segunduak() {
-		for (int i = 1; i <= 5; i++) {
+		for (int i = 1; i <= 10; i++) {
 			System.out.println(i);
 			try {
 				TimeUnit.SECONDS.sleep(1);
@@ -465,17 +470,22 @@ public class Metodoak {
 	}
 
 	public static void fitxIdatzi(Txartelak txartela) {
-		// fitx = new File("eredua\\Billetea.txt");
 		FileWriter fitx = null;
 		PrintWriter pw = null;
+
 		try {
 			fitx = new FileWriter("src\\eredua\\Billetea", true);
 			pw = new PrintWriter(fitx);
 
-			pw.println("Ibilbidearen datuak:  \n"+"\tHartutako linea:  "+txartela.getkodLinea()+"\t\t\t"+"Hasierako geltokia:  "+txartela.getkodGeltokiHasiera()+"\t\t\t"+ "Amaierako geltokia:  "+txartela.getkodGeltokiAmaiera()+"\t\t\t"+ "Zure autobusaren kodigoa:  "+txartela.getkodBus()+"\n");
-			pw.println("Bezeroaren datuak:  \n"+"\tNAN:  "+txartela.getNan()+"\n");
-			pw.println("Erosketaren datuak:  \n"+"\tData eta ordua:  "+txartela.getOrdua()+ "\t\t\t"+"Bidaiaren prezioa:  "+txartela.getPrezioa()+"\n");
-			pw.println("******************************************************************************************************************************************");
+			pw.println("Ibilbidearen datuak:  \n" + "\tHartutako linea:  " + txartela.getkodLinea() + "\t\t\t"
+					+ "Hasierako geltokia:  " + txartela.getkodGeltokiHasiera() + "\t\t\t" + "Amaierako geltokia:  "
+					+ txartela.getkodGeltokiAmaiera() + "\t\t\t" + "Zure autobusaren kodigoa:  " + txartela.getkodBus()
+					+ "\n");
+			pw.println("Bezeroaren datuak:  \n" + "\tNAN:  " + txartela.getNan() + "\n");
+			pw.println("Erosketaren datuak:  \n" + "\tData eta ordua:  " + txartela.getOrdua() + "\t\t\t"
+					+ "Bidaiaren prezioa:  " + txartela.getPrezioa() + "\n");
+			pw.println(
+					"******************************************************************************************************************************************");
 
 			pw.println("");
 		} catch (Exception e) {
