@@ -28,6 +28,7 @@ public class Leiho2 extends JFrame {
 		//panelaren propietateak
 		getContentPane().setLayout(null);
 		this.setBounds(350, 50, 600, 600);
+		this.setTitle("1.taldearen txartel salmenta");
 		this.setResizable(false); // neurketak ez aldatzeko
 		this.setSize(new Dimension(600, 600));
 		Font font;

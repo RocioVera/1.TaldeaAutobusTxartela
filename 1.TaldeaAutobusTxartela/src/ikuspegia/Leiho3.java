@@ -29,7 +29,7 @@ public class Leiho3 extends JFrame {
 	private int hasierakoGeltokiaKod, amaierakoGeltokiaKod, ibilbideZbk;
 	private ArrayList<Geltokiak> arrayGeltokia = new ArrayList<Geltokiak>();
 	private ArrayList<Double> arrayDistantzia = new ArrayList<Double>();
-	private double distantziaTermibusetik = 0, termibusekoAltuera, termibusekoLuzera,  altuera1, luzera1, altuera2, luzera2;
+	private double distantziaTermibusetik = 0, altuera1, luzera1, altuera2, luzera2;
 	private Date dataJoan, dataEtorri;
 	private Hashtable<String, Double> geltokiakOrdenatuta = new Hashtable<String, Double>();
 
@@ -45,6 +45,8 @@ public class Leiho3 extends JFrame {
 		this.setBounds(350, 50, 600, 600);
 		this.setResizable(false); // neurketak ez aldatzeko
 		this.setSize(new Dimension(600, 600));
+		this.setTitle("1.taldearen txartel salmenta");
+
 
 		// botoiak
 		btn_next.addActionListener(new ActionListener() {
@@ -114,12 +116,12 @@ public class Leiho3 extends JFrame {
 
 		//ordenatu geltokiak 
 		arrayGeltokia = Kontsultak.geltokiakAtera((hartutakoLinea));
-		termibusekoAltuera = arrayGeltokia.get(0).getAltuera();
-		termibusekoLuzera = arrayGeltokia.get(0).getLuzera();
 
 		for (int i = 0; i < arrayGeltokia.size(); i++) {
-			if (!"Termibus-Bilbao".equals(arrayGeltokia.get(i).getIzena())) {
-				distantziaTermibusetik = Metodoak.kalkulatuDistantzia(termibusekoAltuera, termibusekoLuzera,
+			//"Termibus-Bilbao" desberdin denean 
+			if (!arrayGeltokia.get(0).getIzena().equals(arrayGeltokia.get(i).getIzena())) {
+				//termibusekoAltuera = arrayGeltokia.get(0).getAltuera()    termibusekoLuzera = arrayGeltokia.get(0).getLuzera()
+				distantziaTermibusetik = Metodoak.kalkulatuDistantzia(arrayGeltokia.get(0).getAltuera(), arrayGeltokia.get(0).getLuzera(),
 						arrayGeltokia.get(i).getAltuera(), arrayGeltokia.get(i).getLuzera());
 				arrayDistantzia.add(distantziaTermibusetik);
 				geltokiakOrdenatuta.put(arrayGeltokia.get(i).getIzena(), distantziaTermibusetik);
