@@ -776,7 +776,7 @@ public class Leiho3 extends JFrame {
 		btnDataEgiaztatu1.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				dataJoan = (java.sql.Date) dateJoan.getDate();
+				dataJoan = dateJoan.getDate();
 				if (dataJoan != null) {
 					btn_next.setVisible(true);
 				}
