@@ -326,6 +326,7 @@ public class Leiho5 extends JFrame {
 					// Diru falta
 					txtDiruFalta.setText(diruFaltaString + " €");
 					txtBueltak.setText("00.00 €");
+					
 				} else if (diruFalta < 0) {
 					diruFaltaString = String.valueOf(-diruFalta);
 					txtBueltak.setText(diruFaltaString + " €");

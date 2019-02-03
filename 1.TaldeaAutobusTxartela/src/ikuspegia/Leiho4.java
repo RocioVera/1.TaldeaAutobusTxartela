@@ -104,7 +104,7 @@ public class Leiho4 extends JFrame {
 
 		//guztiraPrez kalkulatzeko metodoari deitu
 		guztiraPrez = Metodoak.kalkPrezioa(autobusa.getKmKontsumoa(), autobusa.getzPlaza(), altuera1, luzera1, altuera2,
-				luzera2);
+				luzera2, ibilbideZbk);
 		txtPrezioTot.setText(guztiraPrez + " €");
 		getContentPane().add(txtPrezioTot);
 		btn_next.setVisible(false);
@@ -339,7 +339,6 @@ public class Leiho4 extends JFrame {
 				dataEzEditatu = (JTextFieldDateEditor) txtJaioData.getDateEditor();
 				dataEzEditatu.setEditable(false);
 				getContentPane().add(txtJaioData);
-				txtJaioData.setDate(Date.valueOf(LocalDate.now())); // gaurko data jarri
 				txtJaioData.setMaxSelectableDate(Date.valueOf(LocalDate.now()));// gehienez jarri gaurko data
 
 			}
@@ -379,7 +378,7 @@ public class Leiho4 extends JFrame {
 					lblErroreakonektatu.setForeground(Color.RED);
 					lblErroreakonektatu.setBounds(122, 445, 318, 22);
 					lblErroreakonektatu.setVisible(true);
-					if (nan.isEmpty())
+					if (nan.length() < nanLuzera)
 						lblErroreakonektatu.setText("nan-a bete behar duzu");
 					else if (izena.isEmpty())
 						lblErroreakonektatu.setText("izena bete behar duzu");

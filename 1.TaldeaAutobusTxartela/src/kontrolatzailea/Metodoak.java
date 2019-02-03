@@ -71,16 +71,17 @@ public class Metodoak {
 	 * @param eserKop
 	 * @return totPertsonaBilletea
 	 * @author talde1
+	 * @param ibilbideZbk 
 	 */
 	public static float kalkPrezioa(float kontsumoa, int eserKop, double altuera1, double luzera1, double altuera2,
-			double luzera2) {
+			double luzera2, int ibilbideZbk) {
 		float zenbatIrabazi, totBidaia, totPertsonaBilletea;
 		final double onurak = 0.20, erregaia = 0.80;
 
 		double distantzia = kalkulatuDistantzia(altuera1, luzera1, altuera2, luzera2);
 		zenbatIrabazi = (float) (erregaia * kontsumoa * distantzia);
 		totBidaia = (float) (zenbatIrabazi * onurak + zenbatIrabazi);
-		totPertsonaBilletea = totBidaia / eserKop;
+		totPertsonaBilletea = (totBidaia / eserKop)*ibilbideZbk; //ibilbideZBK=1(joan) edo 2 (joan/etorria)
 		totPertsonaBilletea = (float) (Math.round(totPertsonaBilletea * 100.0) / 100.0);
 		return totPertsonaBilletea;
 	}
@@ -166,11 +167,13 @@ public class Metodoak {
 		pasaEnkr = zifratuPasahitza(pasahitza);
 		ArrayList<Bezeroak> bezeroak = new ArrayList<>();
 		SimpleDateFormat formato = new SimpleDateFormat("dd-MM-yyyy");
-		bezeroak = Kontsultak.erregistratuBezeroak(pasaEnkr, NAN, izena, abizenak, sexua, jaioData);
 		// enviar al fitxero
-		if (pasahitza.length() == 0 || NAN.isEmpty() || izena.isEmpty() || abizenak.isEmpty() || sexua.isEmpty()
+		if (pasahitza.length() == 0 || NAN.length() < 8 || izena.isEmpty() || abizenak.isEmpty() || sexua.isEmpty()
 				|| jaioData == null)
 			bal = false;
+		if (bal)
+			bezeroak = Kontsultak.erregistratuBezeroak(pasaEnkr, NAN, izena, abizenak, sexua, jaioData);
+
 		return bal;
 	}
 
