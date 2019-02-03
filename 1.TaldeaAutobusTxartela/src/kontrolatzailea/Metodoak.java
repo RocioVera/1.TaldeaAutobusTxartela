@@ -22,6 +22,96 @@ import ikuspegia.*;
 
 public class Metodoak {
 	/**
+	 * Leiho1 sortu
+	 * 
+	 * @author talde1
+	 */
+	public static void lehenengoLeihoa() {
+		Leiho1 Leiho1 = new Leiho1();
+		Leiho1.setVisible(true);
+
+	}
+
+	/**
+	 * Leiho2 sortu
+	 * 
+	 * @author talde1
+	 */
+	public static void bigarrenLeihoa() {
+		ArrayList<Lineak> lineak = new ArrayList<Lineak>();
+		lineak = Kontsultak.lineakDatuak();
+		ArrayList<Autobusak> autobusak = new ArrayList<>();
+		autobusak = Kontsultak.autobusDatuak();
+		Leiho2 Leiho2 = new Leiho2(lineak, autobusak);
+		Leiho2.setVisible(true);
+	}
+
+	/**
+	 * Leiho3 sortu
+	 * 
+	 * @author talde1
+	 */
+	public static void hirugarrenLeihoa(String hartutakoLinea, Autobusak autobusa) {
+		Leiho3 Leiho3 = new Leiho3(hartutakoLinea, autobusa);
+		Leiho3.setVisible(true);
+
+	}
+
+	/**
+	 * Leiho4 sortu
+	 * 
+	 * @author talde1
+	 * @param luzera2
+	 * @param altuera2
+	 * @param luzera1
+	 * @param altuera1
+	 * @param arrayGeltokia 
+	 */
+	public static void laugarrenLeihoa(String hartutakoLinea, Autobusak autobusa, int ibilbideZbk,
+			int hasierakoGeltokiaKod, int amaierakoGeltokiaKod, double altuera1, double luzera1, double altuera2,
+			double luzera2, ArrayList<Geltokiak> arrayGeltokia) {
+		Leiho4 Leiho4 = new Leiho4(hartutakoLinea, autobusa, ibilbideZbk, hasierakoGeltokiaKod, amaierakoGeltokiaKod,
+				altuera1, luzera1, altuera2, luzera2, arrayGeltokia);
+		Leiho4.setVisible(true);
+
+	}
+
+	/**
+	 * Leiho5 sortu
+	 * 
+	 * @author talde1
+	 * @param luzera2
+	 * @param altuera2
+	 * @param luzera1
+	 * @param altuera1
+	 * @param arrayGeltokia 
+	 */
+	public static void bostgarrenLeihoa(String hartutakoLinea, Autobusak autobusa, int ibilbideZbk,
+			int hasierakoGeltokiaKod, int amaierakoGeltokiaKod, float guztiraPrez, String nan, double altuera1,
+			double luzera1, double altuera2, double luzera2, ArrayList<Geltokiak> arrayGeltokia) {
+		Leiho5 Leiho5 = new Leiho5(hartutakoLinea, autobusa, ibilbideZbk, hasierakoGeltokiaKod, amaierakoGeltokiaKod,
+				guztiraPrez, nan, altuera1, luzera1, altuera2, luzera2, arrayGeltokia);
+		Leiho5.setVisible(true);
+
+	}
+
+	/**
+	 * Leiho6 sortu
+	 * 
+	 * @author talde1
+	 * @param txartela
+	 * @param geltIzenak 
+	 * @param arrayGeltokia 
+	 */
+	public static void seigarrenLeihoa(String hartutakoLinea, Autobusak autobusa, int ibilbideZbk,
+			int hasierakoGeltokiaKod, int amaierakoGeltokiaKod, Txartelak txartela, ArrayList<String> geltIzenak) {
+		Leiho6 Leiho6 = new Leiho6(hartutakoLinea, autobusa, ibilbideZbk, hasierakoGeltokiaKod, amaierakoGeltokiaKod,
+				txartela, geltIzenak);
+		Leiho6.setVisible(true);
+
+	}
+
+	/**
 	 * Hartutako linea jakinda geltokiak bueltatu
 	 * 
 	 * @param arrayGeltokiak
@@ -150,7 +240,6 @@ public class Metodoak {
 	/**
 	 * Bezeroen erregistroa egin datu basean eta hutzik baldin badago sartu behar
 	 * den daturen bat balidazioa bueltatu
-	 * 
 	 * @param pasahitza
 	 * @param NAN
 	 * @param izena
@@ -176,113 +265,39 @@ public class Metodoak {
 
 		return bal;
 	}
+	
+/**
+ * Hasierako eta amaierako geltokien izenak lortu
+ * @param txartela
+ * @return geltIzenak
+ * @author talde1
+ */
+	public static ArrayList<String> geltokienIzenakLortu(Txartelak txartela) {
+		ArrayList<String> geltIzenak = new ArrayList<>();
 
+		String geltHasiIzena = Kontsultak.hasGeltokiarenIzena(txartela.getkodGeltokiHasiera());
+		geltIzenak.add(geltHasiIzena);
+		String geltAmaIzena = Kontsultak.amaGeltokiarenIzena(txartela.getkodGeltokiAmaiera());
+		geltIzenak.add(geltAmaIzena);
+		return geltIzenak;
+	}
+	
 	/**
 	 * Billetea sortu
-	 * 
 	 * @param txartela
 	 * @author talde1
 	 */
 	public static void sortuBilletea(Txartelak txartela) {
 		Kontsultak.billeteaKontsulta(txartela);
-	}
-
-	/**
-	 * Leiho1 sortu
-	 * 
-	 * @author talde1
-	 */
-	public static void lehenengoLeihoa() {
-		Leiho1 Leiho1 = new Leiho1();
-		Leiho1.setVisible(true);
-
-	}
-
-	/**
-	 * Leiho2 sortu
-	 * 
-	 * @author talde1
-	 */
-	public static void bigarrenLeihoa() {
-		ArrayList<Lineak> lineak = new ArrayList<Lineak>();
-		lineak = Kontsultak.lineakDatuak();
-		ArrayList<Autobusak> autobusak = new ArrayList<>();
-		autobusak = Kontsultak.autobusDatuak();
-		Leiho2 Leiho2 = new Leiho2(lineak, autobusak);
-		Leiho2.setVisible(true);
-	}
-
-	/**
-	 * Leiho3 sortu
-	 * 
-	 * @author talde1
-	 */
-	public static void hirugarrenLeihoa(String hartutakoLinea, Autobusak autobusa) {
-		Leiho3 Leiho3 = new Leiho3(hartutakoLinea, autobusa);
-		Leiho3.setVisible(true);
-
-	}
-
-	/**
-	 * Leiho4 sortu
-	 * 
-	 * @author talde1
-	 * @param luzera2
-	 * @param altuera2
-	 * @param luzera1
-	 * @param altuera1
-	 * @param arrayGeltokia 
-	 */
-	public static void laugarrenLeihoa(String hartutakoLinea, Autobusak autobusa, int ibilbideZbk,
-			int hasierakoGeltokiaKod, int amaierakoGeltokiaKod, double altuera1, double luzera1, double altuera2,
-			double luzera2, ArrayList<Geltokiak> arrayGeltokia) {
-		Leiho4 Leiho4 = new Leiho4(hartutakoLinea, autobusa, ibilbideZbk, hasierakoGeltokiaKod, amaierakoGeltokiaKod,
-				altuera1, luzera1, altuera2, luzera2, arrayGeltokia);
-		Leiho4.setVisible(true);
-
-	}
-
-	/**
-	 * Leiho5 sortu
-	 * 
-	 * @author talde1
-	 * @param luzera2
-	 * @param altuera2
-	 * @param luzera1
-	 * @param altuera1
-	 * @param arrayGeltokia 
-	 */
-	public static void bostgarrenLeihoa(String hartutakoLinea, Autobusak autobusa, int ibilbideZbk,
-			int hasierakoGeltokiaKod, int amaierakoGeltokiaKod, float guztiraPrez, String nan, double altuera1,
-			double luzera1, double altuera2, double luzera2, ArrayList<Geltokiak> arrayGeltokia) {
-		Leiho5 Leiho5 = new Leiho5(hartutakoLinea, autobusa, ibilbideZbk, hasierakoGeltokiaKod, amaierakoGeltokiaKod,
-				guztiraPrez, nan, altuera1, luzera1, altuera2, luzera2, arrayGeltokia);
-		Leiho5.setVisible(true);
-
-	}
-
-	/**
-	 * Leiho6 sortu
-	 * 
-	 * @author talde1
-	 * @param txartela
-	 * @param arrayGeltokia 
-	 */
-	public static void seigarrenLeihoa(String hartutakoLinea, Autobusak autobusa, int ibilbideZbk,
-			int hasierakoGeltokiaKod, int amaierakoGeltokiaKod, Txartelak txartela) {
-		Leiho6 Leiho6 = new Leiho6(hartutakoLinea, autobusa, ibilbideZbk, hasierakoGeltokiaKod, amaierakoGeltokiaKod,
-				txartela);
-		Leiho6.setVisible(true);
-
-	}
-
+	}	
+	
 	/**
 	 * Amaieran tiketa imprimatzen dagoen bitartean itxaron behar den denbora
 	 * 
 	 * @author talde1
 	 */
 	public static void Leiho_segunduak() {
-		for (int i = 1; i <= 10; i++) {
+		for (int i = 1; i <= 5; i++) {
 			System.out.println(i);
 			try {
 				TimeUnit.SECONDS.sleep(1);
@@ -472,7 +487,7 @@ public class Metodoak {
 		return bueltakString;
 	}
 
-	public static void fitxIdatzi(Txartelak txartela) {
+	public static void fitxIdatzi(Txartelak txartela, ArrayList<String> geltIzenak ) {
 		FileWriter fitx = null;
 		PrintWriter pw = null;
 
@@ -481,8 +496,8 @@ public class Metodoak {
 			pw = new PrintWriter(fitx);
 
 			pw.println("Ibilbidearen datuak:  \n" + "\tHartutako linea:  " + txartela.getkodLinea() + "\t\t\t"
-					+ "Hasierako geltokia:  " + txartela.getkodGeltokiHasiera() + "\t\t\t" + "Amaierako geltokia:  "
-					+ txartela.getkodGeltokiAmaiera() + "\t\t\t" + "Zure autobusaren kodigoa:  " + txartela.getkodBus()
+					+ "Hasierako geltokia:  " +  geltIzenak.get(0) + "\t\t\t" + "Amaierako geltokia:  "
+					+ geltIzenak.get(1) + "\t\t\t" + "Zure autobusaren kodigoa:  " + txartela.getkodBus()
 					+ "\n");
 			pw.println("Bezeroaren datuak:  \n" + "\tNAN:  " + txartela.getNan() + "\n");
 			pw.println("Erosketaren datuak:  \n" + "\tData eta ordua:  " + txartela.getOrdua() + "\t\t\t"

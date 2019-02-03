@@ -30,6 +30,7 @@ public class Leiho5 extends JFrame {
 	private int kont = 0;
 	private String txanponTot, diruFaltaString;
 	private double diruFalta, sartutakoa;
+	private ArrayList<String> geltIzenak = new ArrayList<>();
 
 	/**
 	 * Ordaintzen duen panela sortu
@@ -58,10 +59,11 @@ public class Leiho5 extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				txartela = new Txartelak(hartutakoLinea, autobusa.getKodBus(), hasierakoGeltokiaKod,
 						amaierakoGeltokiaKod, data, ordua, nan, guztiraPrez, ibilbideZbk);
+				geltIzenak=Metodoak.geltokienIzenakLortu(txartela);
 				Metodoak.sortuBilletea(txartela); // billetea datu basera igotzen duen metodoari deitu
-				Metodoak.fitxIdatzi(txartela); // billetea fitxategian sartzen duen metodoari deitu
+				Metodoak.fitxIdatzi(txartela, geltIzenak); // billetea fitxategian sartzen duen metodoari deitu
 				Metodoak.seigarrenLeihoa(hartutakoLinea, autobusa, ibilbideZbk, hasierakoGeltokiaKod,
-						amaierakoGeltokiaKod, txartela);
+						amaierakoGeltokiaKod, txartela,geltIzenak);
 				dispose();
 			}
 		});

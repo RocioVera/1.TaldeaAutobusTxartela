@@ -24,10 +24,11 @@ public class Leiho6 extends JFrame {
 	 * @param amaierakoGeltokiaKod
 	 * @author talde1
 	 * @param txartela
+	 * @param geltIzenak
 	 * @param arrayGeltokia
 	 */
 	public Leiho6(String hartutakoLinea, Autobusak autobusa, int ibilbideZbk, int hasierakoGeltokiaKod,
-			int amaierakoGeltokiaKod, Txartelak txartela) {
+			int amaierakoGeltokiaKod, Txartelak txartela, ArrayList<String> geltIzenak) {
 		// panelaren propietateak
 		getContentPane().setLayout(null);
 		this.setBounds(350, 50, 600, 600);
@@ -38,27 +39,42 @@ public class Leiho6 extends JFrame {
 		// Eskerrik asko mezua
 		lblEskerrikAskoMezua1 = new JLabel("Eskerrik asko Termibus-eko");
 		lblEskerrikAskoMezua1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblEskerrikAskoMezua1.setFont(new Font("MS PMincho", Font.BOLD, 35));
-		lblEskerrikAskoMezua1.setBounds(43, 29, 493, 53);
+		lblEskerrikAskoMezua1.setFont(new Font("MS PMincho", Font.BOLD, 30));
+		lblEskerrikAskoMezua1.setBounds(53, 13, 493, 40);
 		getContentPane().add(lblEskerrikAskoMezua1);
 
 		lblEskerrikAskoMezua2 = new JLabel("makinetan erosteagatik");
-		lblEskerrikAskoMezua2.setFont(new Font("MS PMincho", Font.BOLD, 35));
+		lblEskerrikAskoMezua2.setFont(new Font("MS PMincho", Font.BOLD, 30));
 		lblEskerrikAskoMezua2.setHorizontalAlignment(SwingConstants.CENTER);
-		lblEskerrikAskoMezua2.setBounds(53, 84, 493, 59);
+		lblEskerrikAskoMezua2.setBounds(63, 55, 493, 40);
 
 		getContentPane().add(lblEskerrikAskoMezua2);
 
 		txtTiket = new JTextArea();
 		txtTiket.setFont(new Font("Comic Sans MS", Font.PLAIN, 14));
-		txtTiket.setText(" Ibilbidearen datuak:  \n" + "   -Hartutako linea:  " + txartela.getkodLinea() + "\n  "
-				+ " -Hasierako geltokia:  " + txartela.getkodGeltokiHasiera() + "\n  " + " -Amaierako geltokia:  "
-				+ txartela.getkodGeltokiAmaiera() + "\n  " + " -Zure autobusaren kodigoa:  " + txartela.getkodBus()
-				+ "\n\n" + " Bezeroaren datuak: \n" + "   -NAN: " + txartela.getNan() + "\n\n"
-				+ " Erosketaren datuak: \n" + "   -Bidaiaren prezioa:  " + txartela.getPrezioa() + "€");
+		if (txartela.getzIbilbidea() == 1)
+			txtTiket.setText("\n Ibilbidearen datuak:  \n" + "\t-Hartutako linea:  " + txartela.getkodLinea()
+					+ "\n\t-Zure autobusaren kodigoa:  " + txartela.getkodBus() + "\n\t-Hasierako geltokia:  "
+					+ geltIzenak.get(0) + "\n\t-Amaierako geltokia:  " + geltIzenak.get(1)
+					+ "\n\t-Hartutako eguna eta ordua: " + txartela.getData() + " " + txartela.getOrdua()
+					+ "\n     \n\n Bezeroaren datuak: \n\t-NAN: " + txartela.getNan()
+					+ "\n\n Erosketaren datuak: \n\t-Bidaiaren prezioa:  " + txartela.getPrezioa() + "€");
+	
+		else if (txartela.getzIbilbidea() == 2)
+			txtTiket.setText(" Ibilbidearen datuak:  \n" + "      -Hartutako linea:  " + txartela.getkodLinea()
+					+ "      -Zure autobusaren kodigoa:  " + txartela.getkodBus()
+					+ "\n\n      *Lehenengo bidaia\n\t-Hasierako geltokia:  " + geltIzenak.get(0)
+					+ "\n\t-Amaierako geltokia:  " + geltIzenak.get(1) + "\n\t-Hartutako eguna eta ordua: "
+					+ txartela.getData() + " " + txartela.getOrdua()
+					+ "\n      *Bigarren bidaia\n\t-Hasierako geltokia:  " + geltIzenak.get(1)
+					+ "\n\t-Amaierako geltokia:  " + geltIzenak.get(0) + "\n\t-Hartutako eguna eta ordua: "
+					+ txartela.getData() + " " + txartela.getOrdua() + "\n\n Bezeroaren datuak: \n" + "      -NAN: "
+					+ txartela.getNan() + "\n\n Erosketaren datuak: \n" + "      -Bidaiaren prezioa:  "
+					+ txartela.getPrezioa() + "€");
+
 		txtTiket.setEditable(false);
 		txtTiket.setBackground(Color.LIGHT_GRAY);
-		txtTiket.setBounds(92, 220, 411, 262);
+		txtTiket.setBounds(53, 146, 529, 391);
 		getContentPane().add(txtTiket);
 
 		btnTiketaImprimatu = new JButton("Tiketa imprimatu eta bukatu erosketa");
@@ -68,10 +84,8 @@ public class Leiho6 extends JFrame {
 				dispose();
 			}
 		});
-		btnTiketaImprimatu.setBounds(130, 169, 306, 25);
+		btnTiketaImprimatu.setBounds(131, 108, 306, 25);
 		getContentPane().add(btnTiketaImprimatu);
-
-		// FALTA EL TICKET
 
 	}
 }
