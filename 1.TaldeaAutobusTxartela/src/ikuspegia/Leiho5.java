@@ -1,8 +1,3 @@
-/***************
- * 1.La hora y dia que se mete en el fitxero y se pasa al ticket 
- * es la del dia del viaje y no la actual
- * 2.En vez del codigo de la parada tendria mas sentido coger el nombre
- 											*******************/
 package ikuspegia;
 
 import java.awt.*;
@@ -25,7 +20,7 @@ public class Leiho5 extends JFrame {
 
 	// bariableak
 	private Txartelak txartela;
-	private Date data = Date.valueOf(LocalDate.now());
+	private Date gaurkoData = Date.valueOf(LocalDate.now());
 	private Timestamp ordua = new Timestamp(System.currentTimeMillis());
 	private int kont = 0;
 	private String txanponTot, diruFaltaString;
@@ -42,10 +37,12 @@ public class Leiho5 extends JFrame {
 	 * @param altuera1
 	 * @author talde1
 	 * @param arrayGeltokia 
+	 * @param dataEtorri 
+	 * @param dataJoan 
 	 */
 	public Leiho5(String hartutakoLinea, Autobusak autobusa, int ibilbideZbk, int hasierakoGeltokiaKod,
 			int amaierakoGeltokiaKod, float guztiraPrez, String nan, double altuera1, double luzera1, double altuera2,
-			double luzera2, ArrayList<Geltokiak> arrayGeltokia) {
+			double luzera2, ArrayList<Geltokiak> arrayGeltokia, java.util.Date dataJoan, java.util.Date dataEtorri) {
 		// panelaren propietateak
 		getContentPane().setLayout(null);
 		this.setBounds(350, 50, 600, 600);
@@ -58,12 +55,12 @@ public class Leiho5 extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				txartela = new Txartelak(hartutakoLinea, autobusa.getKodBus(), hasierakoGeltokiaKod,
-						amaierakoGeltokiaKod, data, ordua, nan, guztiraPrez, ibilbideZbk);
+						amaierakoGeltokiaKod, gaurkoData, ordua, nan, guztiraPrez, ibilbideZbk);
 				geltIzenak=Metodoak.geltokienIzenakLortu(txartela);
 				Metodoak.sortuBilletea(txartela); // billetea datu basera igotzen duen metodoari deitu
-				Metodoak.fitxIdatzi(txartela, geltIzenak); // billetea fitxategian sartzen duen metodoari deitu
+				Metodoak.fitxIdatzi(txartela, geltIzenak, dataJoan, dataEtorri); // billetea fitxategian sartzen duen metodoari deitu
 				Metodoak.seigarrenLeihoa(hartutakoLinea, autobusa, ibilbideZbk, hasierakoGeltokiaKod,
-						amaierakoGeltokiaKod, txartela,geltIzenak);
+						amaierakoGeltokiaKod, txartela,geltIzenak, dataJoan, dataEtorri);
 				dispose();
 			}
 		});
@@ -79,7 +76,7 @@ public class Leiho5 extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				int zIbilbidea = 5;
 				Metodoak.laugarrenLeihoa(hartutakoLinea, autobusa, ibilbideZbk, hasierakoGeltokiaKod,
-						amaierakoGeltokiaKod, altuera1, luzera1, altuera2, luzera2, arrayGeltokia);
+						amaierakoGeltokiaKod, altuera1, luzera1, altuera2, luzera2, arrayGeltokia,dataJoan, dataEtorri);
 
 				dispose();
 			}

@@ -65,13 +65,15 @@ public class Metodoak {
 	 * @param altuera2
 	 * @param luzera1
 	 * @param altuera1
-	 * @param arrayGeltokia 
+	 * @param arrayGeltokia
+	 * @param dataEtorri 
+	 * @param dataJoan 
 	 */
 	public static void laugarrenLeihoa(String hartutakoLinea, Autobusak autobusa, int ibilbideZbk,
 			int hasierakoGeltokiaKod, int amaierakoGeltokiaKod, double altuera1, double luzera1, double altuera2,
-			double luzera2, ArrayList<Geltokiak> arrayGeltokia) {
+			double luzera2, ArrayList<Geltokiak> arrayGeltokia, java.util.Date dataJoan, java.util.Date dataEtorri) {
 		Leiho4 Leiho4 = new Leiho4(hartutakoLinea, autobusa, ibilbideZbk, hasierakoGeltokiaKod, amaierakoGeltokiaKod,
-				altuera1, luzera1, altuera2, luzera2, arrayGeltokia);
+				altuera1, luzera1, altuera2, luzera2, arrayGeltokia,dataJoan, dataEtorri);
 		Leiho4.setVisible(true);
 
 	}
@@ -84,13 +86,15 @@ public class Metodoak {
 	 * @param altuera2
 	 * @param luzera1
 	 * @param altuera1
-	 * @param arrayGeltokia 
+	 * @param arrayGeltokia
+	 * @param dataEtorri 
+	 * @param dataJoan 
 	 */
 	public static void bostgarrenLeihoa(String hartutakoLinea, Autobusak autobusa, int ibilbideZbk,
 			int hasierakoGeltokiaKod, int amaierakoGeltokiaKod, float guztiraPrez, String nan, double altuera1,
-			double luzera1, double altuera2, double luzera2, ArrayList<Geltokiak> arrayGeltokia) {
+			double luzera1, double altuera2, double luzera2, ArrayList<Geltokiak> arrayGeltokia, java.util.Date dataJoan, java.util.Date dataEtorri) {
 		Leiho5 Leiho5 = new Leiho5(hartutakoLinea, autobusa, ibilbideZbk, hasierakoGeltokiaKod, amaierakoGeltokiaKod,
-				guztiraPrez, nan, altuera1, luzera1, altuera2, luzera2, arrayGeltokia);
+				guztiraPrez, nan, altuera1, luzera1, altuera2, luzera2, arrayGeltokia,dataJoan, dataEtorri);
 		Leiho5.setVisible(true);
 
 	}
@@ -100,13 +104,15 @@ public class Metodoak {
 	 * 
 	 * @author talde1
 	 * @param txartela
-	 * @param geltIzenak 
-	 * @param arrayGeltokia 
+	 * @param geltIzenak
+	 * @param dataEtorri 
+	 * @param dataJoan 
+	 * @param arrayGeltokia
 	 */
 	public static void seigarrenLeihoa(String hartutakoLinea, Autobusak autobusa, int ibilbideZbk,
-			int hasierakoGeltokiaKod, int amaierakoGeltokiaKod, Txartelak txartela, ArrayList<String> geltIzenak) {
+			int hasierakoGeltokiaKod, int amaierakoGeltokiaKod, Txartelak txartela, ArrayList<String> geltIzenak, java.util.Date dataJoan, java.util.Date dataEtorri) {
 		Leiho6 Leiho6 = new Leiho6(hartutakoLinea, autobusa, ibilbideZbk, hasierakoGeltokiaKod, amaierakoGeltokiaKod,
-				txartela, geltIzenak);
+				txartela, geltIzenak,dataJoan, dataEtorri);
 		Leiho6.setVisible(true);
 
 	}
@@ -161,7 +167,7 @@ public class Metodoak {
 	 * @param eserKop
 	 * @return totPertsonaBilletea
 	 * @author talde1
-	 * @param ibilbideZbk 
+	 * @param ibilbideZbk
 	 */
 	public static float kalkPrezioa(float kontsumoa, int eserKop, double altuera1, double luzera1, double altuera2,
 			double luzera2, int ibilbideZbk) {
@@ -171,7 +177,7 @@ public class Metodoak {
 		double distantzia = kalkulatuDistantzia(altuera1, luzera1, altuera2, luzera2);
 		zenbatIrabazi = (float) (erregaia * kontsumoa * distantzia);
 		totBidaia = (float) (zenbatIrabazi * onurak + zenbatIrabazi);
-		totPertsonaBilletea = (totBidaia / eserKop)*ibilbideZbk; //ibilbideZBK=1(joan) edo 2 (joan/etorria)
+		totPertsonaBilletea = (totBidaia / eserKop) * ibilbideZbk; // ibilbideZBK=1(joan) edo 2 (joan/etorria)
 		totPertsonaBilletea = (float) (Math.round(totPertsonaBilletea * 100.0) / 100.0);
 		return totPertsonaBilletea;
 	}
@@ -240,6 +246,7 @@ public class Metodoak {
 	/**
 	 * Bezeroen erregistroa egin datu basean eta hutzik baldin badago sartu behar
 	 * den daturen bat balidazioa bueltatu
+	 * 
 	 * @param pasahitza
 	 * @param NAN
 	 * @param izena
@@ -265,13 +272,14 @@ public class Metodoak {
 
 		return bal;
 	}
-	
-/**
- * Hasierako eta amaierako geltokien izenak lortu
- * @param txartela
- * @return geltIzenak
- * @author talde1
- */
+
+	/**
+	 * Hasierako eta amaierako geltokien izenak lortu
+	 * 
+	 * @param txartela
+	 * @return geltIzenak
+	 * @author talde1
+	 */
 	public static ArrayList<String> geltokienIzenakLortu(Txartelak txartela) {
 		ArrayList<String> geltIzenak = new ArrayList<>();
 
@@ -281,16 +289,17 @@ public class Metodoak {
 		geltIzenak.add(geltAmaIzena);
 		return geltIzenak;
 	}
-	
+
 	/**
 	 * Billetea sortu
+	 * 
 	 * @param txartela
 	 * @author talde1
 	 */
 	public static void sortuBilletea(Txartelak txartela) {
 		Kontsultak.billeteaKontsulta(txartela);
-	}	
-	
+	}
+
 	/**
 	 * Amaieran tiketa imprimatzen dagoen bitartean itxaron behar den denbora
 	 * 
@@ -487,7 +496,7 @@ public class Metodoak {
 		return bueltakString;
 	}
 
-	public static void fitxIdatzi(Txartelak txartela, ArrayList<String> geltIzenak ) {
+	public static void fitxIdatzi(Txartelak txartela, ArrayList<String> geltIzenak, java.util.Date dataJoan, java.util.Date dataEtorri) {
 		FileWriter fitx = null;
 		PrintWriter pw = null;
 
@@ -495,13 +504,16 @@ public class Metodoak {
 			fitx = new FileWriter("src\\eredua\\Billetea", true);
 			pw = new PrintWriter(fitx);
 
-			pw.println("Ibilbidearen datuak:  \n" + "\tHartutako linea:  " + txartela.getkodLinea() + "\t\t\t"
-					+ "Hasierako geltokia:  " +  geltIzenak.get(0) + "\t\t\t" + "Amaierako geltokia:  "
-					+ geltIzenak.get(1) + "\t\t\t" + "Zure autobusaren kodigoa:  " + txartela.getkodBus()
-					+ "\n");
+			pw.println("Ibilbidearen datuak:  \n" + "\tHartutako linea:  " + txartela.getkodLinea() + "\t\t\t\t"
+					+ "Zure autobusaren kodigoa:  " + txartela.getkodBus() + "\n\t" + "Hasierako geltokia:  "
+					+ geltIzenak.get(0) + "\t\t\t" + "Amaierako geltokia:  " + geltIzenak.get(1) + "\n");
 			pw.println("Bezeroaren datuak:  \n" + "\tNAN:  " + txartela.getNan() + "\n");
-			pw.println("Erosketaren datuak:  \n" + "\tData eta ordua:  " + txartela.getOrdua() + "\t\t\t"
-					+ "Bidaiaren prezioa:  " + txartela.getPrezioa() + "\n");
+			if (txartela.getzIbilbidea() == 1)
+				pw.println("Erosketaren datuak:  \n" + "\tData eta ordua:  " + txartela.getOrdua());
+			else if (txartela.getzIbilbidea() == 2)
+				pw.println("Erosketaren datuak:  \n" + "\t*Lehenengo bidaiaren data eta ordua:  " + dataJoan
+						+ "\n\t*Bigarren bidaiaren data eta ordua:  " + dataEtorri);
+			pw.println("\n\tBidaiaren prezioa:  " + txartela.getPrezioa() + "\n");
 			pw.println(
 					"******************************************************************************************************************************************");
 

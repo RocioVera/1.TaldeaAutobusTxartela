@@ -4,6 +4,7 @@ import java.awt.*;
 import javax.swing.*;
 import kontrolatzailea.*;
 import java.awt.event.*;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
@@ -25,10 +26,12 @@ public class Leiho6 extends JFrame {
 	 * @author talde1
 	 * @param txartela
 	 * @param geltIzenak
+	 * @param dataEtorri 
+	 * @param dataJoan 
 	 * @param arrayGeltokia
 	 */
 	public Leiho6(String hartutakoLinea, Autobusak autobusa, int ibilbideZbk, int hasierakoGeltokiaKod,
-			int amaierakoGeltokiaKod, Txartelak txartela, ArrayList<String> geltIzenak) {
+			int amaierakoGeltokiaKod, Txartelak txartela, ArrayList<String> geltIzenak, java.util.Date dataJoan, java.util.Date dataEtorri) {
 		// panelaren propietateak
 		getContentPane().setLayout(null);
 		this.setBounds(350, 50, 600, 600);
@@ -56,7 +59,7 @@ public class Leiho6 extends JFrame {
 			txtTiket.setText("\n Ibilbidearen datuak:  \n" + "\t-Hartutako linea:  " + txartela.getkodLinea()
 					+ "\n\t-Zure autobusaren kodigoa:  " + txartela.getkodBus() + "\n\t-Hasierako geltokia:  "
 					+ geltIzenak.get(0) + "\n\t-Amaierako geltokia:  " + geltIzenak.get(1)
-					+ "\n\t-Hartutako eguna eta ordua: " + txartela.getData() + " " + txartela.getOrdua()
+					+ "\n\t-Hartutako eguna eta ordua: " + dataJoan + " " /*+ txartela.getOrdua()*/
 					+ "\n     \n\n Bezeroaren datuak: \n\t-NAN: " + txartela.getNan()
 					+ "\n\n Erosketaren datuak: \n\t-Bidaiaren prezioa:  " + txartela.getPrezioa() + "€");
 	
@@ -65,16 +68,16 @@ public class Leiho6 extends JFrame {
 					+ "      -Zure autobusaren kodigoa:  " + txartela.getkodBus()
 					+ "\n\n      *Lehenengo bidaia\n\t-Hasierako geltokia:  " + geltIzenak.get(0)
 					+ "\n\t-Amaierako geltokia:  " + geltIzenak.get(1) + "\n\t-Hartutako eguna eta ordua: "
-					+ txartela.getData() + " " + txartela.getOrdua()
+					+ dataJoan + " " /*+ txartela.getOrdua()*/
 					+ "\n      *Bigarren bidaia\n\t-Hasierako geltokia:  " + geltIzenak.get(1)
 					+ "\n\t-Amaierako geltokia:  " + geltIzenak.get(0) + "\n\t-Hartutako eguna eta ordua: "
-					+ txartela.getData() + " " + txartela.getOrdua() + "\n\n Bezeroaren datuak: \n" + "      -NAN: "
+					+ dataEtorri + " " /*+ txartela.getOrdua()*/ + "\n\n Bezeroaren datuak: \n" + "      -NAN: "
 					+ txartela.getNan() + "\n\n Erosketaren datuak: \n" + "      -Bidaiaren prezioa:  "
 					+ txartela.getPrezioa() + "€");
 
 		txtTiket.setEditable(false);
 		txtTiket.setBackground(Color.LIGHT_GRAY);
-		txtTiket.setBounds(53, 146, 529, 391);
+		txtTiket.setBounds(37, 146, 545, 391);
 		getContentPane().add(txtTiket);
 
 		btnTiketaImprimatu = new JButton("Tiketa imprimatu eta bukatu erosketa");

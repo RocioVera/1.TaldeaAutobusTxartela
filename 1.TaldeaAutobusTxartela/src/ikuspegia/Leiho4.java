@@ -12,7 +12,7 @@ import com.toedter.calendar.*;
 
 public class Leiho4 extends JFrame {
 	private static final long serialVersionUID = 1L;
-	//panelan ikusten diren bariableak
+	// panelan ikusten diren bariableak
 	private JTextField txtPrezioTot = new JTextField(), txtNan = new JTextField(), txtIzena = new JTextField(),
 			txtAbizenak = new JTextField(), txtSexua = new JTextField();
 	private JPasswordField passwordField = new JPasswordField();
@@ -22,9 +22,9 @@ public class Leiho4 extends JFrame {
 			btnErregistratuNahi = new JButton("Erregistratu"), btnErregistratu = new JButton("Erregistratu"),
 			btn_next = new JButton("Hurrengoa"), btn_prev = new JButton("Atzera"), restart = new JButton("\u2302");
 	private JDateChooser txtJaioData = new JDateChooser();
-	private JTextFieldDateEditor dataEzEditatu; //kentzeko eskuz sartu ahal izana
+	private JTextFieldDateEditor dataEzEditatu; // kentzeko eskuz sartu ahal izana
 
-	//bariableak
+	// bariableak
 	private java.util.Date jaioData;
 	private String pasahitza, nan, izena, abizenak, sexua;
 	private float guztiraPrez;
@@ -34,6 +34,7 @@ public class Leiho4 extends JFrame {
 
 	/**
 	 * login edo erregistratu ahal den panela sortu
+	 * 
 	 * @param hartutakoLinea
 	 * @param autobusa
 	 * @param ibilbideZbk
@@ -44,11 +45,14 @@ public class Leiho4 extends JFrame {
 	 * @param altuera2
 	 * @param luzera2
 	 * @author talde1
-	 * @param arrayGeltokia 
+	 * @param arrayGeltokia
+	 * @param dataEtorri
+	 * @param dataJoan
 	 */
 	public Leiho4(String hartutakoLinea, Autobusak autobusa, int ibilbideZbk, int hasierakoGeltokiaKod,
-			int amaierakoGeltokiaKod, double altuera1, double luzera1, double altuera2, double luzera2, ArrayList<Geltokiak> arrayGeltokia) {
-		//panelaren propietateak
+			int amaierakoGeltokiaKod, double altuera1, double luzera1, double altuera2, double luzera2,
+			ArrayList<Geltokiak> arrayGeltokia, java.util.Date dataJoan, java.util.Date dataEtorri) {
+		// panelaren propietateak
 		getContentPane().setLayout(null);
 		this.setBounds(350, 50, 600, 600);
 		this.setResizable(false); // neurketak ez aldatzeko
@@ -60,7 +64,8 @@ public class Leiho4 extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				Metodoak.bostgarrenLeihoa(hartutakoLinea, autobusa, ibilbideZbk, hasierakoGeltokiaKod,
-						amaierakoGeltokiaKod, guztiraPrez, nan, altuera1, luzera1, altuera2, luzera2, arrayGeltokia);
+						amaierakoGeltokiaKod, guztiraPrez, nan, altuera1, luzera1, altuera2, luzera2, arrayGeltokia,
+						dataJoan, dataEtorri);
 				dispose();
 			}
 		});
@@ -102,7 +107,7 @@ public class Leiho4 extends JFrame {
 		txtPrezioTot.setColumns(10);
 		txtPrezioTot.setBounds(281, 37, 86, 20);
 
-		//guztiraPrez kalkulatzeko metodoari deitu
+		// guztiraPrez kalkulatzeko metodoari deitu
 		guztiraPrez = Metodoak.kalkPrezioa(autobusa.getKmKontsumoa(), autobusa.getzPlaza(), altuera1, luzera1, altuera2,
 				luzera2, ibilbideZbk);
 		txtPrezioTot.setText(guztiraPrez + " €");
@@ -122,7 +127,7 @@ public class Leiho4 extends JFrame {
 
 		btnErregistratu.setVisible(false);
 
-		//hasi saioari ematerakoan agertu behar diren bariableak
+		// hasi saioari ematerakoan agertu behar diren bariableak
 		btnHasiSaioa = new JButton("Hasi saioa");
 		btnHasiSaioa.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -190,7 +195,8 @@ public class Leiho4 extends JFrame {
 		lblErroreakonektatu.setHorizontalAlignment(SwingConstants.CENTER);
 		getContentPane().add(lblErroreakonektatu);
 
-		//hasi saioari eman ostean ziurtatzeko bezeroa erregistratuta dagoela eta erosi dezakela billetea
+		// hasi saioari eman ostean ziurtatzeko bezeroa erregistratuta dagoela eta erosi
+		// dezakela billetea
 		btnKonektatu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// bbdd-ra konektatu pasahitza frogatzeko
@@ -222,8 +228,8 @@ public class Leiho4 extends JFrame {
 		lblAbizenak = new JLabel("Abizenak:");
 		lblJaioData = new JLabel("Jaio data:");
 		lblSexua = new JLabel("Sexua (V/M):");
-		
-		//erregistratu ematerakoan agertu behar diren bariableak
+
+		// erregistratu ematerakoan agertu behar diren bariableak
 		btnErregistratuNahi.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				// bisibilitatea
@@ -289,12 +295,12 @@ public class Leiho4 extends JFrame {
 				getContentPane().add(txtAbizenak);
 				txtAbizenak.addKeyListener(new KeyAdapter() {
 					public void keyTyped(KeyEvent e) {
-						//100 baino gehiago ez sartzeko
+						// 100 baino gehiago ez sartzeko
 						if (txtAbizenak.getText().length() > abizenLuzera)
 							e.consume(); // ez du godetzen
 					}
 				});
-				
+
 				// non, formatua eta zer jarri
 				lblPasahitza.setFont(new Font("Tahoma", Font.BOLD, 17));
 				lblPasahitza.setBounds(175, 360, 93, 20);
@@ -307,7 +313,7 @@ public class Leiho4 extends JFrame {
 					@SuppressWarnings("deprecation")
 					public void keyTyped(KeyEvent e) {
 						letra = e.getKeyChar();
-						//50 baino gehiago ez sartzeko
+						// 50 baino gehiago ez sartzeko
 						if (passwordField.getText().length() > pasahitzLuzera)
 							e.consume(); // ez du godetzen
 					}
@@ -323,12 +329,13 @@ public class Leiho4 extends JFrame {
 				txtSexua.addKeyListener(new KeyAdapter() {
 					public void keyTyped(KeyEvent e) {
 						letra = e.getKeyChar();
-						//bakarrik karakter bat (V,v,M,m) sartzekoa
-						if (txtSexua.getText().length() > sexuLuzera || letra != 'V' && letra != 'v' && letra != 'M' && letra != 'm')
+						// bakarrik karakter bat (V,v,M,m) sartzekoa
+						if (txtSexua.getText().length() > sexuLuzera
+								|| letra != 'V' && letra != 'v' && letra != 'M' && letra != 'm')
 							e.consume(); // ez du godetzen
 					}
 				});
-				
+
 				// non, formatua eta zer jarri
 				lblJaioData.setFont(new Font("Tahoma", Font.BOLD, 17));
 				lblJaioData.setBounds(175, 315, 90, 20);
@@ -346,7 +353,7 @@ public class Leiho4 extends JFrame {
 		btnErregistratuNahi.setBounds(313, 112, 122, 25);
 		getContentPane().add(btnErregistratuNahi);
 
-		//ziurtatzeko bete dituela datu guztiak
+		// ziurtatzeko bete dituela datu guztiak
 		btnErregistratu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// bbdd-ra konektatu pasahitza frogatzeko
@@ -358,7 +365,7 @@ public class Leiho4 extends JFrame {
 				System.out.println("jaio data: " + jaioData);
 				sexua = txtSexua.getText();
 
-				//erregistratzen duen metodoari deitu
+				// erregistratzen duen metodoari deitu
 				balErregis = Metodoak.erregistratuBezeroak(pasahitza, nan, izena, abizenak, sexua, jaioData);
 
 				if (balErregis) {
@@ -396,7 +403,5 @@ public class Leiho4 extends JFrame {
 		btnErregistratu.setBounds(233, 408, 109, 25);
 		getContentPane().add(btnErregistratu);
 
-
-		
 	}
 }

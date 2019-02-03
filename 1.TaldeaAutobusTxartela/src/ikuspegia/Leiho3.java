@@ -53,7 +53,7 @@ public class Leiho3 extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				Metodoak.laugarrenLeihoa(hartutakoLinea, autobusa, ibilbideZbk, hasierakoGeltokiaKod,
-						amaierakoGeltokiaKod, altuera1, luzera1, altuera2, luzera2, arrayGeltokia);
+						amaierakoGeltokiaKod, altuera1, luzera1, altuera2, luzera2, arrayGeltokia, dataJoan, dataEtorri);
 				dispose();
 			}
 		});
@@ -749,8 +749,8 @@ public class Leiho3 extends JFrame {
 		//gaurtik aurreko egunak bakarrik utzi 
 		dateJoan.getCalendarButton().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				dataJoan = dateJoan.getDate();
-				dataEtorri = dateEtorria.getDate();
+				dataJoan = (Date) dateJoan.getDate();
+				dataEtorri = (java.sql.Date) dateEtorria.getDate();
 				dateEtorria.setEnabled(true);
 				dateEtorria.getDateEditor().setSelectableDateRange(dataJoan, null);;
 			}
@@ -758,7 +758,7 @@ public class Leiho3 extends JFrame {
 		//joango den egunetik egunak bakarrik utzi 
 		dateEtorria.getCalendarButton().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				dataJoan = dateJoan.getDate();
+				dataJoan = (Date) dateJoan.getDate();
 				dateEtorria.getDateEditor().setSelectableDateRange(dataJoan, null);;
 
 				if (dataJoan == null) {
@@ -776,7 +776,7 @@ public class Leiho3 extends JFrame {
 		btnDataEgiaztatu1.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				dataJoan = dateJoan.getDate();
+				dataJoan = (java.sql.Date) dateJoan.getDate();
 				if (dataJoan != null) {
 					btn_next.setVisible(true);
 				}
