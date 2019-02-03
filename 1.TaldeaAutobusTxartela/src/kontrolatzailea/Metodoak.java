@@ -1,22 +1,11 @@
 package kontrolatzailea;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.PrintWriter;
+import java.io.*;
 import java.math.BigInteger;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
+import java.security.*;
 import java.text.*;
-import java.time.*;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
-import java.sql.*;
-import java.sql.Date;
-
-import com.toedter.calendar.JDateChooser;
-
 import eredua.*;
 import ikuspegia.*;
 

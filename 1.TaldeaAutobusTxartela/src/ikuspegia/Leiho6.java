@@ -4,9 +4,7 @@ import java.awt.*;
 import javax.swing.*;
 import kontrolatzailea.*;
 import java.awt.event.*;
-import java.sql.Date;
 import java.util.ArrayList;
-import java.util.concurrent.TimeUnit;
 
 public class Leiho6 extends JFrame {
 	private static final long serialVersionUID = 1L;

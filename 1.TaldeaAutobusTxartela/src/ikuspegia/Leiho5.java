@@ -74,7 +74,6 @@ public class Leiho5 extends JFrame {
 		btn_prev.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				int zIbilbidea = 5;
 				Metodoak.laugarrenLeihoa(hartutakoLinea, autobusa, ibilbideZbk, hasierakoGeltokiaKod,
 						amaierakoGeltokiaKod, altuera1, luzera1, altuera2, luzera2, arrayGeltokia,dataJoan, dataEtorri);
 
