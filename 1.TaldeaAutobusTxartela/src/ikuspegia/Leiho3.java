@@ -19,7 +19,7 @@ public class Leiho3 extends JFrame {
 	private ButtonGroup hasierakoGeltokiaGroup, amaierakoGeltokiaGroup, joanEtorriGroup;
 	private JButton btn_next = new JButton("Hurrengoa"), btn_prev = new JButton("Atzera"),
 			restart = new JButton("\u2302"), btnDataEgiaztatu1, btnDataEgiaztatu2;
-	private JLabel lblEtorria, lblJoan, lblDataEtorria, lblDataJoan, lblOrduaJoan, lblOrduaEtorria;
+	private JLabel lblEtorria, lblJoan, lblDataEtorria, lblDataJoan, lblOrduaJoan, lblOrduaEtorria, mezua;
 	private JDateChooser dateEtorria = new JDateChooser(), dateJoan = new JDateChooser();
 	private JTextFieldDateEditor dataEzEditatu; // kentzeko eskuz sartu ahal izana
 	private JRadioButton amaierakoGeltItem_1, amaierakoGeltItem_2, amaierakoGeltItem_3, amaierakoGeltItem_4,
@@ -167,6 +167,7 @@ public class Leiho3 extends JFrame {
 						altuera1 = arrayGeltokia.get(0).getAltuera();
 						luzera1 = arrayGeltokia.get(0).getLuzera();
 						amaierakoGeltItem_1.setEnabled(false);
+						amaierakoGeltokiaGroup.clearSelection();
 						if (luzera == 2)
 							amaierakoGeltItem_2.setEnabled(true);
 						else if (luzera == 3) {
@@ -228,6 +229,7 @@ public class Leiho3 extends JFrame {
 						luzera1 = arrayGeltokia.get(1).getLuzera();
 						amaierakoGeltItem_1.setEnabled(false);
 						amaierakoGeltItem_2.setEnabled(false);
+						amaierakoGeltokiaGroup.clearSelection();
 						if (luzera == 3) {
 							amaierakoGeltItem_3.setEnabled(true);
 						} else if (luzera == 4) {
@@ -283,6 +285,7 @@ public class Leiho3 extends JFrame {
 						amaierakoGeltItem_1.setEnabled(false);
 						amaierakoGeltItem_2.setEnabled(false);
 						amaierakoGeltItem_3.setEnabled(false);
+						amaierakoGeltokiaGroup.clearSelection();
 						if (luzera == 4) {
 							amaierakoGeltItem_4.setEnabled(true);
 						} else if (luzera == 5) {
@@ -333,6 +336,7 @@ public class Leiho3 extends JFrame {
 						amaierakoGeltItem_2.setEnabled(false);
 						amaierakoGeltItem_3.setEnabled(false);
 						amaierakoGeltItem_4.setEnabled(false);
+						amaierakoGeltokiaGroup.clearSelection();
 						if (luzera == 5) {
 							amaierakoGeltItem_5.setEnabled(true);
 						} else if (luzera == 6) {
@@ -379,6 +383,7 @@ public class Leiho3 extends JFrame {
 						amaierakoGeltItem_3.setEnabled(false);
 						amaierakoGeltItem_4.setEnabled(false);
 						amaierakoGeltItem_5.setEnabled(false);
+						amaierakoGeltokiaGroup.clearSelection();
 						if (luzera == 6) {
 							amaierakoGeltItem_6.setEnabled(true);
 						} else if (luzera == 7) {
@@ -421,6 +426,7 @@ public class Leiho3 extends JFrame {
 						amaierakoGeltItem_4.setEnabled(false);
 						amaierakoGeltItem_5.setEnabled(false);
 						amaierakoGeltItem_6.setEnabled(false);
+						amaierakoGeltokiaGroup.clearSelection();
 						if (luzera == 7)
 							amaierakoGeltItem_7.setEnabled(true);
 
@@ -463,6 +469,7 @@ public class Leiho3 extends JFrame {
 						amaierakoGeltItem_5.setEnabled(false);
 						amaierakoGeltItem_6.setEnabled(false);
 						amaierakoGeltItem_7.setEnabled(false);
+						amaierakoGeltokiaGroup.clearSelection();
 
 						// aurretik jarri baldin badu berriz hasteko
 						joanEtorriaMenua.setEnabled(false);
@@ -630,6 +637,7 @@ public class Leiho3 extends JFrame {
 				btnDataEgiaztatu1.setVisible(true);
 				btnDataEgiaztatu2.setVisible(false);
 				btn_next.setVisible(false);
+				dateEtorria.setCalendar(null);
 
 			}
 		});
@@ -743,6 +751,13 @@ public class Leiho3 extends JFrame {
 		getContentPane().add(JCBEtorria);
 		dataEtorriString=dataEtorri+" "+JCBEtorria.getSelectedItem();
 
+		mezua = new JLabel("* Sartu data berriro, mesedez.");
+		mezua.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		mezua.setForeground(Color.RED);
+		mezua.setBounds(329, 269, 237, 16);
+		mezua.setVisible(false);
+		getContentPane().add(mezua);
+		
 		// gaurtik aurreko egunak bakarrik utzi
 		dateJoan.getCalendarButton().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -786,16 +801,25 @@ public class Leiho3 extends JFrame {
 		// joan eta joan-etorria beteta dagoenean
 		btnDataEgiaztatu2.addActionListener(new ActionListener() {
 			@Override
-			public void actionPerformed(ActionEvent e) {
-				dataJoan = dateJoan.getDate();
-				dataEtorri = dateEtorria.getDate();
-				System.out.println(dataEtorriString);
-
-				if (dataJoan != null && dataEtorri != null) {
-					btn_next.setVisible(true);
-				}
+				public void actionPerformed(ActionEvent e) {
+					dataJoan = dateJoan.getDate();
+					dataEtorri = dateEtorria.getDate();
+					System.out.println(dataEtorriString);
+	
+					if (dataJoan != null && dataEtorri != null) {
+						btn_next.setVisible(true);
+					}
+					
+					try	{
+						if (dataJoan.after(dataEtorri)) {
+							btn_next.setVisible(false);
+							dateEtorria.setCalendar(null);
+							mezua.setVisible(true);
+						}
+					} catch (Exception g) {
+						
+					}
 			}
 		});
-
 	}
 }
