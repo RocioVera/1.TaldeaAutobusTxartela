@@ -203,7 +203,7 @@ public class Kontsultak {
 
 	// insertak
 	public static ArrayList<Bezeroak> erregistratuBezeroak(String pasahitza, String NAN, String izena, String abizenak,
-			String sexua, java.util.Date jaioData) {
+			String sexua, String jaioData) {
 		ArrayList<Bezeroak> arrayBezeroak = new ArrayList<Bezeroak>();
 		Connection konexioa = Konexioa.getConexion();
 
@@ -215,8 +215,7 @@ public class Kontsultak {
 			st.setString(1, NAN);
 			st.setString(2, izena);
 			st.setString(3, abizenak);
-			st.setDate(4, Date.valueOf(LocalDate.now()));
-			// st.setDate (4, jaioData);
+			st.setString (4, jaioData);
 			st.setString(5, sexua);
 			st.setString(6, pasahitza);
 

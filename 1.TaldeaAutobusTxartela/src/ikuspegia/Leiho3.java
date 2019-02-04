@@ -1,4 +1,3 @@
-
 package ikuspegia;
 
 import java.awt.*;
@@ -39,7 +38,7 @@ public class Leiho3 extends JFrame {
 	private double distantziaTermibusetik = 0, altuera1, luzera1, altuera2, luzera2;
 	private Date dataJoan, dataEtorri;
 	private String dataJoanString, dataEtorriString;
-	private JComboBox JCBJoan, JCBEtorria;
+	private JComboBox<String> JCBJoan, JCBEtorria;
 	private SimpleDateFormat dataFormato;
 
 	private Hashtable<String, Double> geltokiakOrdenatuta = new Hashtable<String, Double>();
@@ -67,7 +66,8 @@ public class Leiho3 extends JFrame {
 			    dataFormato = new SimpleDateFormat("yyyy-MM-dd");
 
 				dataJoanString=dataFormato.format(dataJoan)+" "+JCBJoan.getSelectedItem();
-				dataEtorriString=dataFormato.format(dataEtorri)+" "+JCBEtorria.getSelectedItem();
+				if (ibilbideZbk==2)
+					dataEtorriString=dataFormato.format(dataEtorri)+" "+JCBEtorria.getSelectedItem();
 
 				Metodoak.laugarrenLeihoa(hartutakoLinea, autobusa, ibilbideZbk, hasierakoGeltokiaKod,
 						amaierakoGeltokiaKod, altuera1, luzera1, altuera2, luzera2, arrayGeltokia, dataJoanString,
@@ -731,7 +731,7 @@ public class Leiho3 extends JFrame {
 		btnDataEgiaztatu2.setVisible(false);
 		getContentPane().add(btnDataEgiaztatu2);
 
-		JCBJoan = new JComboBox();
+		JCBJoan = new JComboBox<String>();
 		JCBJoan.setBounds(200, 174, 72, 22);
 		JCBJoan.setVisible(false);
 		JCBJoan.setEnabled(false);
@@ -740,7 +740,7 @@ public class Leiho3 extends JFrame {
 		}
 		getContentPane().add(JCBJoan);
 
-		JCBEtorria = new JComboBox();
+		JCBEtorria = new JComboBox<String>();
 		JCBEtorria.setBounds(200, 301, 72, 22);
 		JCBEtorria.setVisible(false);
 		JCBEtorria.setEnabled(false);

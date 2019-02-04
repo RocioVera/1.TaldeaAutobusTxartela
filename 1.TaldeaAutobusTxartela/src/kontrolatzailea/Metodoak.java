@@ -55,14 +55,14 @@ public class Metodoak {
 	 * @param luzera1
 	 * @param altuera1
 	 * @param arrayGeltokia
-	 * @param dataEtorri 
-	 * @param dataJoan 
+	 * @param dataEtorri
+	 * @param dataJoan
 	 */
 	public static void laugarrenLeihoa(String hartutakoLinea, Autobusak autobusa, int ibilbideZbk,
 			int hasierakoGeltokiaKod, int amaierakoGeltokiaKod, double altuera1, double luzera1, double altuera2,
 			double luzera2, ArrayList<Geltokiak> arrayGeltokia, String dataJoan, String dataEtorri) {
 		Leiho4 Leiho4 = new Leiho4(hartutakoLinea, autobusa, ibilbideZbk, hasierakoGeltokiaKod, amaierakoGeltokiaKod,
-				altuera1, luzera1, altuera2, luzera2, arrayGeltokia,dataJoan, dataEtorri);
+				altuera1, luzera1, altuera2, luzera2, arrayGeltokia, dataJoan, dataEtorri);
 		Leiho4.setVisible(true);
 
 	}
@@ -76,14 +76,15 @@ public class Metodoak {
 	 * @param luzera1
 	 * @param altuera1
 	 * @param arrayGeltokia
-	 * @param dataEtorri 
-	 * @param dataJoan 
+	 * @param dataEtorri
+	 * @param dataJoan
 	 */
 	public static void bostgarrenLeihoa(String hartutakoLinea, Autobusak autobusa, int ibilbideZbk,
 			int hasierakoGeltokiaKod, int amaierakoGeltokiaKod, float guztiraPrez, String nan, double altuera1,
-			double luzera1, double altuera2, double luzera2, ArrayList<Geltokiak> arrayGeltokia, String dataJoan, String dataEtorri) {
+			double luzera1, double altuera2, double luzera2, ArrayList<Geltokiak> arrayGeltokia, String dataJoan,
+			String dataEtorri) {
 		Leiho5 Leiho5 = new Leiho5(hartutakoLinea, autobusa, ibilbideZbk, hasierakoGeltokiaKod, amaierakoGeltokiaKod,
-				guztiraPrez, nan, altuera1, luzera1, altuera2, luzera2, arrayGeltokia,dataJoan, dataEtorri);
+				guztiraPrez, nan, altuera1, luzera1, altuera2, luzera2, arrayGeltokia, dataJoan, dataEtorri);
 		Leiho5.setVisible(true);
 
 	}
@@ -94,14 +95,15 @@ public class Metodoak {
 	 * @author talde1
 	 * @param txartela
 	 * @param geltIzenak
-	 * @param dataEtorri 
-	 * @param dataJoan 
+	 * @param dataEtorri
+	 * @param dataJoan
 	 * @param arrayGeltokia
 	 */
 	public static void seigarrenLeihoa(String hartutakoLinea, Autobusak autobusa, int ibilbideZbk,
-			int hasierakoGeltokiaKod, int amaierakoGeltokiaKod, Txartelak txartela, ArrayList<String> geltIzenak, String dataJoan, String dataEtorri) {
+			int hasierakoGeltokiaKod, int amaierakoGeltokiaKod, Txartelak txartela, ArrayList<String> geltIzenak,
+			String dataJoan, String dataEtorri) {
 		Leiho6 Leiho6 = new Leiho6(hartutakoLinea, autobusa, ibilbideZbk, hasierakoGeltokiaKod, amaierakoGeltokiaKod,
-				txartela, geltIzenak,dataJoan, dataEtorri);
+				txartela, geltIzenak, dataJoan, dataEtorri);
 		Leiho6.setVisible(true);
 
 	}
@@ -113,7 +115,6 @@ public class Metodoak {
 	 * @author talde1
 	 * @return arrayGeltokiak
 	 */
-
 	public static ArrayList<Integer> geltokiakHartu(String linea) {
 		ArrayList<GeltokiaLinea> arrayGelLinea = Kontsultak.arrayGelLinea();
 		ArrayList<Integer> arrayGeltokiak = new ArrayList<>();
@@ -241,25 +242,82 @@ public class Metodoak {
 	 * @param izena
 	 * @param abizenak
 	 * @param sexua
-	 * @param jaioData
+	 * @param jaioDataString2
 	 * @return bal
 	 * @author talde1
 	 */
-	public static boolean erregistratuBezeroak(String pasahitza, String NAN, String izena, String abizenak,
-			String sexua, java.util.Date jaioData) {
-		boolean bal = true;
+	public static boolean erregistratuBezeroak(String pasahitza, String nan, String izena, String abizenak,
+			String sexua, String jaioDataString) {
+		boolean bal = true, nanBal = false;
 		String pasaEnkr = "";
 		pasaEnkr = zifratuPasahitza(pasahitza);
 		ArrayList<Bezeroak> bezeroak = new ArrayList<>();
-		SimpleDateFormat formato = new SimpleDateFormat("dd-MM-yyyy");
+
+		//nanBal = nanBalidazioa(jaioDataString, nan);
+
 		// enviar al fitxero
-		if (pasahitza.length() == 0 || NAN.length() < 8 || izena.isEmpty() || abizenak.isEmpty() || sexua.isEmpty()
-				|| jaioData == null)
+		if (pasahitza.length() == 0 || nan.length() < 8 || izena.isEmpty() || abizenak.isEmpty() || sexua.isEmpty()
+				|| nan.length()<8)
 			bal = false;
 		if (bal)
-			bezeroak = Kontsultak.erregistratuBezeroak(pasaEnkr, NAN, izena, abizenak, sexua, jaioData);
+			bezeroak = Kontsultak.erregistratuBezeroak(pasaEnkr, nan, izena, abizenak, sexua, jaioDataString);
 
 		return bal;
+	}
+
+	public static boolean nanBalidazioa(String nan) {
+		String nanLetra = nan.substring(8);
+		String nanLarria = nanLetra.toUpperCase();
+		boolean nanBalidazioa = false;
+		System.out.println(nan.length());
+		if (nan.length() != 9 || Character.isLetter(nan.charAt(8)) == false)
+		 nanBalidazioa = false;
+
+		if (nanZenbakiak(nan) == true && nanLetra(nan).equals(nanLarria))
+			nanBalidazioa = true;
+		return nanBalidazioa;
+	}
+
+	/**
+	 * Lehenengo 8 karaktereak zenbakiak direla balidatzen du. 8 zenbaki ez badaude
+	 * NAN-a ez dago ondo
+	 * @param nan
+	 * @return balNan
+	 * @author talde1
+	 */
+	public static boolean nanZenbakiak(String nan) {
+		String zbk, nanOna = "";
+		boolean balNan = false;
+		String[] zbkArray = { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" };
+		for (int i = 0; i < nan.length() - 1; i++) { // sartutako nan-a
+			zbk = nan.substring(i, i + 1);
+			for (int j = 0; j < nan.length(); j++) { // zenbakien arraya
+				if (zbk.equals(zbkArray[j]))
+					nanOna += zbkArray[j];
+			}
+		}
+		if (nanOna.length() != 9)
+			balNan = true;
+		else
+			balNan = false;
+		return balNan;
+	}
+
+	/**
+	 * nan-aren zenbaki guztiak gehitzen ditu eta zati 23 egiten hondarra lortzen
+	 * du. Hondarra horrekin sartutako nan-aren letra bueltatzen du. 
+	 * @param nan
+	 * @return nanLarria
+	 * @author talde1
+	 */
+	public static String nanLetra(String nan) {
+		int nanGehiketa = Integer.parseInt(nan.substring(0, 8)), hondarra;
+		String nanLarria = null;
+		String[] zbkArray = { "T", "R", "W", "A", "G", "M", "Y", "F", "P", "D", "X", "B", "N", "J", "Z", "S", "Q", "V",
+				"H", "L", "C", "K", "E" };
+		hondarra = nanGehiketa % 23;
+		nanLarria = zbkArray[hondarra];
+		return nanLarria;
 	}
 
 	/**
@@ -485,7 +543,8 @@ public class Metodoak {
 		return bueltakString;
 	}
 
-	public static void fitxIdatzi(Txartelak txartela, ArrayList<String> geltIzenak, String dataJoan, String dataEtorri) {
+	public static void fitxIdatzi(Txartelak txartela, ArrayList<String> geltIzenak, String dataJoan,
+			String dataEtorri) {
 		FileWriter fitx = null;
 		PrintWriter pw = null;
 

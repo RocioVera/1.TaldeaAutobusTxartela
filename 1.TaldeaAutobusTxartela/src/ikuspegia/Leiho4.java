@@ -5,6 +5,7 @@ import javax.swing.*;
 import kontrolatzailea.*;
 import java.awt.event.*;
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -26,9 +27,10 @@ public class Leiho4 extends JFrame {
 
 	// bariableak
 	private java.util.Date jaioData;
-	private String pasahitza, nan, izena, abizenak, sexua;
+	private SimpleDateFormat dataFormato = new SimpleDateFormat("yyyy-MM-dd");
+	private String jaioDataString, pasahitza, nan, izena, abizenak, sexua;
 	private float guztiraPrez;
-	private boolean balPasa, balNan, balErregis;
+	private boolean balPasa, balNan, balErregis, nanBalErregistratu;
 	private int nanLuzera = 8, izenLuzera = 49, abizenLuzera = 99, pasahitzLuzera = 49, sexuLuzera = 0;
 	private char letra;
 
@@ -227,7 +229,7 @@ public class Leiho4 extends JFrame {
 		lblIzena = new JLabel("Izena:");
 		lblAbizenak = new JLabel("Abizenak:");
 		lblJaioData = new JLabel("Jaio data:");
-		lblSexua = new JLabel("Sexua (V/M):");
+		lblSexua = new JLabel("Sexua (E/G):");
 
 		// erregistratu ematerakoan agertu behar diren bariableak
 		btnErregistratuNahi.addActionListener(new ActionListener() {
@@ -331,7 +333,7 @@ public class Leiho4 extends JFrame {
 						letra = e.getKeyChar();
 						// bakarrik karakter bat (V,v,M,m) sartzekoa
 						if (txtSexua.getText().length() > sexuLuzera
-								|| letra != 'V' && letra != 'v' && letra != 'M' && letra != 'm')
+								|| letra != 'E' && letra != 'e' && letra != 'G' && letra != 'g')
 							e.consume(); // ez du godetzen
 					}
 				});
@@ -366,7 +368,12 @@ public class Leiho4 extends JFrame {
 				sexua = txtSexua.getText();
 
 				// erregistratzen duen metodoari deitu
-				balErregis = Metodoak.erregistratuBezeroak(pasahitza, nan, izena, abizenak, sexua, jaioData);
+				if (jaioData != null) {
+					jaioDataString = dataFormato.format(jaioData);
+				}
+				nanBalErregistratu = Metodoak.nanBalidazioa(nan);
+				if (nanBalErregistratu)
+					balErregis = Metodoak.erregistratuBezeroak(pasahitza, nan, izena, abizenak, sexua, jaioDataString);
 
 				if (balErregis) {
 					btn_next.setVisible(true);
@@ -387,6 +394,8 @@ public class Leiho4 extends JFrame {
 					lblErroreakonektatu.setVisible(true);
 					if (nan.length() < nanLuzera)
 						lblErroreakonektatu.setText("nan-a bete behar duzu");
+					else if (nanBalErregistratu == false)
+						lblErroreakonektatu.setText("nan-a txarto sartu duzu");
 					else if (izena.isEmpty())
 						lblErroreakonektatu.setText("izena bete behar duzu");
 					else if (abizenak.isEmpty())
