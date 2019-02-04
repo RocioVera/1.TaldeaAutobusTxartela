@@ -60,7 +60,7 @@ public class Metodoak {
 	 */
 	public static void laugarrenLeihoa(String hartutakoLinea, Autobusak autobusa, int ibilbideZbk,
 			int hasierakoGeltokiaKod, int amaierakoGeltokiaKod, double altuera1, double luzera1, double altuera2,
-			double luzera2, ArrayList<Geltokiak> arrayGeltokia, java.util.Date dataJoan, java.util.Date dataEtorri) {
+			double luzera2, ArrayList<Geltokiak> arrayGeltokia, String dataJoan, String dataEtorri) {
 		Leiho4 Leiho4 = new Leiho4(hartutakoLinea, autobusa, ibilbideZbk, hasierakoGeltokiaKod, amaierakoGeltokiaKod,
 				altuera1, luzera1, altuera2, luzera2, arrayGeltokia,dataJoan, dataEtorri);
 		Leiho4.setVisible(true);
@@ -81,7 +81,7 @@ public class Metodoak {
 	 */
 	public static void bostgarrenLeihoa(String hartutakoLinea, Autobusak autobusa, int ibilbideZbk,
 			int hasierakoGeltokiaKod, int amaierakoGeltokiaKod, float guztiraPrez, String nan, double altuera1,
-			double luzera1, double altuera2, double luzera2, ArrayList<Geltokiak> arrayGeltokia, java.util.Date dataJoan, java.util.Date dataEtorri) {
+			double luzera1, double altuera2, double luzera2, ArrayList<Geltokiak> arrayGeltokia, String dataJoan, String dataEtorri) {
 		Leiho5 Leiho5 = new Leiho5(hartutakoLinea, autobusa, ibilbideZbk, hasierakoGeltokiaKod, amaierakoGeltokiaKod,
 				guztiraPrez, nan, altuera1, luzera1, altuera2, luzera2, arrayGeltokia,dataJoan, dataEtorri);
 		Leiho5.setVisible(true);
@@ -99,7 +99,7 @@ public class Metodoak {
 	 * @param arrayGeltokia
 	 */
 	public static void seigarrenLeihoa(String hartutakoLinea, Autobusak autobusa, int ibilbideZbk,
-			int hasierakoGeltokiaKod, int amaierakoGeltokiaKod, Txartelak txartela, ArrayList<String> geltIzenak, java.util.Date dataJoan, java.util.Date dataEtorri) {
+			int hasierakoGeltokiaKod, int amaierakoGeltokiaKod, Txartelak txartela, ArrayList<String> geltIzenak, String dataJoan, String dataEtorri) {
 		Leiho6 Leiho6 = new Leiho6(hartutakoLinea, autobusa, ibilbideZbk, hasierakoGeltokiaKod, amaierakoGeltokiaKod,
 				txartela, geltIzenak,dataJoan, dataEtorri);
 		Leiho6.setVisible(true);
@@ -485,7 +485,7 @@ public class Metodoak {
 		return bueltakString;
 	}
 
-	public static void fitxIdatzi(Txartelak txartela, ArrayList<String> geltIzenak, java.util.Date dataJoan, java.util.Date dataEtorri) {
+	public static void fitxIdatzi(Txartelak txartela, ArrayList<String> geltIzenak, String dataJoan, String dataEtorri) {
 		FileWriter fitx = null;
 		PrintWriter pw = null;
 

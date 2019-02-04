@@ -2,10 +2,8 @@ package kontrolatzailea;
 
 public class Geltokiak {
 	private int kodGeltokia;
-	private String izena;
-	private String kalea;
-	private float altuera;
-	private float luzera;
+	private String izena, kalea;
+	private float altuera, luzera;
 	
 	public Geltokiak(int kodGeltokia, String izena, String kalea, float altuera, float luzera) {
 		
@@ -55,6 +53,11 @@ public class Geltokiak {
 	public void setLuzera(float luzera) {
 		this.luzera = luzera;
 	}
-
+	
+	@Override
+	public String toString() {
+		return "Zure geltokia: " + kodGeltokia + "\nGeltokiaren izena: " + izena + "\n Geltokiaren kalea: " + kalea + "\nGeltokiaren altuera: "
+				+ altuera + "\nGeltokiaren luzera: " + luzera;
+	}
 
 }

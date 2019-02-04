@@ -42,7 +42,7 @@ public class Leiho5 extends JFrame {
 	 */
 	public Leiho5(String hartutakoLinea, Autobusak autobusa, int ibilbideZbk, int hasierakoGeltokiaKod,
 			int amaierakoGeltokiaKod, float guztiraPrez, String nan, double altuera1, double luzera1, double altuera2,
-			double luzera2, ArrayList<Geltokiak> arrayGeltokia, java.util.Date dataJoan, java.util.Date dataEtorri) {
+			double luzera2, ArrayList<Geltokiak> arrayGeltokia, String dataJoan, String dataEtorri) {
 		// panelaren propietateak
 		getContentPane().setLayout(null);
 		this.setBounds(350, 50, 600, 600);

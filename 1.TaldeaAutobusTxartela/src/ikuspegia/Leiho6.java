@@ -29,7 +29,7 @@ public class Leiho6 extends JFrame {
 	 * @param arrayGeltokia
 	 */
 	public Leiho6(String hartutakoLinea, Autobusak autobusa, int ibilbideZbk, int hasierakoGeltokiaKod,
-			int amaierakoGeltokiaKod, Txartelak txartela, ArrayList<String> geltIzenak, java.util.Date dataJoan, java.util.Date dataEtorri) {
+			int amaierakoGeltokiaKod, Txartelak txartela, ArrayList<String> geltIzenak, String dataJoan, String dataEtorri) {
 		// panelaren propietateak
 		getContentPane().setLayout(null);
 		this.setBounds(350, 50, 600, 600);

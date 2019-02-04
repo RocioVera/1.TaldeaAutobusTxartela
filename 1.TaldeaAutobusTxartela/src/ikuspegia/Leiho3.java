@@ -1,7 +1,9 @@
+
 package ikuspegia;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.text.SimpleDateFormat;
 import java.util.*;
 import javax.swing.*;
 import com.toedter.calendar.*;
@@ -11,49 +13,65 @@ import kontrolatzailea.*;
 
 public class Leiho3 extends JFrame {
 	private static final long serialVersionUID = 1L;
-	//panelan ikusten diren bariableak
+	// panelan ikusten diren bariableak
 	private JMenuBar geltoki;
 	private JMenu hasierakoGeltokia, amaierakoGeltokia, joanEtorriaMenua;
 	private ButtonGroup hasierakoGeltokiaGroup, amaierakoGeltokiaGroup, joanEtorriGroup;
-	private JButton btn_next = new JButton("Hurrengoa"),btn_prev = new JButton("Atzera"),restart = new JButton("\u2302"),btnDataEgiaztatu1, btnDataEgiaztatu2;
-
-	private JSpinner etorriaOrdua, etorriaMinutu, joanOrdua, joanMinutu;
+	private JButton btn_next = new JButton("Hurrengoa"), btn_prev = new JButton("Atzera"),
+			restart = new JButton("\u2302"), btnDataEgiaztatu1, btnDataEgiaztatu2;
 	private JLabel lblEtorria, lblJoan, lblDataEtorria, lblDataJoan, lblOrduaJoan, lblOrduaEtorria;
 	private JDateChooser dateEtorria = new JDateChooser(), dateJoan = new JDateChooser();
-	private JTextFieldDateEditor dataEzEditatu; //kentzeko eskuz sartu ahal izana
+	private JTextFieldDateEditor dataEzEditatu; // kentzeko eskuz sartu ahal izana
 	private JRadioButton amaierakoGeltItem_1, amaierakoGeltItem_2, amaierakoGeltItem_3, amaierakoGeltItem_4,
-			amaierakoGeltItem_5, amaierakoGeltItem_6, amaierakoGeltItem_7, hasierakoGeltItem_1, hasierakoGeltItem_2, hasierakoGeltItem_3, hasierakoGeltItem_4,
-			hasierakoGeltItem_5, hasierakoGeltItem_6, hasierakoGeltItem_7,joan, joanEtorria;
+			amaierakoGeltItem_5, amaierakoGeltItem_6, amaierakoGeltItem_7, hasierakoGeltItem_1, hasierakoGeltItem_2,
+			hasierakoGeltItem_3, hasierakoGeltItem_4, hasierakoGeltItem_5, hasierakoGeltItem_6, hasierakoGeltItem_7,
+			joan, joanEtorria;
 
-	//bariableak
+	// bariableak
 	private int hasierakoGeltokiaKod, amaierakoGeltokiaKod, ibilbideZbk;
 	private ArrayList<Geltokiak> arrayGeltokia = new ArrayList<Geltokiak>();
 	private ArrayList<Double> arrayDistantzia = new ArrayList<Double>();
+	private ArrayList<String> autobusOrduak = new ArrayList<String>(
+			Arrays.asList("7:00", "7:30", "8:00", "8:30", "9:00", "9:30", "10:00", "10:30", "11:00", "11:30", "12:00",
+					"12:30", "13:00", "13:30", "14:00", "14:30", "15:00", "15:30", "16:00", "17:30", "18:00", "18:30",
+					"19:00", "19:30", "20:00", "20:30", "21:00", "21:30", "22:00", "22:30"));
+
 	private double distantziaTermibusetik = 0, altuera1, luzera1, altuera2, luzera2;
 	private Date dataJoan, dataEtorri;
+	private String dataJoanString, dataEtorriString;
+	private JComboBox JCBJoan, JCBEtorria;
+	private SimpleDateFormat dataFormato;
+
 	private Hashtable<String, Double> geltokiakOrdenatuta = new Hashtable<String, Double>();
 
 	/**
-	 * Hasierako eta amaierako geltokiak, joan/joan etorria, data eta ordua erabaki behar duen panela sortu
+	 * Hasierako eta amaierako geltokiak, joan/joan etorria, data eta ordua erabaki
+	 * behar duen panela sortu
+	 * 
 	 * @param hartutakoLinea
 	 * @param autobusa
 	 * @author talde1
 	 */
 	public Leiho3(String hartutakoLinea, Autobusak autobusa) {
-		//panelaren propietateak
+		// panelaren propietateak
 		getContentPane().setLayout(null);
 		this.setBounds(350, 50, 600, 600);
 		this.setResizable(false); // neurketak ez aldatzeko
 		this.setSize(new Dimension(600, 600));
 		this.setTitle("1.taldearen txartel salmenta");
 
-
 		// botoiak
 		btn_next.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+			    dataFormato = new SimpleDateFormat("yyyy-MM-dd");
+
+				dataJoanString=dataFormato.format(dataJoan)+" "+JCBJoan.getSelectedItem();
+				dataEtorriString=dataFormato.format(dataEtorri)+" "+JCBEtorria.getSelectedItem();
+
 				Metodoak.laugarrenLeihoa(hartutakoLinea, autobusa, ibilbideZbk, hasierakoGeltokiaKod,
-						amaierakoGeltokiaKod, altuera1, luzera1, altuera2, luzera2, arrayGeltokia, dataJoan, dataEtorri);
+						amaierakoGeltokiaKod, altuera1, luzera1, altuera2, luzera2, arrayGeltokia, dataJoanString,
+						dataEtorriString);
 				dispose();
 			}
 		});
@@ -114,15 +132,17 @@ public class Leiho3 extends JFrame {
 		amaierakoGeltokiaGroup = new ButtonGroup();
 		joanEtorriGroup = new ButtonGroup();
 
-		//ordenatu geltokiak 
+		// ordenatu geltokiak
 		arrayGeltokia = Kontsultak.geltokiakAtera((hartutakoLinea));
 
 		for (int i = 0; i < arrayGeltokia.size(); i++) {
-			//"Termibus-Bilbao" desberdin denean 
+			// "Termibus-Bilbao" desberdin denean
 			if (!arrayGeltokia.get(0).getIzena().equals(arrayGeltokia.get(i).getIzena())) {
-				//termibusekoAltuera = arrayGeltokia.get(0).getAltuera()    termibusekoLuzera = arrayGeltokia.get(0).getLuzera()
-				distantziaTermibusetik = Metodoak.kalkulatuDistantzia(arrayGeltokia.get(0).getAltuera(), arrayGeltokia.get(0).getLuzera(),
-						arrayGeltokia.get(i).getAltuera(), arrayGeltokia.get(i).getLuzera());
+				// termibusekoAltuera = arrayGeltokia.get(0).getAltuera() termibusekoLuzera =
+				// arrayGeltokia.get(0).getLuzera()
+				distantziaTermibusetik = Metodoak.kalkulatuDistantzia(arrayGeltokia.get(0).getAltuera(),
+						arrayGeltokia.get(0).getLuzera(), arrayGeltokia.get(i).getAltuera(),
+						arrayGeltokia.get(i).getLuzera());
 				arrayDistantzia.add(distantziaTermibusetik);
 				geltokiakOrdenatuta.put(arrayGeltokia.get(i).getIzena(), distantziaTermibusetik);
 			}
@@ -131,7 +151,7 @@ public class Leiho3 extends JFrame {
 		geltokiakOrdenatuta.get(arrayGeltokia);
 		System.out.println(geltokiakOrdenatuta);
 
-		//pantailaratu geltokiak ordenean
+		// pantailaratu geltokiak ordenean
 		int luzera = arrayGeltokia.size();
 		for (int i = 0; i <= luzera - 1; i++) {
 			if (i == 1) {
@@ -175,21 +195,19 @@ public class Leiho3 extends JFrame {
 							amaierakoGeltItem_6.setEnabled(true);
 							amaierakoGeltItem_7.setEnabled(true);
 						}
-						//aurretik jarri baldin badu berriz hasteko
+						// aurretik jarri baldin badu berriz hasteko
 						joanEtorriaMenua.setEnabled(false);
 						lblJoan.setVisible(false);
 						lblDataJoan.setVisible(false);
 						lblOrduaJoan.setVisible(false);
 						dateJoan.setVisible(false);
-						joanMinutu.setVisible(false);
-						joanOrdua.setVisible(false);
+						JCBJoan.setVisible(false);
 
 						lblEtorria.setVisible(false);
 						lblDataEtorria.setVisible(false);
 						lblOrduaEtorria.setVisible(false);
 						dateEtorria.setVisible(false);
-						etorriaMinutu.setVisible(false);
-						etorriaOrdua.setVisible(false);
+						JCBEtorria.setVisible(false);
 						btnDataEgiaztatu2.setVisible(false);
 						btnDataEgiaztatu1.setVisible(false);
 					}
@@ -231,21 +249,19 @@ public class Leiho3 extends JFrame {
 							amaierakoGeltItem_6.setEnabled(true);
 							amaierakoGeltItem_7.setEnabled(true);
 						}
-						//aurretik jarri baldin badu berriz hasteko
+						// aurretik jarri baldin badu berriz hasteko
 						joanEtorriaMenua.setEnabled(false);
 						lblJoan.setVisible(false);
 						lblDataJoan.setVisible(false);
 						lblOrduaJoan.setVisible(false);
 						dateJoan.setVisible(false);
-						joanMinutu.setVisible(false);
-						joanOrdua.setVisible(false);
+						JCBJoan.setVisible(false);
 
 						lblEtorria.setVisible(false);
 						lblDataEtorria.setVisible(false);
 						lblOrduaEtorria.setVisible(false);
 						dateEtorria.setVisible(false);
-						etorriaMinutu.setVisible(false);
-						etorriaOrdua.setVisible(false);
+						JCBEtorria.setVisible(false);
 						btnDataEgiaztatu2.setVisible(false);
 						btnDataEgiaztatu1.setVisible(false);
 					}
@@ -282,21 +298,19 @@ public class Leiho3 extends JFrame {
 							amaierakoGeltItem_6.setEnabled(true);
 							amaierakoGeltItem_7.setEnabled(true);
 						}
-						//aurretik jarri baldin badu berriz hasteko
+						// aurretik jarri baldin badu berriz hasteko
 						joanEtorriaMenua.setEnabled(false);
 						lblJoan.setVisible(false);
 						lblDataJoan.setVisible(false);
 						lblOrduaJoan.setVisible(false);
 						dateJoan.setVisible(false);
-						joanMinutu.setVisible(false);
-						joanOrdua.setVisible(false);
+						JCBJoan.setVisible(false);
 
 						lblEtorria.setVisible(false);
 						lblDataEtorria.setVisible(false);
 						lblOrduaEtorria.setVisible(false);
 						dateEtorria.setVisible(false);
-						etorriaMinutu.setVisible(false);
-						etorriaOrdua.setVisible(false);
+						JCBEtorria.setVisible(false);
 						btnDataEgiaztatu2.setVisible(false);
 						btnDataEgiaztatu1.setVisible(false);
 					}
@@ -329,21 +343,19 @@ public class Leiho3 extends JFrame {
 							amaierakoGeltItem_6.setEnabled(true);
 							amaierakoGeltItem_7.setEnabled(true);
 						}
-						//aurretik jarri baldin badu berriz hasteko
+						// aurretik jarri baldin badu berriz hasteko
 						joanEtorriaMenua.setEnabled(false);
 						lblJoan.setVisible(false);
 						lblDataJoan.setVisible(false);
 						lblOrduaJoan.setVisible(false);
 						dateJoan.setVisible(false);
-						joanMinutu.setVisible(false);
-						joanOrdua.setVisible(false);
+						JCBJoan.setVisible(false);
 
 						lblEtorria.setVisible(false);
 						lblDataEtorria.setVisible(false);
 						lblOrduaEtorria.setVisible(false);
 						dateEtorria.setVisible(false);
-						etorriaMinutu.setVisible(false);
-						etorriaOrdua.setVisible(false);
+						JCBEtorria.setVisible(false);
 						btnDataEgiaztatu2.setVisible(false);
 						btnDataEgiaztatu1.setVisible(false);
 					}
@@ -373,21 +385,19 @@ public class Leiho3 extends JFrame {
 							amaierakoGeltItem_6.setEnabled(true);
 							amaierakoGeltItem_7.setEnabled(true);
 						}
-						//aurretik jarri baldin badu berriz hasteko
+						// aurretik jarri baldin badu berriz hasteko
 						joanEtorriaMenua.setEnabled(false);
 						lblJoan.setVisible(false);
 						lblDataJoan.setVisible(false);
 						lblOrduaJoan.setVisible(false);
 						dateJoan.setVisible(false);
-						joanMinutu.setVisible(false);
-						joanOrdua.setVisible(false);
+						JCBJoan.setVisible(false);
 
 						lblEtorria.setVisible(false);
 						lblDataEtorria.setVisible(false);
 						lblOrduaEtorria.setVisible(false);
 						dateEtorria.setVisible(false);
-						etorriaMinutu.setVisible(false);
-						etorriaOrdua.setVisible(false);
+						JCBEtorria.setVisible(false);
 						btnDataEgiaztatu2.setVisible(false);
 						btnDataEgiaztatu1.setVisible(false);
 					}
@@ -413,22 +423,20 @@ public class Leiho3 extends JFrame {
 						amaierakoGeltItem_6.setEnabled(false);
 						if (luzera == 7)
 							amaierakoGeltItem_7.setEnabled(true);
-						
-						//aurretik jarri baldin badu berriz hasteko
+
+						// aurretik jarri baldin badu berriz hasteko
 						joanEtorriaMenua.setEnabled(false);
 						lblJoan.setVisible(false);
 						lblDataJoan.setVisible(false);
 						lblOrduaJoan.setVisible(false);
 						dateJoan.setVisible(false);
-						joanMinutu.setVisible(false);
-						joanOrdua.setVisible(false);
+						JCBJoan.setVisible(false);
 
 						lblEtorria.setVisible(false);
 						lblDataEtorria.setVisible(false);
 						lblOrduaEtorria.setVisible(false);
 						dateEtorria.setVisible(false);
-						etorriaMinutu.setVisible(false);
-						etorriaOrdua.setVisible(false);
+						JCBEtorria.setVisible(false);
 						btnDataEgiaztatu2.setVisible(false);
 						btnDataEgiaztatu1.setVisible(false);
 					}
@@ -445,7 +453,7 @@ public class Leiho3 extends JFrame {
 				hasierakoGeltItem_7.addActionListener(new ActionListener() {
 					@Override
 					public void actionPerformed(ActionEvent e) {
-						//amaierako geltokietan zein bai utzi
+						// amaierako geltokietan zein bai utzi
 						amaierakoGeltokia.setEnabled(true);
 						hasierakoGeltokiaGroup.add(hasierakoGeltItem_7);
 						amaierakoGeltItem_1.setEnabled(false);
@@ -456,21 +464,19 @@ public class Leiho3 extends JFrame {
 						amaierakoGeltItem_6.setEnabled(false);
 						amaierakoGeltItem_7.setEnabled(false);
 
-						//aurretik jarri baldin badu berriz hasteko
+						// aurretik jarri baldin badu berriz hasteko
 						joanEtorriaMenua.setEnabled(false);
 						lblJoan.setVisible(false);
 						lblDataJoan.setVisible(false);
 						lblOrduaJoan.setVisible(false);
 						dateJoan.setVisible(false);
-						joanMinutu.setVisible(false);
-						joanOrdua.setVisible(false);
+						JCBJoan.setVisible(false);
 
 						lblEtorria.setVisible(false);
 						lblDataEtorria.setVisible(false);
 						lblOrduaEtorria.setVisible(false);
 						dateEtorria.setVisible(false);
-						etorriaMinutu.setVisible(false);
-						etorriaOrdua.setVisible(false);
+						JCBEtorria.setVisible(false);
 						btnDataEgiaztatu2.setVisible(false);
 						btnDataEgiaztatu1.setVisible(false);
 					}
@@ -605,7 +611,7 @@ public class Leiho3 extends JFrame {
 		joanEtorriGroup.add(joan);
 		joanEtorriGroup.add(joanEtorria);
 
-		//joateko bidaia bakarrik eguna eta ordua erabaki
+		// joateko bidaia bakarrik eguna eta ordua erabaki
 		joan.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -614,21 +620,17 @@ public class Leiho3 extends JFrame {
 				lblDataJoan.setVisible(true);
 				lblOrduaJoan.setVisible(true);
 				dateJoan.setVisible(true);
-				joanMinutu.setVisible(true);
-				joanOrdua.setVisible(true);
+				JCBJoan.setVisible(true);
 
 				lblEtorria.setVisible(false);
 				lblDataEtorria.setVisible(false);
 				lblOrduaEtorria.setVisible(false);
 				dateEtorria.setVisible(false);
-				etorriaMinutu.setVisible(false);
-				etorriaOrdua.setVisible(false);
+				JCBEtorria.setVisible(false);
 				btnDataEgiaztatu1.setVisible(true);
 				btnDataEgiaztatu2.setVisible(false);
 				btn_next.setVisible(false);
 
-				etorriaMinutu.setValue(0);
-				etorriaOrdua.setValue(0);
 			}
 		});
 
@@ -661,19 +663,7 @@ public class Leiho3 extends JFrame {
 		dateJoan.getJCalendar().setMinSelectableDate(new Date());
 		getContentPane().add(dateJoan);
 
-		joanMinutu = new JSpinner();
-		joanMinutu.setModel(new SpinnerNumberModel(0, 0, 59, 1));
-		joanMinutu.setBounds(258, 176, 51, 20);
-		joanMinutu.setVisible(false);
-		getContentPane().add(joanMinutu);
-
-		joanOrdua = new JSpinner();
-		joanOrdua.setModel(new SpinnerNumberModel(0, 0, 23, 1));
-		joanOrdua.setBounds(192, 176, 51, 20);
-		joanOrdua.setVisible(false);
-		getContentPane().add(joanOrdua);
-
-		//joan eta etorria bidaia eguna eta ordua erabaki
+		// joan eta etorria bidaia eguna eta ordua erabaki
 		joanEtorria.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -682,15 +672,14 @@ public class Leiho3 extends JFrame {
 				lblDataJoan.setVisible(true);
 				lblOrduaJoan.setVisible(true);
 				dateJoan.setVisible(true);
-				joanMinutu.setVisible(true);
-				joanOrdua.setVisible(true);
+				JCBJoan.setVisible(true);
 
 				lblEtorria.setVisible(true);
 				lblDataEtorria.setVisible(true);
 				lblOrduaEtorria.setVisible(true);
 				dateEtorria.setVisible(true);
-				etorriaMinutu.setVisible(true);
-				etorriaOrdua.setVisible(true);
+				JCBEtorria.setVisible(true);
+
 				btnDataEgiaztatu2.setVisible(true);
 				btnDataEgiaztatu1.setVisible(false);
 				btn_next.setVisible(false);
@@ -724,18 +713,6 @@ public class Leiho3 extends JFrame {
 		dataEzEditatu.setEditable(false);
 		getContentPane().add(dateEtorria);
 
-		etorriaMinutu = new JSpinner();
-		etorriaMinutu.setModel(new SpinnerNumberModel(0, 0, 59, 1));
-		etorriaMinutu.setBounds(266, 300, 51, 20);
-		etorriaMinutu.setVisible(false);
-		getContentPane().add(etorriaMinutu);
-
-		etorriaOrdua = new JSpinner();
-		etorriaOrdua.setModel(new SpinnerNumberModel(0, 0, 23, 1));
-		etorriaOrdua.setBounds(200, 300, 51, 20);
-		etorriaOrdua.setVisible(false);
-		getContentPane().add(etorriaOrdua);
-
 		btnDataEgiaztatu1 = new JButton("Data egiaztatu");
 		btnDataEgiaztatu1.setBounds(423, 421, 122, 25);
 		btnDataEgiaztatu1.setVisible(false);
@@ -746,20 +723,43 @@ public class Leiho3 extends JFrame {
 		btnDataEgiaztatu2.setVisible(false);
 		getContentPane().add(btnDataEgiaztatu2);
 
-		//gaurtik aurreko egunak bakarrik utzi 
+		JCBJoan = new JComboBox();
+		JCBJoan.setBounds(200, 174, 72, 22);
+		JCBJoan.setVisible(false);
+		JCBJoan.setEnabled(false);
+		for (int i=0;i<autobusOrduak.size();i++){
+			JCBJoan.addItem(autobusOrduak.get(i));
+		}
+		getContentPane().add(JCBJoan);
+
+		JCBEtorria = new JComboBox();
+		JCBEtorria.setBounds(200, 301, 72, 22);
+		JCBEtorria.setVisible(false);
+		JCBEtorria.setEnabled(false);
+
+		for (int i=0;i<autobusOrduak.size();i++){
+			JCBEtorria.addItem(autobusOrduak.get(i));
+		}
+		getContentPane().add(JCBEtorria);
+		dataEtorriString=dataEtorri+" "+JCBEtorria.getSelectedItem();
+
+		// gaurtik aurreko egunak bakarrik utzi
 		dateJoan.getCalendarButton().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				JCBJoan.setEnabled(true);
 				dataJoan = (Date) dateJoan.getDate();
 				dataEtorri = (Date) dateEtorria.getDate();
 				dateEtorria.setEnabled(true);
-				dateEtorria.getDateEditor().setSelectableDateRange(dataJoan, null);;
+				dateEtorria.getDateEditor().setSelectableDateRange(dataJoan, null);
+				
 			}
 		});
-		//joango den egunetik egunak bakarrik utzi 
+		// joango den egunetik egunak bakarrik utzi
 		dateEtorria.getCalendarButton().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				JCBEtorria.setEnabled(true);
 				dataJoan = (Date) dateJoan.getDate();
-				dateEtorria.getDateEditor().setSelectableDateRange(dataJoan, null);;
+				dateEtorria.getDateEditor().setSelectableDateRange(dataJoan, null);
 
 				if (dataJoan == null) {
 					dateEtorria.setEnabled(false);
@@ -772,7 +772,7 @@ public class Leiho3 extends JFrame {
 			}
 		});
 
-		//joan beteta dagoenean
+		// joan beteta dagoenean
 		btnDataEgiaztatu1.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -783,12 +783,13 @@ public class Leiho3 extends JFrame {
 			}
 		});
 
-		//joan eta joan-etorria beteta dagoenean
+		// joan eta joan-etorria beteta dagoenean
 		btnDataEgiaztatu2.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				dataJoan = dateJoan.getDate();
 				dataEtorri = dateEtorria.getDate();
+				System.out.println(dataEtorriString);
 
 				if (dataJoan != null && dataEtorri != null) {
 					btn_next.setVisible(true);
