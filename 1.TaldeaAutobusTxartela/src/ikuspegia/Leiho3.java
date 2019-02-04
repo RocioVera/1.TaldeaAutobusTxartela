@@ -750,7 +750,7 @@ public class Leiho3 extends JFrame {
 		dateJoan.getCalendarButton().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				dataJoan = (Date) dateJoan.getDate();
-				dataEtorri = (java.sql.Date) dateEtorria.getDate();
+				dataEtorri = (Date) dateEtorria.getDate();
 				dateEtorria.setEnabled(true);
 				dateEtorria.getDateEditor().setSelectableDateRange(dataJoan, null);;
 			}
