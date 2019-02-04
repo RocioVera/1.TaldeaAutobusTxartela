@@ -24,12 +24,13 @@ public class Leiho6 extends JFrame {
 	 * @author talde1
 	 * @param txartela
 	 * @param geltIzenak
-	 * @param dataEtorri 
-	 * @param dataJoan 
+	 * @param dataEtorri
+	 * @param dataJoan
 	 * @param arrayGeltokia
 	 */
 	public Leiho6(String hartutakoLinea, Autobusak autobusa, int ibilbideZbk, int hasierakoGeltokiaKod,
-			int amaierakoGeltokiaKod, Txartelak txartela, ArrayList<String> geltIzenak, String dataJoan, String dataEtorri) {
+			int amaierakoGeltokiaKod, Txartelak txartela, ArrayList<String> geltIzenak, String dataJoan,
+			String dataEtorri) {
 		// panelaren propietateak
 		getContentPane().setLayout(null);
 		this.setBounds(350, 50, 600, 600);
@@ -57,21 +58,19 @@ public class Leiho6 extends JFrame {
 			txtTiket.setText("\n Ibilbidearen datuak:  \n" + "\t-Hartutako linea:  " + txartela.getkodLinea()
 					+ "\n\t-Zure autobusaren kodigoa:  " + txartela.getkodBus() + "\n\t-Hasierako geltokia:  "
 					+ geltIzenak.get(0) + "\n\t-Amaierako geltokia:  " + geltIzenak.get(1)
-					+ "\n\t-Hartutako eguna eta ordua: " + dataJoan + " " /*+ txartela.getOrdua()*/
-					+ "\n     \n\n Bezeroaren datuak: \n\t-NAN: " + txartela.getNan()
-					+ "\n\n Erosketaren datuak: \n\t-Bidaiaren prezioa:  " + txartela.getPrezioa() + "€");
-	
+					+ "\n\t-Hartutako eguna eta ordua: " + dataJoan + " " + "\n     \n\n Bezeroaren datuak: \n\t-NAN: "
+					+ txartela.getNan() + "\n\n Erosketaren datuak: \n\t-Bidaiaren prezioa:  " + txartela.getPrezioa()
+					+ "€");
+
 		else if (txartela.getzIbilbidea() == 2)
 			txtTiket.setText(" Ibilbidearen datuak:  \n" + "      -Hartutako linea:  " + txartela.getkodLinea()
 					+ "      -Zure autobusaren kodigoa:  " + txartela.getkodBus()
 					+ "\n\n      *Lehenengo bidaia\n\t-Hasierako geltokia:  " + geltIzenak.get(0)
-					+ "\n\t-Amaierako geltokia:  " + geltIzenak.get(1) + "\n\t-Hartutako eguna eta ordua: "
-					+ dataJoan + " " /*+ txartela.getOrdua()*/
+					+ "\n\t-Amaierako geltokia:  " + geltIzenak.get(1) + "\n\t-Hartutako eguna eta ordua: " + dataJoan
 					+ "\n      *Bigarren bidaia\n\t-Hasierako geltokia:  " + geltIzenak.get(1)
-					+ "\n\t-Amaierako geltokia:  " + geltIzenak.get(0) + "\n\t-Hartutako eguna eta ordua: "
-					+ dataEtorri + " " /*+ txartela.getOrdua()*/ + "\n\n Bezeroaren datuak: \n" + "      -NAN: "
-					+ txartela.getNan() + "\n\n Erosketaren datuak: \n" + "      -Bidaiaren prezioa:  "
-					+ txartela.getPrezioa() + "€");
+					+ "\n\t-Amaierako geltokia:  " + geltIzenak.get(0) + "\n\t-Hartutako eguna eta ordua: " + dataEtorri
+					+ "\n\n Bezeroaren datuak: \n" + "      -NAN: " + txartela.getNan() + "\n\n Erosketaren datuak: \n"
+					+ "      -Bidaiaren prezioa:  " + txartela.getPrezioa() + "€");
 
 		txtTiket.setEditable(false);
 		txtTiket.setBackground(Color.LIGHT_GRAY);

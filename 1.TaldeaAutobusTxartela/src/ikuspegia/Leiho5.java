@@ -330,7 +330,7 @@ public class Leiho5 extends JFrame {
 					txtBueltak.setText(diruFaltaString + " €");
 					txtDiruFalta.setText("00.00 €");
 					// txanponTot
-					txanponTot = Metodoak.bueltakZerrenda(diruFalta);
+					txanponTot = Metodoak.diruBueltakZerrenda(diruFalta);
 					txtrTxtareatxanponbueltak.setText(txanponTot);
 
 				} else {

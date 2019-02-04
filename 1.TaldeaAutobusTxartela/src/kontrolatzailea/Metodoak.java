@@ -48,7 +48,6 @@ public class Metodoak {
 
 	/**
 	 * Leiho4 sortu
-	 * 
 	 * @author talde1
 	 * @param luzera2
 	 * @param altuera2
@@ -236,28 +235,25 @@ public class Metodoak {
 	/**
 	 * Bezeroen erregistroa egin datu basean eta hutzik baldin badago sartu behar
 	 * den daturen bat balidazioa bueltatu
-	 * 
 	 * @param pasahitza
 	 * @param NAN
 	 * @param izena
 	 * @param abizenak
 	 * @param sexua
-	 * @param jaioDataString2
+	 * @param jaioDataString
 	 * @return bal
 	 * @author talde1
 	 */
 	public static boolean erregistratuBezeroak(String pasahitza, String nan, String izena, String abizenak,
 			String sexua, String jaioDataString) {
-		boolean bal = true, nanBal = false;
+		boolean bal = true;
 		String pasaEnkr = "";
 		pasaEnkr = zifratuPasahitza(pasahitza);
 		ArrayList<Bezeroak> bezeroak = new ArrayList<>();
 
-		//nanBal = nanBalidazioa(jaioDataString, nan);
-
-		// enviar al fitxero
+		// fitxeroari bidali
 		if (pasahitza.length() == 0 || nan.length() < 8 || izena.isEmpty() || abizenak.isEmpty() || sexua.isEmpty()
-				|| nan.length()<8)
+				|| nan.length() < 8)
 			bal = false;
 		if (bal)
 			bezeroak = Kontsultak.erregistratuBezeroak(pasaEnkr, nan, izena, abizenak, sexua, jaioDataString);
@@ -271,7 +267,7 @@ public class Metodoak {
 		boolean nanBalidazioa = false;
 		System.out.println(nan.length());
 		if (nan.length() != 9 || Character.isLetter(nan.charAt(8)) == false)
-		 nanBalidazioa = false;
+			nanBalidazioa = false;
 
 		if (nanZenbakiak(nan) == true && nanLetra(nan).equals(nanLarria))
 			nanBalidazioa = true;
@@ -281,6 +277,7 @@ public class Metodoak {
 	/**
 	 * Lehenengo 8 karaktereak zenbakiak direla balidatzen du. 8 zenbaki ez badaude
 	 * NAN-a ez dago ondo
+	 * 
 	 * @param nan
 	 * @return balNan
 	 * @author talde1
@@ -305,7 +302,8 @@ public class Metodoak {
 
 	/**
 	 * nan-aren zenbaki guztiak gehitzen ditu eta zati 23 egiten hondarra lortzen
-	 * du. Hondarra horrekin sartutako nan-aren letra bueltatzen du. 
+	 * du. Hondarra horrekin sartutako nan-aren letra bueltatzen du.
+	 * 
 	 * @param nan
 	 * @return nanLarria
 	 * @author talde1
@@ -461,7 +459,7 @@ public class Metodoak {
 	 * @author talde1
 	 * @return bueltakString
 	 */
-	public static String bueltakZerrenda(double diruFalta) {
+	public static String diruBueltakZerrenda(double diruFalta) {
 		String bueltakString = "";
 		double bueltak = 0;
 
@@ -521,12 +519,12 @@ public class Metodoak {
 				} else if (bueltak >= 0.1) {
 					bueltak = bueltak - 0.1;
 					bueltak = Math.round(bueltak * 100.0) / 100.0;
-					bueltakString = bueltakString + "0.1€-ko moneta \n ";
+					bueltakString = bueltakString + "0.1€-ko moneta \n";
 
 				} else if (bueltak >= 0.05) {
 					bueltak = bueltak - 0.05;
 					bueltak = Math.round(bueltak * 100.0) / 100.0;
-					bueltakString = bueltakString + "0.05€-ko moneta \n ";
+					bueltakString = bueltakString + "0.05€-ko moneta \n";
 
 				} else if (bueltak >= 0.02) {
 					bueltak = bueltak - 0.02;
@@ -536,7 +534,7 @@ public class Metodoak {
 				} else if (bueltak >= 0.01) {
 					bueltak = bueltak - 0.01;
 					bueltak = Math.round(bueltak * 100.0) / 100.0;
-					bueltakString = bueltakString + "0.01€-ko moneta \n ";
+					bueltakString = bueltakString + "0.01€-ko moneta \n";
 				}
 			}
 		}
@@ -553,7 +551,7 @@ public class Metodoak {
 			pw = new PrintWriter(fitx);
 
 			pw.println("Ibilbidearen datuak:  \n" + "\tHartutako linea:  " + txartela.getkodLinea() + "\t\t\t\t"
-					+ "Zure autobusaren kodigoa:  " + txartela.getkodBus() + "\n\t" + "Hasierako geltokia:  "
+					+ "\tZure autobusaren kodigoa:  " + txartela.getkodBus() + "\n\t" + "Hasierako geltokia:  "
 					+ geltIzenak.get(0) + "\t\t\t" + "Amaierako geltokia:  " + geltIzenak.get(1) + "\n");
 			pw.println("Bezeroaren datuak:  \n" + "\tNAN:  " + txartela.getNan() + "\n");
 			if (txartela.getzIbilbidea() == 1)
@@ -564,7 +562,6 @@ public class Metodoak {
 			pw.println("\n\tBidaiaren prezioa:  " + txartela.getPrezioa() + "\n");
 			pw.println(
 					"******************************************************************************************************************************************");
-
 			pw.println("");
 		} catch (Exception e) {
 			e.printStackTrace();
