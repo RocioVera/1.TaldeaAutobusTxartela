@@ -638,7 +638,7 @@ public class Leiho3 extends JFrame {
 				btnDataEgiaztatu2.setVisible(false);
 				btn_next.setVisible(false);
 				dateEtorria.setCalendar(null);
-
+				JCBEtorria.setSelectedIndex((Integer) 0);
 			}
 		});
 
@@ -784,6 +784,7 @@ public class Leiho3 extends JFrame {
 					dateEtorria.getJCalendar().setMinSelectableDate(dataJoan);
 					dateEtorria.getJCalendar().setMaxSelectableDate(null);
 				}
+				
 			}
 		});
 
