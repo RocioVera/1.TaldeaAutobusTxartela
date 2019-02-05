@@ -37,7 +37,9 @@ public class Leiho3 extends JFrame {
 
 	private double distantziaTermibusetik = 0, altuera1, luzera1, altuera2, luzera2;
 	private Date dataJoan, dataEtorri;
+	private int CBJoan = 0;
 	private String dataJoanString, dataEtorriString;
+
 	private JComboBox<String> JCBJoan, JCBEtorria;
 	private SimpleDateFormat dataFormato;
 
@@ -785,6 +787,11 @@ public class Leiho3 extends JFrame {
 					dateEtorria.getJCalendar().setMaxSelectableDate(null);
 				}
 				
+				/*CBJoan = JCBJoan.getSelectedIndex();				
+				for(int i = 0; i > CBJoan; i++) {
+					JCBEtorria.setSelectedIndex(i);
+					JCBEtorria.setSelectedItem(false);
+				}*/
 			}
 		});
 
