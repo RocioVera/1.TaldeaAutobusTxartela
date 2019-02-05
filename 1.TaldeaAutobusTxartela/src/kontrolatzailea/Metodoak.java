@@ -207,6 +207,7 @@ public class Metodoak {
 		pasaEnkr = zifratuPasahitza(pasahitza);
 		ArrayList<Bezeroak> bezeroak = new ArrayList<>();
 		bezeroak = Kontsultak.bezeroDatuak();
+		System.out.println(bezeroak.size());
 		for (Bezeroak bezeroak2 : bezeroak) {
 			if (pasaEnkr.equals(bezeroak2.getPasahitza()))
 				bal = true;

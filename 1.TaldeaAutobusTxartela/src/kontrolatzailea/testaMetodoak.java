@@ -2,9 +2,22 @@ package kontrolatzailea;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
+
+import org.junit.BeforeClass;
 import org.junit.jupiter.api.Test;
 
 class testaMetodoak {
+	@BeforeClass
+	public void KonexioaTesta() {
+		Connection konexioa = Konexioa.getConexion();
+		Statement st = null;
+		ResultSet rs = null;
+
+		System.out.println(konexioa);
+	}
 	// double
 	// Zenbat diru sartzen duen jakiteko egiteko - froga
 	@Test
@@ -35,10 +48,7 @@ class testaMetodoak {
 	// Bi geltokien harteko distantzia kalkulatu
 	@Test
 	public void kalkulatuDistantziaTesta() {
-		assertEquals(Metodoak.kalkulatuDistantzia(43.2614, -2.94974, 43.3759, -2.99183), 13.179291549936597); // termibus
-																												// -
-																												// metro
-																												// larrabasterra
+		assertEquals(Metodoak.kalkulatuDistantzia(43.2614, -2.94974, 43.3759, -2.99183), 13.179291549936597); // termibus -  metro  larrabasterra
 	}
 
 	// float
@@ -47,10 +57,7 @@ class testaMetodoak {
 	public void kalkPrezioaTesta() {
 		float kontsumoa = (float) 0.32;
 		float erantzuna = (float) 0.1;
-		assertEquals(Metodoak.kalkPrezioa(kontsumoa, 40, 43.2614, -2.94974, 43.3759, -2.99183, 1), erantzuna); // termibus
-																												// -
-																												// metro
-																												// larrabasterra
+		assertEquals(Metodoak.kalkPrezioa(kontsumoa, 40, 43.2614, -2.94974, 43.3759, -2.99183, 1), erantzuna); // termibus -metro larrabasterra
 	}
 
 	// String
@@ -83,35 +90,42 @@ class testaMetodoak {
 
 //TXARTO
 	//zifratuPasahitza
+	@Test
 	public void zifratuPasahitzaTesta() {
 		String pasahitza="123456";
-		System.out.println(Metodoak.zifratuPasahitza(pasahitza));
 		assertEquals(Metodoak.zifratuPasahitza(pasahitza), "e10adc3949ba59abbe56e057f20f883e");
 
 	}
 
-//TXARTO
 	//boolean
 	// Sartutako pasahitza (zifratuta) ea datu basean dagoen ala ez
+	@Test
 	public void frogatuPasahitzaTesta() {
-		String pasahitzaOna="abracadabra";
-		assertTrue(Metodoak.frogatuPasahitza(pasahitzaOna));
-
-		String pasahitzaTxarto="abracadabr";
+		String pasahitzaTxarto="abracadabra";
 		assertFalse(Metodoak.frogatuPasahitza(pasahitzaTxarto));
+
+		String pasahitzaOna="123456";
+		assertTrue(Metodoak.frogatuPasahitza(pasahitzaOna));
 	}
 	
 	//Sartutako nan-a ea datu baaean dagoen ala ez
+	@Test
 	public void frogatuNANTesta() {
-		String nan="12345678Z";
-		assertFalse(Metodoak.frogatuNAN(nan));
+		String nanOna="12345678Z";
+		String nanTxarto="12345678x";
+		assertFalse(Metodoak.frogatuNAN(nanTxarto));
+		assertTrue(Metodoak.frogatuNAN(nanOna));
 
+		
 	}
 	//frogatuNAN
+	@Test
 	public void nanBalidazioaTesta() {
-		String nan="12345678Z";
-		assertTrue(Metodoak.nanBalidazioa(nan));
-		assertFalse(Metodoak.nanBalidazioa(nan));
+		String nanOna="12345678Z";
+		String nanTxarto="12345678x";
+		assertTrue(Metodoak.nanBalidazioa(nanOna));
+		assertFalse(Metodoak.nanBalidazioa(nanTxarto));
+
 
 	}
 }
