@@ -3,7 +3,6 @@ package kontrolatzailea;
 import java.io.*;
 import java.math.BigInteger;
 import java.security.*;
-import java.text.*;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 import eredua.*;
@@ -12,18 +11,15 @@ import ikuspegia.*;
 public class Metodoak {
 	/**
 	 * Leiho1 sortu
-	 * 
 	 * @author talde1
 	 */
 	public static void lehenengoLeihoa() {
 		Leiho1 Leiho1 = new Leiho1();
 		Leiho1.setVisible(true);
-
 	}
 
 	/**
 	 * Leiho2 sortu
-	 * 
 	 * @author talde1
 	 */
 	public static void bigarrenLeihoa() {
@@ -37,7 +33,6 @@ public class Metodoak {
 
 	/**
 	 * Leiho3 sortu
-	 * 
 	 * @author talde1
 	 */
 	public static void hirugarrenLeihoa(String hartutakoLinea, Autobusak autobusa) {
@@ -68,7 +63,6 @@ public class Metodoak {
 
 	/**
 	 * Leiho5 sortu
-	 * 
 	 * @author talde1
 	 * @param luzera2
 	 * @param altuera2
@@ -90,7 +84,6 @@ public class Metodoak {
 
 	/**
 	 * Leiho6 sortu
-	 * 
 	 * @author talde1
 	 * @param txartela
 	 * @param geltIzenak
@@ -109,7 +102,6 @@ public class Metodoak {
 
 	/**
 	 * Hartutako linea jakinda geltokiak bueltatu
-	 * 
 	 * @param arrayGeltokiak
 	 * @author talde1
 	 * @return arrayGeltokiak
@@ -128,7 +120,6 @@ public class Metodoak {
 
 	/**
 	 * Bi geltokien harteko distantzia kalkulatu
-	 * 
 	 * @param altuera1
 	 * @param luzera1
 	 * @param altuera2
@@ -151,7 +142,6 @@ public class Metodoak {
 
 	/**
 	 * Bi geltokien harteko distantzia kalkulatu
-	 * 
 	 * @param kontsumoa
 	 * @param eserKop
 	 * @return totPertsonaBilletea
@@ -173,7 +163,6 @@ public class Metodoak {
 
 	/**
 	 * Sartutako pasahitza zifratu
-	 * 
 	 * @param pasahitza
 	 * @return hashtext
 	 * @author talde1
@@ -196,7 +185,6 @@ public class Metodoak {
 
 	/**
 	 * Sartutako pasahitza (zifratuta) ea datu basean dagoen ala ez
-	 * 
 	 * @param pasahitza
 	 * @return bal
 	 * @author talde1
@@ -217,7 +205,6 @@ public class Metodoak {
 
 	/**
 	 * Sartutako nan-a ea datu baaean dagoen ala ez
-	 * 
 	 * @param nan
 	 * @return bal
 	 * @author talde1
@@ -262,6 +249,12 @@ public class Metodoak {
 		return bal;
 	}
 
+	/**
+	 * Balidatu nan-a
+	 * @param nan
+	 * @return nanBalidazioa
+	 * @author talde1
+	 */
 	public static boolean nanBalidazioa(String nan) {
 		String nanLetra = nan.substring(8);
 		String nanLarria = nanLetra.toUpperCase();
@@ -278,7 +271,6 @@ public class Metodoak {
 	/**
 	 * Lehenengo 8 karaktereak zenbakiak direla balidatzen du. 8 zenbaki ez badaude
 	 * NAN-a ez dago ondo
-	 * 
 	 * @param nan
 	 * @return balNan
 	 * @author talde1
@@ -304,7 +296,6 @@ public class Metodoak {
 	/**
 	 * nan-aren zenbaki guztiak gehitzen ditu eta zati 23 egiten hondarra lortzen
 	 * du. Hondarra horrekin sartutako nan-aren letra bueltatzen du.
-	 * 
 	 * @param nan
 	 * @return nanLarria
 	 * @author talde1
@@ -321,12 +312,12 @@ public class Metodoak {
 
 	/**
 	 * Hasierako eta amaierako geltokien izenak lortu
-	 * 
 	 * @param txartela
 	 * @return geltIzenak
 	 * @author talde1
+	 * @param ibilbideZbk 
 	 */
-	public static ArrayList<String> geltokienIzenakLortu(Txartelak txartela) {
+	public static ArrayList<String> geltokienIzenakLortu(Txartelak txartela, int ibilbideZbk) {
 		ArrayList<String> geltIzenak = new ArrayList<>();
 
 		String geltHasiIzena = Kontsultak.hasGeltokiarenIzena(txartela.getkodGeltokiHasiera());
@@ -338,17 +329,17 @@ public class Metodoak {
 
 	/**
 	 * Billetea sortu
-	 * 
 	 * @param txartela
 	 * @author talde1
+	 * @param data 
+	 * @param ibilbideZbk 
 	 */
-	public static void sortuBilletea(Txartelak txartela) {
-		Kontsultak.billeteaKontsulta(txartela);
+	public static void sortuBilletea(Txartelak txartela, String data, int ibilbideZbk) {
+		Kontsultak.billeteaKontsulta(txartela, data, ibilbideZbk);
 	}
 
 	/**
 	 * Amaieran tiketa imprimatzen dagoen bitartean itxaron behar den denbora
-	 * 
 	 * @author talde1
 	 */
 	public static void Leiho_segunduak() {
@@ -365,7 +356,6 @@ public class Metodoak {
 
 	/**
 	 * Zenbat diru sartzen duen jakiteko egiteko
-	 * 
 	 * @param kont
 	 * @param sartutakoa
 	 * @return sartutakoa
@@ -439,7 +429,6 @@ public class Metodoak {
 
 	/**
 	 * Jakiteko zenbat diru sartu duen gero bueltak emateko ala ez
-	 * 
 	 * @param diruFalta
 	 * @param guztiraPrez
 	 * @param sartutakoa
@@ -455,10 +444,10 @@ public class Metodoak {
 	/**
 	 * Arrayan sartzeko zenbat kantitate txanpon bakoitza eta bueltatu txanpona /
 	 * billete
-	 * 
 	 * @param diruFalta
-	 * @author talde1
 	 * @return bueltakString
+	 * @author talde1
+
 	 */
 	public static String diruBueltakZerrenda(double diruFalta) {
 		String bueltakString = "";
@@ -542,6 +531,14 @@ public class Metodoak {
 		return bueltakString;
 	}
 
+	/**
+	 * Fitxategian idatzi tiket-a.
+	 * @param txartela
+	 * @param geltIzenak
+	 * @param dataJoan
+	 * @param dataEtorri
+	 * @author talde1
+	 */
 	public static void fitxIdatzi(Txartelak txartela, ArrayList<String> geltIzenak, String dataJoan,
 			String dataEtorri) {
 		FileWriter fitx = null;

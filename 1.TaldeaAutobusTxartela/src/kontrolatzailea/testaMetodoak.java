@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 import org.junit.BeforeClass;
 import org.junit.jupiter.api.Test;
@@ -115,7 +116,6 @@ class testaMetodoak {
 		String nanTxarto="12345678x";
 		assertFalse(Metodoak.frogatuNAN(nanTxarto));
 		assertTrue(Metodoak.frogatuNAN(nanOna));
-
 		
 	}
 	//frogatuNAN
@@ -125,7 +125,6 @@ class testaMetodoak {
 		String nanTxarto="12345678x";
 		assertTrue(Metodoak.nanBalidazioa(nanOna));
 		assertFalse(Metodoak.nanBalidazioa(nanTxarto));
-
-
 	}
+	
 }

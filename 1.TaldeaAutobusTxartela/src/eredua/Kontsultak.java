@@ -232,15 +232,16 @@ public class Kontsultak {
 		return arrayBezeroak;
 	}
 
-	public static void billeteaKontsulta(Txartelak txartela) {
+	public static void billeteaKontsulta(Txartelak txartela, String data, int ibilbideZbk) {
 		// kalkulatu prezioa distantziaren metodoak dietzen
 		Connection konexioa = Konexioa.getConexion();
-
 		try {
+
 			PreparedStatement st = konexioa.prepareStatement(
-					"INSERT INTO `billete` (`NTrayecto`, `Cod_Linea`, `Cod_Bus`, `Cod_Parada_Inicio`, `Cod_Parada_Fin`, `Fecha`, `Hora`, `DNI`, `Precio`)"
-							+ " VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)");
-			st.setInt(1, txartela.getzIbilbidea());
+					"INSERT INTO `billete` (`NTrayecto`, `Cod_Linea`, `Cod_Bus`, `Cod_Parada_Inicio`, `Cod_Parada_Fin`, `Fecha`, `Hora`, `DNI`, `Precio`, `IbilbideData`)"
+							+ " VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+
+			st.setInt(1, ibilbideZbk);
 			st.setString(2, txartela.getkodLinea());
 			st.setInt(3, txartela.getkodBus());
 			st.setInt(4, txartela.getkodGeltokiHasiera());
@@ -249,15 +250,37 @@ public class Kontsultak {
 			st.setTimestamp(7, txartela.getOrdua());
 			st.setString(8, txartela.getNan());
 			st.setFloat(9, txartela.getPrezioa());
-
+			st.setString(10, data);
+			
 			st.executeUpdate();
+			System.out.println(ibilbideZbk);
+			System.out.println(data);
 			st.close();
 
 			System.out.println("Gehitu da");
 		} catch (SQLException e) {
-			System.out.println("Ez da gehitu");
+			System.out.println(e);
 		}
 
 	}
+
+	
+	/*
+	 * 
+CREATE TABLE `billete` (
+  `Cod_Billete` int(8) NOT NULL,
+  `NTrayecto` int(11) NOT NULL,
+  `Cod_Linea` varchar(10) COLLATE utf8_bin NOT NULL,
+  `Cod_Bus` int(11) NOT NULL,
+  `Cod_Parada_Inicio` int(8) NOT NULL,
+  `Cod_Parada_Fin` int(8) NOT NULL,
+  `FechaCompra` date NOT NULL,
+  `HoraCompra` time NOT NULL,
+  `DNI` varchar(9) COLLATE utf8_bin NOT NULL,
+  `ibilbideData` varchar(20) NOT NULL,
+  `Precio` float NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;*/
+	
+	
 
 }

@@ -56,8 +56,13 @@ public class Leiho5 extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				txartela = new Txartelak(hartutakoLinea, autobusa.getKodBus(), hasierakoGeltokiaKod,
 						amaierakoGeltokiaKod, gaurkoData, ordua, nan, guztiraPrez, ibilbideZbk);
-				geltIzenak=Metodoak.geltokienIzenakLortu(txartela);
-				Metodoak.sortuBilletea(txartela); // billetea datu basera igotzen duen metodoari deitu
+				geltIzenak=Metodoak.geltokienIzenakLortu(txartela,ibilbideZbk);
+				if (txartela.getzIbilbidea()==1) 
+					Metodoak.sortuBilletea(txartela, dataJoan,ibilbideZbk); // billetea datu basera igotzen duen metodoari deitu
+				else if (txartela.getzIbilbidea()==2) {
+					Metodoak.sortuBilletea(txartela, dataJoan,ibilbideZbk-1); // billetea datu basera igotzen duen metodoari deitu
+					Metodoak.sortuBilletea(txartela,dataEtorri,ibilbideZbk); // billetea datu basera igotzen duen metodoari deitu
+				}
 				Metodoak.fitxIdatzi(txartela, geltIzenak, dataJoan, dataEtorri); // billetea fitxategian sartzen duen metodoari deitu
 				Metodoak.seigarrenLeihoa(hartutakoLinea, autobusa, ibilbideZbk, hasierakoGeltokiaKod,
 						amaierakoGeltokiaKod, txartela,geltIzenak, dataJoan, dataEtorri);
