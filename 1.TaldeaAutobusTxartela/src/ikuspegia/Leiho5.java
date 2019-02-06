@@ -23,7 +23,7 @@ public class Leiho5 extends JFrame {
 	private Date gaurkoData = Date.valueOf(LocalDate.now());
 	private Timestamp ordua = new Timestamp(System.currentTimeMillis());
 	private int kont = 0;
-	private String txanponTot, diruFaltaString;
+	private String txanponTot, diruFaltaString, ibilbideData;
 	private double diruFalta, sartutakoa;
 	private ArrayList<String> geltIzenak = new ArrayList<>();
 
@@ -55,13 +55,17 @@ public class Leiho5 extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				txartela = new Txartelak(hartutakoLinea, autobusa.getKodBus(), hasierakoGeltokiaKod,
-						amaierakoGeltokiaKod, gaurkoData, ordua, nan, guztiraPrez, ibilbideZbk);
+						amaierakoGeltokiaKod, gaurkoData, ordua, nan, guztiraPrez, ibilbideZbk, ibilbideData);
 				geltIzenak=Metodoak.geltokienIzenakLortu(txartela,ibilbideZbk);
-				if (txartela.getzIbilbidea()==1) 
-					Metodoak.sortuBilletea(txartela, dataJoan,ibilbideZbk); // billetea datu basera igotzen duen metodoari deitu
+				if (txartela.getzIbilbidea()==1) {
+					ibilbideData=dataJoan;
+					Metodoak.sortuBilletea(txartela, ibilbideData,ibilbideZbk); // billetea datu basera igotzen duen metodoari deitu
+				}
 				else if (txartela.getzIbilbidea()==2) {
-					Metodoak.sortuBilletea(txartela, dataJoan,ibilbideZbk-1); // billetea datu basera igotzen duen metodoari deitu
-					Metodoak.sortuBilletea(txartela,dataEtorri,ibilbideZbk); // billetea datu basera igotzen duen metodoari deitu
+					ibilbideData=dataJoan;
+					Metodoak.sortuBilletea(txartela, ibilbideData,ibilbideZbk-1); // billetea datu basera igotzen duen metodoari deitu
+					ibilbideData=dataEtorri;
+					Metodoak.sortuBilletea(txartela,ibilbideData,ibilbideZbk); // billetea datu basera igotzen duen metodoari deitu
 				}
 				Metodoak.fitxIdatzi(txartela, geltIzenak, dataJoan, dataEtorri); // billetea fitxategian sartzen duen metodoari deitu
 				Metodoak.seigarrenLeihoa(hartutakoLinea, autobusa, ibilbideZbk, hasierakoGeltokiaKod,

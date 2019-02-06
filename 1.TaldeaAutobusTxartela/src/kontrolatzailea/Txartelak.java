@@ -14,9 +14,12 @@ public class Txartelak {
 	private Timestamp ordua;
 	private String nan;
 	private float prezioa;
+	private String ibilbideData;
 	
+	
+
 	public Txartelak(String kodLinea, int kodBus, int kodGeltokiHasiera, int kodGeltokiAmaiera,
-			Date data, Timestamp ordua, String nan, float prezioa, int zIbilbidea) {
+			Date data, Timestamp ordua, String nan, float prezioa, int zIbilbidea, String ibilbideData) {
 		
 		this.kodLinea = kodLinea;
 		this.kodBus = kodBus;
@@ -27,6 +30,15 @@ public class Txartelak {
 		this.nan = nan;
 		this.prezioa = prezioa;
 		this.zIbilbidea = zIbilbidea;
+		this.ibilbideData = ibilbideData;
+	}
+	
+	public String getIbilbideData() {
+		return ibilbideData;
+	}
+
+	public void setIbilbideData(String ibilbideData) {
+		this.ibilbideData = ibilbideData;
 	}
 	
 	public int getzIbilbidea() {

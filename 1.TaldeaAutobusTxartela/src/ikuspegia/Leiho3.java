@@ -37,8 +37,9 @@ public class Leiho3 extends JFrame {
 
 	private double distantziaTermibusetik = 0, altuera1, luzera1, altuera2, luzera2;
 	private Date dataJoan, dataEtorri;
-	private int CBJoan = 0;
+	private int CBJoan = 0, kontZPlaza = 0;
 	private String dataJoanString, dataEtorriString;
+	private boolean balZPlaza = false;
 
 	private JComboBox<String> JCBJoan, JCBEtorria;
 	private SimpleDateFormat dataFormato;
@@ -65,11 +66,11 @@ public class Leiho3 extends JFrame {
 		btn_next.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-			    dataFormato = new SimpleDateFormat("yyyy-MM-dd");
+				dataFormato = new SimpleDateFormat("yyyy-MM-dd");
 
-				dataJoanString=dataFormato.format(dataJoan)+" "+JCBJoan.getSelectedItem();
-				if (ibilbideZbk==2)
-					dataEtorriString=dataFormato.format(dataEtorri)+" "+JCBEtorria.getSelectedItem();
+				dataJoanString = dataFormato.format(dataJoan) + " " + JCBJoan.getSelectedItem();
+				if (ibilbideZbk == 2)
+					dataEtorriString = dataFormato.format(dataEtorri) + " " + JCBEtorria.getSelectedItem();
 
 				Metodoak.laugarrenLeihoa(hartutakoLinea, autobusa, ibilbideZbk, hasierakoGeltokiaKod,
 						amaierakoGeltokiaKod, altuera1, luzera1, altuera2, luzera2, arrayGeltokia, dataJoanString,
@@ -737,7 +738,7 @@ public class Leiho3 extends JFrame {
 		JCBJoan.setBounds(200, 174, 72, 22);
 		JCBJoan.setVisible(false);
 		JCBJoan.setEnabled(false);
-		for (int i=0;i<autobusOrduak.size();i++){
+		for (int i = 0; i < autobusOrduak.size(); i++) {
 			JCBJoan.addItem(autobusOrduak.get(i));
 		}
 		getContentPane().add(JCBJoan);
@@ -747,11 +748,11 @@ public class Leiho3 extends JFrame {
 		JCBEtorria.setVisible(false);
 		JCBEtorria.setEnabled(false);
 
-		for (int i=0;i<autobusOrduak.size();i++){
+		for (int i = 0; i < autobusOrduak.size(); i++) {
 			JCBEtorria.addItem(autobusOrduak.get(i));
 		}
 		getContentPane().add(JCBEtorria);
-		dataEtorriString=dataEtorri+" "+JCBEtorria.getSelectedItem();
+		dataEtorriString = dataEtorri + " " + JCBEtorria.getSelectedItem();
 
 		mezua = new JLabel("* Sartu data berriro, mesedez.");
 		mezua.setFont(new Font("Tahoma", Font.PLAIN, 16));
@@ -759,7 +760,7 @@ public class Leiho3 extends JFrame {
 		mezua.setBounds(329, 269, 237, 16);
 		mezua.setVisible(false);
 		getContentPane().add(mezua);
-		
+
 		// gaurtik aurreko egunak bakarrik utzi
 		dateJoan.getCalendarButton().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -768,7 +769,7 @@ public class Leiho3 extends JFrame {
 				dataEtorri = (Date) dateEtorria.getDate();
 				dateEtorria.setEnabled(true);
 				dateEtorria.getDateEditor().setSelectableDateRange(dataJoan, null);
-				
+
 			}
 		});
 		// joango den egunetik egunak bakarrik utzi
@@ -786,12 +787,11 @@ public class Leiho3 extends JFrame {
 					dateEtorria.getJCalendar().setMinSelectableDate(dataJoan);
 					dateEtorria.getJCalendar().setMaxSelectableDate(null);
 				}
-				
-				/*CBJoan = JCBJoan.getSelectedIndex();				
-				for(int i = 0; i > CBJoan; i++) {
-					JCBEtorria.setSelectedIndex(i);
-					JCBEtorria.setSelectedItem(false);
-				}*/
+
+				/*
+				 * CBJoan = JCBJoan.getSelectedIndex(); for(int i = 0; i > CBJoan; i++) {
+				 * JCBEtorria.setSelectedIndex(i); JCBEtorria.setSelectedItem(false); }
+				 */
 			}
 		});
 
@@ -803,30 +803,37 @@ public class Leiho3 extends JFrame {
 				if (dataJoan != null) {
 					btn_next.setVisible(true);
 				}
+				balZPlaza = Metodoak.zPlazaBalidatu(dataJoanString);
+				if (kontZPlaza < autobusa.getzPlaza()) {
+					if (balZPlaza) {
+						kontZPlaza++;
+					}
+				}else
+					System.out.println("Ez dago autobus plaza gehiago.");
 			}
 		});
 
 		// joan eta joan-etorria beteta dagoenean
 		btnDataEgiaztatu2.addActionListener(new ActionListener() {
 			@Override
-				public void actionPerformed(ActionEvent e) {
-					dataJoan = dateJoan.getDate();
-					dataEtorri = dateEtorria.getDate();
-					System.out.println(dataEtorriString);
-	
-					if (dataJoan != null && dataEtorri != null) {
-						btn_next.setVisible(true);
+			public void actionPerformed(ActionEvent e) {
+				dataJoan = dateJoan.getDate();
+				dataEtorri = dateEtorria.getDate();
+				System.out.println(dataEtorriString);
+
+				if (dataJoan != null && dataEtorri != null) {
+					btn_next.setVisible(true);
+				}
+
+				try {
+					if (dataJoan.after(dataEtorri)) {
+						btn_next.setVisible(false);
+						dateEtorria.setCalendar(null);
+						mezua.setVisible(true);
 					}
-					
-					try	{
-						if (dataJoan.after(dataEtorri)) {
-							btn_next.setVisible(false);
-							dateEtorria.setCalendar(null);
-							mezua.setVisible(true);
-						}
-					} catch (Exception g) {
-						
-					}
+				} catch (Exception g) {
+
+				}
 			}
 		});
 	}

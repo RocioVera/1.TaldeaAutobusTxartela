@@ -337,6 +337,19 @@ public class Metodoak {
 	public static void sortuBilletea(Txartelak txartela, String data, int ibilbideZbk) {
 		Kontsultak.billeteaKontsulta(txartela, data, ibilbideZbk);
 	}
+	
+	public static boolean zPlazaBalidatu(String dataBerria) {
+		ArrayList<Txartelak> txartelak = new ArrayList<>();
+		txartelak = Kontsultak.txartelaZPlaza();
+		boolean bal = false;
+		for (Txartelak txartelak2 : txartelak) {
+			if (dataBerria.equals(txartelak2.getIbilbideData())) {
+			bal = true;
+		}else
+			bal = false;
+		}
+		return bal;
+	}
 
 	/**
 	 * Amaieran tiketa imprimatzen dagoen bitartean itxaron behar den denbora

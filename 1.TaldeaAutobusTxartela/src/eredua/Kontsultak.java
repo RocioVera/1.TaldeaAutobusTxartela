@@ -263,6 +263,45 @@ public class Kontsultak {
 		}
 
 	}
+	
+	public static ArrayList<Txartelak> txartelaZPlaza() {
+		PreparedStatement st = null;
+		Connection konexioa = Konexioa.getConexion();
+		ArrayList<Txartelak> txartelak = new ArrayList<>();
+		String kodLinea;
+		int zIbilbidea;
+		int kodBus;
+		int kodGeltokiHasiera;
+		int kodGeltokiAmaiera;
+		Date data;
+		Timestamp ordua;
+		String nan;
+		float prezioa;
+		String ibilbideData;
+		try {
+			st = konexioa.prepareStatement(
+					"SELECT * FROM billete");
+			ResultSet rs = st.executeQuery();
+			while (rs.next()) {
+				kodLinea = (rs.getString("Cod_Linea"));
+				zIbilbidea = (rs.getInt("NTrayecto"));
+				kodBus = (rs.getInt("Cod_Bus"));
+				kodGeltokiHasiera = (rs.getInt("Cod_Parada_Inicio"));
+				kodGeltokiAmaiera = (rs.getInt("Cod_Parada_Inicio"));
+				data = (rs.getDate("Fecha"));
+				ordua = (rs.getTimestamp("Hora"));
+				nan = (rs.getString("DNI"));
+				prezioa = (rs.getFloat("Precio"));
+				ibilbideData = (rs.getString("ibilbideData"));
+				Txartelak txartela = new Txartelak(kodLinea, kodBus, kodGeltokiHasiera, kodGeltokiAmaiera, data, ordua, nan, prezioa, zIbilbidea, ibilbideData);
+				txartelak.add(txartela);
+			}
+		} catch (Exception e) {
+			e.getMessage();
+		}
+		return txartelak;
+
+	}
 
 	
 	/*
