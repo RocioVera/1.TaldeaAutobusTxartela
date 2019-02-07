@@ -195,7 +195,6 @@ public class Metodoak {
 		pasaEnkr = zifratuPasahitza(pasahitza);
 		ArrayList<Bezeroak> bezeroak = new ArrayList<>();
 		bezeroak = Kontsultak.bezeroDatuak();
-		System.out.println(bezeroak.size());
 		for (Bezeroak bezeroak2 : bezeroak) {
 			if (pasaEnkr.equals(bezeroak2.getPasahitza()))
 				bal = true;
@@ -259,7 +258,6 @@ public class Metodoak {
 		String nanLetra = nan.substring(8);
 		String nanLarria = nanLetra.toUpperCase();
 		boolean nanBalidazioa = false;
-		System.out.println(nan.length());
 		if (nan.length() != 9 || Character.isLetter(nan.charAt(8)) == false)
 			nanBalidazioa = false;
 
@@ -317,7 +315,7 @@ public class Metodoak {
 	 * @author talde1
 	 * @param ibilbideZbk 
 	 */
-	public static ArrayList<String> geltokienIzenakLortu(Txartelak txartela, int ibilbideZbk) {
+	public static ArrayList<String> geltokienIzenakLortu(Txartelak txartela) {
 		ArrayList<String> geltIzenak = new ArrayList<>();
 
 		String geltHasiIzena = Kontsultak.hasGeltokiarenIzena(txartela.getkodGeltokiHasiera());
@@ -336,28 +334,19 @@ public class Metodoak {
 	 */
 	public static void sortuBilletea(Txartelak txartela, String data, int ibilbideZbk) {
 		Kontsultak.billeteaKontsulta(txartela, data, ibilbideZbk);
-	}
-	
-	public static boolean zPlazaBalidatu(String dataBerria) {
-		ArrayList<Txartelak> txartelak = new ArrayList<>();
-		txartelak = Kontsultak.txartelaZPlaza();
-		boolean bal = false;
-		for (Txartelak txartelak2 : txartelak) {
-			if (dataBerria.equals(txartelak2.getIbilbideData())) {
-			bal = true;
-		}else
-			bal = false;
-		}
-		return bal;
+
 	}
 
+	public static int txartelaZPlazaFroga (String ibilbideData) {
+		int txartelaZPlazaKont=0;
+		return txartelaZPlazaKont;
+	}
 	/**
 	 * Amaieran tiketa imprimatzen dagoen bitartean itxaron behar den denbora
 	 * @author talde1
 	 */
 	public static void Leiho_segunduak() {
 		for (int i = 1; i <= 5; i++) {
-			System.out.println(i);
 			try {
 				TimeUnit.SECONDS.sleep(1);
 			} catch (InterruptedException e1) {

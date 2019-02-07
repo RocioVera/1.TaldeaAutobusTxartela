@@ -200,6 +200,24 @@ public class Kontsultak {
 		return geltAmaIzena;
 
 	}
+	
+	public static int txartelaZPlaza(String ibilbideData) {
+		PreparedStatement st = null;
+		Connection konexioa = Konexioa.getConexion();
+		int txartelaZPlazaKont = 0;
+		try {
+			st = konexioa.prepareStatement(
+					"SELECT COUNT(ibilbideData) FROM `billete` WHERE ibilbideData LIKE '"+ibilbideData+"'");
+			ResultSet rs = st.executeQuery();
+			while (rs.next()) {
+				txartelaZPlazaKont = (rs.getInt("ibilbideData"));
+			}
+		} catch (Exception e) {
+			e.getMessage();
+		}
+		return txartelaZPlazaKont;
+
+	}
 
 	// insertak
 	public static ArrayList<Bezeroak> erregistratuBezeroak(String pasahitza, String NAN, String izena, String abizenak,
@@ -236,13 +254,13 @@ public class Kontsultak {
 		// kalkulatu prezioa distantziaren metodoak dietzen
 		Connection konexioa = Konexioa.getConexion();
 		try {
-
 			PreparedStatement st = konexioa.prepareStatement(
-					"INSERT INTO `billete` (`NTrayecto`, `Cod_Linea`, `Cod_Bus`, `Cod_Parada_Inicio`, `Cod_Parada_Fin`, `Fecha`, `Hora`, `DNI`, `Precio`, `IbilbideData`)"
+					"INSERT INTO `billete` (`NTrayecto`, `Cod_Linea`, `Cod_Bus`, `Cod_Parada_Inicio`, `Cod_Parada_Fin`, `Fecha`, `Hora`, `DNI`, `Precio`, `ibilbideData`)"
 							+ " VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
 			st.setInt(1, ibilbideZbk);
 			st.setString(2, txartela.getkodLinea());
+
 			st.setInt(3, txartela.getkodBus());
 			st.setInt(4, txartela.getkodGeltokiHasiera());
 			st.setInt(5, txartela.getkodGeltokiAmaiera());
@@ -251,55 +269,15 @@ public class Kontsultak {
 			st.setString(8, txartela.getNan());
 			st.setFloat(9, txartela.getPrezioa());
 			st.setString(10, data);
-			
+
 			st.executeUpdate();
-			System.out.println(ibilbideZbk);
-			System.out.println(data);
+
 			st.close();
 
 			System.out.println("Gehitu da");
 		} catch (SQLException e) {
 			System.out.println(e);
 		}
-
-	}
-	
-	public static ArrayList<Txartelak> txartelaZPlaza() {
-		PreparedStatement st = null;
-		Connection konexioa = Konexioa.getConexion();
-		ArrayList<Txartelak> txartelak = new ArrayList<>();
-		String kodLinea;
-		int zIbilbidea;
-		int kodBus;
-		int kodGeltokiHasiera;
-		int kodGeltokiAmaiera;
-		Date data;
-		Timestamp ordua;
-		String nan;
-		float prezioa;
-		String ibilbideData;
-		try {
-			st = konexioa.prepareStatement(
-					"SELECT * FROM billete");
-			ResultSet rs = st.executeQuery();
-			while (rs.next()) {
-				kodLinea = (rs.getString("Cod_Linea"));
-				zIbilbidea = (rs.getInt("NTrayecto"));
-				kodBus = (rs.getInt("Cod_Bus"));
-				kodGeltokiHasiera = (rs.getInt("Cod_Parada_Inicio"));
-				kodGeltokiAmaiera = (rs.getInt("Cod_Parada_Inicio"));
-				data = (rs.getDate("Fecha"));
-				ordua = (rs.getTimestamp("Hora"));
-				nan = (rs.getString("DNI"));
-				prezioa = (rs.getFloat("Precio"));
-				ibilbideData = (rs.getString("ibilbideData"));
-				Txartelak txartela = new Txartelak(kodLinea, kodBus, kodGeltokiHasiera, kodGeltokiAmaiera, data, ordua, nan, prezioa, zIbilbidea, ibilbideData);
-				txartelak.add(txartela);
-			}
-		} catch (Exception e) {
-			e.getMessage();
-		}
-		return txartelak;
 
 	}
 

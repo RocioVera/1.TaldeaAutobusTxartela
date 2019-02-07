@@ -56,7 +56,10 @@ public class Leiho5 extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				txartela = new Txartelak(hartutakoLinea, autobusa.getKodBus(), hasierakoGeltokiaKod,
 						amaierakoGeltokiaKod, gaurkoData, ordua, nan, guztiraPrez, ibilbideZbk, ibilbideData);
-				geltIzenak=Metodoak.geltokienIzenakLortu(txartela,ibilbideZbk);
+				System.out.println(ibilbideZbk+"AQUI");
+
+				geltIzenak=Metodoak.geltokienIzenakLortu(txartela);
+
 				if (txartela.getzIbilbidea()==1) {
 					ibilbideData=dataJoan;
 					Metodoak.sortuBilletea(txartela, ibilbideData,ibilbideZbk); // billetea datu basera igotzen duen metodoari deitu

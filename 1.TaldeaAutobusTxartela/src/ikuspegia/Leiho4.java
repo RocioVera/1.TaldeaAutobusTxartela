@@ -364,7 +364,6 @@ public class Leiho4 extends JFrame {
 				izena = txtIzena.getText();
 				abizenak = txtAbizenak.getText();
 				jaioData = txtJaioData.getDate();
-				System.out.println("jaio data: " + jaioData);
 				sexua = txtSexua.getText();
 
 				// erregistratzen duen metodoari deitu
