@@ -331,9 +331,10 @@ public class Metodoak {
 	 * @author talde1
 	 * @param data 
 	 * @param ibilbideZbk 
+	 * @param guztiraPrez 
 	 */
-	public static void sortuBilletea(Txartelak txartela, String data, int ibilbideZbk) {
-		Kontsultak.billeteaKontsulta(txartela, data, ibilbideZbk);
+	public static void sortuBilletea(Txartelak txartela, String data, int ibilbideZbk, float guztiraPrez) {
+		Kontsultak.billeteaKontsulta(txartela, data, ibilbideZbk, guztiraPrez);
 
 	}
 

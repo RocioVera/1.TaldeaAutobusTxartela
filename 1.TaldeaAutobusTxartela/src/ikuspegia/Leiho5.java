@@ -56,19 +56,19 @@ public class Leiho5 extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				txartela = new Txartelak(hartutakoLinea, autobusa.getKodBus(), hasierakoGeltokiaKod,
 						amaierakoGeltokiaKod, gaurkoData, ordua, nan, guztiraPrez, ibilbideZbk, ibilbideData);
-				System.out.println(ibilbideZbk+"AQUI");
+				System.out.println(guztiraPrez+"AQUI");
 
 				geltIzenak=Metodoak.geltokienIzenakLortu(txartela);
 
 				if (txartela.getzIbilbidea()==1) {
 					ibilbideData=dataJoan;
-					Metodoak.sortuBilletea(txartela, ibilbideData,ibilbideZbk); // billetea datu basera igotzen duen metodoari deitu
+					Metodoak.sortuBilletea(txartela, ibilbideData,ibilbideZbk, (float)(guztiraPrez+0.005)); // billetea datu basera igotzen duen metodoari deitu
 				}
 				else if (txartela.getzIbilbidea()==2) {
 					ibilbideData=dataJoan;
-					Metodoak.sortuBilletea(txartela, ibilbideData,ibilbideZbk-1); // billetea datu basera igotzen duen metodoari deitu
+					Metodoak.sortuBilletea(txartela, ibilbideData,ibilbideZbk-1,(float)( guztiraPrez/2-0.005)); // billetea datu basera igotzen duen metodoari deitu
 					ibilbideData=dataEtorri;
-					Metodoak.sortuBilletea(txartela,ibilbideData,ibilbideZbk); // billetea datu basera igotzen duen metodoari deitu
+					Metodoak.sortuBilletea(txartela,ibilbideData,ibilbideZbk, (float)(guztiraPrez/2+0.005)); // billetea datu basera igotzen duen metodoari deitu
 				}
 				Metodoak.fitxIdatzi(txartela, geltIzenak, dataJoan, dataEtorri); // billetea fitxategian sartzen duen metodoari deitu
 				Metodoak.seigarrenLeihoa(hartutakoLinea, autobusa, ibilbideZbk, hasierakoGeltokiaKod,

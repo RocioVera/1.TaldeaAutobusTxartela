@@ -149,6 +149,7 @@ public class Leiho3 extends JFrame {
 		}
 		Collections.sort(arrayDistantzia);
 		geltokiakOrdenatuta.get(arrayGeltokia);
+		System.out.println(geltokiakOrdenatuta);
 
 		// pantailaratu geltokiak ordenean
 		luzera = arrayGeltokia.size();
@@ -671,6 +672,7 @@ public class Leiho3 extends JFrame {
 		dateJoan.setBounds(190, 142, 127, 20);
 		dataEzEditatu = (JTextFieldDateEditor) dateJoan.getDateEditor();
 		dataEzEditatu.setEditable(false);
+
 		dateJoan.setVisible(false);
 		dateJoan.getJCalendar().setMinSelectableDate(new Date());
 		getContentPane().add(dateJoan);
@@ -721,7 +723,6 @@ public class Leiho3 extends JFrame {
 		dateEtorria.setDateFormatString("yyyy-MM-dd");
 		dateEtorria.setBounds(190, 265, 127, 20);
 		dateEtorria.setVisible(false);
-		
 		dataEzEditatu = (JTextFieldDateEditor) dateEtorria.getDateEditor();
 		dataEzEditatu.setEditable(false);
 		getContentPane().add(dateEtorria);
@@ -735,11 +736,6 @@ public class Leiho3 extends JFrame {
 		btnDataEgiaztatu2.setBounds(423, 421, 122, 25);
 		btnDataEgiaztatu2.setVisible(false);
 		getContentPane().add(btnDataEgiaztatu2);
-
-		btnAteraOrduLibreak = new JButton("Atera ordu libreak");
-		btnAteraOrduLibreak.setBounds(284, 300, 144, 25);
-		btnAteraOrduLibreak.setVisible(false);
-		getContentPane().add(btnAteraOrduLibreak);
 
 		JCBJoan = new JComboBox<String>();
 		JCBJoan.setBounds(200, 174, 72, 22);
@@ -780,6 +776,7 @@ public class Leiho3 extends JFrame {
 				JCBEtorria.setVisible(false);
 				btnDataEgiaztatu2.setVisible(false);
 				btn_next.setVisible(false);
+				dataJoan = (Date) dateJoan.getDate();
 				dateEtorria.getDateEditor().setSelectableDateRange(dataJoan, null);
 				btnAteraOrduLibreak.setVisible(true);
 
@@ -794,14 +791,13 @@ public class Leiho3 extends JFrame {
 
 			}
 		});
-		
-		for (int i = 0; i < autobusOrduak.size(); i++)
-			JCBEtorria.addItem(autobusOrduak.get(i));
 
+		// atera behar diren orduak ateratzeko
 		btnAteraOrduLibreak = new JButton("Atera ordu libreak");
 		// atera behar diren orduak ateratzeko
 		btnAteraOrduLibreak.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				JCBEtorria.removeAllItems();
 				if (dateEtorria.getDate() != null) {
 					if (dateJoan.getDate().compareTo(dateEtorria.getDate())==0) {
 						for (int i = JCBJoan.getSelectedIndex()+1; i < autobusOrduak.size(); i++) {
@@ -821,13 +817,14 @@ public class Leiho3 extends JFrame {
 					mezua.setText("Sartu ezazu eguna");
 					mezua.setBounds(329, 269, 237, 16);
 				}
-				JCBEtorria.removeAllItems();
 			}
 		});
 		btnAteraOrduLibreak.setBounds(284, 300, 144, 25);
 		btnAteraOrduLibreak.setVisible(false);
 		getContentPane().add(btnAteraOrduLibreak);
 		
+		
+
 		// joan beteta dagoenean
 		btnDataEgiaztatu1.addActionListener(new ActionListener() {
 			@Override

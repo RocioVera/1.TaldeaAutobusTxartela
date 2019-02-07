@@ -250,9 +250,11 @@ public class Kontsultak {
 		return arrayBezeroak;
 	}
 
-	public static void billeteaKontsulta(Txartelak txartela, String data, int ibilbideZbk) {
+	public static void billeteaKontsulta(Txartelak txartela, String ibilbideData, int ibilbideZbk, float guztiraPrez) {
 		// kalkulatu prezioa distantziaren metodoak dietzen
 		Connection konexioa = Konexioa.getConexion();
+		guztiraPrez=(float) (Math.round(guztiraPrez*100.0)/100.0);
+		
 		try {
 			PreparedStatement st = konexioa.prepareStatement(
 					"INSERT INTO `billete` (`NTrayecto`, `Cod_Linea`, `Cod_Bus`, `Cod_Parada_Inicio`, `Cod_Parada_Fin`, `Fecha`, `Hora`, `DNI`, `Precio`, `ibilbideData`)"
@@ -260,15 +262,14 @@ public class Kontsultak {
 
 			st.setInt(1, ibilbideZbk);
 			st.setString(2, txartela.getkodLinea());
-
 			st.setInt(3, txartela.getkodBus());
 			st.setInt(4, txartela.getkodGeltokiHasiera());
 			st.setInt(5, txartela.getkodGeltokiAmaiera());
 			st.setDate(6, txartela.getData());
 			st.setTimestamp(7, txartela.getOrdua());
 			st.setString(8, txartela.getNan());
-			st.setFloat(9, txartela.getPrezioa());
-			st.setString(10, data);
+			st.setFloat(9, guztiraPrez);
+			st.setString(10, ibilbideData);
 
 			st.executeUpdate();
 
