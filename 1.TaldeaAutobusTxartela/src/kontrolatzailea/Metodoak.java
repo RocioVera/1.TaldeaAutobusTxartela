@@ -161,6 +161,7 @@ public class Metodoak {
 		return totPertsonaBilletea;
 	}
 
+	
 	/**
 	 * Sartutako pasahitza zifratu
 	 * @param pasahitza
@@ -315,6 +316,13 @@ public class Metodoak {
 	 * @author talde1
 	 * @param ibilbideZbk 
 	 */
+	public static Autobusak autobusKotsMaxMetodoa(String linea) {
+		Autobusak autobusKotsMaxArray;
+		autobusKotsMaxArray = Kontsultak.autobusKotsMax(linea);
+
+		return autobusKotsMaxArray;
+	}
+	
 	public static ArrayList<String> geltokienIzenakLortu(Txartelak txartela) {
 		ArrayList<String> geltIzenak = new ArrayList<>();
 

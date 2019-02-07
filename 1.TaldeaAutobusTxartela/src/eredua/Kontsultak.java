@@ -32,6 +32,33 @@ public class Kontsultak {
 		return arrayLineak;
 	}
 
+	public static Autobusak autobusKotsMax(String linea) {
+		Statement st = null;
+		Connection konexioa = Konexioa.getConexion();
+		int kodBus, nPlaza;
+		String kolorea;
+		float kontsumoa;
+		Autobusak autobusak = null;
+		try {
+			st = konexioa.createStatement();
+			ResultSet rs = st.executeQuery("SELECT * FROM autobus a, linea_autobus l WHERE a.Cod_bus = l.Cod_bus GROUP by "+ "'" + linea + "'");
+			while (rs.next()) {
+				kodBus = (rs.getInt("Cod_bus"));
+				nPlaza = (rs.getInt("N_plazas"));
+				kontsumoa = (rs.getFloat(3));
+				kolorea = (rs.getString(4));
+				autobusak = new Autobusak(kodBus, nPlaza, kontsumoa, kolorea);
+			}
+		} catch (Exception e) {
+			e.getMessage();
+		}
+		return autobusak;
+
+		// SELECT * FROM autobus a, linea_autobus l WHERE a.Cod_bus = l.Cod_bus GROUP by
+		// l.Cod_Linea
+
+	}
+
 	public static ArrayList<Autobusak> autobusDatuak() {
 		ArrayList<Autobusak> arraybus = new ArrayList<Autobusak>();
 		Statement st = null;
@@ -170,8 +197,8 @@ public class Kontsultak {
 		Connection konexioa = Konexioa.getConexion();
 		String geltHasiIzena = null;
 		try {
-			st = konexioa.prepareStatement(
-					"SELECT nombre FROM parada WHERE Cod_Parada="+"'"+kodGeltokiHasiera + "'");
+			st = konexioa
+					.prepareStatement("SELECT nombre FROM parada WHERE Cod_Parada=" + "'" + kodGeltokiHasiera + "'");
 			ResultSet rs = st.executeQuery();
 			while (rs.next()) {
 				geltHasiIzena = (rs.getString("nombre"));
@@ -188,8 +215,8 @@ public class Kontsultak {
 		Connection konexioa = Konexioa.getConexion();
 		String geltAmaIzena = null;
 		try {
-			st = konexioa.prepareStatement(
-					"SELECT nombre FROM parada WHERE Cod_Parada="+"'"+kodGeltokiHasiera + "'");
+			st = konexioa
+					.prepareStatement("SELECT nombre FROM parada WHERE Cod_Parada=" + "'" + kodGeltokiHasiera + "'");
 			ResultSet rs = st.executeQuery();
 			while (rs.next()) {
 				geltAmaIzena = (rs.getString("nombre"));
@@ -200,14 +227,14 @@ public class Kontsultak {
 		return geltAmaIzena;
 
 	}
-	
+
 	public static int txartelaZPlaza(String ibilbideData) {
 		PreparedStatement st = null;
 		Connection konexioa = Konexioa.getConexion();
 		int txartelaZPlazaKont = 0;
 		try {
 			st = konexioa.prepareStatement(
-					"SELECT COUNT(ibilbideData) FROM `billete` WHERE ibilbideData LIKE '"+ibilbideData+"'");
+					"SELECT COUNT(ibilbideData) FROM `billete` WHERE ibilbideData LIKE '" + ibilbideData + "'");
 			ResultSet rs = st.executeQuery();
 			while (rs.next()) {
 				txartelaZPlazaKont = (rs.getInt("ibilbideData"));
@@ -233,7 +260,7 @@ public class Kontsultak {
 			st.setString(1, NAN);
 			st.setString(2, izena);
 			st.setString(3, abizenak);
-			st.setString (4, jaioData);
+			st.setString(4, jaioData);
 			st.setString(5, sexua);
 			st.setString(6, pasahitza);
 
@@ -253,8 +280,8 @@ public class Kontsultak {
 	public static void billeteaKontsulta(Txartelak txartela, String ibilbideData, int ibilbideZbk, float guztiraPrez) {
 		// kalkulatu prezioa distantziaren metodoak dietzen
 		Connection konexioa = Konexioa.getConexion();
-		guztiraPrez=(float) (Math.round(guztiraPrez*100.0)/100.0);
-		
+		guztiraPrez = (float) (Math.round(guztiraPrez * 100.0) / 100.0);
+
 		try {
 			PreparedStatement st = konexioa.prepareStatement(
 					"INSERT INTO `billete` (`NTrayecto`, `Cod_Linea`, `Cod_Bus`, `Cod_Parada_Inicio`, `Cod_Parada_Fin`, `Fecha`, `Hora`, `DNI`, `Precio`, `ibilbideData`)"
@@ -281,24 +308,5 @@ public class Kontsultak {
 		}
 
 	}
-
-	
-	/*
-	 * 
-CREATE TABLE `billete` (
-  `Cod_Billete` int(8) NOT NULL,
-  `NTrayecto` int(11) NOT NULL,
-  `Cod_Linea` varchar(10) COLLATE utf8_bin NOT NULL,
-  `Cod_Bus` int(11) NOT NULL,
-  `Cod_Parada_Inicio` int(8) NOT NULL,
-  `Cod_Parada_Fin` int(8) NOT NULL,
-  `FechaCompra` date NOT NULL,
-  `HoraCompra` time NOT NULL,
-  `DNI` varchar(9) COLLATE utf8_bin NOT NULL,
-  `ibilbideData` varchar(20) NOT NULL,
-  `Precio` float NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;*/
-	
-	
 
 }

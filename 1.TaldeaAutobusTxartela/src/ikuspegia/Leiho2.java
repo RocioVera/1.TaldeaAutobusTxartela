@@ -76,7 +76,8 @@ public class Leiho2 extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				btn_next.setVisible(true);
 				hartutakoLinea="L1";
-				autobusa = autobusak.get(0);
+				//llamar a consulta
+				autobusa = Metodoak.autobusKotsMaxMetodoa(hartutakoLinea);
 			}
 		});
 		L1.setBounds(47, 85, 530, 85);
@@ -87,7 +88,7 @@ public class Leiho2 extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				btn_next.setVisible(true);
 				hartutakoLinea="L2";
-				autobusa = autobusak.get(3);
+				autobusa = Metodoak.autobusKotsMaxMetodoa(hartutakoLinea);
 			}
 		});
 		L2.setBounds(47, 187, 530, 85);
@@ -98,7 +99,7 @@ public class Leiho2 extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				btn_next.setVisible(true);
 				hartutakoLinea="L3";
-				autobusa = autobusak.get(4);
+				autobusa = Metodoak.autobusKotsMaxMetodoa(hartutakoLinea);
 			}
 		});
 		L3.setBounds(47, 288, 530, 85);
@@ -109,7 +110,7 @@ public class Leiho2 extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				btn_next.setVisible(true);
 				hartutakoLinea="L4";
-				autobusa = autobusak.get(6);
+				autobusa = Metodoak.autobusKotsMaxMetodoa(hartutakoLinea);
 			}
 		});
 		L4.setBounds(47, 380, 530, 85);
