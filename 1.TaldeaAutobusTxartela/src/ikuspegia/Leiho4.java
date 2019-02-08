@@ -369,8 +369,9 @@ public class Leiho4 extends JFrame {
 				// erregistratzen duen metodoari deitu
 				if (jaioData != null) {
 					jaioDataString = dataFormato.format(jaioData);
+					nanBalErregistratu = Metodoak.nanBalidazioa(nan);
 				}
-				nanBalErregistratu = Metodoak.nanBalidazioa(nan);
+				
 				if (nanBalErregistratu)
 					balErregis = Metodoak.erregistratuBezeroak(pasahitza, nan, izena, abizenak, sexua, jaioDataString);
 

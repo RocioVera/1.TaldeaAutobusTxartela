@@ -348,6 +348,7 @@ public class Metodoak {
 
 	public static int txartelaZPlazaFroga (String ibilbideData) {
 		int txartelaZPlazaKont=0;
+		txartelaZPlazaKont = Kontsultak.txartelaZPlaza(ibilbideData);
 		return txartelaZPlazaKont;
 	}
 	/**
