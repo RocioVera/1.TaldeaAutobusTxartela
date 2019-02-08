@@ -41,7 +41,8 @@ public class Kontsultak {
 		Autobusak autobusak = null;
 		try {
 			st = konexioa.createStatement();
-			ResultSet rs = st.executeQuery("SELECT * FROM autobus a, linea_autobus l WHERE a.Cod_bus = l.Cod_bus GROUP by "+ "'" + linea + "'");
+			ResultSet rs = st.executeQuery("SELECT * FROM autobus a, linea_autobus l WHERE l.Cod_Linea like "+ "'" + linea + "'" +" AND a.Cod_bus = l.Cod_bus AND Consumo_km IN (SELECT max(Consumo_km) FROM autobus A, linea_autobus L WHERE l.Cod_Linea like "+ "'" + linea + "'" +" AND a.Cod_bus = l.Cod_bus)");
+
 			while (rs.next()) {
 				kodBus = (rs.getInt("Cod_bus"));
 				nPlaza = (rs.getInt("N_plazas"));

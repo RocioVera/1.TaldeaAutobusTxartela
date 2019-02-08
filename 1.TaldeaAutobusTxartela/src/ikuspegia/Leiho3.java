@@ -777,6 +777,7 @@ public class Leiho3 extends JFrame {
 				btnDataEgiaztatu2.setVisible(false);
 				btn_next.setVisible(false);
 				dataJoan = (Date) dateJoan.getDate();
+				dateEtorria.setDate(dateJoan.getDate());
 				dateEtorria.getDateEditor().setSelectableDateRange(dataJoan, null);
 				btnAteraOrduLibreak.setVisible(true);
 
