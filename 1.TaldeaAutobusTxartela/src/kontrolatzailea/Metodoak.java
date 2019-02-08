@@ -9,8 +9,9 @@ import eredua.*;
 import ikuspegia.*;
 
 public class Metodoak {
+	//Leihoak sortu
 	/**
-	 * Leiho1 sortu
+	 * Leiho1 sortu.
 	 * @author talde1
 	 */
 	public static void lehenengoLeihoa() {
@@ -19,7 +20,7 @@ public class Metodoak {
 	}
 
 	/**
-	 * Leiho2 sortu
+	 * Leiho2 sortu.
 	 * @author talde1
 	 */
 	public static void bigarrenLeihoa() {
@@ -30,7 +31,7 @@ public class Metodoak {
 	}
 
 	/**
-	 * Leiho3 sortu
+	 * Leiho3 sortu.
 	 * @author talde1
 	 */
 	public static void hirugarrenLeihoa(String hartutakoLinea, Autobusak autobusa) {
@@ -40,7 +41,7 @@ public class Metodoak {
 	}
 
 	/**
-	 * Leiho4 sortu
+	 * Leiho4 sortu.
 	 * @author talde1
 	 * @param luzera2
 	 * @param altuera2
@@ -49,8 +50,7 @@ public class Metodoak {
 	 * @param arrayGeltokia
 	 * @param dataEtorri
 	 * @param dataJoan
-	 */
-	
+	 */	
 	public static void laugarrenLeihoa(String hartutakoLinea, Autobusak autobusa, int ibilbideZbk,
 			int hasierakoGeltokiaKod, int amaierakoGeltokiaKod, double altuera1, double luzera1, double altuera2,
 			double luzera2, ArrayList<Geltokiak> arrayGeltokia, String dataJoan, String dataEtorri) {
@@ -61,7 +61,7 @@ public class Metodoak {
 	}
 
 	/**
-	 * Leiho5 sortu
+	 * Leiho5 sortu.
 	 * @author talde1
 	 * @param luzera2
 	 * @param altuera2
@@ -82,7 +82,7 @@ public class Metodoak {
 	}
 
 	/**
-	 * Leiho6 sortu
+	 * Leiho6 sortu.
 	 * @author talde1
 	 * @param txartela
 	 * @param geltIzenak
@@ -99,26 +99,31 @@ public class Metodoak {
 
 	}
 
+	//Leiho2-ko metodoak
 	/**
-	 * Hartutako linea jakinda geltokiak bueltatu
+	 * Hartzen duen lineatik gehien kontsumitzen duen autobusa bueltatzen du.
 	 * @author talde1
 	 * @param linea
-	 * @return arrayGeltokiak
+	 * @return autobusKotsMaxArray
 	 */
-	public static ArrayList<Integer> geltokiakHartu(String linea) {
-		ArrayList<GeltokiaLinea> arrayGelLinea = Kontsultak.arrayGelLinea();
-		ArrayList<Integer> arrayGeltokiak = new ArrayList<>();
-		for (GeltokiaLinea obj : arrayGelLinea) {
-			while (linea == obj.getKodLinea()) {
-				arrayGeltokiak.add(obj.getKodGeltokia());
-			}
-		}
-		return arrayGeltokiak;
-
+	public static Autobusak autobusKotsMaxMetodoa(String linea) {
+		return Kontsultak.autobusKotsMax(linea);
 	}
 
+	//Leiho3-ko metodoak
 	/**
-	 * Bi geltokien harteko distantzia kalkulatu
+	 * Sartutako linearen geltoki guztiak bueltatzen du.
+	 * @author talde1
+	 * @param hartutakoLinea
+	 * @return arrayGeltokia
+	 */
+	public static ArrayList<Geltokiak> geltokiakAteraMetodoa(String hartutakoLinea) {
+		ArrayList<Geltokiak> arrayGeltokia = Kontsultak.geltokiakAtera(hartutakoLinea);
+		return arrayGeltokia;		
+	}
+	
+	/**
+	 * Bi geltokien harteko distantzia kalkulatu.
 	 * @author talde1
 	 * @param altuera1
 	 * @param luzera1
@@ -140,7 +145,23 @@ public class Metodoak {
 	}
 
 	/**
-	 * Bi geltokien harteko distantzia kalkulatu
+	 * Frogatzeko ea autobusa beteta dagoen ala ez.
+	 * @author talde1
+	 * @param ibilbideData
+	 * @param autobusa
+	 * @return txartelaZPlazaBal
+	 */
+	public static boolean txartelaZPlazaFroga (String ibilbideData, Autobusak autobusa) {
+		boolean txartelaZPlazaBal=false;
+		int txartelaZPlazaKont = Kontsultak.txartelaZPlaza(ibilbideData);
+		if (txartelaZPlazaKont<=autobusa.getzPlaza()) {
+			txartelaZPlazaBal=true;}
+		return txartelaZPlazaBal;
+	}
+	
+	//Leiho4-ko metodoak
+	/**
+	 * Bi geltokien harteko distantzia kalkulatu.
 	 * @author talde1
 	 * @param kontsumoa
 	 * @param eserKop
@@ -163,9 +184,67 @@ public class Metodoak {
 		totPertsonaBilletea = (float) (Math.round(totPertsonaBilletea * 100.0) / 100.0);
 		return totPertsonaBilletea;
 	}
+	
+	/**
+	 * Sartutako pasahitza (zifratuta) ea datu basean dagoen ala ez.
+	 * @author talde1
+	 * @param pasahitza
+	 * @return bal
+	 */
+	public static boolean frogatuPasahitza(String pasahitza) {
+		boolean bal = false;
+		String pasaEnkr = "";
+		pasaEnkr = zifratuPasahitza(pasahitza);
+		ArrayList<Bezeroak> bezeroak = new ArrayList<>();
+		bezeroak = Kontsultak.bezeroDatuak();
+		for (Bezeroak bezeroak2 : bezeroak) {
+			if (pasaEnkr.equals(bezeroak2.getPasahitza()))
+				bal = true;
+		}
+		return bal;
+	}
 
 	/**
-	 * Sartutako pasahitza zifratu
+	 * Sartutako nan-a ea datu baaean dagoen ala ez.
+	 * @author talde1
+	 * @param nan
+	 * @return bal
+	 */
+	public static boolean frogatuNAN(String nan) {
+		boolean bal = false;
+		ArrayList<Bezeroak> bezeroak = new ArrayList<>();
+		bezeroak = Kontsultak.bezeroDatuak();
+		for (Bezeroak bezeroak2 : bezeroak) {
+			if (nan.equals(bezeroak2.getNAN()))
+				bal = true;
+		}
+		return bal;
+	}
+	
+	/**
+	 * Bezeroen erregistroa egin datu basean eta hutzik baldin badago sartu behar
+	 * den daturen bat balidazioa bueltatu.
+	 * @author talde1
+	 * @param pasahitza
+	 * @param nan
+	 * @param izena
+	 * @param abizenak
+	 * @param sexua
+	 * @param jaioDataString
+	 * @return bal
+	 */
+	public static boolean erregistratuBezeroak(String pasahitza, String nan, String izena, String abizenak,
+			String sexua, String jaioDataString) {
+		boolean bal = true;
+		// fitxeroari bidali
+		if (pasahitza.length() == 0 || nan.length() < 8 || izena.isEmpty() || abizenak.isEmpty() || sexua.isEmpty()
+				|| nan.length() < 8)
+			bal = false;
+		return bal;
+	}
+	
+	/**
+	 * Sartutako pasahitza zifratu.
 	 * @author talde1
 	 * @param pasahitza
 	 * @return hashtext
@@ -187,78 +266,15 @@ public class Metodoak {
 	}
 
 	/**
-	 * Sartutako pasahitza (zifratuta) ea datu basean dagoen ala ez
-	 * @author talde1
-	 * @param pasahitza
-	 * @return bal
-	 */
-	public static boolean frogatuPasahitza(String pasahitza) {
-		boolean bal = false;
-		String pasaEnkr = "";
-		pasaEnkr = zifratuPasahitza(pasahitza);
-		ArrayList<Bezeroak> bezeroak = new ArrayList<>();
-		bezeroak = Kontsultak.bezeroDatuak();
-		for (Bezeroak bezeroak2 : bezeroak) {
-			if (pasaEnkr.equals(bezeroak2.getPasahitza()))
-				bal = true;
-		}
-		return bal;
-	}
-
-	/**
-	 * Sartutako nan-a ea datu baaean dagoen ala ez
-	 * @author talde1
-	 * @param nan
-	 * @return bal
-	 */
-	public static boolean frogatuNAN(String nan) {
-		boolean bal = false;
-		ArrayList<Bezeroak> bezeroak = new ArrayList<>();
-		bezeroak = Kontsultak.bezeroDatuak();
-		for (Bezeroak bezeroak2 : bezeroak) {
-			if (nan.equals(bezeroak2.getNAN()))
-				bal = true;
-		}
-		return bal;
-	}
-
-	/**
-	 * Bezeroen erregistroa egin datu basean eta hutzik baldin badago sartu behar
-	 * den daturen bat balidazioa bueltatu
-	 * @author talde1
-	 * @param pasahitza
-	 * @param nan
-	 * @param izena
-	 * @param abizenak
-	 * @param sexua
-	 * @param jaioDataString
-	 * @return bal
-	 */
-	public static boolean erregistratuBezeroak(String pasahitza, String nan, String izena, String abizenak,
-			String sexua, String jaioDataString) {
-		boolean bal = true;
-		String pasaEnkr = "";
-		pasaEnkr = zifratuPasahitza(pasahitza);
-		ArrayList<Bezeroak> bezeroak = new ArrayList<>();
-		// fitxeroari bidali
-		if (pasahitza.length() == 0 || nan.length() < 8 || izena.isEmpty() || abizenak.isEmpty() || sexua.isEmpty()
-				|| nan.length() < 8)
-			bal = false;
-		if (bal)
-			bezeroak = Kontsultak.erregistratuBezeroak(pasaEnkr, nan, izena, abizenak, sexua, jaioDataString);
-		return bal;
-	}
-
-	/**
-	 * Balidatu nan-a
+	 * Balidatu nan-a.
 	 * @author talde1
 	 * @param nan
 	 * @return nanBalidazioa
 	 */
 	public static boolean nanBalidazioa(String nan) {
-		String nanLetra = nan.substring(8);
-		String nanLarria = nanLetra.toUpperCase();
+		String nanLetra = nan.substring(8), nanLarria = nanLetra.toUpperCase();
 		boolean nanBalidazioa = false;
+		System.out.println(Character.isLetter(nan.charAt(8)));
 		if (nan.length() != 9 || Character.isLetter(nan.charAt(8)) == false)
 			nanBalidazioa = false;
 
@@ -266,10 +282,10 @@ public class Metodoak {
 			nanBalidazioa = true;
 		return nanBalidazioa;
 	}
-
+	
 	/**
 	 * Lehenengo 8 karaktereak zenbakiak direla balidatzen du. 8 zenbaki ez badaude
-	 * NAN-a ez dago ondo
+	 * NAN-a ez dago ondo.
 	 * @author talde1
 	 * @param nan
 	 * @return balNan
@@ -308,77 +324,8 @@ public class Metodoak {
 		nanLarria = zbkArray[hondarra];
 		return nanLarria;
 	}
-
-	/**
-	 * Hartzen duen lineatik gehien kontsumitzen duen autobusa bueltatzen du.
-	 * @author talde1
-	 * @param linea
-	 * @return autobusKotsMaxArray
-	 */
-	public static Autobusak autobusKotsMaxMetodoa(String linea) {
-		return Kontsultak.autobusKotsMax(linea);
-	}
 	
-	/**
-	 * Hasierako eta amaierako geltokien izenak lortu.
-	 * @author talde1
-	 * @param txartela
-	 * @return geltIzenak
-	 */
-	public static ArrayList<String> geltokienIzenakLortu(Txartelak txartela) {
-		ArrayList<String> geltIzenak = new ArrayList<>();
-		String geltHasiIzena = Kontsultak.hasGeltokiarenIzena(txartela.getkodGeltokiHasiera());
-		geltIzenak.add(geltHasiIzena);
-		String geltAmaIzena = Kontsultak.amaGeltokiarenIzena(txartela.getkodGeltokiAmaiera());
-		geltIzenak.add(geltAmaIzena);
-		return geltIzenak;
-	}
-
-	/**
-	 * Billetea sortu.
-	 * @author talde1
-	 * @param txartela
-	 * @param ibilbideData
-	 * @param ibilbideZbk
-	 * @param guztiraPrez
-	 * @param hasierakoGeltokiaKod
-	 * @param amaierakoGeltokiaKod
-	 */
-	public static void sortuBilletea(Txartelak txartela, String ibilbideData, int ibilbideZbk, float guztiraPrez, int hasierakoGeltokiaKod,
-			int amaierakoGeltokiaKod) {
-		Kontsultak.billeteaKontsulta(txartela, ibilbideData, ibilbideZbk, guztiraPrez, hasierakoGeltokiaKod, amaierakoGeltokiaKod);
-	}
-
-	/**
-	 * Frogatzeko ea autobusa beteta dagoen ala ez.
-	 * @author talde1
-	 * @param ibilbideData
-	 * @param autobusa
-	 * @return txartelaZPlazaBal
-	 */
-	public static boolean txartelaZPlazaFroga (String ibilbideData, Autobusak autobusa) {
-		boolean txartelaZPlazaBal=false;
-		int txartelaZPlazaKont = Kontsultak.txartelaZPlaza(ibilbideData);
-		if (txartelaZPlazaKont<=autobusa.getzPlaza()) {
-			txartelaZPlazaBal=true;}
-		return txartelaZPlazaBal;
-	}
-	
-	/**
-	 * Amaieran tiketa imprimatzen dagoen bitartean itxaron behar den denbora.
-	 * @author talde1
-	 */
-	public static void Leiho_segunduak() {
-		for (int i = 1; i <= 5; i++) {
-			try {
-				TimeUnit.SECONDS.sleep(1);
-			} catch (InterruptedException e1) {
-				e1.printStackTrace();
-			}
-		}
-		lehenengoLeihoa();
-	}
-
+	//Leiho5-ko metodoak
 	/**
 	 * Zenbat diru sartzen duen jakiteko egiteko.
 	 * @author talde1
@@ -464,7 +411,7 @@ public class Metodoak {
 		diruFalta = guztiraPrez - sartutakoa;
 		diruFalta = Math.round(diruFalta * 100.0) / 100.0;
 		return diruFalta;
-	}
+	}	
 
 	/**
 	 * Arrayan sartzeko zenbat kantitate txanpon bakoitza eta bueltatu txanpona / billete.
@@ -475,7 +422,6 @@ public class Metodoak {
 	public static String diruBueltakZerrenda(double diruFalta) {
 		String bueltakString = "";
 		double bueltak = 0;
-
 		if (diruFalta < 0) {
 			bueltak = -diruFalta;
 			for (double i = bueltak; i > 0; i = bueltak) {
@@ -555,6 +501,36 @@ public class Metodoak {
 	}
 
 	/**
+	 * Hasierako eta amaierako geltokien izenak lortu.
+	 * @author talde1
+	 * @param txartela
+	 * @return geltIzenak
+	 */
+	public static ArrayList<String> geltokienIzenakLortu(Txartelak txartela) {
+		ArrayList<String> geltIzenak = new ArrayList<>();
+		String geltHasiIzena = Kontsultak.geltokiarenIzena(txartela.getkodGeltokiHasiera());
+		geltIzenak.add(geltHasiIzena);
+		String geltAmaIzena = Kontsultak.geltokiarenIzena(txartela.getkodGeltokiAmaiera());
+		geltIzenak.add(geltAmaIzena);
+		return geltIzenak;
+	}
+
+	/**
+	 * Billetea sortu.
+	 * @author talde1
+	 * @param txartela
+	 * @param ibilbideData
+	 * @param ibilbideZbk
+	 * @param guztiraPrez
+	 * @param hasierakoGeltokiaKod
+	 * @param amaierakoGeltokiaKod
+	 */
+	public static void sortuBilletea(Txartelak txartela, String ibilbideData, int ibilbideZbk, float guztiraPrez, int hasierakoGeltokiaKod,
+			int amaierakoGeltokiaKod) {
+		Kontsultak.billeteaKontsulta(txartela, ibilbideData, ibilbideZbk, guztiraPrez, hasierakoGeltokiaKod, amaierakoGeltokiaKod);
+	}
+
+	/**
 	 * Tiket-a fitxategian idatzi.
 	 * @author talde1
 	 * @param txartela
@@ -596,5 +572,20 @@ public class Metodoak {
 		}
 	}
 
+	//Leiho6-ko metodoak
+	/**
+	 * Amaieran tiketa imprimatzen dagoen bitartean itxaron behar den denbora.
+	 * @author talde1
+	 */
+	public static void Leiho_segunduak() {
+		for (int i = 1; i <= 5; i++) {
+			try {
+				TimeUnit.SECONDS.sleep(1);
+			} catch (InterruptedException e1) {
+				e1.printStackTrace();
+			}
+		}
+		lehenengoLeihoa();
+	}
 
 }

@@ -128,7 +128,7 @@ public class Leiho3 extends JFrame {
 		joanEtorriGroup = new ButtonGroup();
 
 		// ordenatu geltokiak
-		arrayGeltokia = Kontsultak.geltokiakAtera((hartutakoLinea));
+		arrayGeltokia = Metodoak.geltokiakAteraMetodoa(hartutakoLinea);
 
 		for (int i = 0; i < arrayGeltokia.size(); i++) {
 			// "Termibus-Bilbao" desberdin denean
@@ -141,8 +141,10 @@ public class Leiho3 extends JFrame {
 				geltokiakOrdenatuta.put(arrayGeltokia.get(i).getIzena(), distantziaTermibusetik);
 			}
 		}
+		
 		Collections.sort(arrayDistantzia);
 		geltokiakOrdenatuta.get(arrayGeltokia);
+		System.out.println(geltokiakOrdenatuta);
 
 		// pantailaratu geltokiak ordenean
 		luzera = arrayGeltokia.size();
