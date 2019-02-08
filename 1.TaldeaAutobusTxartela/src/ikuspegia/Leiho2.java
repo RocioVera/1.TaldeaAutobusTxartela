@@ -21,10 +21,9 @@ public class Leiho2 extends JFrame {
 	/**
 	 * Ze linea hartu nahi duen erabaki behar den panela sortu
 	 * @param lineak
-	 * @param autobusak
 	 * @author talde1
 	 */
-	public Leiho2(ArrayList<Lineak> lineak, ArrayList<Autobusak> autobusak) {
+	public Leiho2(ArrayList<Lineak> lineak) {
 		//panelaren propietateak
 		getContentPane().setLayout(null);
 		this.setBounds(350, 50, 600, 600);

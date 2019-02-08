@@ -17,7 +17,7 @@ public class Leiho3 extends JFrame {
 	private JMenu hasierakoGeltokia, amaierakoGeltokia, joanEtorriaMenua;
 	private ButtonGroup hasierakoGeltokiaGroup, amaierakoGeltokiaGroup, joanEtorriGroup;
 	private JButton btn_next = new JButton("Hurrengoa"), btn_prev = new JButton("Atzera"),
-			restart = new JButton("\u2302"), btnDataEgiaztatu1, btnDataEgiaztatu2, btnAteraOrduLibreak;
+			restart = new JButton("\u2302"), btnDataEgiaztatu1, btnDataEgiaztatu2, btnAteraOrduak;
 	private JLabel lblEtorria, lblJoan, lblDataEtorria, lblDataJoan, lblOrduaJoan, lblOrduaEtorria, mezua = new JLabel();;
 	private JDateChooser dateEtorria = new JDateChooser(), dateJoan = new JDateChooser();
 	private JTextFieldDateEditor dataEzEditatu; // kentzeko eskuz sartu ahal izana
@@ -64,12 +64,6 @@ public class Leiho3 extends JFrame {
 		btn_next.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				dataFormato = new SimpleDateFormat("yyyy-MM-dd");
-
-				dataJoanString = dataFormato.format(dataJoan) + " " + JCBJoan.getSelectedItem();
-				if (ibilbideZbk == 2)
-					dataEtorriString = dataFormato.format(dataEtorri) + " " + JCBEtorria.getSelectedItem();
-
 				Metodoak.laugarrenLeihoa(hartutakoLinea, autobusa, ibilbideZbk, hasierakoGeltokiaKod,
 						amaierakoGeltokiaKod, altuera1, luzera1, altuera2, luzera2, arrayGeltokia, dataJoanString,
 						dataEtorriString);
@@ -149,7 +143,6 @@ public class Leiho3 extends JFrame {
 		}
 		Collections.sort(arrayDistantzia);
 		geltokiakOrdenatuta.get(arrayGeltokia);
-		System.out.println(geltokiakOrdenatuta);
 
 		// pantailaratu geltokiak ordenean
 		luzera = arrayGeltokia.size();
@@ -211,7 +204,7 @@ public class Leiho3 extends JFrame {
 						JCBEtorria.setVisible(false);
 						btnDataEgiaztatu2.setVisible(false);
 						btnDataEgiaztatu1.setVisible(false);
-						btnAteraOrduLibreak.setVisible(false);
+						btnAteraOrduak.setVisible(false);
 					}
 				});
 			}
@@ -267,7 +260,7 @@ public class Leiho3 extends JFrame {
 						JCBEtorria.setVisible(false);
 						btnDataEgiaztatu2.setVisible(false);
 						btnDataEgiaztatu1.setVisible(false);
-						btnAteraOrduLibreak.setVisible(false);
+						btnAteraOrduak.setVisible(false);
 					}
 				});
 			}
@@ -318,7 +311,7 @@ public class Leiho3 extends JFrame {
 						JCBEtorria.setVisible(false);
 						btnDataEgiaztatu2.setVisible(false);
 						btnDataEgiaztatu1.setVisible(false);
-						btnAteraOrduLibreak.setVisible(false);
+						btnAteraOrduak.setVisible(false);
 					}
 				});
 			}
@@ -365,7 +358,7 @@ public class Leiho3 extends JFrame {
 						JCBEtorria.setVisible(false);
 						btnDataEgiaztatu2.setVisible(false);
 						btnDataEgiaztatu1.setVisible(false);
-						btnAteraOrduLibreak.setVisible(false);
+						btnAteraOrduak.setVisible(false);
 					}
 				});
 			}
@@ -409,7 +402,7 @@ public class Leiho3 extends JFrame {
 						JCBEtorria.setVisible(false);
 						btnDataEgiaztatu2.setVisible(false);
 						btnDataEgiaztatu1.setVisible(false);
-						btnAteraOrduLibreak.setVisible(false);
+						btnAteraOrduak.setVisible(false);
 					}
 				});
 			}
@@ -450,7 +443,7 @@ public class Leiho3 extends JFrame {
 						JCBEtorria.setVisible(false);
 						btnDataEgiaztatu2.setVisible(false);
 						btnDataEgiaztatu1.setVisible(false);
-						btnAteraOrduLibreak.setVisible(false);
+						btnAteraOrduak.setVisible(false);
 					}
 				});
 			}
@@ -492,7 +485,7 @@ public class Leiho3 extends JFrame {
 						JCBEtorria.setVisible(false);
 						btnDataEgiaztatu2.setVisible(false);
 						btnDataEgiaztatu1.setVisible(false);
-						btnAteraOrduLibreak.setVisible(false);
+						btnAteraOrduak.setVisible(false);
 					}
 				});
 			}
@@ -645,6 +638,7 @@ public class Leiho3 extends JFrame {
 				btnDataEgiaztatu2.setVisible(false);
 				btn_next.setVisible(false);
 				dateEtorria.setCalendar(null);
+				btnAteraOrduak.setVisible(false);
 			}
 		});
 
@@ -704,24 +698,24 @@ public class Leiho3 extends JFrame {
 		// joan-etorri propietateak
 		lblEtorria = new JLabel("Etorria");
 		lblEtorria.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		lblEtorria.setBounds(71, 222, 89, 21);
+		lblEtorria.setBounds(71, 259, 89, 21);
 		lblEtorria.setVisible(false);
 		getContentPane().add(lblEtorria);
 
 		lblDataEtorria = new JLabel("Data");
 		lblDataEtorria.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		lblDataEtorria.setBounds(134, 265, 46, 21);
+		lblDataEtorria.setBounds(134, 293, 46, 21);
 		lblDataEtorria.setVisible(false);
 		getContentPane().add(lblDataEtorria);
 
 		lblOrduaEtorria = new JLabel("Ordua");
 		lblOrduaEtorria.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		lblOrduaEtorria.setBounds(134, 300, 46, 21);
+		lblOrduaEtorria.setBounds(134, 332, 46, 21);
 		lblOrduaEtorria.setVisible(false);
 		getContentPane().add(lblOrduaEtorria);
 
 		dateEtorria.setDateFormatString("yyyy-MM-dd");
-		dateEtorria.setBounds(190, 265, 127, 20);
+		dateEtorria.setBounds(190, 293, 127, 20);
 		dateEtorria.setVisible(false);
 		dataEzEditatu = (JTextFieldDateEditor) dateEtorria.getDateEditor();
 		dataEzEditatu.setEditable(false);
@@ -747,14 +741,15 @@ public class Leiho3 extends JFrame {
 		getContentPane().add(JCBJoan);
 
 		JCBEtorria = new JComboBox<String>();
-		JCBEtorria.setBounds(200, 301, 72, 22);
+		JCBEtorria.setBounds(190, 333, 72, 22);
 		JCBEtorria.setVisible(false);
 		JCBEtorria.setEnabled(false);
 		getContentPane().add(JCBEtorria);
 
 		mezua.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		mezua.setForeground(Color.RED);
-		mezua.setBounds(329, 265, 253, 20);
+		mezua.setBounds(329, 294, 253, 20);
+
 		mezua.setVisible(false);
 		getContentPane().add(mezua);
 
@@ -762,6 +757,7 @@ public class Leiho3 extends JFrame {
 		dateJoan.getCalendarButton().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				JCBJoan.setEnabled(true);
+				btn_next.setVisible(false);
 				dataJoan = (Date) dateJoan.getDate();
 				dataEtorri = (Date) dateEtorria.getDate();
 				dateEtorria.setEnabled(true);
@@ -779,7 +775,7 @@ public class Leiho3 extends JFrame {
 				dataJoan = (Date) dateJoan.getDate();
 				dateEtorria.setDate(dateJoan.getDate());
 				dateEtorria.getDateEditor().setSelectableDateRange(dataJoan, null);
-				btnAteraOrduLibreak.setVisible(true);
+				btnAteraOrduak.setVisible(true);
 
 				if (dataJoan == null) {
 					dateEtorria.setEnabled(false);
@@ -794,9 +790,9 @@ public class Leiho3 extends JFrame {
 		});
 
 		// atera behar diren orduak ateratzeko
-		btnAteraOrduLibreak = new JButton("Atera ordu libreak");
+		btnAteraOrduak = new JButton("Atera orduak");
 		// atera behar diren orduak ateratzeko
-		btnAteraOrduLibreak.addActionListener(new ActionListener() {
+		btnAteraOrduak.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				JCBEtorria.removeAllItems();
 				if (dateEtorria.getDate() != null) {
@@ -818,11 +814,12 @@ public class Leiho3 extends JFrame {
 					mezua.setText("Sartu ezazu eguna");
 					mezua.setBounds(329, 269, 237, 16);
 				}
+				btnAteraOrduak.setVisible(false);
 			}
 		});
-		btnAteraOrduLibreak.setBounds(284, 300, 144, 25);
-		btnAteraOrduLibreak.setVisible(false);
-		getContentPane().add(btnAteraOrduLibreak);
+		btnAteraOrduak.setBounds(274, 332, 122, 25);
+		btnAteraOrduak.setVisible(false);
+		getContentPane().add(btnAteraOrduak);
 		
 		
 
@@ -831,21 +828,55 @@ public class Leiho3 extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				dataJoan = dateJoan.getDate();
+				dataFormato = new SimpleDateFormat("yyyy-MM-dd");
+				dataJoanString = dataFormato.format(dataJoan) + " " + JCBJoan.getSelectedItem();
+
 				if (dataJoan != null) {
-					btn_next.setVisible(true);
+					if (!Metodoak.txartelaZPlazaFroga(dataJoanString, autobusa)) {
+						mezua.setText("* Autobusa beteta dago *");
+						mezua.setBounds(134, 203, 253, 20);
+						mezua.setVisible(true);	
+						btn_next.setVisible(false);						
+					}
+					else {
+						mezua.setVisible(false);
+						btn_next.setVisible(true);
+					}
 				}
 			}
 		});
-
+	
+		
 		// joan eta joan-etorria beteta dagoenean
 		btnDataEgiaztatu2.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				dataJoan = dateJoan.getDate();
-				dataEtorri = dateEtorria.getDate();
+				dataEtorri = dateEtorria.getDate();	
+				
+				dataFormato = new SimpleDateFormat("yyyy-MM-dd");
+				dataJoanString = dataFormato.format(dataJoan) + " " + JCBJoan.getSelectedItem();
+				dataEtorriString = dataFormato.format(dataEtorri) + " " + JCBEtorria.getSelectedItem();
 
 				if (dataJoan != null && dataEtorri != null) {
-					btn_next.setVisible(true);
+
+					if (!Metodoak.txartelaZPlazaFroga(dataEtorriString, autobusa)) {
+						mezua.setText("* Autobusa beteta dago *");
+						mezua.setBounds(144, 366, 253, 20);
+						btn_next.setVisible(false);
+						mezua.setVisible(true);
+					}
+					if (!Metodoak.txartelaZPlazaFroga(dataJoanString, autobusa)) {
+						mezua.setText("* Joan autobusa beteta dago");
+						mezua.setBounds(134, 203, 253, 20);
+						mezua.setVisible(true);
+						btn_next.setVisible(false);
+
+					}
+					if (Metodoak.txartelaZPlazaFroga(dataEtorriString, autobusa) && Metodoak.txartelaZPlazaFroga(dataJoanString, autobusa)) {
+						btn_next.setVisible(true);
+						mezua.setVisible(false);
+					}
 				}
 				if (dataJoan.after(dataEtorri)) {
 					btn_next.setVisible(false);
@@ -854,6 +885,8 @@ public class Leiho3 extends JFrame {
 					mezua.setVisible(true);
 				}
 			}
+			
 		});
+		
 	}
 }

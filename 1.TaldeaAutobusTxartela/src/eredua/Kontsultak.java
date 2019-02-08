@@ -102,7 +102,6 @@ public class Kontsultak {
 			float altuera;
 			float luzera;
 			while (rs.next()) {
-				System.out.println(rs.getString(2));
 				kodGeltokia = (rs.getInt(1));
 				izena = (rs.getString(2));
 				kalea = (rs.getString(3));
@@ -231,18 +230,20 @@ public class Kontsultak {
 
 	public static int txartelaZPlaza(String ibilbideData) {
 		PreparedStatement st = null;
+
 		Connection konexioa = Konexioa.getConexion();
 		int txartelaZPlazaKont = 0;
 		try {
 			st = konexioa.prepareStatement(
-					"SELECT COUNT(ibilbideData) FROM `billete` WHERE ibilbideData LIKE '" + ibilbideData + "'");
+					"SELECT COUNT(ibilbideData) FROM billete WHERE ibilbideData LIKE '" + ibilbideData + "'");
 			ResultSet rs = st.executeQuery();
 			while (rs.next()) {
-				txartelaZPlazaKont = (rs.getInt("ibilbideData"));
+				txartelaZPlazaKont = (rs.getInt("COUNT(ibilbideData)"));
 			}
 		} catch (Exception e) {
 			e.getMessage();
 		}
+
 		return txartelaZPlazaKont;
 
 	}
@@ -267,7 +268,6 @@ public class Kontsultak {
 
 			st.executeUpdate();
 			st.close();
-
 			System.out.println("Gehitu da");
 		} catch (SQLException e) {
 			System.out.println("Ez da gehitu");
@@ -278,7 +278,7 @@ public class Kontsultak {
 		return arrayBezeroak;
 	}
 
-	public static void billeteaKontsulta(Txartelak txartela, String ibilbideData, int ibilbideZbk, float guztiraPrez) {
+	public static void billeteaKontsulta(Txartelak txartela, String ibilbideData, int ibilbideZbk, float guztiraPrez, int hasierakoGeltokiaKod, int amaierakoGeltokiaKod) {
 		// kalkulatu prezioa distantziaren metodoak dietzen
 		Connection konexioa = Konexioa.getConexion();
 		guztiraPrez = (float) (Math.round(guztiraPrez * 100.0) / 100.0);
@@ -291,8 +291,8 @@ public class Kontsultak {
 			st.setInt(1, ibilbideZbk);
 			st.setString(2, txartela.getkodLinea());
 			st.setInt(3, txartela.getkodBus());
-			st.setInt(4, txartela.getkodGeltokiHasiera());
-			st.setInt(5, txartela.getkodGeltokiAmaiera());
+			st.setInt(4, hasierakoGeltokiaKod);
+			st.setInt(5, amaierakoGeltokiaKod);
 			st.setDate(6, txartela.getData());
 			st.setTimestamp(7, txartela.getOrdua());
 			st.setString(8, txartela.getNan());
