@@ -143,7 +143,6 @@ public class Leiho3 extends JFrame {
 		
 		Collections.sort(arrayDistantzia);
 		geltokiakOrdenatuta.get(arrayGeltokia);
-		System.out.println(geltokiakOrdenatuta);
 
 		// pantailaratu geltokiak ordenean
 		luzera = arrayGeltokia.size();

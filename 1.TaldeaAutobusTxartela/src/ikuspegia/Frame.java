@@ -9,7 +9,6 @@ public class Frame extends JFrame {
 	GridBagConstraints config = new GridBagConstraints();
 
 	public Frame() {
-		BorderLayout borderLayout = (BorderLayout) getContentPane().getLayout();
 		this.setTitle("1.taldearen txartel salmenta");
 		this.setSize(new Dimension(600, 600));
 		this.setResizable(false); // neurketak ez aldatzeko

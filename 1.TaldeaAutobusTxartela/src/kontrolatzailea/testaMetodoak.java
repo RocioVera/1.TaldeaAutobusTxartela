@@ -10,14 +10,6 @@ import org.junit.BeforeClass;
 import org.junit.jupiter.api.Test;
 
 class testaMetodoak {
-	@BeforeClass
-	public void KonexioaTesta() {
-		Connection konexioa = Konexioa.getConexion();
-		Statement st = null;
-		ResultSet rs = null;
-
-		System.out.println(konexioa);
-	}
 	// double
 	// Zenbat diru sartzen duen jakiteko egiteko - froga
 	@Test
@@ -88,13 +80,11 @@ class testaMetodoak {
 		assertEquals(Metodoak.nanLetra(nan), "Z");
 	}
 
-//TXARTO
 	//zifratuPasahitza
 	@Test
 	public void zifratuPasahitzaTesta() {
 		String pasahitza="123456";
 		assertEquals(Metodoak.zifratuPasahitza(pasahitza), "e10adc3949ba59abbe56e057f20f883e");
-
 	}
 
 	//boolean
@@ -107,6 +97,14 @@ class testaMetodoak {
 		String pasahitzaOna="123456";
 		assertTrue(Metodoak.frogatuPasahitza(pasahitzaOna));
 	}
+	
+	@Test
+	public void nanZenbakiakTesta() {
+		String nanOndo="12345678";
+		assertTrue(Metodoak.nanZenbakiak(nanOndo)); 
+		//ez da inoiz false izango, metodoan badaezpada jarrita dago
+	}
+	
 	
 	//Sartutako nan-a ea datu baaean dagoen ala ez
 	@Test
@@ -121,9 +119,26 @@ class testaMetodoak {
 	@Test
 	public void nanBalidazioaTesta() {
 		String nanOna="12345678Z";
-		String nanTxarto="12345678x";
+		String nanTxarto="123456781";
 		assertTrue(Metodoak.nanBalidazioa(nanOna));
 		assertFalse(Metodoak.nanBalidazioa(nanTxarto));
+	}
+	
+	//Frogatzeko ea autobusa beteta dagoen ala ez.
+	@Test
+	public void txartelaZPlazaFrogaTesta() {
+		String ibilbideData="2019-02-15 10:00:00";
+		Autobusak autobusa = null;
+		assertFalse(Metodoak.txartelaZPlazaFroga(ibilbideData,autobusa));
+	}
+	
+	//Frogatzeko ea autobusa beteta dagoen ala ez.
+	@Test
+	public void erregistratuBezeroakTesta() {
+		String pasahitza="",nan="12345678Z",izena="JUnit",abizenak="froga",sexua="E",jaioDataString="";
+		assertFalse(Metodoak.erregistratuBezeroak(pasahitza,nan,izena,abizenak,sexua,jaioDataString));
+		pasahitza="123456"; jaioDataString="2000-08-11";
+		assertTrue(Metodoak.erregistratuBezeroak(pasahitza,nan,izena,abizenak,sexua,jaioDataString));
 	}
 	
 }
