@@ -7,7 +7,6 @@ import java.util.*;
 import javax.swing.*;
 import com.toedter.calendar.*;
 
-import eredua.*;
 import kontrolatzailea.*;
 
 public class Leiho3 extends JFrame {
@@ -758,13 +757,19 @@ public class Leiho3 extends JFrame {
 		// gaurtik aurreko egunak bakarrik utzi
 		dateJoan.getCalendarButton().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				if (joan.isSelected())
+					btnDataEgiaztatu1.setVisible(true);
 				JCBJoan.setEnabled(true);
 				btn_next.setVisible(false);
 				dataJoan = (Date) dateJoan.getDate();
 				dataEtorri = (Date) dateEtorria.getDate();
 				dateEtorria.setEnabled(true);
 				dateEtorria.getDateEditor().setSelectableDateRange(dataJoan, null);
-
+				
+				if (joanEtorria.isSelected() && dateEtorria.getDate()!=null) {
+					btnAteraOrduak.setVisible(true);
+					btnDataEgiaztatu2.setVisible(false);
+				}
 			}
 		});
 		// joango den egunetik egunak bakarrik utzi
@@ -842,6 +847,8 @@ public class Leiho3 extends JFrame {
 					}
 					else {
 						mezua.setVisible(false);
+						JCBJoan.setEnabled(false);
+						btnDataEgiaztatu1.setVisible(false);
 						btn_next.setVisible(true);
 					}
 				}
@@ -877,6 +884,9 @@ public class Leiho3 extends JFrame {
 					}
 					if (Metodoak.txartelaZPlazaFroga(dataEtorriString, autobusa) && Metodoak.txartelaZPlazaFroga(dataJoanString, autobusa)) {
 						btn_next.setVisible(true);
+						btnDataEgiaztatu2.setVisible(false);
+						JCBJoan.setEnabled(false);
+						JCBEtorria.setEnabled(false);
 						mezua.setVisible(false);
 					}
 				}

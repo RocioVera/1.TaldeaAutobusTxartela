@@ -1,11 +1,10 @@
 package kontrolatzailea;
 
-public class Herrialdeak {
+public class Hiriak {
 	
-	private String kodPostal;
-	private String izena;
+	private String kodPostal, izena;
 	
-	public Herrialdeak(String kodPostal, String izena) {
+	public Hiriak(String kodPostal, String izena) {
 	
 		this.kodPostal = kodPostal;
 		this.izena = izena;

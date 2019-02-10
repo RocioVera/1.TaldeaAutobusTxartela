@@ -215,6 +215,7 @@ public class Leiho4 extends JFrame {
 					passwordField.setEnabled(false);
 					txtNan.setEnabled(false);
 					btnKonektatu.setEnabled(false);
+					btnErregistratuNahi.setVisible(false);
 				} else {
 					lblErroreakonektatu.setBounds(145, 329, 318, 22);
 					lblErroreakonektatu.setForeground(Color.RED);
@@ -370,7 +371,7 @@ public class Leiho4 extends JFrame {
 				if (jaioData != null)
 					jaioDataString = dataFormato.format(jaioData);
 				
-				if (nan != null)
+				if (nan != null && nan.length()==nanLuzera+1)
 					nanBalErregistratu = Metodoak.nanBalidazioa(nan);
 				
 				if (nanBalErregistratu)
@@ -389,11 +390,12 @@ public class Leiho4 extends JFrame {
 					txtJaioData.setEnabled(false);
 					txtSexua.setEnabled(false);
 					btnErregistratu.setEnabled(false);
+					btnHasiSaioa.setVisible(false);
 				} else {
 					lblErroreakonektatu.setForeground(Color.RED);
 					lblErroreakonektatu.setBounds(122, 445, 318, 22);
 					lblErroreakonektatu.setVisible(true);
-					if (nan.length() < nanLuzera)
+					if (nan.length()+1 < nanLuzera)
 						lblErroreakonektatu.setText("nan-a bete behar duzu");
 					else if (nanBalErregistratu == false)
 						lblErroreakonektatu.setText("nan-a txarto sartu duzu");

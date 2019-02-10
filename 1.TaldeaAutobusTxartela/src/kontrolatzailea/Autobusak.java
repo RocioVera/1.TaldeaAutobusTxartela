@@ -2,8 +2,7 @@ package kontrolatzailea;
 
 public class Autobusak {
 	
-	private int kodBus;
-	private int zPlaza;
+	private int kodBus, zPlaza;
 	private float kmKontsumoa;
 	private String kolorea;
 	

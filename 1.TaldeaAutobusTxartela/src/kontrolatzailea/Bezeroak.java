@@ -4,19 +4,15 @@ import java.util.Date;
 
 public class Bezeroak {
 	
-	private String NAN;
-	private String izena;
-	private String abizenak;
-	private Date data;
-	private String sexua;
-	private String pasahitza;
+	private String NAN, izena, abizenak, sexua, pasahitza;
+	private Date jaioData;
 	
-	public Bezeroak(String nAN, String izena, String abizenak, Date jaioData, String sexua, String pasahitza) {
+	public Bezeroak(String Nan, String izena, String abizenak, Date jaioData, String sexua, String pasahitza) {
 		
-		NAN = nAN;
+		NAN = Nan;
 		this.izena = izena;
 		this.abizenak = abizenak;
-		this.data = jaioData;
+		this.jaioData = jaioData;
 		this.sexua = sexua;
 		this.pasahitza = pasahitza;
 	}
@@ -25,8 +21,8 @@ public class Bezeroak {
 		return NAN;
 	}
 	
-	public void setNAN(String nAN) {
-		NAN = nAN;
+	public void setNAN(String Nan) {
+		NAN = Nan;
 	}
 	
 	public String getIzena() {
@@ -45,12 +41,12 @@ public class Bezeroak {
 		this.abizenak = abizenak;
 	}
 	
-	public Date getData() {
-		return data;
+	public Date getjaioData() {
+		return jaioData;
 	}
 	
-	public void setData(Date data) {
-		this.data = data;
+	public void setjaioData(Date data) {
+		this.jaioData = data;
 	}
 	
 	public String getSexua() {

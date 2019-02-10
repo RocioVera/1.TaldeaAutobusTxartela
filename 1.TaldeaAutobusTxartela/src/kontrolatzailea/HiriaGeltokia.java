@@ -1,11 +1,11 @@
 package kontrolatzailea;
 
-public class HerrialdeGeltokia {
+public class HiriaGeltokia {
 	
 	private int kodGeltokia;
 	private String kodPostal;
 	
-	public HerrialdeGeltokia(int kodGeltokia, String kodPostal) {
+	public HiriaGeltokia(int kodGeltokia, String kodPostal) {
 		
 		this.kodGeltokia = kodGeltokia;
 		this.kodPostal = kodPostal;

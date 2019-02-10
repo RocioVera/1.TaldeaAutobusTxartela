@@ -5,18 +5,14 @@ import java.sql.Timestamp;
 
 public class Txartelak {
 	
-	private String kodLinea;
-	private int zIbilbidea;
-	private int kodBus;
-	private int kodGeltokiHasiera;
-	private int kodGeltokiAmaiera;
+	private int zIbilbidea, kodBus, kodGeltokiHasiera, kodGeltokiAmaiera;
+	private String kodLinea, Nan, ibilbideData;
+	private float prezioa;
 	private Date data;
 	private Timestamp ordua;
-	private String nan, ibilbideData;
-	private float prezioa;
 	
 	public Txartelak(String kodLinea, int kodBus, int kodGeltokiHasiera, int kodGeltokiAmaiera,
-			Date data, Timestamp ordua, String nan, float prezioa, int zIbilbidea, String ibilbideData) {
+			Date data, Timestamp ordua, String NAN, float prezioa, int zIbilbidea, String ibilbideData) {
 		
 		this.kodLinea = kodLinea;
 		this.kodBus = kodBus;
@@ -24,7 +20,7 @@ public class Txartelak {
 		this.kodGeltokiAmaiera = kodGeltokiAmaiera;
 		this.data = data;
 		this.ordua = ordua;
-		this.nan = nan;
+		this.Nan = NAN;
 		this.prezioa = prezioa;
 		this.zIbilbidea = zIbilbidea;
 		this.ibilbideData =  ibilbideData;
@@ -95,11 +91,11 @@ public class Txartelak {
 	}
 
 	public String getNan() {
-		return nan;
+		return Nan;
 	}
 
-	public void setNan(String nAN) {
-		this.nan = nan;
+	public void setNan(String NAN) {
+		this.Nan = NAN;
 	}
 
 	public float getPrezioa() {

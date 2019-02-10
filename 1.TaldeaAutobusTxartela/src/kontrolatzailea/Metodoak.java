@@ -236,12 +236,20 @@ public class Metodoak {
 	public static boolean erregistratuBezeroak(String pasahitza, String nan, String izena, String abizenak,
 			String sexua, String jaioDataString) {
 		boolean bal = true;
+		String pasaEnkr = "";
+		pasaEnkr = zifratuPasahitza(pasahitza);
+		ArrayList<Bezeroak> bezeroak = new ArrayList<>();
+
 		// fitxeroari bidali
 		if (pasahitza.length() == 0 || nan.length() < 8 || izena.isEmpty() || abizenak.isEmpty() || sexua.isEmpty()
-				|| nan.length() < 8)
+				|| nan.length() < 8 || jaioDataString==null)
 			bal = false;
+		if (bal)
+			bezeroak = Kontsultak.erregistratuBezeroak(pasaEnkr, nan, izena, abizenak, sexua, jaioDataString);
+
 		return bal;
 	}
+
 	
 	/**
 	 * Sartutako pasahitza zifratu.

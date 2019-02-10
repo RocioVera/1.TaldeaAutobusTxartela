@@ -2,8 +2,7 @@ package kontrolatzailea;
 
 public class Lineak {
 	
-	private String kodLinea;
-	private String izena;
+	private String kodLinea, izena;
 	
 	public Lineak(String kodLinea, String izena) {
 		
