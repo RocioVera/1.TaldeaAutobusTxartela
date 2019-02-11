@@ -28,7 +28,7 @@ public class Leiho4 extends JFrame {
 	// bariableak
 	private java.util.Date jaioData;
 	private SimpleDateFormat dataFormato = new SimpleDateFormat("yyyy-MM-dd");
-	private String jaioDataString, pasahitza, nan, izena, abizenak, sexua;
+	private String jaioDataString, pasahitza, nan, izena, abizenak, sexua, nanLarria;;
 	private float guztiraPrez;
 	private boolean balPasa, balNan, balErregis, nanBalErregistratu;
 	private int nanLuzera = 8, izenLuzera = 49, abizenLuzera = 99, pasahitzLuzera = 49, sexuLuzera = 0;
@@ -370,13 +370,28 @@ public class Leiho4 extends JFrame {
 				// erregistratzen duen metodoari deitu
 				if (jaioData != null)
 					jaioDataString = dataFormato.format(jaioData);
-				
-				if (nan != null && nan.length()==nanLuzera+1)
+
+				if (nan != null && nan.length() == nanLuzera + 1)
 					nanBalErregistratu = Metodoak.nanBalidazioa(nan);
-				
-				if (nanBalErregistratu)
+
+				if (nanBalErregistratu) {
+					nanLarria = nan.substring(8).toUpperCase();
+					nan = nan.substring(0, 8) + nanLarria;
 					balErregis = Metodoak.erregistratuBezeroak(pasahitza, nan, izena, abizenak, sexua, jaioDataString);
 
+					if (nan.length() - 1 == nanLuzera && !Metodoak.nanGordetaEgon(nan))
+						txtNan.setEnabled(false);
+					else if (!izena.isEmpty())
+						txtIzena.setEnabled(false);
+					else if (!abizenak.isEmpty())
+						txtAbizenak.setEnabled(false);
+					else if (!sexua.isEmpty())
+						txtSexua.setEnabled(false);
+					else if (jaioData != null)
+						txtJaioData.setEnabled(false);
+					else if (pasahitza.length() != 0)
+						passwordField.setEnabled(false);
+				}
 				if (balErregis) {
 					btn_next.setVisible(true);
 					lblErroreakonektatu.setBounds(122, 445, 318, 22);
@@ -391,24 +406,40 @@ public class Leiho4 extends JFrame {
 					txtSexua.setEnabled(false);
 					btnErregistratu.setEnabled(false);
 					btnHasiSaioa.setVisible(false);
+
 				} else {
 					lblErroreakonektatu.setForeground(Color.RED);
 					lblErroreakonektatu.setBounds(122, 445, 318, 22);
 					lblErroreakonektatu.setVisible(true);
-					if (nan.length()+1 < nanLuzera)
-						lblErroreakonektatu.setText("nan-a bete behar duzu");
+					if (nan.length() + 1 < nanLuzera)
+						lblErroreakonektatu.setText("nan-a bete behar duzu.");
 					else if (nanBalErregistratu == false)
-						lblErroreakonektatu.setText("nan-a txarto sartu duzu");
-					else if (izena.isEmpty())
-						lblErroreakonektatu.setText("izena bete behar duzu");
-					else if (abizenak.isEmpty())
-						lblErroreakonektatu.setText("abizena bete behar duzu");
-					else if (sexua.isEmpty())
-						lblErroreakonektatu.setText("sexua bete behar duzu");
-					else if (jaioData == null)
-						lblErroreakonektatu.setText("jaioData bete behar duzu");
-					else if (pasahitza.length() == 0)
-						lblErroreakonektatu.setText("pasahitza bete behar duzu");
+						lblErroreakonektatu.setText("nan-a txarto sartu duzu.");
+					else if (Metodoak.nanGordetaEgon(nan)) {
+						lblErroreakonektatu.setText("Erregistratuta zaude, hasi saioa.");
+						passwordField.setEnabled(false);
+						txtIzena.setEnabled(false);
+						txtAbizenak.setEnabled(false);
+						txtJaioData.setEnabled(false);
+						txtSexua.setEnabled(false);
+					} else if (!Metodoak.nanGordetaEgon(nan)) {
+						lblErroreakonektatu.setText("izena bete behar duzu.");
+						passwordField.setEnabled(true);
+						txtIzena.setEnabled(true);
+						txtAbizenak.setEnabled(true);
+						txtJaioData.setEnabled(true);
+						txtSexua.setEnabled(true);
+						if (izena.isEmpty())
+							lblErroreakonektatu.setText("izena bete behar duzu.");
+						else if (abizenak.isEmpty())
+							lblErroreakonektatu.setText("abizena bete behar duzu.");
+						else if (sexua.isEmpty())
+							lblErroreakonektatu.setText("sexua bete behar duzu.");
+						else if (jaioData == null)
+							lblErroreakonektatu.setText("jaioData bete behar duzu.");
+						else if (pasahitza.length() == 0)
+							lblErroreakonektatu.setText("pasahitza bete behar duzu.");
+					}
 				}
 			}
 		});

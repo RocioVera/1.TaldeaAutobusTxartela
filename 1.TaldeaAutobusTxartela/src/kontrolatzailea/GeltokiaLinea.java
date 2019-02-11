@@ -1,7 +1,6 @@
 package kontrolatzailea;
 
 public class GeltokiaLinea {
-	
 	private String kodLinea;
 	private int kodGeltokia;
 	

@@ -95,6 +95,7 @@ public class Kontsultak {
 		return arrayparada;
 	}
 	
+	
 	/**
 	 * Hartuko duen autobusaren libre ez dauden lekuak bueltatu.
 	 * @author talde1
@@ -152,7 +153,8 @@ public class Kontsultak {
 
 
 	//Leiho5-ko kontsultak
-	/**
+	/** 
+	 * Sartutako geltokiaren izena atera,
 	 * @author talde1
 	 * @param kodGeltokia
 	 * @return geltIzena

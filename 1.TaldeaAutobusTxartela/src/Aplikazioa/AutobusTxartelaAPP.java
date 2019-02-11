@@ -2,7 +2,7 @@ package Aplikazioa;
 
 import kontrolatzailea.*;
 
-public class Nagusia {
+public class AutobusTxartelaAPP {
 
 	public static void main(String[] args) {
 		String basedatos = "ethazi3";

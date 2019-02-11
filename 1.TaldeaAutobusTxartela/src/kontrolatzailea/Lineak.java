@@ -4,8 +4,7 @@ public class Lineak {
 	
 	private String kodLinea, izena;
 	
-	public Lineak(String kodLinea, String izena) {
-		
+	public Lineak(String kodLinea, String izena) {	
 		this.kodLinea = kodLinea;
 		this.izena = izena;
 	}

@@ -1,7 +1,6 @@
 package kontrolatzailea;
 
 public class Hiriak {
-	
 	private String kodPostal, izena;
 	
 	public Hiriak(String kodPostal, String izena) {

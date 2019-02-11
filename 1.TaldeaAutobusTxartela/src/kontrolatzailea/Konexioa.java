@@ -6,17 +6,10 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class Konexioa {
-	private String makina;
-	private String bezeroa;
-	private String pasahitza;
-	private int portua;
-	private String portuaStr;
-
-	private String zerbitzaria;
 	private static Connection conexion = null;
-
-	// CONSTRUCTOR
-	// Recibe el nombre de la base de datos
+	private String makina, bezeroa, pasahitza, portuaStr, zerbitzaria;
+	private int portua;
+	// Datu basearen izena hartu
 	public Konexioa(String datuBasea) {
 
 		String fitx = "src\\eredua\\DBkonexioa";
@@ -32,33 +25,31 @@ public class Konexioa {
 			this.portua = Integer.parseInt(portuaStr);
 			this.zerbitzaria = String.valueOf(arraya[4]);
 
-			
 			fr.close();
 		} catch (Exception e) {
-			System.out.println("Excepcion leyendo fichero " + fitx + ": " + e);
+			System.out.println("Fitxeroa (" + fitx + ") irakurtzerakoan salbuezpena: " + e);
 		}
 
 		this.zerbitzaria = "jdbc:mysql://" + this.makina + ":" + this.portua + "/" + datuBasea;
 
-		// Registrar el driver
+		// Driverra erregistratu
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 		} catch (ClassNotFoundException e) {
-			System.err.println("ERROR AL REGISTRAR EL DRIVER");
-			System.exit(0); // parar la ejecución
+			System.err.println("Driver-a erregistatzerakoan errorea.");
+			System.exit(0); // exekuzioa gelditu
 		}
 
-		// Establecer la conexión con el servidor
+		// Zerbitzariarekin konexioa ezarri
 		try {
 			conexion = DriverManager.getConnection("jdbc:mysql://" + this.makina, this.bezeroa, this.pasahitza);
 		} catch (SQLException e) {
-			System.err.println("ERROR AL CONECTAR CON EL SERVIDOR");
+			System.err.println("Zerbitzariarekin konektatzerakoan errorea.");
 			System.exit(0); // parar la ejecución
 		}
-		System.out.println("Conectado a " + datuBasea);
+		System.out.println(datuBasea+ " konektatuta" );
 	}
 
-	// Devuelve el objeto Connection que se usará en la clase Controller
 	public static Connection getConexion() {
 		return conexion;
 	}

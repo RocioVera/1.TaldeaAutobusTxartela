@@ -2,11 +2,6 @@ package kontrolatzailea;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.Statement;
-
-import org.junit.BeforeClass;
 import org.junit.jupiter.api.Test;
 
 class testaMetodoak {
@@ -98,6 +93,7 @@ class testaMetodoak {
 		assertTrue(Metodoak.frogatuPasahitza(pasahitzaOna));
 	}
 	
+	//Lehenengo 8 karaktereak zenbakiak direla balidatzen du.
 	@Test
 	public void nanZenbakiakTesta() {
 		String nanOndo="12345678";
@@ -105,6 +101,12 @@ class testaMetodoak {
 		//ez da inoiz false izango, metodoan badaezpada jarrita dago
 	}
 	
+	//Frogatu dni-a erregistratuta ez dagoela.
+	@Test
+	public void nanGordetaEgonTesta() {
+		String nanGordeta="12345678Z";
+		assertTrue(Metodoak.nanZenbakiak(nanGordeta));
+	}
 	
 	//Sartutako nan-a ea datu baaean dagoen ala ez
 	@Test
@@ -113,8 +115,8 @@ class testaMetodoak {
 		String nanTxarto="12345678x";
 		assertFalse(Metodoak.frogatuNAN(nanTxarto));
 		assertTrue(Metodoak.frogatuNAN(nanOna));
-		
 	}
+	
 	//frogatuNAN
 	@Test
 	public void nanBalidazioaTesta() {
