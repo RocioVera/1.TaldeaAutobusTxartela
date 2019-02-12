@@ -56,7 +56,6 @@ public class Leiho5 extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				txartela = new Txartelak(hartutakoLinea, autobusa.getKodBus(), hasierakoGeltokiaKod,
 						amaierakoGeltokiaKod, gaurkoData, ordua, nan, guztiraPrez, ibilbideZbk, ibilbideData);
-				System.out.println(guztiraPrez+"AQUI");
 
 				geltIzenak=Metodoak.geltokienIzenakLortu(txartela);
 
