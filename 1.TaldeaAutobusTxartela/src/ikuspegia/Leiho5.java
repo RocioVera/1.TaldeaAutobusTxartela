@@ -44,6 +44,7 @@ public class Leiho5 extends JFrame {
 			int amaierakoGeltokiaKod, float guztiraPrez, String nan, double altuera1, double luzera1, double altuera2,
 			double luzera2, ArrayList<Geltokiak> arrayGeltokia, String dataJoan, String dataEtorri) {
 		// panelaren propietateak
+		setIconImage(Toolkit.getDefaultToolkit().getImage(".\\Argazkiak\\logoa.png")); 
 		getContentPane().setLayout(null);
 		this.setBounds(350, 50, 600, 600);
 		this.setResizable(false); //neurketak ez aldatzeko

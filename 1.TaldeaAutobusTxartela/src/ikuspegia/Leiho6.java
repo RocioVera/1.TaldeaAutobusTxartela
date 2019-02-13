@@ -30,6 +30,7 @@ public class Leiho6 extends JFrame {
 			int amaierakoGeltokiaKod, Txartelak txartela, ArrayList<String> geltIzenak, String dataJoan,
 			String dataEtorri) {
 		// panelaren propietateak
+		setIconImage(Toolkit.getDefaultToolkit().getImage(".\\Argazkiak\\logoa.png")); 
 		getContentPane().setLayout(null);
 		this.setBounds(350, 50, 600, 600);
 		this.setResizable(false); // neurketak ez aldatzeko

@@ -26,6 +26,7 @@ public class Leiho2 extends JFrame {
 	 */
 	public Leiho2(ArrayList<Lineak> lineak) {
 		//panelaren propietateak
+		setIconImage(Toolkit.getDefaultToolkit().getImage(".\\Argazkiak\\logoa.png")); 
 		getContentPane().setLayout(null);
 		this.setBounds(350, 50, 600, 600);
 		this.setTitle("1.taldearen txartel salmenta");

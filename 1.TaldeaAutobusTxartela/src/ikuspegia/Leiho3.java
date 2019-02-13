@@ -53,6 +53,7 @@ public class Leiho3 extends JFrame {
 	 */
 	public Leiho3(String hartutakoLinea, Autobusak autobusa) {
 		// panelaren propietateak
+		setIconImage(Toolkit.getDefaultToolkit().getImage(".\\Argazkiak\\logoa.png")); 
 		getContentPane().setLayout(null);
 		this.setBounds(350, 50, 600, 600);
 		this.setResizable(false); // neurketak ez aldatzeko
@@ -839,10 +840,11 @@ public class Leiho3 extends JFrame {
 
 				if (dataJoan != null) {
 					if (!Metodoak.txartelaZPlazaFroga(dataJoanString, autobusa)) {
-						mezua.setText("* Autobusa beteta dago *");
+						mezua.setText("* Autobusa beteta dago");
 						mezua.setBounds(134, 203, 253, 20);
-						mezua.setVisible(true);	
-						btn_next.setVisible(false);						
+						mezua.setVisible(true);
+						btn_next.setVisible(false);
+
 					}
 					else {
 						mezua.setVisible(false);
@@ -875,7 +877,7 @@ public class Leiho3 extends JFrame {
 						mezua.setVisible(true);
 					}
 					if (!Metodoak.txartelaZPlazaFroga(dataJoanString, autobusa)) {
-						mezua.setText("* Joan autobusa beteta dago");
+						mezua.setText("* Autobusa beteta dago");
 						mezua.setBounds(134, 203, 253, 20);
 						mezua.setVisible(true);
 						btn_next.setVisible(false);

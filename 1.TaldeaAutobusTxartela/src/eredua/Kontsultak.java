@@ -165,7 +165,7 @@ public class Kontsultak {
 		String geltIzena = null;
 		try {
 			st = konexioa
-					.prepareStatement("SELECT nombre FROM parada WHERE Cod_Parada=" + "'" + kodGeltokia + "'");
+					.prepareStatement("SELECT DISTINCT(nombre) FROM parada WHERE Cod_Parada=" + "'" + kodGeltokia + "'");
 			ResultSet rs = st.executeQuery();
 			while (rs.next()) {
 				geltIzena = (rs.getString("nombre"));

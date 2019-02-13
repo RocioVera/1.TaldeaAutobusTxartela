@@ -5,11 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.util.ArrayList;
 
 import org.junit.jupiter.api.Test;
-import org.mockito.ArgumentCaptor;
 import org.mockito.Mockito;
-
-import eredua.Kontsultak;
-import ikuspegia.Leiho3;
 
 class testaMetodoak {
 	// double

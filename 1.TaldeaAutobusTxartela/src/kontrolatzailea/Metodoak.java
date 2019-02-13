@@ -156,7 +156,7 @@ public class Metodoak {
 	public static boolean txartelaZPlazaFroga(String ibilbideData, Autobusak autobusa) {
 		boolean txartelaZPlazaBal = false;
 		int txartelaZPlazaKont = Kontsultak.txartelaZPlaza(ibilbideData);
-		if (txartelaZPlazaKont <= autobusa.getzPlaza()) {
+		if (txartelaZPlazaKont <= autobusa.getzPlaza()-1) {
 			txartelaZPlazaBal = true;
 		}
 		return txartelaZPlazaBal;
