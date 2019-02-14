@@ -100,15 +100,16 @@ public class Kontsultak {
 	 * Hartuko duen autobusaren libre ez dauden lekuak bueltatu.
 	 * @author talde1
 	 * @param ibilbideData
+	 * @param autobusa 
 	 * @return txartelaZPlazaKont
 	 */
-	public static int txartelaZPlaza(String ibilbideData) {
+	public static int txartelaZPlaza(String ibilbideData, Autobusak autobusa) {
 		PreparedStatement st = null;
 		Connection konexioa = Konexioa.getConexion();
 		int txartelaZPlazaKont = 0;
 		try {
 			st = konexioa.prepareStatement(
-					"SELECT COUNT(ibilbideData) FROM billete WHERE ibilbideData LIKE '" + ibilbideData + "'");
+					"SELECT COUNT(ibilbideData) FROM billete WHERE ibilbideData LIKE '" + ibilbideData + "'"+ " AND Cod_Bus = "+ "'"+autobusa.getKodBus()+"'");
 			ResultSet rs = st.executeQuery();
 			while (rs.next()) {
 				txartelaZPlazaKont = (rs.getInt("COUNT(ibilbideData)"));
