@@ -148,6 +148,7 @@ public class Leiho3 extends JFrame {
 		// pantailaratu geltokiak ordenean
 		luzera = arrayGeltokia.size();
 		for (int i = 0; i <= arrayGeltokia.size() - 1; i++) {
+			mezua.setVisible(false);
 			if (i == 1) {
 				hasierakoGeltItem_1 = new JRadioButton(arrayGeltokia.get(0).getIzena());
 				hasierakoGeltItem_1.setFont(new Font("Verdana", Font.BOLD, 12));
@@ -155,6 +156,7 @@ public class Leiho3 extends JFrame {
 				hasierakoGeltItem_1.addActionListener(new ActionListener() {
 					@Override
 					public void actionPerformed(ActionEvent e) {
+						mezua.setVisible(false);
 						amaierakoGeltokia.setEnabled(true);
 						hasierakoGeltokiaGroup.add(hasierakoGeltItem_1);
 						hasierakoGeltokiaKod = arrayGeltokia.get(0).getKodGeltokia();
@@ -217,6 +219,7 @@ public class Leiho3 extends JFrame {
 				hasierakoGeltItem_2.addActionListener(new ActionListener() {
 					@Override
 					public void actionPerformed(ActionEvent e) {
+						mezua.setVisible(false);
 						amaierakoGeltokia.setEnabled(true);
 						hasierakoGeltokiaGroup.add(hasierakoGeltItem_2);
 						hasierakoGeltokiaKod = arrayGeltokia.get(1).getKodGeltokia();
@@ -276,6 +279,7 @@ public class Leiho3 extends JFrame {
 				hasierakoGeltItem_3.addActionListener(new ActionListener() {
 					@Override
 					public void actionPerformed(ActionEvent e) {
+						mezua.setVisible(false);
 						amaierakoGeltokia.setEnabled(true);
 						hasierakoGeltokiaGroup.add(hasierakoGeltItem_3);
 						amaierakoGeltItem_1.setEnabled(false);
@@ -327,6 +331,7 @@ public class Leiho3 extends JFrame {
 				hasierakoGeltItem_4.addActionListener(new ActionListener() {
 					@Override
 					public void actionPerformed(ActionEvent e) {
+						mezua.setVisible(false);
 						amaierakoGeltokia.setEnabled(true);
 						hasierakoGeltokiaGroup.add(hasierakoGeltItem_4);
 						amaierakoGeltItem_1.setEnabled(false);
@@ -374,6 +379,7 @@ public class Leiho3 extends JFrame {
 				hasierakoGeltItem_5.addActionListener(new ActionListener() {
 					@Override
 					public void actionPerformed(ActionEvent e) {
+						mezua.setVisible(false);
 						amaierakoGeltokia.setEnabled(true);
 						hasierakoGeltokiaGroup.add(hasierakoGeltItem_5);
 						amaierakoGeltItem_1.setEnabled(false);
@@ -417,6 +423,7 @@ public class Leiho3 extends JFrame {
 				hasierakoGeltItem_6.addActionListener(new ActionListener() {
 					@Override
 					public void actionPerformed(ActionEvent e) {
+						mezua.setVisible(false);
 						amaierakoGeltokia.setEnabled(true);
 						hasierakoGeltokiaGroup.add(hasierakoGeltItem_6);
 						amaierakoGeltItem_1.setEnabled(false);
@@ -459,6 +466,7 @@ public class Leiho3 extends JFrame {
 				hasierakoGeltItem_7.addActionListener(new ActionListener() {
 					@Override
 					public void actionPerformed(ActionEvent e) {
+						mezua.setVisible(false);
 						// amaierako geltokietan zein bai utzi
 						amaierakoGeltokia.setEnabled(true);
 						hasierakoGeltokiaGroup.add(hasierakoGeltItem_7);
@@ -505,6 +513,7 @@ public class Leiho3 extends JFrame {
 				amaierakoGeltItem_1.addActionListener(new ActionListener() {
 					@Override
 					public void actionPerformed(ActionEvent e) {
+						mezua.setVisible(false);
 						joanEtorriaMenua.setEnabled(true);
 						amaierakoGeltokiaGroup.add(amaierakoGeltItem_1);
 					}
@@ -521,6 +530,7 @@ public class Leiho3 extends JFrame {
 				amaierakoGeltItem_2.addActionListener(new ActionListener() {
 					@Override
 					public void actionPerformed(ActionEvent e) {
+						mezua.setVisible(false);
 						joanEtorriaMenua.setEnabled(true);
 						amaierakoGeltokiaGroup.add(amaierakoGeltItem_2);
 					}
@@ -537,6 +547,7 @@ public class Leiho3 extends JFrame {
 				amaierakoGeltItem_3.addActionListener(new ActionListener() {
 					@Override
 					public void actionPerformed(ActionEvent e) {
+						mezua.setVisible(false);
 						joanEtorriaMenua.setEnabled(true);
 						amaierakoGeltokiaGroup.add(amaierakoGeltItem_3);
 					}
@@ -553,6 +564,7 @@ public class Leiho3 extends JFrame {
 				amaierakoGeltItem_4.addActionListener(new ActionListener() {
 					@Override
 					public void actionPerformed(ActionEvent e) {
+						mezua.setVisible(false);
 						joanEtorriaMenua.setEnabled(true);
 						amaierakoGeltokiaGroup.add(amaierakoGeltItem_4);
 					}
@@ -569,6 +581,7 @@ public class Leiho3 extends JFrame {
 				amaierakoGeltItem_5.addActionListener(new ActionListener() {
 					@Override
 					public void actionPerformed(ActionEvent e) {
+						mezua.setVisible(false);
 						joanEtorriaMenua.setEnabled(true);
 						amaierakoGeltokiaGroup.add(amaierakoGeltItem_5);
 
@@ -586,6 +599,7 @@ public class Leiho3 extends JFrame {
 				amaierakoGeltItem_6.addActionListener(new ActionListener() {
 					@Override
 					public void actionPerformed(ActionEvent e) {
+						mezua.setVisible(false);
 						joanEtorriaMenua.setEnabled(true);
 						amaierakoGeltokiaGroup.add(amaierakoGeltItem_6);
 					}
@@ -602,6 +616,7 @@ public class Leiho3 extends JFrame {
 				amaierakoGeltItem_7.addActionListener(new ActionListener() {
 					@Override
 					public void actionPerformed(ActionEvent e) {
+						mezua.setVisible(false);
 						joanEtorriaMenua.setEnabled(true);
 						amaierakoGeltokiaGroup.add(amaierakoGeltItem_7);
 					}
@@ -757,6 +772,7 @@ public class Leiho3 extends JFrame {
 		// gaurtik aurreko egunak bakarrik utzi
 		dateJoan.getCalendarButton().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				mezua.setVisible(false);
 				if (joan.isSelected())
 					btnDataEgiaztatu1.setVisible(true);
 				JCBJoan.setEnabled(true);
